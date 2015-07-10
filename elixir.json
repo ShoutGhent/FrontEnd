@@ -2,11 +2,11 @@
   "watchers": {
     "default": {
       "watch-lr": [
-        "dist/js/*.js",
-        "dist/index.html"
+        "dist/**/*.js",
+        "dist/**/*.html"
       ],
       "watch-lr-css": [
-        "dist/css/*.css"
+        "dist/**/**.css"
       ]
     }
   }

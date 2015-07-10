@@ -9,10 +9,11 @@ elixir.config.assetsDir = 'app/';
 elixir.config.cssOutput = 'dist/css';
 elixir.config.jsOutput = 'dist/js';
 
-elixir(function(mix) {
+elixir(function (mix) {
     mix.sass('style.scss')
         .browserify('main.js')
-        .copy('./app/index.html', './dist/index.html');
+        .copy('./app/index.html', './dist/index.html')
+        .copy('./app/img/**/*.*', './dist/img/');
 });
 
 gulp.on('task_start', function (e) {
@@ -20,6 +21,7 @@ gulp.on('task_start', function (e) {
         livereload.listen();
     }
 });
+
 gulp.task('watch-lr-css', function () {
     livereload.changed('app.css');
 });

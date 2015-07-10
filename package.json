@@ -4,11 +4,13 @@
     "start": "gulp"
   },
   "dependencies": {
+    "MD5": "^1.2.2",
     "alt": "^0.14.4",
     "moment": "^2.10.3",
     "node-uuid": "^1.4.3",
     "react": "^0.13.0",
-    "react-router": "^0.13.0"
+    "react-router": "^0.13.0",
+    "superagent": "^1.2.0"
   },
   "devDependencies": {
     "gulp": "^3.8.8",
