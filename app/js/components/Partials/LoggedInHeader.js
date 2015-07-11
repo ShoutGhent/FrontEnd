@@ -5,6 +5,7 @@ import DropdownTitle from './dropdown/DropdownTitle'
 import DropdownContent from './dropdown/DropdownContent'
 import UserActions from '../../actions/UserActions'
 import SearchActions from './search/SearchActions'
+import { Link } from 'react-router'
 
 var LoggedInHeader = React.createClass({
     logout(event) {
@@ -40,9 +41,9 @@ var LoggedInHeader = React.createClass({
                     </Dropdown>
                 </li>
                 <li>
-                    <a href="/start">
+                    <Link to="home">
                         <Icon icon="chat_bubble_outline" />
-                    </a>
+                    </Link>
                 </li>
                 <li>
                     <Dropdown>
