@@ -8,7 +8,8 @@ moment.locale('nl')
 var Shout = React.createClass({
     getInitialState() {
         return {
-            width: '100%'
+            width: '100%',
+            visible: true
         }
     },
     calcPercentage() {
@@ -17,13 +18,20 @@ var Shout = React.createClass({
 
         if (end != null) {
             end = moment(end).format('X')
-            setInterval(() => {
+            var interval = setInterval(() => {
                 var now = moment().format('X')
                 var percentage = 100 - (((now - begin) / (end - begin)) * 100)
 
-                this.setState({
-                    width: `${percentage}%`
-                })
+                if (percentage < 0) {
+                    clearInterval(interval)
+                    this.setState({
+                        visible: false
+                    })
+                } else {
+                    this.setState({
+                        width: `${percentage}%`
+                    })
+                }
             }, 800)
         }
     },
@@ -34,8 +42,11 @@ var Shout = React.createClass({
         var name = this.props.shout.anonymous ? 'Anonymous' : this.props.shout.user.name
         var email = this.props.shout.anonymous ? 'anonymous' : this.props.shout.user.email
 
+        var css = {
+            display: this.state.visible ? 'block' : 'none'
+        }
         return (
-            <div className="shout hoverable">
+            <div className="shout hoverable" style={css}>
                 <div className="shout-header">
                     <a href="#">
                         <Avatar email={email} size={35}/>
