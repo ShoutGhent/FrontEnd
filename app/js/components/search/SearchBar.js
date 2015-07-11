@@ -1,5 +1,5 @@
 import React from 'react'
-import Icon from '../Icon'
+import Icon from '../partials/Icon'
 import SearchStore from './SearchStore'
 import SearchActions from './SearchActions'
 

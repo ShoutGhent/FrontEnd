@@ -1,10 +1,10 @@
 import React from 'react'
 import Icon from './Icon'
-import Dropdown from './dropdown/Dropdown'
-import DropdownTitle from './dropdown/DropdownTitle'
-import DropdownContent from './dropdown/DropdownContent'
+import Dropdown from '../dropdown/Dropdown'
+import DropdownTitle from '../dropdown/DropdownTitle'
+import DropdownContent from '../dropdown/DropdownContent'
 import UserActions from '../../actions/UserActions'
-import SearchActions from './search/SearchActions'
+import SearchActions from '../search/SearchActions'
 import { Link } from 'react-router'
 
 var LoggedInHeader = React.createClass({

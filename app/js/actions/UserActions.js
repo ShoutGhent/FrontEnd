@@ -3,9 +3,9 @@ import ApiActions from './ApiActions'
 import WebStorage from '../services/WebStorage'
 import RouterContainer from '../services/RouterContainer'
 
-class UserActions extends ApiActions {
+class UserActions {
     login(payload) {
-        super.post("auth/login", payload, (res, err) => {
+        ApiActions.post("auth/login", payload, (res, err) => {
             if ( ! err) {
                 var nextPath = RouterContainer.get().getCurrentQuery().nextPath || '/';
 
@@ -19,7 +19,7 @@ class UserActions extends ApiActions {
         })
     }
     loginUsingJwt(jwt) {
-        super.post("auth/me", null, (res, err) => {
+        ApiActions.post("auth/me", null, (res, err) => {
             if ( ! err) {
                 var nextPath = RouterContainer.get().getCurrentQuery().nextPath || '/';
                 RouterContainer.get().transitionTo(nextPath)

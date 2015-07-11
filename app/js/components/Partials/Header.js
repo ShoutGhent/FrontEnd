@@ -1,7 +1,7 @@
 import React from 'react'
 import Logo from './Logo'
 import UserStore from '../../stores/UserStore'
-import SearchBar from './search/SearchBar'
+import SearchBar from '../search/SearchBar'
 import LoggedInHeader from './LoggedInHeader'
 import LoggedOutHeader from './LoggedOutHeader'
 

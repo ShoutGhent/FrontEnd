@@ -21,16 +21,16 @@ class ApiActions {
                 }
             })
     }
-    get(url, data, cb) {
+    static get(url, data, cb) {
         ApiActions._send("get", url, data, cb)
     }
-    post(url, data, cb) {
+    static post(url, data, cb) {
         ApiActions._send("post", url, data, cb)
     }
-    put(url, data, cb) {
+    static put(url, data, cb) {
         ApiActions._send("put", url, data, cb)
     }
-    delete(url, data, cb) {
+    static delete(url, data, cb) {
         ApiActions._send("delete", url, data, cb)
     }
 

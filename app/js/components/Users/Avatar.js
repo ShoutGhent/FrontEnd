@@ -31,7 +31,7 @@ var Avatar = React.createClass({
         })
 
         return (
-            <img className={`img-${this.props.size}`} src={url} />
+            <img className={`img-${this.props.size} avatar`} src={url} />
         )
     }
 })

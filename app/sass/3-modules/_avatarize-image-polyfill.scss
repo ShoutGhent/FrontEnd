@@ -1,0 +1,15 @@
+@mixin imagePolyfill($size) {
+    background-color: transparent;
+    width: ($size + 0px) !important;
+    height: ($size + 0px) !important;
+    display: inline-block;
+}
+
+$from: 1;
+$to: 1024;
+
+@for $i from $from to ($to + 1) {
+    .img-#{$i} {
+        @include imagePolyfill($i);
+    }
+}
