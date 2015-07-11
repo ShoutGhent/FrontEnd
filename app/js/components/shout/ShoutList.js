@@ -17,7 +17,11 @@ var ShoutList = React.createClass({
     },
     render() {
         return (
-            <div>{this.state.shouts.map((shout) => <Shout key={shout.uuid} shout={shout}/>)}</div>
+            <div>
+            {this.state.shouts.map((shout) =>
+                <Shout key={shout.uuid} shout={shout}/>
+            )}
+            </div>
         )
     }
 })
