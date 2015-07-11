@@ -10,12 +10,6 @@ class DropdownActions {
     unRegister(key) {
         setTimeout(() => this.dispatch(key), 0)
     }
-    hideAll() {
-        setTimeout(() => this.dispatch(), 0)
-    }
-    hideOthers(key) {
-        setTimeout(() => this.dispatch(key), 0)
-    }
 }
 
 export default alt.createActions(DropdownActions)

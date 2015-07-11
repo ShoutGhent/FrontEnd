@@ -6,6 +6,6 @@ var _IndexLoggedIn = React.createClass({
             <div></div>
         )
     }
-});
+})
 
 export default _IndexLoggedIn

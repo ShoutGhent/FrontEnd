@@ -4,24 +4,24 @@ import Dropdown from './dropdown/Dropdown'
 import DropdownTitle from './dropdown/DropdownTitle'
 import DropdownContent from './dropdown/DropdownContent'
 import UserActions from '../../actions/UserActions'
+import SearchActions from './search/SearchActions'
 
 var LoggedInHeader = React.createClass({
     logout(event) {
         event.preventDefault()
         UserActions.logout()
     },
+    toggleSearch(event) {
+        event.preventDefault()
+        SearchActions.toggleSearch()
+    },
     render() {
         return (
             <ul className="right hide-on-med-and-down">
                 <li>
-                    <a href="#" data-toggle="#search">
+                    <a href onClick={this.toggleSearch}>
                         <Icon icon="search" />
                     </a>
-                </li>
-                <li id="search" data-focus=".navbar-input">
-                    <form action="">
-                        <input type="text" className="navbar-input"/>
-                    </form>
                 </li>
                 <li>
                     <Dropdown>

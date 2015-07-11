@@ -8,7 +8,9 @@ class DropdownStore {
     }
     onToggle(dropdown_id) {
         this.dropdowns.forEach((item, key) => {
-            if (item.key == dropdown_id) {
+            if (item.key != dropdown_id) {
+                this.dropdowns[key].isOpen = false
+            } else {
                 this.dropdowns[key].isOpen = ! item.isOpen
             }
         })
@@ -23,18 +25,6 @@ class DropdownStore {
         this.dropdowns.forEach((item, key) => {
             if (item.key == dropdown_id) {
                 this.dropdowns.splice(key, 1)
-            }
-        })
-    }
-    onHideAll() {
-        this.dropdowns.forEach((item, key) => {
-            item.isOpen = false
-        })
-    }
-    onHideOthers(dropdown_id) {
-        this.dropdowns.forEach((item, key) => {
-            if (item.key != dropdown_id) {
-                this.dropdowns[key].isOpen = false
             }
         })
     }

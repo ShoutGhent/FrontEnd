@@ -8,9 +8,6 @@ var Dropdown = React.createClass({
             dropdown_id: uuid.v4()
         }
     },
-    hideAllDropdowns() {
-        DropdownActions.hideAll()
-    },
     componentDidMount() {
         DropdownActions.register(this.state.dropdown_id)
     },
@@ -24,11 +21,7 @@ var Dropdown = React.createClass({
             })
         })
 
-        return (
-            <div>
-                {renderedChildren}
-            </div>
-        )
+        return <div>{renderedChildren}</div>
     }
 })
 

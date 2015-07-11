@@ -1,5 +1,6 @@
 import React from 'react'
 import DropdownStore from './DropdownStore'
+import DropdownActions from './DropdownActions'
 
 function getStateFromStore(key) {
     var dropdowns = DropdownStore.getState().dropdowns
@@ -27,14 +28,19 @@ var DropdownContent = React.createClass({
     _onChange() {
         this.setState(getStateFromStore(this.props.dropdown_id))
     },
+    toggleDropdown(event) {
+        event.preventDefault()
+        DropdownActions.toggle(this.props.dropdown_id)
+    },
     render() {
         var css = {
             opacity: this.state.isOpen ? 1 : 0,
             display: this.state.isOpen ? 'block' : 'none',
-            minWidth: '200px'
+            minWidth: '200px',
+            marginTop: '15px'
         }
         return (
-            <div className="dropdown-content" style={css}>{this.props.children}</div>
+            <div onMouseLeave={this.toggleDropdown} className="dropdown-content" style={css}>{this.props.children}</div>
         )
     }
 })

@@ -79,6 +79,6 @@ var _IndexLoggedOut = React.createClass({
             </div>
         )
     }
-});
+})
 
 export default _IndexLoggedOut

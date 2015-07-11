@@ -1,6 +1,7 @@
 import React from 'react'
 import Logo from './Logo'
 import UserStore from '../../stores/UserStore'
+import SearchBar from './search/SearchBar'
 import LoggedInHeader from './LoggedInHeader'
 import LoggedOutHeader from './LoggedOutHeader'
 
@@ -24,6 +25,7 @@ var Header = React.createClass({
     render() {
         return (
             <div>
+                <SearchBar />
                 <nav className="teal" role="navigation">
                     <div className="nav-wrapper container">
                         <Logo />
