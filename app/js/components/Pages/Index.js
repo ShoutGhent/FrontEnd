@@ -1,82 +1,29 @@
 import React from 'react'
-import Parallax from '../Partials/Parallax'
-import Headline from '../Partials/Headline'
+import LoggedIn from './_IndexLoggedIn'
+import LoggedOut from './_IndexLoggedOut'
+import UserStore from '../../stores/UserStore'
+
+function getStateFromStore() {
+    return UserStore.getState()
+}
 
 var Index = React.createClass({
+    getInitialState() {
+        return getStateFromStore()
+    },
+    componentDidMount() {
+        UserStore.listen(this._onChange)
+    },
+    componentWillUnmount() {
+        UserStore.unlisten(this._onChange)
+    },
+    _onChange() {
+        this.setState(getStateFromStore())
+    },
     render() {
+        var view = this.state.loggedIn ? <LoggedIn user={this.state} /> : <LoggedOut />
         return (
-            <div>
-                <Parallax img='/img/background1.jpg'>
-                    <div id="index-banner">
-                        <div className="section">
-                            <div className="container">
-                                <h1 className="header center white-text text-lighten-2">Schreeuw het van de daken</h1>
-                                <div className="row center">
-                                    <h5 className="header col s12 light white-text">Shout! verenigt studenten en maakt van hen een hechte groep. Registreer je nu en ontdek de voordelen.</h5>
-                                </div>
-                                <div className="row center">
-                                    <a href="register" className="btn-large waves-effect waves-light teal lighten-1">Registeren</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </Parallax>
-
-                <div className="container">
-                    <div className="section">
-                        <div className="row">
-                            <div className="col s12 m4">
-                                <div className="icon-block">
-                                    <h2 className="center brown-text"><i className="material-icons">flash_on</i></h2>
-                                    <h5 className="center">Speeds up development</h5>
-
-                                    <p className="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
-                                </div>
-                            </div>
-
-                            <div className="col s12 m4">
-                                <div className="icon-block">
-                                    <h2 className="center brown-text"><i className="material-icons">group</i></h2>
-                                    <h5 className="center">User Experience Focused</h5>
-
-                                    <p className="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
-                                </div>
-                            </div>
-
-                            <div className="col s12 m4">
-                                <div className="icon-block">
-                                    <h2 className="center brown-text"><i className="material-icons">settings</i></h2>
-                                    <h5 className="center">Easy to work with</h5>
-
-                                    <p className="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <Parallax img='/img/background2.jpg'>
-                    <Headline>A modern responsive front-end framework based on Material Design</Headline>
-                </Parallax>
-
-                <div className="container">
-                    <div className="section">
-                        <div className="row">
-                            <div className="col s12 center">
-                                <h3><i className="mdi-content-send brown-text"></i></h3>
-                                <h4>Contact Us</h4>
-                                <p className="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <Parallax img='/img/background3.jpg'>
-                    <Headline>A modern responsive front-end framework based on Material Design</Headline>
-                </Parallax>
-            </div>
+            <div>{view}</div>
         )
     }
 });

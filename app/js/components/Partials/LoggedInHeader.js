@@ -1,0 +1,87 @@
+import React from 'react'
+import Icon from './Icon'
+import Dropdown from './dropdown/Dropdown'
+import DropdownTitle from './dropdown/DropdownTitle'
+import DropdownContent from './dropdown/DropdownContent'
+import UserActions from '../../actions/UserActions'
+
+var LoggedInHeader = React.createClass({
+    logout(event) {
+        event.preventDefault()
+        UserActions.logout()
+    },
+    render() {
+        return (
+            <ul className="right hide-on-med-and-down">
+                <li>
+                    <a href="#" data-toggle="#search">
+                        <Icon icon="search" />
+                    </a>
+                </li>
+                <li id="search" data-focus=".navbar-input">
+                    <form action="">
+                        <input type="text" className="navbar-input"/>
+                    </form>
+                </li>
+                <li>
+                    <Dropdown>
+                        <DropdownTitle>
+                            <Icon icon="view_module" />
+                        </DropdownTitle>
+                        <DropdownContent>
+                            <ul>
+                                <li><a href="#!">VTK</a></li>
+                                <li><a href="#!" className="collection-item"> VRG <span className="new badge">4</span></a></li>
+                                <li><a href="#!">Home Fabiola</a></li>
+                                <li className="divider"></li>
+                                <li><a href="#!">Alle groepen</a></li>
+                            </ul>
+                        </DropdownContent>
+                    </Dropdown>
+                </li>
+                <li>
+                    <a href="/start">
+                        <Icon icon="chat_bubble_outline" />
+                    </a>
+                </li>
+                <li>
+                    <Dropdown>
+                        <DropdownTitle>
+                            <Icon icon="schedule" />
+                        </DropdownTitle>
+                        <DropdownContent>
+                            <ul>
+                                <li><a href="#!">Log 1</a></li>
+                                <li><a href="#!">Log 2</a></li>
+                                <li><a href="#!">Log 3</a></li>
+                                <li><a href="#!">Log 4</a></li>
+                                <li className="divider"></li>
+                                <li><a href="#!">Alle logs weergeven</a></li>
+                            </ul>
+                        </DropdownContent>
+                    </Dropdown>
+                </li>
+                <li>
+                    <Dropdown>
+                        <DropdownTitle>
+                            <i className="material-icons right">perm_identity</i> {this.props.user.name}
+                        </DropdownTitle>
+                        <DropdownContent>
+                            <ul>
+                                <li><a href="/settings">Profiel</a></li>
+                                <li className="divider"></li>
+                                <li><a href="#!">Nieuwe shout</a></li>
+                                <li><a href="#!">Nieuwe groep</a></li>
+
+                                <li className="divider"></li>
+                                <li><a href onClick={this.logout}>Log out</a></li>
+                            </ul>
+                        </DropdownContent>
+                    </Dropdown>
+                </li>
+            </ul>
+        )
+    }
+})
+
+export default LoggedInHeader

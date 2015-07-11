@@ -1,9 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router'
 
 var Logo = React.createClass({
     render() {
         return (
-            <a href="/" className="brand-logo">Shout</a>
+            <Link to="/" className="brand-logo">Shout</Link>
         )
     }
 });
