@@ -10,8 +10,8 @@
 }
 
 .card {
+  overflow: visible;
   position: relative;
-  overflow: hidden;
   margin: $element-top-margin 0 $element-bottom-margin 0;
   background-color: $card-bg-color;
   transition: box-shadow .25s;
@@ -107,7 +107,6 @@
   .card-content {
     padding: $card-padding;
     border-radius: 0 0 2px 2px;
-
 
     p {
       margin: 0;

@@ -8,7 +8,7 @@ var DropdownTitle = React.createClass({
     },
     render() {
         return (
-            <a href onClick={this.toggleDropdown}>{this.props.children}</a>
+            <a href={true} onClick={this.toggleDropdown}>{this.props.children}</a>
         )
     }
 })

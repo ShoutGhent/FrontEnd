@@ -32,13 +32,24 @@ var DropdownContent = React.createClass({
         event.preventDefault()
         DropdownActions.toggle(this.props.dropdown_id)
     },
+    getDefaultProps() {
+        return {
+            right: 0,
+            top: '10px'
+        }
+    },
     render() {
         var css = {
             opacity: this.state.isOpen ? 1 : 0,
             display: this.state.isOpen ? 'block' : 'none',
             minWidth: '200px',
-            marginTop: '15px'
+            marginTop: this.props.top
         }
+
+        if (this.props.right) {
+            css.right = this.props.right
+        }
+
         return (
             <div onMouseLeave={this.toggleDropdown} className="dropdown-content" style={css}>{this.props.children}</div>
         )

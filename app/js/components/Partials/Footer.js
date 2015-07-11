@@ -7,7 +7,7 @@ var Footer = React.createClass({
         };
 
         return (
-            <footer className="page-footer teal" style={css}>
+            <footer className="page-footer" style={css}>
                 <div className="container">
                     <div className="row">
                         <div className="col l7 s12">

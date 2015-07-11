@@ -69,7 +69,11 @@ var LoggedInHeader = React.createClass({
                         </DropdownTitle>
                         <DropdownContent>
                             <ul>
-                                <li><a href="/settings">Profiel</a></li>
+                                <li>
+                                    <Link to="settings">
+                                        Profile
+                                    </Link>
+                                </li>
                                 <li className="divider"></li>
                                 <li><a href="#!">Nieuwe shout</a></li>
                                 <li><a href="#!">Nieuwe groep</a></li>

@@ -26,7 +26,7 @@ var Header = React.createClass({
         return (
             <div>
                 <SearchBar />
-                <nav className="teal" role="navigation">
+                <nav role="navigation">
                     <div className="nav-wrapper container">
                         <Logo />
                         {this.state.loggedIn ? <LoggedInHeader user={this.state.user} /> : <LoggedOutHeader />}

@@ -11,8 +11,9 @@ var Dropdown = React.createClass({
     componentDidMount() {
         DropdownActions.register(this.state.dropdown_id)
     },
-    componentWillUnmount() {
-        DropdownActions.unRegister(this.state.dropdown_id)
+    toggleDropdown(event) {
+        event.preventDefault()
+        DropdownActions.toggle(this.props.dropdown_id)
     },
     render() {
         var renderedChildren = React.Children.map(this.props.children, (child) => {
@@ -21,7 +22,7 @@ var Dropdown = React.createClass({
             })
         })
 
-        return <div>{renderedChildren}</div>
+        return <div {...this.props}>{renderedChildren}</div>
     }
 })
 

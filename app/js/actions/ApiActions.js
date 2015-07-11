@@ -12,6 +12,12 @@ class ApiActions {
             .send(data || {})
             .set('Authorization', `Bearer ${WebStorage.fromStore('jwt')}`)
             .end((err, res) => {
+                if (err) {
+                    if (err.message == "Unauthorized") {
+                        WebStorage.remove('jwt')
+                        WebStorage.remove('user')
+                    }
+                }
                 if (res.body.token) {
                     WebStorage.toStore('jwt', res.body.token)
                 }
