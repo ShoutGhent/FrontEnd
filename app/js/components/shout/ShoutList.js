@@ -1,19 +1,27 @@
 import React from 'react'
-import ApiActions from '../../actions/ApiActions'
+import ShoutStore from './ShoutStore'
+import ShoutActions from './ShoutActions'
 import Shout from './Shout'
+
+function getStateFromStore() {
+    return ShoutStore.getState()
+}
 
 var ShoutList = React.createClass({
     getInitialState() {
-        return {
-            shouts: []
-        }
+        return getStateFromStore()
+    },
+    componentDidMount() {
+        ShoutStore.listen(this._onChange)
+    },
+    componentWillUnmount() {
+        ShoutStore.unlisten(this._onChange)
+    },
+    _onChange() {
+        this.setState(getStateFromStore())
     },
     componentWillMount() {
-        ApiActions.get('shouts', {}, (data) => {
-            this.setState({
-                shouts: data
-            })
-        })
+        ShoutActions.fetchShouts()
     },
     render() {
         return (

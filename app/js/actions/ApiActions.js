@@ -7,15 +7,31 @@ class ApiActions {
             prefix: "http://api.shout.app/"
         }
     }
+    static _refreshToken(token, cb) {
+        ApiActions._send('get', 'auth/token/refresh', { token: token }, (res, err) => {
+            if (err) {
+                cb(true)
+            } else {
+                cb(false)
+            }
+        })
+    }
     static _send(verb, url, data, cb) {
         request[verb](ApiActions.options().prefix + url)
             .send(data || {})
             .set('Authorization', `Bearer ${WebStorage.fromStore('jwt')}`)
             .end((err, res) => {
                 if (err) {
-                    if (err.message == "Unauthorized") {
-                        WebStorage.remove('jwt')
-                        WebStorage.remove('user')
+                    if (res.body.error && res.body.error == "token_expired") {
+                        ApiActions._refreshToken(WebStorage.fromStore('jwt'), (uhOh) => {
+                            if (uhOh) {
+                                // @TODO: cleanup, redirect to login page
+                                if (err.message == "Unauthorized") {
+                                    WebStorage.remove('jwt')
+                                    WebStorage.remove('user')
+                                }
+                            }
+                        })
                     }
                 }
                 if (res.body.token) {

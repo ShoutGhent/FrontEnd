@@ -11,10 +11,6 @@ var Dropdown = React.createClass({
     componentDidMount() {
         DropdownActions.register(this.state.dropdown_id)
     },
-    toggleDropdown(event) {
-        event.preventDefault()
-        DropdownActions.toggle(this.props.dropdown_id)
-    },
     render() {
         var renderedChildren = React.Children.map(this.props.children, (child) => {
             return React.addons.cloneWithProps(child, {
