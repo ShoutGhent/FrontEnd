@@ -7,7 +7,8 @@ import UserActions from './actions/UserActions'
 
 var router = Router.create({
     routes: routes,
-    location: Router.HistoryLocation
+    location: Router.HistoryLocation,
+    scrollBehavior: Router.ScrollToTopBehavior
 })
 
 RouterContainer.set(router)

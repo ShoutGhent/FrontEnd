@@ -1,5 +1,6 @@
 import React from 'react'
 import { Tab, TabPanel } from '../tab/Tab'
+import MaterialInput from '../partials/MaterialInput'
 
 var Settings = React.createClass({
     render() {
@@ -14,24 +15,20 @@ var Settings = React.createClass({
                                     <form className="col s12">
                                         <div className="row">
                                             <div className="input-field col m6 s12">
-                                                <input id="first_name" type="text" className="validate" />
-                                                <label htmlFor="first_name">Voornaam</label>
+                                                <MaterialInput label="Voornaam" id="first_name" type="text" className="validate" />
                                             </div>
                                             <div className="input-field col m6 s12">
-                                                <input id="last_name" type="text" className="validate" />
-                                                <label htmlFor="last_name">Achternaam</label>
+                                                <MaterialInput label="Achternaam" id="last_name" type="text" className="validate" />
                                             </div>
                                         </div>
                                         <div className="row">
                                             <div className="input-field col s12">
-                                                <input id="address" type="text" className="validate" />
-                                                <label htmlFor="address">Adres</label>
+                                                <MaterialInput label="Adres" id="address" type="text" className="validate" />
                                             </div>
                                         </div>
                                         <div className="row">
                                             <div className="input-field col s12">
-                                                <input id="email" type="email" className="validate" />
-                                                <label htmlFor="email">Email</label>
+                                                <MaterialInput label="Email" id="email" type="email" className="validate" />
                                             </div>
                                         </div>
                                     </form>
@@ -43,20 +40,17 @@ var Settings = React.createClass({
                                     <form className="col s12">
                                         <div className="row">
                                             <div className="input-field col s12">
-                                                <input id="password1" type="password" className="validate" />
-                                                <label htmlFor="password1">Huidig wachtwoord</label>
+                                                <MaterialInput label="Huidig wachtwoord" id="password1" type="password" className="validate" />
                                             </div>
                                         </div>
                                         <div className="row">
                                             <div className="input-field col s12">
-                                                <input id="password2" type="password" className="validate" />
-                                                <label htmlFor="password2">Nieuw wachtwoord</label>
+                                                <MaterialInput label="Nieuw wachtwoord" id="password2" type="password" className="validate" />
                                             </div>
                                         </div>
                                         <div className="row">
                                             <div className="input-field col s12">
-                                                <input id="password2" type="password" className="validate" />
-                                                <label htmlFor="password2">Wachtwoord herhalen</label>
+                                                <MaterialInput label="Wachtwoord herhalen" id="password3" type="password" className="validate" />
                                             </div>
                                         </div>
                                     </form>

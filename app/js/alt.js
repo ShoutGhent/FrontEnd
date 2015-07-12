@@ -1,3 +1,5 @@
 import Alt from 'alt'
 
-export default new Alt()
+var alt = new Alt()
+
+export default alt

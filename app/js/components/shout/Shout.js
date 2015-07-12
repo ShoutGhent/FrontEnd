@@ -2,9 +2,7 @@ import React from 'react'
 import Avatar from '../users/Avatar'
 import Icon from '../partials/Icon'
 import moment from 'moment'
-import Dropdown from '../dropdown/Dropdown'
-import DropdownTitle from '../dropdown/DropdownTitle'
-import DropdownContent from '../dropdown/DropdownContent'
+import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
 
 moment.locale('nl')
 

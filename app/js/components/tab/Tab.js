@@ -22,7 +22,7 @@ var Tab = React.createClass({
         }
 
         var manipulatedChildren = React.Children.map(this.props.children, (child, index) => {
-            panelHeaders.push(<li key={child.title} className="tab col" style={css}><a href={true} onClick={this.makeActive.bind(this, child, index)}>{child.props.title}</a></li>)
+            panelHeaders.push(<li key={child.props.title} className="tab col" style={css}><a href={true} onClick={this.makeActive.bind(this, child, index)}>{child.props.title}</a></li>)
 
             var active = false
             if (this.state.activePanel.props.title == child.props.title) {

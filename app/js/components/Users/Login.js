@@ -31,7 +31,7 @@ var Login = React.createClass({
         return (
             <div className="container">
                 <div className="section">
-                    <h1 className="teal-text">Log in</h1>
+                    <h1>Log in</h1>
                     <form onSubmit={this.login}>
                         <input type="email" id="email" name="email" placeholder="E-mail" value={this.state.email} onChange={this.setEmail} />
                         <input type="password" id="password" name="password" placeholder="Wachtwoord" value={this.state.password} onChange={this.setPassword} />
