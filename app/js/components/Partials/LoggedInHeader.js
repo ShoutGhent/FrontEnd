@@ -28,13 +28,11 @@ var LoggedInHeader = React.createClass({
                             <Icon icon="view_module" />
                         </DropdownTitle>
                         <DropdownContent>
-                            <ul>
-                                <li><a href="#!">VTK</a></li>
-                                <li><a href="#!" className="collection-item"> VRG <span className="new badge">4</span></a></li>
-                                <li><a href="#!">Home Fabiola</a></li>
-                                <li className="divider"></li>
-                                <li><a href="#!">Alle groepen</a></li>
-                            </ul>
+                            <li><a href="#!">VTK</a></li>
+                            <li><a href="#!" className="collection-item"> VRG <span className="new badge">4</span></a></li>
+                            <li><a href="#!">Home Fabiola</a></li>
+                            <li className="divider"></li>
+                            <li><a href="#!">Alle groepen</a></li>
                         </DropdownContent>
                     </Dropdown>
                 </li>
@@ -49,14 +47,12 @@ var LoggedInHeader = React.createClass({
                             <Icon icon="schedule" />
                         </DropdownTitle>
                         <DropdownContent>
-                            <ul>
-                                <li><a href="#!">Log 1</a></li>
-                                <li><a href="#!">Log 2</a></li>
-                                <li><a href="#!">Log 3</a></li>
-                                <li><a href="#!">Log 4</a></li>
-                                <li className="divider"></li>
-                                <li><a href="#!">Alle logs weergeven</a></li>
-                            </ul>
+                            <li><a href="#!">Log 1</a></li>
+                            <li><a href="#!">Log 2</a></li>
+                            <li><a href="#!">Log 3</a></li>
+                            <li><a href="#!">Log 4</a></li>
+                            <li className="divider"></li>
+                            <li><a href="#!">Alle logs weergeven</a></li>
                         </DropdownContent>
                     </Dropdown>
                 </li>
@@ -66,19 +62,17 @@ var LoggedInHeader = React.createClass({
                             <i className="material-icons right">perm_identity</i> {this.props.user.name}
                         </DropdownTitle>
                         <DropdownContent>
-                            <ul>
-                                <li>
-                                    <Link to="settings">
-                                        Profile
-                                    </Link>
-                                </li>
-                                <li className="divider"></li>
-                                <li><a href="#!">Nieuwe shout</a></li>
-                                <li><a href="#!">Nieuwe groep</a></li>
+                            <li>
+                                <Link to="settings">
+                                    Profile
+                                </Link>
+                            </li>
+                            <li className="divider"></li>
+                            <li><a href="#!">Nieuwe shout</a></li>
+                            <li><a href="#!">Nieuwe groep</a></li>
 
-                                <li className="divider"></li>
-                                <li><a href onClick={this.logout}>Log out</a></li>
-                            </ul>
+                            <li className="divider"></li>
+                            <li><a href onClick={this.logout}>Log out</a></li>
                         </DropdownContent>
                     </Dropdown>
                 </li>

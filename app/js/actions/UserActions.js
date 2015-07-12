@@ -21,9 +21,6 @@ class UserActions {
     loginUsingJwt(jwt) {
         ApiActions.post("auth/me", null, (res, err) => {
             if ( ! err) {
-                var nextPath = RouterContainer.get().getCurrentQuery().nextPath || '/';
-                RouterContainer.get().transitionTo(nextPath)
-
                 WebStorage.toStore('user', res)
 
                 this.dispatch(res)

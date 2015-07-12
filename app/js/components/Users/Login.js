@@ -2,6 +2,7 @@ import React from 'react'
 import UserActions from '../../actions/UserActions'
 import Avatar from './Avatar'
 import AuthenticatedRoute from '../../mixins/AuthenticatedRoute'
+import MaterialInput from '../partials/MaterialInput'
 
 var Login = React.createClass({
     getInitialState() {
@@ -33,8 +34,8 @@ var Login = React.createClass({
                 <div className="section">
                     <h1>Log in</h1>
                     <form onSubmit={this.login}>
-                        <input type="email" id="email" name="email" placeholder="E-mail" value={this.state.email} onChange={this.setEmail} />
-                        <input type="password" id="password" name="password" placeholder="Wachtwoord" value={this.state.password} onChange={this.setPassword} />
+                        <MaterialInput label="E-mail" type="email" id="email" name="email" value={this.state.email} onChange={this.setEmail}/>
+                        <MaterialInput label="Wachtwoord" type="password" id="password" name="password" value={this.state.password} onChange={this.setPassword}/>
 
                         <div className="right-align">
                             <button className="btn waves-effect waves-light" type="submit" name="action">

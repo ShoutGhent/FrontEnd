@@ -1,4 +1,5 @@
 import React from 'react/addons'
+import { Grid, Cell } from 'rgx'
 
 var MaterialInput = React.createClass({
     getInitialState() {
@@ -42,10 +43,14 @@ var MaterialInput = React.createClass({
     render() {
         var { label } = this.props
 
+        var labelStyles = {
+            pointerEvents: 'none'
+        }
+
         return (
-            <div>
+            <div className="input-field">
                 <input {...this.props} onChange={this.changeValue} onBlur={this.check}/>
-                <label className={this.state.open ? 'active' : ''}>{label}</label>
+                <label style={labelStyles} className={this.state.open ? 'active' : ''}>{label}</label>
             </div>
         )
     }

@@ -1,4 +1,5 @@
 import React from 'react/addons'
+import { Grid, Cell } from 'rgx'
 
 var Tab = React.createClass({
     getInitialState() {
@@ -44,7 +45,7 @@ var Tab = React.createClass({
 
         return (
             <div>
-                <ul className="tabs row">
+                <ul className="tabs">
                     {panelHeaders}
                     <div className="indicator" style={indicatorCss}></div>
                 </ul>
@@ -60,10 +61,8 @@ var TabPanel = React.createClass({
             display: this.props.isActive ? 'block' : 'none'
         }
         return (
-            <div>
-                <div className="col s12 tabs-content" style={css}>
-                    {this.props.children}
-                </div>
+            <div style={css}>
+                {this.props.children}
             </div>
         )
     }

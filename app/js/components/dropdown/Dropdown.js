@@ -75,7 +75,6 @@ var DropdownContent = React.createClass({
         var css = {
             opacity: this.state.isOpen ? 1 : 0,
             display: this.state.isOpen ? 'block' : 'none',
-            minWidth: '200px',
             marginTop: this.props.top
         }
 
@@ -84,7 +83,9 @@ var DropdownContent = React.createClass({
         }
 
         return (
-            <div onMouseLeave={this.toggleDropdown} className="dropdown-content" style={css}>{this.props.children}</div>
+            <ul className="dropdown-content" onMouseLeave={this.toggleDropdown} style={css}>
+                {this.props.children}
+            </ul>
         )
     }
 })

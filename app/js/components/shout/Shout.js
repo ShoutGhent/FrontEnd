@@ -56,7 +56,7 @@ var Shout = React.createClass({
             display: this.state.visible ? 'block' : 'none'
         }
         return (
-            <div className="card shout hoverable" style={css}>
+            <div className="card shout" style={css}>
                 <div className="card-content black-text">
                     <div className="card-title black-text">
                         <a href="#">
@@ -68,11 +68,9 @@ var Shout = React.createClass({
                                 <Icon icon="more_vert"/>
                             </DropdownTitle>
                             <DropdownContent top={0}>
-                                <ul>
-                                    <li><a href>Permalink</a></li>
-                                    <li><a href>Share</a></li>
-                                    <li><a href>Something Else</a></li>
-                                </ul>
+                                <li><a href>Permalink</a></li>
+                                <li><a href>Share</a></li>
+                                <li><a href>Something Else</a></li>
                             </DropdownContent>
                         </Dropdown>
                     </div>

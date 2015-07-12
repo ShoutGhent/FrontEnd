@@ -1,6 +1,7 @@
 import React from 'react'
 import { Tab, TabPanel } from '../tab/Tab'
 import MaterialInput from '../partials/MaterialInput'
+import { Grid, Cell } from '../grid/Grid'
 
 var Settings = React.createClass({
     render() {
@@ -11,50 +12,44 @@ var Settings = React.createClass({
                         <Tab>
                             <TabPanel title="Persoonlijk">
                                 <h5>Persoonlijk</h5>
-                                <div className="row">
-                                    <form className="col s12">
-                                        <div className="row">
-                                            <div className="input-field col m6 s12">
-                                                <MaterialInput label="Voornaam" id="first_name" type="text" className="validate" />
-                                            </div>
-                                            <div className="input-field col m6 s12">
-                                                <MaterialInput label="Achternaam" id="last_name" type="text" className="validate" />
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="input-field col s12">
-                                                <MaterialInput label="Adres" id="address" type="text" className="validate" />
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="input-field col s12">
-                                                <MaterialInput label="Email" id="email" type="email" className="validate" />
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
+                                <form>
+                                    <Grid gutter={15}>
+                                        <Cell padding={15} inlineCell={true}>
+                                            <MaterialInput label="Voornaam" id="first_name" type="text" className="validate" />
+                                        </Cell>
+                                        <Cell padding={15} inlineCell={true}>
+                                            <MaterialInput label="Achternaam" id="last_name" type="text" className="validate m6" />
+                                        </Cell>
+                                    </Grid>
+                                    <Grid>
+                                        <Cell width={100}>
+                                            <MaterialInput label="Adres" id="address" type="text" className="validate" />
+                                        </Cell>
+                                        <Cell width={100}>
+                                            <MaterialInput label="Email" id="email" type="email" className="validate" />
+                                        </Cell>
+                                    </Grid>
+                                </form>
                             </TabPanel>
                             <TabPanel title="Account">
                                 <h5>Account</h5>
-                                <div className="row">
-                                    <form className="col s12">
-                                        <div className="row">
-                                            <div className="input-field col s12">
-                                                <MaterialInput label="Huidig wachtwoord" id="password1" type="password" className="validate" />
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="input-field col s12">
-                                                <MaterialInput label="Nieuw wachtwoord" id="password2" type="password" className="validate" />
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="input-field col s12">
-                                                <MaterialInput label="Wachtwoord herhalen" id="password3" type="password" className="validate" />
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
+                                <form>
+                                    <Grid>
+                                        <Cell>
+                                            <MaterialInput label="Huidig wachtwoord" id="password1" type="password" className="validate" />
+                                        </Cell>
+                                    </Grid>
+                                    <Grid>
+                                        <Cell>
+                                            <MaterialInput label="Nieuw wachtwoord" id="password2" type="password" className="validate" />
+                                        </Cell>
+                                    </Grid>
+                                    <Grid>
+                                        <Cell>
+                                            <MaterialInput label="Wachtwoord herhalen" id="password3" type="password" className="validate" />
+                                        </Cell>
+                                    </Grid>
+                                </form>
                             </TabPanel>
                             <TabPanel title="Groepen">
                                 <h5>Groepen</h5>
