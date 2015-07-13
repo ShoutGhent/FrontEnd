@@ -1,8 +1,8 @@
 import React from 'react'
-import Parallax from '../partials/Parallax'
-import Headline from '../partials/Headline'
-import Icon from '../partials/Icon'
-import { Grid, Cell } from '../grid/Grid'
+import Parallax from '../../partials/Parallax'
+import Headline from '../../partials/Headline'
+import Icon from '../../partials/Icon'
+import { Grid, Cell } from '../../grid/Grid'
 
 var _IndexLoggedOut = React.createClass({
     render() {

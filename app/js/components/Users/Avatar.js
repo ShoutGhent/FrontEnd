@@ -30,7 +30,9 @@ var Avatar = React.createClass({
             }
         })
 
-        return (
+        return this.props.changeAble ? (
+            <img data-avatarize-invoke onClick={(event) => {event.preventDefault()}} className={`img-${this.props.size} avatar`} {...this.props} src={url} />
+        ) : (
             <img className={`img-${this.props.size} avatar`} {...this.props} src={url} />
         )
     }

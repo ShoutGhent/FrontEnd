@@ -1,7 +1,7 @@
 import React from 'react'
 import LoggedIn from './_IndexLoggedIn'
 import LoggedOut from './_IndexLoggedOut'
-import UserStore from '../../stores/UserStore'
+import UserStore from '../../../stores/UserStore'
 
 function getStateFromStore() {
     return UserStore.getState()

@@ -24,7 +24,6 @@ class UserActions {
                 WebStorage.toStore('user', res)
 
                 this.dispatch(res)
-
             }
         })
     }

@@ -5,10 +5,9 @@ import WebStorage from './services/WebStorage'
 import RouterContainer from './services/RouterContainer'
 import UserActions from './actions/UserActions'
 
-var router = Router.create({
-    routes: routes,
-    location: Router.HistoryLocation,
-    scrollBehavior: Router.ScrollToTopBehavior
+let router = Router.create({
+    routes: routes
+    //location: Router.HistoryLocation,
 })
 
 RouterContainer.set(router)
@@ -19,4 +18,5 @@ if (jwt) {
     UserActions.loginUsingJwt(jwt);
 }
 
-router.run(Handler => React.render(<Handler />, document.body))
+let mountNode = document.getElementById('mount-node')
+router.run(Handler => React.render(<Handler />, mountNode))

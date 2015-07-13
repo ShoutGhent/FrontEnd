@@ -2,8 +2,8 @@ import React from "react"
 import { Route } from "react-router"
 import App from './components/App'
 import Login from './components/users/Login'
-import Index from './components/pages/Index'
-import Settings from './components/pages/Settings'
+import Index from './components/pages/index/Index'
+import Settings from './components/pages/profile/Settings'
 import LoggedIn from './components/LoggedIn'
 
 var routes = (

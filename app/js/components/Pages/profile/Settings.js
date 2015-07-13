@@ -1,8 +1,8 @@
 import React from 'react'
-import { Tab, TabPanel } from '../tab/Tab'
-import MaterialInput from '../partials/MaterialInput'
-import { Grid, Cell } from '../grid/Grid'
-import Avatar from '../users/Avatar'
+import { Tab, TabPanel } from '../../tab/Tab'
+import MaterialInput from '../../partials/MaterialInput'
+import { Grid, Cell } from '../../grid/Grid'
+import Avatar from '../../users/Avatar'
 
 var Settings = React.createClass({
     render() {
@@ -13,7 +13,7 @@ var Settings = React.createClass({
                         <Tab>
                             <TabPanel title="Persoonlijk">
                                 <h5>Persoonlijk</h5>
-                                <Avatar email="malfait.robin@gmail.com" data-avatarize-invoke />
+                                <Avatar email="malfait.robin@gmail.com"/>
                                 <form>
                                     <Grid>
                                         <Cell width={1/2}>

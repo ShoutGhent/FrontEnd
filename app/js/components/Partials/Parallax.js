@@ -7,7 +7,6 @@ var Parallax = React.createClass({
     render() {
         var css = {
             backgroundImage: `url(${this.props.img})`,
-            backgroundAttachment: 'fixed',
             backgroundSize: 'cover'
         }
 

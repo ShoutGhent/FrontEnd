@@ -3,9 +3,10 @@ class WebStorage {
         return localStorage
     }
     fromStore(key, defaultValue) {
-        var data = this._storage().getItem(key)
+        let data = this._storage().getItem(key)
+
         if (data) {
-            return JSON.parse(data)
+            return JSON.parse(data) || defaultValue
         }
 
         return defaultValue
@@ -17,6 +18,7 @@ class WebStorage {
         this._storage().removeItem(key)
     }
 }
+
 let store = new WebStorage()
 
 export default {
