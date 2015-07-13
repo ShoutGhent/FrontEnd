@@ -1,15 +1,20 @@
 import React from 'react'
 import { RouteHandler} from 'react-router'
-import AuthenticatedComponent from '../auth/AuthenticatedComponent'
+import LoginStore from '../auth/LoginStore'
 
 var LoggedIn = React.createClass({
+    statics: {
+        willTransitionTo(transition) {
+            if ( ! LoginStore.isLoggedIn()) {
+                transition.redirect('/auth/login', {}, {
+                    nextPath: transition.path
+                })
+            }
+        }
+    },
     render() {
-        return (
-            <div>
-                <RouteHandler />
-            </div>
-        )
+        return (<RouteHandler />)
     }
 })
 
-export default AuthenticatedComponent(LoggedIn)
+export default LoggedIn

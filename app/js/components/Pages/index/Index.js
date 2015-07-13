@@ -21,9 +21,10 @@ var Index = React.createClass({
         this.setState(getStateFromStore())
     },
     render() {
-        console.log(this.state)
-        return (
-            <div>{this.state.loggedIn ? <LoggedIn user={this.state.user} /> : <LoggedOut />}</div>
+        return LoginStore.isLoggedIn() ? (
+            <LoggedIn user={this.state.user} />
+        ) : (
+            <LoggedOut />
         )
     }
 });

@@ -29,7 +29,7 @@ var Header = React.createClass({
                 <nav role="navigation">
                     <div className="nav-wrapper container">
                         <Logo />
-                        {this.state.loggedIn ? <LoggedInHeader user={this.state.user} /> : <LoggedOutHeader />}
+                        {LoginStore.isLoggedIn() ? <LoggedInHeader user={this.state.user} /> : <LoggedOutHeader />}
                     </div>
                 </nav>
             </div>

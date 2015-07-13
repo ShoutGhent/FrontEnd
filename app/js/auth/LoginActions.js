@@ -18,7 +18,7 @@ class LoginActions {
         WebStorage.remove('user')
 
         RouterContainer.get().transitionTo('/auth/login')
-        
+
         this.dispatch()
     }
 }

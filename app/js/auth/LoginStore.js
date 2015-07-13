@@ -1,13 +1,17 @@
 import alt from '../alt'
 import LoginActions from './LoginActions'
+import WebStore from '../services/WebStorage'
 
 class LoginStore {
     constructor() {
-        this.user = null
-        this.jwt = null
-        this.loggedIn = false
+        this.user = WebStore.fromStore('user', null)
+        this.jwt = WebStore.fromStore('user', null)
 
         this.bindActions(LoginActions)
+    }
+
+    static isLoggedIn() {
+        return !! this.getState().user
     }
 
     onLoginUser(payload) {
@@ -15,12 +19,11 @@ class LoginStore {
 
         this.jwt = token
         this.user = user
-        this.loggedIn = true
     }
 
     onLogoutUser() {
         this.user = null
-        this.loggedIn = false
+        this.jwt = null
     }
 }
 
