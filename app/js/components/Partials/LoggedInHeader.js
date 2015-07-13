@@ -2,7 +2,7 @@ import React from 'react'
 import Icon from './Icon'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
 import Auth from '../../auth/AuthService'
-import AuthService from '../search/SearchActions'
+import SearchActions from '../search/SearchActions'
 import { Link } from 'react-router'
 import Avatar from '../users/Avatar'
 

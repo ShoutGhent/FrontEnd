@@ -2,33 +2,41 @@ import LoginActions from './LoginActions'
 import API from '../services/API'
 
 class AuthService {
-    login(payload) {
+    login(payload, cb) {
         API.post("auth/login", payload, (res, err) => {
             if ( ! err) {
                 let { token, user } = res
 
                 LoginActions.loginUser(token, user)
             }
+
+            if (cb) cb(res, err)
         })
     }
-    loginUsingJwt(jwt) {
+    loginUsingJwt(jwt, cb) {
         API.post("auth/me", null, (res, err) => {
             if ( ! err) {
                 LoginActions.loginUser(jwt, res)
             }
+
+            if (cb) cb(res, err)
         })
     }
-    register(payload) {
+    register(payload, cb) {
         API.post("auth/register", payload, (res, err) => {
             if ( ! err) {
                 let { token, user } = res
 
                 LoginActions.loginUser(token, user)
             }
+
+            if (cb) cb(res, err)
         })
     }
-    logout() {
+    logout(cb) {
         LoginActions.logoutUser()
+
+        if (cb) cb()
     }
 }
 

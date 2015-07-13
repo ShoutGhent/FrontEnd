@@ -9,15 +9,41 @@ var Register = React.createClass({
             email: '',
             name: '',
             password: '',
-            passwordRepeat: ''
+            passwordRepeat: '',
+            error: false,
+            loading: false,
+            registerButton: 'Ga Verder'
         }
     },
     register(event) {
         event.preventDefault()
 
         var user = this.state
+        this.setState({
+            registerButton: 'Bezig met registreren...',
+            loading: true
+        })
 
-        Auth.register(user)
+        Auth.register(user, (res, err) => {
+            if (err) {
+                this.setState({
+                    registerButton: 'Uh Oh, er ging wat mis...',
+                    error: true,
+                    loading: false,
+                    email: '',
+                    name: '',
+                    password: '',
+                    passwordRepeat: ''
+                })
+
+                setTimeout(() => {
+                    this.setState({
+                        registerButton: 'Ga Verder',
+                        error: false
+                    })
+                }, 2500)
+            }
+        })
     },
     setEmail(event) {
         this.setState({
@@ -51,8 +77,8 @@ var Register = React.createClass({
                         <MaterialInput label="Herhaal Wachtwoord" type="password" id="password_repeat" name="password_repeat" value={this.state.passwordRepeat} onChange={this.setPasswordRepeat}/>
 
                         <div className="right-align">
-                            <button className="btn btn-large waves-effect waves-light" type="submit" name="action">
-                                <i className="material-icons right">send</i>Ga Verder
+                            <button className={`btn btn-large waves-effect waves-light ${this.state.error ? 'red' : ''}`} type="submit" name="action">
+                                <i className="material-icons right">{this.state.loading ? 'loop' : 'send'}</i>{this.state.registerButton}
                             </button>
                         </div>
                     </form>

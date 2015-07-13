@@ -13,6 +13,7 @@ class LoginActions {
 
         this.dispatch({ user, jwt })
     }
+
     logoutUser() {
         WebStorage.remove('jwt')
         WebStorage.remove('user')

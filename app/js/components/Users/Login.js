@@ -6,16 +6,39 @@ import MaterialInput from '../partials/MaterialInput'
 var Login = React.createClass({
     getInitialState() {
         return {
-            email: '',
-            password: ''
+            email: null,
+            password: null,
+            error: false,
+            loading: false,
+            loginButton: 'Log In'
         }
     },
     login(event) {
         event.preventDefault()
 
         var user = this.state
+        this.setState({
+            loginButton: 'Bezig met inloggen...',
+            loading: true
+        })
 
-        Auth.login(user)
+        Auth.login(user, (res, err) => {
+            if (err) {
+                this.setState({
+                    loginButton: 'Uh Oh, foute gegevens...',
+                    error: true,
+                    loading: false,
+                    password: null
+                })
+
+                setTimeout(() => {
+                    this.setState({
+                        loginButton: 'Log In',
+                        error: false
+                    })
+                }, 2500)
+            }
+        })
     },
     setEmail(event) {
         this.setState({
@@ -37,8 +60,8 @@ var Login = React.createClass({
                         <MaterialInput label="Wachtwoord" type="password" id="password" name="password" value={this.state.password} onChange={this.setPassword}/>
 
                         <div className="right-align">
-                            <button className="btn btn-large waves-effect waves-light" type="submit" name="action">
-                                <i className="material-icons right">lock</i>Log in
+                            <button className={`btn btn-large waves-effect waves-light ${this.state.error ? 'red' : ''}`} type="submit" name="action">
+                                <i className="material-icons right">{this.state.loading ? 'loop' : 'lock'}</i>{this.state.loginButton}
                             </button>
                         </div>
                     </form>
