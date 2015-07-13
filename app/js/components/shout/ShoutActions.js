@@ -1,9 +1,9 @@
 import alt from "../../alt"
-import ApiActions from '../../actions/ApiActions'
+import API from '../../services/API'
 
 class ShoutActions {
     fetchShouts() {
-        ApiActions.get('shouts', {}, (data) => {
+        API.get('shouts', {}, (data) => {
             this.dispatch(data)
         })
     }

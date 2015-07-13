@@ -1,7 +1,6 @@
 import React from 'react'
-import UserActions from '../../actions/UserActions'
+import Auth from '../../auth/AuthService'
 import Avatar from './Avatar'
-import AuthenticatedRoute from '../../mixins/AuthenticatedRoute'
 import MaterialInput from '../partials/MaterialInput'
 
 var Login = React.createClass({
@@ -16,7 +15,7 @@ var Login = React.createClass({
 
         var user = this.state
 
-        UserActions.login(user)
+        Auth.login(user)
     },
     setEmail(event) {
         this.setState({

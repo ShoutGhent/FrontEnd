@@ -1,14 +1,14 @@
 import React from 'react'
 import Icon from './Icon'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
-import UserActions from '../../actions/UserActions'
-import SearchActions from '../search/SearchActions'
+import Auth from '../../auth/AuthService'
+import AuthService from '../search/SearchActions'
 import { Link } from 'react-router'
 
 var LoggedInHeader = React.createClass({
     logout(event) {
         event.preventDefault()
-        UserActions.logout()
+        Auth.logout()
     },
     toggleSearch(event) {
         event.preventDefault()

@@ -1,12 +1,12 @@
 import React from 'react'
 import Logo from './Logo'
-import UserStore from '../../stores/UserStore'
+import LoginStore from '../../auth/LoginStore'
 import SearchBar from '../search/SearchBar'
 import LoggedInHeader from './LoggedInHeader'
 import LoggedOutHeader from './LoggedOutHeader'
 
 function getStateFromStore() {
-    return UserStore.getState()
+    return LoginStore.getState()
 }
 
 var Header = React.createClass({
@@ -14,10 +14,10 @@ var Header = React.createClass({
         return getStateFromStore()
     },
     componentDidMount() {
-        UserStore.listen(this._onChange)
+        LoginStore.listen(this._onChange)
     },
     componentWillUnmount() {
-        UserStore.unlisten(this._onChange)
+        LoginStore.unlisten(this._onChange)
     },
     _onChange() {
         this.setState(getStateFromStore())

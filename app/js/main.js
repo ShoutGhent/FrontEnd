@@ -3,7 +3,7 @@ import Router from "react-router"
 import routes from "./Routes"
 import WebStorage from './services/WebStorage'
 import RouterContainer from './services/RouterContainer'
-import UserActions from './actions/UserActions'
+import Auth from './auth/AuthService'
 
 let router = Router.create({
     routes: routes
@@ -15,7 +15,7 @@ RouterContainer.set(router)
 let jwt = WebStorage.fromStore('jwt')
 
 if (jwt) {
-    UserActions.loginUsingJwt(jwt);
+    Auth.loginUsingJwt(jwt)
 }
 
 let mountNode = document.getElementById('mount-node')

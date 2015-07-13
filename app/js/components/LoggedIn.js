@@ -1,5 +1,6 @@
 import React from 'react'
 import { RouteHandler} from 'react-router'
+import AuthenticatedComponent from '../auth/AuthenticatedComponent'
 
 var LoggedIn = React.createClass({
     render() {
@@ -11,4 +12,4 @@ var LoggedIn = React.createClass({
     }
 })
 
-export default LoggedIn
+export default AuthenticatedComponent(LoggedIn)
