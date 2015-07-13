@@ -3,23 +3,30 @@ import Auth from '../../auth/AuthService'
 import Avatar from './Avatar'
 import MaterialInput from '../partials/MaterialInput'
 
-var Login = React.createClass({
+var Register = React.createClass({
     getInitialState() {
         return {
             email: '',
-            password: ''
+            name: '',
+            password: '',
+            passwordRepeat: ''
         }
     },
-    login(event) {
+    register(event) {
         event.preventDefault()
 
         var user = this.state
 
-        Auth.login(user)
+        Auth.register(user)
     },
     setEmail(event) {
         this.setState({
             email: event.target.value
+        })
+    },
+    setName(event) {
+        this.setState({
+            name: event.target.value
         })
     },
     setPassword(event) {
@@ -27,18 +34,25 @@ var Login = React.createClass({
             password: event.target.value
         })
     },
+    setPasswordRepeat(event) {
+        this.setState({
+            passwordRepeat: event.target.value
+        })
+    },
     render() {
         return (
             <div className="container">
                 <div className="section">
-                    <h1>Log in</h1>
-                    <form onSubmit={this.login}>
+                    <h1>Registreren</h1>
+                    <form onSubmit={this.register}>
                         <MaterialInput label="E-mail" type="email" id="email" name="email" value={this.state.email} onChange={this.setEmail} focus/>
+                        <MaterialInput label="Naam" type="text" id="name" name="name" value={this.state.name} onChange={this.setName}/>
                         <MaterialInput label="Wachtwoord" type="password" id="password" name="password" value={this.state.password} onChange={this.setPassword}/>
+                        <MaterialInput label="Herhaal Wachtwoord" type="password" id="password_repeat" name="password_repeat" value={this.state.passwordRepeat} onChange={this.setPasswordRepeat}/>
 
                         <div className="right-align">
                             <button className="btn btn-large waves-effect waves-light" type="submit" name="action">
-                                <i className="material-icons right">lock</i>Log in
+                                <i className="material-icons right">send</i>Ga Verder
                             </button>
                         </div>
                     </form>
@@ -48,4 +62,4 @@ var Login = React.createClass({
     }
 })
 
-export default Login
+export default Register

@@ -6,8 +6,8 @@ import RouterContainer from './services/RouterContainer'
 import Auth from './auth/AuthService'
 
 let router = Router.create({
-    routes: routes
-    //location: Router.HistoryLocation,
+    routes: routes,
+    //location: Router.HistoryLocation
 })
 
 RouterContainer.set(router)

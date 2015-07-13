@@ -1,6 +1,6 @@
 import React from 'react'
 import { RouteHandler} from 'react-router'
-import LoginStore from '../auth/LoginStore'
+import LoginStore from '../../auth/LoginStore'
 
 var LoggedIn = React.createClass({
     statics: {

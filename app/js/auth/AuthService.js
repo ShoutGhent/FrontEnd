@@ -18,6 +18,15 @@ class AuthService {
             }
         })
     }
+    register(payload) {
+        API.post("auth/register", payload, (res, err) => {
+            if ( ! err) {
+                let { token, user } = res
+
+                LoginActions.loginUser(token, user)
+            }
+        })
+    }
     logout() {
         LoginActions.logoutUser()
     }

@@ -40,6 +40,15 @@ var MaterialInput = React.createClass({
             this.closeLabel()
         }
     },
+    focusable(component) {
+        if (this.props.focus) {
+            let node = React.findDOMNode(component)
+
+            if (node) {
+                node.focus()
+            }
+        }
+    },
     render() {
         var { label } = this.props
 
@@ -49,7 +58,7 @@ var MaterialInput = React.createClass({
 
         return (
             <div className="input-field">
-                <input {...this.props} onChange={this.changeValue} onBlur={this.check}/>
+                <input {...this.props} onChange={this.changeValue} onBlur={this.check} ref={this.focusable}/>
                 <label style={labelStyles} className={this.state.open ? 'active' : ''}>{label}</label>
             </div>
         )

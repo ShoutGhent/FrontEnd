@@ -4,6 +4,7 @@ import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
 import Auth from '../../auth/AuthService'
 import AuthService from '../search/SearchActions'
 import { Link } from 'react-router'
+import Avatar from '../users/Avatar'
 
 var LoggedInHeader = React.createClass({
     logout(event) {
@@ -15,6 +16,8 @@ var LoggedInHeader = React.createClass({
         SearchActions.toggleSearch()
     },
     render() {
+        let { user } = this.props
+
         return (
             <ul className="right hide-on-med-and-down">
                 <li>
@@ -59,7 +62,7 @@ var LoggedInHeader = React.createClass({
                 <li>
                     <Dropdown>
                         <DropdownTitle>
-                            <i className="material-icons right">perm_identity</i> {this.props.user.name}
+                            {user.name} <Avatar email={user.email} size={30} round/>
                         </DropdownTitle>
                         <DropdownContent>
                             <li>

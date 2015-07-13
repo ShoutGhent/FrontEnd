@@ -20,9 +20,11 @@ var Avatar = React.createClass({
         }
     },
     render() {
-        var url = `https://avatarize.me/a/${md5(this.props.email)}?size=${this.props.size}`
+        let { email, size, round } = this.props
 
-        var x = ['default', 'pixelate', 'greyscale', 'blur']
+        let url = `https://avatarize.me/a/${md5(email)}?size=${size}`
+
+        let x = ['default', 'pixelate', 'greyscale', 'blur']
 
         x.forEach((option) => {
             if (this.props[option]) {
@@ -30,10 +32,12 @@ var Avatar = React.createClass({
             }
         })
 
+        let className = `img-${size} avatar ${round ? 'circle' : ''}`
+
         return this.props.changeAble ? (
-            <img data-avatarize-invoke onClick={(event) => {event.preventDefault()}} className={`img-${this.props.size} avatar`} {...this.props} src={url} />
+            <img data-avatarize-invoke onClick={(event) => {event.preventDefault()}} className={className} {...this.props} src={url} />
         ) : (
-            <img className={`img-${this.props.size} avatar`} {...this.props} src={url} />
+            <img className={className} {...this.props} src={url} />
         )
     }
 })
