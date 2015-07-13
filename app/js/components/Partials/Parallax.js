@@ -11,12 +11,8 @@ var Parallax = React.createClass({
             backgroundSize: 'cover'
         }
 
-        return (
-            <div style={css}>
-                {this.props.children}
-            </div>
-        )
+        return (<div style={css}>{this.props.children}</div>)
     }
-});
+})
 
 export default Parallax

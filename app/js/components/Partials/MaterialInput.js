@@ -1,5 +1,5 @@
 import React from 'react/addons'
-import { Grid, Cell } from 'rgx'
+import { Grid, Cell } from '../grid/Grid'
 
 var MaterialInput = React.createClass({
     getInitialState() {

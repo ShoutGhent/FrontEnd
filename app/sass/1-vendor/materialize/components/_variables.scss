@@ -1,9 +1,9 @@
 /*** Colors ***/
-$primary-color: colour("indigo") !default;
+$primary-color: colour("red", 400) !default;
 $primary-color-light: lighten($primary-color, 15%) !default;
 $primary-color-dark: darken($primary-color, 15%) !default;
 
-$secondary-color: colour("indigo", 400) !default;
+$secondary-color: colour("grey", 600) !default;
 $success-color: colour("green") !default;
 $error-color: colour("red") !default;
 $link-color: color("shades", "black") !default;

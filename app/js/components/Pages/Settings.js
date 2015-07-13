@@ -2,6 +2,7 @@ import React from 'react'
 import { Tab, TabPanel } from '../tab/Tab'
 import MaterialInput from '../partials/MaterialInput'
 import { Grid, Cell } from '../grid/Grid'
+import Avatar from '../users/Avatar'
 
 var Settings = React.createClass({
     render() {
@@ -12,20 +13,19 @@ var Settings = React.createClass({
                         <Tab>
                             <TabPanel title="Persoonlijk">
                                 <h5>Persoonlijk</h5>
+                                <Avatar email="malfait.robin@gmail.com" data-avatarize-invoke />
                                 <form>
-                                    <Grid gutter={15}>
-                                        <Cell padding={15} inlineCell={true}>
+                                    <Grid>
+                                        <Cell width={1/2}>
                                             <MaterialInput label="Voornaam" id="first_name" type="text" className="validate" />
                                         </Cell>
-                                        <Cell padding={15} inlineCell={true}>
+                                        <Cell width={1/2}>
                                             <MaterialInput label="Achternaam" id="last_name" type="text" className="validate m6" />
                                         </Cell>
-                                    </Grid>
-                                    <Grid>
-                                        <Cell width={100}>
+                                        <Cell width={1/1}>
                                             <MaterialInput label="Adres" id="address" type="text" className="validate" />
                                         </Cell>
-                                        <Cell width={100}>
+                                        <Cell width={1/1}>
                                             <MaterialInput label="Email" id="email" type="email" className="validate" />
                                         </Cell>
                                     </Grid>

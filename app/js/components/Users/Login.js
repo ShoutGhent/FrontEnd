@@ -38,7 +38,7 @@ var Login = React.createClass({
                         <MaterialInput label="Wachtwoord" type="password" id="password" name="password" value={this.state.password} onChange={this.setPassword}/>
 
                         <div className="right-align">
-                            <button className="btn waves-effect waves-light" type="submit" name="action">
+                            <button className="btn btn-large waves-effect waves-light" type="submit" name="action">
                                 <i className="material-icons right">lock</i>Log in
                             </button>
                         </div>
