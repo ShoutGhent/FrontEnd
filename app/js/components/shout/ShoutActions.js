@@ -7,6 +7,9 @@ class ShoutActions {
             this.dispatch(data)
         })
     }
+    removeShout(shout) {
+        this.dispatch(shout)
+    }
 }
 
 export default alt.createActions(ShoutActions)

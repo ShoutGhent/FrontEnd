@@ -11,12 +11,11 @@ let Shout = React.createClass({
     getInitialState() {
         return {
             width: '100%',
-            visible: true,
             intervalId: null
         }
     },
     calcPercentage() {
-        let { shout } = this.props
+        let { shout, onRemove } = this.props
         let { created_at, publish_until} = shout
 
         let begin = moment(created_at).format('X')
@@ -31,9 +30,9 @@ let Shout = React.createClass({
                 if (percentage < 0) {
                     clearInterval(this.state.intervalId)
                     this.setState({
-                        intervalId: null,
-                        visible: false
+                        intervalId: null
                     })
+                    onRemove(shout)
                 } else {
                     this.setState({
                         width: `${percentage}%`
@@ -61,12 +60,8 @@ let Shout = React.createClass({
         let name = anonymous ? anonymousName : user.name
         let email = anonymous ? anonymousName : user.email
 
-        let css = {
-            display: this.state.visible ? 'block' : 'none'
-        }
-
         return (
-            <div className="card shout" style={css}>
+            <div className="card shout">
                 <div className="card-content black-text">
                     <div className="card-title black-text">
                         <a href="#">

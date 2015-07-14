@@ -23,11 +23,14 @@ let ShoutList = React.createClass({
     componentWillMount() {
         ShoutActions.fetchShouts()
     },
+    removeShout(shout) {
+        ShoutActions.removeShout(shout)
+    },
     render() {
         return (
             <div>
             {this.state.shouts.map((shout) =>
-                <Shout key={shout.uuid} shout={shout}/>
+                <Shout key={shout.uuid} shout={shout} onRemove={this.removeShout}/>
             )}
             </div>
         )
