@@ -4,14 +4,21 @@ import Icon from '../partials/Icon'
 import moment from 'moment'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
 import { Link } from 'react-router'
+import WebStorage from '../../services/WebStorage'
+import EditShout from '../pages/shout/EditShout'
 
 moment.locale('nl')
 
 let Shout = React.createClass({
     getInitialState() {
+        let { shout } = this.props
+
         return {
             width: '100%',
-            intervalId: null
+            intervalId: null,
+            currentUser: WebStorage.fromStore('user'),
+            modalOpen: false,
+            shout: shout
         }
     },
     calcPercentage() {
@@ -51,14 +58,36 @@ let Shout = React.createClass({
     componentWillUnmount() {
         clearInterval(this.state.intervalId)
     },
+    openModal(event) {
+        event.preventDefault()
+        this.setState({
+            modalOpen: true
+        })
+    },
+    save(shout) {
+        this.setState({
+            shout: shout
+        })
+    },
+    closeModal() {
+        this.setState({
+            modalOpen: false
+        })
+    },
     render() {
-        let { shout } = this.props
+        let { currentUser, width, modalOpen, shout } = this.state
         let { user, anonymous } = shout
+
+        if (this.props.user) {
+            user = this.props.user
+        }
 
         let anonymousName = 'Anonymous'
 
         let name = anonymous ? anonymousName : user.name
         let email = anonymous ? anonymousName : user.email
+
+        let myShout = currentUser.uuid == user.uuid
 
         return (
             <div className="card shout">
@@ -73,22 +102,24 @@ let Shout = React.createClass({
                                 <Icon icon="more_vert"/>
                             </DropdownTitle>
                             <DropdownContent top={0}>
-                                <li>
-                                    <Link to="shout" params={{shoutId: shout.uuid}}>
-                                        Permalink
-                                    </Link>
-                                </li>
+                                <li><Link to="shout" params={{shoutId: shout.uuid}}>Permalink</Link></li>
+                                {myShout ? (
+                                    <li><a href onClick={this.openModal}>Edit</a></li>
+                                ) : ''}
                             </DropdownContent>
                         </Dropdown>
+                        <EditShout isOpen={modalOpen} onSave={this.save} onClose={this.closeModal} shout={shout} />
                     </div>
                     <p>{shout.description}</p>
                 </div>
-                <div className="card-action right-align">
-                    <a href="#"><Icon icon="grade"/></a>
+                <div className="card-action">
+                    <div className="right-align">
+                        <a href="#"><Icon icon="grade"/></a>
+                    </div>
                 </div>
                 <div className="shout-progress">
                     <div className="progress">
-                        <div className="determinate" style={{width: this.state.width}}></div>
+                        <div className="determinate" style={{width}}></div>
                     </div>
                 </div>
             </div>

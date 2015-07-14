@@ -4,11 +4,13 @@ import ShoutActions from './ShoutActions'
 class ShoutStore {
     constructor() {
         this.shouts = []
+        this.loading = true
 
         this.bindActions(ShoutActions)
     }
     onFetchShouts(data) {
         this.shouts = data
+        this.loading = false
     }
     onRemoveShout(shout) {
         this.shouts.map((item, key) => {

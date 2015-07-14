@@ -1,10 +1,10 @@
 .modal {
   @extend .z-depth-4;
 
-  display: none;
+  display: block;
   position: fixed;
-  left: 0;
-  right: 0;
+  top: 50%;
+  left: 50%;
   background-color: #fafafa;
   padding: 0;
   max-height: 70%;
@@ -12,8 +12,12 @@
   margin: auto;
   overflow-y: auto;
 
+  z-index: 1002;
+
   border-radius: 2px;
   will-change: top, opacity;
+
+  transform: translate(-50%, -50%);
 
   @media #{$medium-and-down} {
    width: 80%;
@@ -31,6 +35,7 @@
   }
 
   .modal-footer {
+    border-top: 1px solid rgba(0,0,0,.1);
     border-radius: 0 0 2px 2px;
     background-color: #fafafa;
     padding: 4px 6px;
@@ -45,15 +50,16 @@
 }
 .lean-overlay {
     position: fixed;
-    z-index:999;
-    top: -100px;
+    z-index: 999;
+    top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     height: 125%;
     width: 100%;
-    background: #000;
-    display: none;
+    background: rgba(0, 0, 0, 0.5);
+    display: block;
+    pointer-events: none;
 
     will-change: opacity;
 }

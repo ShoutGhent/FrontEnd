@@ -4,6 +4,7 @@ import MaterialInput from '../../partials/MaterialInput'
 import { Grid, Cell } from '../../grid/Grid'
 import Avatar from '../../users/Avatar'
 import LoginStore from '../../../auth/LoginStore'
+import ShoutList from '../../shout/mine/ShoutList'
 
 function getStateFromStore() {
     return LoginStore.getState()
@@ -30,8 +31,10 @@ let Settings = React.createClass({
                 <div className="settings container">
                     <div className="section">
                         <Tab>
+                            <TabPanel title="Shouts">
+                                <ShoutList />
+                            </TabPanel>
                             <TabPanel title="Persoonlijk">
-                                <h5>Persoonlijk</h5>
                                 <Avatar email={user.email}/>
                                 <form>
                                     <Grid>
@@ -51,7 +54,6 @@ let Settings = React.createClass({
                                 </form>
                             </TabPanel>
                             <TabPanel title="Account">
-                                <h5>Account</h5>
                                 <form>
                                     <Grid>
                                         <Cell>
@@ -71,7 +73,6 @@ let Settings = React.createClass({
                                 </form>
                             </TabPanel>
                             <TabPanel title="Groepen">
-                                <h5>Groepen</h5>
                                 <ul className="collection with-header">
                                     <li className="collection-item"><div>Alvin<a href="#!" className="secondary-content"><i className="material-icons">send</i></a></div></li>
                                     <li className="collection-item"><div>Alvin<a href="#!" className="secondary-content"><i className="material-icons">send</i></a></div></li>
@@ -80,7 +81,6 @@ let Settings = React.createClass({
                                 </ul>
                             </TabPanel>
                             <TabPanel title="Notificaties">
-                                <h5>Notificaties</h5>
                                 <form action="#">
                                     <div className="row">
                                         <div className="col s9" htmlFor="email">

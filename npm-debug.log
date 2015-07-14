@@ -1,0 +1,205 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'react-growing-textarea',
+1 verbose cli   '--save' ]
+2 info using npm@2.10.1
+3 info using node@v0.12.4
+4 verbose node symlink /usr/local/bin/node
+5 verbose install initial load of /Users/robin/Sites/ShoutGhent/FrontEnd/package.json
+6 verbose installManyTop reading scoped package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/MD5/package.json
+7 verbose installManyTop reading scoped package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/alt/package.json
+8 verbose installManyTop reading scoped package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/gulp/package.json
+9 verbose installManyTop reading scoped package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/gulp-livereload/package.json
+10 verbose installManyTop reading scoped package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/laravel-elixir/package.json
+11 verbose installManyTop reading scoped package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/moment/package.json
+12 verbose installManyTop reading scoped package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/node-uuid/package.json
+13 verbose installManyTop reading scoped package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react/package.json
+14 verbose installManyTop reading scoped package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react-a11y/package.json
+15 verbose installManyTop reading scoped package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react-highlightable/package.json
+16 verbose installManyTop reading scoped package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react-portal/package.json
+17 verbose installManyTop reading scoped package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react-router/package.json
+18 verbose installManyTop reading scoped package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/superagent/package.json
+19 info package.json moment@2.10.3 No license field.
+20 info package.json node-uuid@1.4.3 No license field.
+21 info package.json superagent@1.2.0 No license field.
+22 verbose readDependencies loading dependencies from /Users/robin/Sites/ShoutGhent/FrontEnd/package.json
+23 silly cache add args [ 'react-growing-textarea', null ]
+24 verbose cache add spec react-growing-textarea
+25 silly cache add parsed spec { raw: 'react-growing-textarea',
+25 silly cache add   scope: null,
+25 silly cache add   name: 'react-growing-textarea',
+25 silly cache add   rawSpec: '',
+25 silly cache add   spec: '*',
+25 silly cache add   type: 'range' }
+26 silly addNamed react-growing-textarea@*
+27 verbose addNamed "*" is a valid semver range for react-growing-textarea
+28 silly addNameRange { name: 'react-growing-textarea', range: '*', hasData: false }
+29 silly mapToRegistry name react-growing-textarea
+30 silly mapToRegistry using default registry
+31 silly mapToRegistry registry https://registry.npmjs.org/
+32 silly mapToRegistry uri https://registry.npmjs.org/react-growing-textarea
+33 verbose addNameRange registry:https://registry.npmjs.org/react-growing-textarea not in flight; fetching
+34 verbose request uri https://registry.npmjs.org/react-growing-textarea
+35 verbose request no auth needed
+36 info attempt registry request try #1 at 01:12:46
+37 verbose request id c631d1efd7bad548
+38 http request GET https://registry.npmjs.org/react-growing-textarea
+39 http 200 https://registry.npmjs.org/react-growing-textarea
+40 silly get cb [ 200,
+40 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+40 silly get     etag: '"B8SKOLQT47V4P68O8DT507Z6Q"',
+40 silly get     'content-type': 'application/json',
+40 silly get     'cache-control': 'max-age=60',
+40 silly get     'content-length': '3919',
+40 silly get     'accept-ranges': 'bytes',
+40 silly get     date: 'Tue, 14 Jul 2015 23:12:47 GMT',
+40 silly get     via: '1.1 varnish',
+40 silly get     age: '0',
+40 silly get     connection: 'keep-alive',
+40 silly get     'x-served-by': 'cache-lhr6334-LHR',
+40 silly get     'x-cache': 'MISS',
+40 silly get     'x-cache-hits': '0',
+40 silly get     'x-timer': 'S1436915567.193364,VS0,VE92',
+40 silly get     vary: 'Accept' } ]
+41 verbose get saving react-growing-textarea to /Users/robin/.npm/registry.npmjs.org/react-growing-textarea/.cache.json
+42 silly addNameRange number 2 { name: 'react-growing-textarea', range: '*', hasData: true }
+43 silly addNameRange versions [ 'react-growing-textarea', [ '0.0.1', '0.0.2' ] ]
+44 silly addNamed react-growing-textarea@0.0.2
+45 verbose addNamed "0.0.2" is a plain semver version for react-growing-textarea
+46 silly mapToRegistry name react-growing-textarea
+47 silly mapToRegistry using default registry
+48 silly mapToRegistry registry https://registry.npmjs.org/
+49 silly mapToRegistry uri https://registry.npmjs.org/react-growing-textarea
+50 verbose addRemoteTarball https://registry.npmjs.org/react-growing-textarea/-/react-growing-textarea-0.0.2.tgz not in flight; adding
+51 verbose addRemoteTarball [ 'https://registry.npmjs.org/react-growing-textarea/-/react-growing-textarea-0.0.2.tgz',
+51 verbose addRemoteTarball   '174eda07de286fb08a74911a9cdd7ed97c1cadb4' ]
+52 info retry fetch attempt 1 at 01:12:47
+53 info attempt registry request try #1 at 01:12:47
+54 http fetch GET https://registry.npmjs.org/react-growing-textarea/-/react-growing-textarea-0.0.2.tgz
+55 http fetch 200 https://registry.npmjs.org/react-growing-textarea/-/react-growing-textarea-0.0.2.tgz
+56 silly fetchAndShaCheck shasum 174eda07de286fb08a74911a9cdd7ed97c1cadb4
+57 verbose addTmpTarball /var/folders/cq/_5lhg3n123b50_rcws63lnxw0000gn/T/npm-98292-8aa5f317/registry.npmjs.org/react-growing-textarea/-/react-growing-textarea-0.0.2.tgz not in flight; adding
+58 verbose addTmpTarball already have metadata; skipping unpack for react-growing-textarea@0.0.2
+59 silly cache afterAdd react-growing-textarea@0.0.2
+60 verbose afterAdd /Users/robin/.npm/react-growing-textarea/0.0.2/package/package.json not in flight; writing
+61 verbose afterAdd /Users/robin/.npm/react-growing-textarea/0.0.2/package/package.json written
+62 silly install resolved [ { name: 'react-growing-textarea',
+62 silly install resolved     version: '0.0.2',
+62 silly install resolved     description: 'growing textarea component for React',
+62 silly install resolved     main: 'lib/react-growing-textarea.js',
+62 silly install resolved     scripts:
+62 silly install resolved      { test: 'script/test --browsers Firefox --single-run',
+62 silly install resolved        start: 'script/build' },
+62 silly install resolved     repository:
+62 silly install resolved      { type: 'git',
+62 silly install resolved        url: 'git@github.com:cezary/react-growing-textarea.git' },
+62 silly install resolved     keywords: [ 'textarea', 'react', 'react-component' ],
+62 silly install resolved     author: { name: 'Cezary Wojtkowski', email: 'cezary@gmail.com' },
+62 silly install resolved     license: 'MIT',
+62 silly install resolved     bugs: { url: 'https://github.com/cezary/react-growing-textarea/issues' },
+62 silly install resolved     homepage: 'https://github.com/cezary/react-growing-textarea',
+62 silly install resolved     peerDependencies: { react: '^0.12.0' },
+62 silly install resolved     devDependencies:
+62 silly install resolved      { 'jsx-loader': '^0.12.2',
+62 silly install resolved        webpack: '^1.3.2-beta8',
+62 silly install resolved        'webpack-dev-server': '^1.4.7',
+62 silly install resolved        reactify: '^0.17.0',
+62 silly install resolved        'uglify-js': '^2.4.15' },
+62 silly install resolved     gitHead: '47b9acc5d5557f90dcf59b13f8aaa56e8d2dad8c',
+62 silly install resolved     _id: 'react-growing-textarea@0.0.2',
+62 silly install resolved     _shasum: '174eda07de286fb08a74911a9cdd7ed97c1cadb4',
+62 silly install resolved     _from: 'react-growing-textarea@*',
+62 silly install resolved     _npmVersion: '2.0.0',
+62 silly install resolved     _npmUser: { name: 'cezary', email: 'cezary@gmail.com' },
+62 silly install resolved     maintainers: [ [Object] ],
+62 silly install resolved     dist:
+62 silly install resolved      { shasum: '174eda07de286fb08a74911a9cdd7ed97c1cadb4',
+62 silly install resolved        tarball: 'http://registry.npmjs.org/react-growing-textarea/-/react-growing-textarea-0.0.2.tgz' },
+62 silly install resolved     directories: {},
+62 silly install resolved     _resolved: 'https://registry.npmjs.org/react-growing-textarea/-/react-growing-textarea-0.0.2.tgz' } ]
+63 info install react-growing-textarea@0.0.2 into /Users/robin/Sites/ShoutGhent/FrontEnd
+64 info installOne react-growing-textarea@0.0.2
+65 verbose installOne of react-growing-textarea to /Users/robin/Sites/ShoutGhent/FrontEnd not in flight; installing
+66 verbose lock using /Users/robin/.npm/_locks/react-growing-textarea-320a65330652a98d.lock for /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react-growing-textarea
+67 silly install write writing react-growing-textarea 0.0.2 to /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react-growing-textarea
+68 verbose unbuild node_modules/react-growing-textarea
+69 silly gentlyRm /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react-growing-textarea is being purged from base /Users/robin/Sites/ShoutGhent/FrontEnd
+70 verbose gentlyRm don't care about contents; nuking /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react-growing-textarea
+71 verbose tar unpack /Users/robin/.npm/react-growing-textarea/0.0.2/package.tgz
+72 verbose tar unpacking to /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react-growing-textarea
+73 silly gentlyRm /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react-growing-textarea is being purged
+74 verbose gentlyRm don't care about contents; nuking /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react-growing-textarea
+75 silly gunzTarPerm modes [ '755', '644' ]
+76 silly gunzTarPerm extractEntry package.json
+77 silly gunzTarPerm extractEntry README.md
+78 silly gunzTarPerm extractEntry index.js
+79 silly gunzTarPerm extractEntry dist/react-growing-textarea.js
+80 silly gunzTarPerm extractEntry dist/react-growing-textarea.min.js
+81 silly gunzTarPerm extractEntry dist/react-growing-textarea.map
+82 silly gunzTarPerm extractEntry dist/react-growing-textarea.min.map
+83 silly gunzTarPerm extractEntry src/growingTextarea.coffee
+84 silly gunzTarPerm extractEntry lib/react-growing-textarea.js
+85 verbose write writing to /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react-growing-textarea/package.json
+86 info preinstall react-growing-textarea@0.0.2
+87 verbose readDependencies loading dependencies from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react-growing-textarea/package.json
+88 silly prepareForInstallMany adding react@^0.12.0 from react-growing-textarea peerDependencies
+89 warn peerDependencies The peer dependency react@^0.12.0 included from react-growing-textarea will no
+90 warn peerDependencies longer be automatically installed to fulfill the peerDependency
+91 warn peerDependencies in npm 3+. Your application will need to depend on it explicitly.
+92 verbose readDependencies loading dependencies from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react-growing-textarea/package.json
+93 silly install resolved []
+94 verbose about to build /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react-growing-textarea
+95 info build /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react-growing-textarea
+96 info linkStuff react-growing-textarea@0.0.2
+97 silly linkStuff react-growing-textarea@0.0.2 has /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules as its parent node_modules
+98 verbose linkBins react-growing-textarea@0.0.2
+99 verbose linkMans react-growing-textarea@0.0.2
+100 verbose rebuildBundles react-growing-textarea@0.0.2
+101 info install react-growing-textarea@0.0.2
+102 info postinstall react-growing-textarea@0.0.2
+103 verbose readDependencies loading dependencies from /Users/robin/Sites/ShoutGhent/FrontEnd/package.json
+104 verbose targetResolver reading package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/MD5/package.json
+105 verbose targetResolver reading package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/alt/package.json
+106 verbose targetResolver reading package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/gulp/package.json
+107 verbose targetResolver reading package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/gulp-livereload/package.json
+108 verbose targetResolver reading package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/laravel-elixir/package.json
+109 verbose targetResolver reading package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/moment/package.json
+110 verbose targetResolver reading package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/node-uuid/package.json
+111 verbose targetResolver reading package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react/package.json
+112 verbose targetResolver reading package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react-a11y/package.json
+113 verbose targetResolver reading package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react-growing-textarea/package.json
+114 verbose targetResolver reading package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react-highlightable/package.json
+115 verbose targetResolver reading package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react-portal/package.json
+116 verbose targetResolver reading package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react-router/package.json
+117 verbose targetResolver reading package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/superagent/package.json
+118 verbose targetResolver reading package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/.bin/gulp/package.json
+119 verbose targetResolver reading package data from /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/.bin/uuid/package.json
+120 verbose already installed skipping react@^0.12.0 /Users/robin/Sites/ShoutGhent/FrontEnd
+121 silly install resolved []
+122 verbose unlock done using /Users/robin/.npm/_locks/react-growing-textarea-320a65330652a98d.lock for /Users/robin/Sites/ShoutGhent/FrontEnd/node_modules/react-growing-textarea
+123 verbose validateInstall loading /Users/robin/Sites/ShoutGhent/FrontEnd/package.json for validation
+124 verbose stack Error: The package react does not satisfy its siblings' peerDependencies requirements!
+124 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:125:32
+124 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:267:7
+124 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:138:5
+124 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:251:14
+124 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+124 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:251:14
+124 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+124 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:251:14
+124 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+124 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:251:14
+125 verbose cwd /Users/robin/Sites/ShoutGhent/FrontEnd
+126 error Darwin 15.0.0
+127 error argv "node" "/usr/local/bin/npm" "install" "react-growing-textarea" "--save"
+128 error node v0.12.4
+129 error npm  v2.10.1
+130 error code EPEERINVALID
+131 error peerinvalid The package react does not satisfy its siblings' peerDependencies requirements!
+131 error peerinvalid Peer react-highlightable@0.0.2 wants react@^0.13.x
+131 error peerinvalid Peer react-portal@0.6.0 wants react@^0.13.x
+131 error peerinvalid Peer react-router@0.13.3 wants react@0.13.x
+131 error peerinvalid Peer react-growing-textarea@0.0.2 wants react@^0.12.0
+132 verbose exit [ 1, true ]
