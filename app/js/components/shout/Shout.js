@@ -88,6 +88,11 @@ let Shout = React.createClass({
         let email = anonymous ? anonymousName : user.email
 
         let myShout = currentUser.uuid == user.uuid
+        
+        let links = [
+            <li><a href onClick={this.openModal}>Edit</a></li>,
+            //null ? <li><a href onClick={(event) => {event.preventDefault}}>Republish</a></li> : ''
+        ]
 
         return (
             <div className="card shout">
@@ -103,9 +108,7 @@ let Shout = React.createClass({
                             </DropdownTitle>
                             <DropdownContent top={0}>
                                 <li><Link to="shout" params={{shoutId: shout.uuid}}>Permalink</Link></li>
-                                {myShout ? (
-                                    <li><a href onClick={this.openModal}>Edit</a></li>
-                                ) : ''}
+                                {myShout ? links.map((item) => { return item }) : ''}
                             </DropdownContent>
                         </Dropdown>
                         <EditShout isOpen={modalOpen} onSave={this.save} onClose={this.closeModal} shout={shout} />
