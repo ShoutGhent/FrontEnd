@@ -27,7 +27,7 @@ class AuthService {
             if ( ! err) {
                 let { token, user } = res
 
-                LoginActions.loginUser(token, user)
+                LoginActions.loginUser(token, user, true)
             }
 
             if (cb) cb(res, err)
