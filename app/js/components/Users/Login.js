@@ -51,6 +51,10 @@ var Login = React.createClass({
         })
     },
     render() {
+        let { loading, loginButton } = this.state
+
+        let iconClass = `material-icons right ${this.state.loading ? 'icon-spin' : ''}`
+
         return (
             <div className="container">
                 <div className="section">
@@ -61,7 +65,7 @@ var Login = React.createClass({
 
                         <div className="right-align">
                             <button className={`btn btn-large waves-effect waves-light ${this.state.error ? 'red' : ''}`} type="submit" name="action">
-                                <i className="material-icons right">{this.state.loading ? 'loop' : 'lock'}</i>{this.state.loginButton}
+                                <i className={iconClass}>{loading ? 'loop' : 'lock'}</i>{loginButton}
                             </button>
                         </div>
                     </form>

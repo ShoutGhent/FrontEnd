@@ -79,7 +79,7 @@ let Shout = React.createClass({
                             </DropdownTitle>
                             <DropdownContent top={0}>
                                 <li>
-                                    <Link to="shout" params={{shoutId: shout.id}}>
+                                    <Link to="shout" params={{shoutId: shout.uuid}}>
                                         Permalink
                                     </Link>
                                 </li>

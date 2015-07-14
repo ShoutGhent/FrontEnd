@@ -66,6 +66,10 @@ var Register = React.createClass({
         })
     },
     render() {
+        let { loading, registerButton } = this.state
+
+        let iconClass = `material-icons right ${this.state.loading ? 'icon-spin' : ''}`
+
         return (
             <div className="container">
                 <div className="section">
@@ -78,7 +82,7 @@ var Register = React.createClass({
 
                         <div className="right-align">
                             <button className={`btn btn-large waves-effect waves-light ${this.state.error ? 'red' : ''}`} type="submit" name="action">
-                                <i className="material-icons right">{this.state.loading ? 'loop' : 'send'}</i>{this.state.registerButton}
+                                <i className={iconClass}>{loading ? 'loop' : 'send'}</i>{registerButton}
                             </button>
                         </div>
                     </form>
