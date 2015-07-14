@@ -7,7 +7,7 @@ function getStateFromStore() {
     return ShoutStore.getState()
 }
 
-var ShoutList = React.createClass({
+let ShoutList = React.createClass({
     getInitialState() {
         return getStateFromStore()
     },

@@ -1,10 +1,10 @@
 import React from 'react'
 
-var Headline = React.createClass({
+let Headline = React.createClass({
     render() {
-        var css = {
+        let css = {
             marginBottom: '0'
-        };
+        }
 
         return (
             <div className="section">
@@ -16,6 +16,6 @@ var Headline = React.createClass({
             </div>
         )
     }
-});
+})
 
 export default Headline

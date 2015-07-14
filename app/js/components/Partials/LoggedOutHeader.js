@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-var LoggedOutHeader = React.createClass({
+let LoggedOutHeader = React.createClass({
     render() {
         return (
             <ul className="right hide-on-med-and-down">

@@ -7,7 +7,7 @@ function getStateFromStore() {
     return SearchStore.getState()
 }
 
-var SearchBar = React.createClass({
+let SearchBar = React.createClass({
     getInitialState() {
         return getStateFromStore()
     },
@@ -33,7 +33,7 @@ var SearchBar = React.createClass({
         }
     },
     render() {
-        var css = {
+        let css = {
             border: 'none',
             height: '40px',
             width: '100%',
@@ -41,7 +41,7 @@ var SearchBar = React.createClass({
             outline: 'none'
         }
 
-        var wrapStyles = {
+        let wrapStyles = {
             overflow: 'hidden',
             transition: 'height .3s ease-in-out',
             height: this.state.isOpen ? '40px' : '0'

@@ -6,6 +6,7 @@ import Login from './components/users/Login'
 import Register from './components/users/Register'
 import Index from './components/pages/index/Index'
 import Settings from './components/pages/profile/Settings'
+import Shout from './components/pages/shout/Shout'
 
 var routes = (
     <Route path="/" handler={App}>
@@ -18,6 +19,7 @@ var routes = (
             <Route name="profile" path="profile">
                 <Route name="settings" path="settings" handler={Settings}/>
             </Route>
+            <Route name="shout" path="shouts/:shoutId" handler={Shout} />
         </Route>
     </Route>
 );

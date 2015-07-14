@@ -1,7 +1,7 @@
 import React from 'react/addons'
 import { Grid, Cell } from '../grid/Grid'
 
-var MaterialInput = React.createClass({
+let MaterialInput = React.createClass({
     getInitialState() {
         return {
             open: false,
@@ -50,9 +50,9 @@ var MaterialInput = React.createClass({
         }
     },
     render() {
-        var { label } = this.props
+        let { label } = this.props
 
-        var labelStyles = {
+        let labelStyles = {
             pointerEvents: 'none'
         }
 

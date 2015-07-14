@@ -1,14 +1,10 @@
 import React from 'react'
 import { Grid, Cell } from '../grid/Grid'
 
-var Footer = React.createClass({
+let Footer = React.createClass({
     render() {
-        var css = {
-            marginTop: '0'
-        };
-
         return (
-            <footer className="page-footer" style={css}>
+            <footer className="page-footer">
                 <div className="container">
                     <Grid>
                         <Cell width={7/12} inline>
@@ -34,6 +30,6 @@ var Footer = React.createClass({
             </footer>
         )
     }
-});
+})
 
 export default Footer

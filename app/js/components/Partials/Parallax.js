@@ -1,11 +1,11 @@
 import React from 'react'
 
-var Parallax = React.createClass({
+let Parallax = React.createClass({
     propTypes: {
         img: React.PropTypes.string.isRequired
     },
     render() {
-        var css = {
+        let css = {
             backgroundImage: `url(${this.props.img})`,
             backgroundSize: 'cover'
         }

@@ -6,7 +6,7 @@ import SearchActions from '../search/SearchActions'
 import { Link } from 'react-router'
 import Avatar from '../users/Avatar'
 
-var LoggedInHeader = React.createClass({
+let LoggedInHeader = React.createClass({
     logout(event) {
         event.preventDefault()
         Auth.logout()

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-var Logo = React.createClass({
+let Logo = React.createClass({
     render() {
-        var css = {
+        let css = {
             fill: 'white',
             width: '100px',
             height: '64px'
@@ -25,6 +25,6 @@ var Logo = React.createClass({
             </Link>
         )
     }
-});
+})
 
 export default Logo

@@ -1,6 +1,6 @@
 import React from 'react'
 
-var Icon = React.createClass({
+let Icon = React.createClass({
     render() {
         return (
             <i className="material-icons">{this.props.icon}</i>

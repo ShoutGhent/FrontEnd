@@ -3,10 +3,11 @@ import Avatar from '../users/Avatar'
 import Icon from '../partials/Icon'
 import moment from 'moment'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
+import { Link } from 'react-router'
 
 moment.locale('nl')
 
-var Shout = React.createClass({
+let Shout = React.createClass({
     getInitialState() {
         return {
             width: '100%',
@@ -15,14 +16,17 @@ var Shout = React.createClass({
         }
     },
     calcPercentage() {
-        var begin = moment(this.props.shout.created_at).format('X')
-        var end = this.props.shout.publish_until
+        let { shout } = this.props
+        let { created_at, publish_until} = shout
+
+        let begin = moment(created_at).format('X')
+        let end = publish_until
 
         if (end != null) {
             end = moment(end).format('X')
-            var interval = setInterval(() => {
-                var now = moment().format('X')
-                var percentage = 100 - (((now - begin) / (end - begin)) * 100)
+            let interval = setInterval(() => {
+                let now = moment().format('X')
+                let percentage = 100 - (((now - begin) / (end - begin)) * 100)
 
                 if (percentage < 0) {
                     clearInterval(this.state.intervalId)
@@ -49,12 +53,18 @@ var Shout = React.createClass({
         clearInterval(this.state.intervalId)
     },
     render() {
-        var name = this.props.shout.anonymous ? 'Anonymous' : this.props.shout.user.name
-        var email = this.props.shout.anonymous ? 'anonymous' : this.props.shout.user.email
+        let { shout } = this.props
+        let { user, anonymous } = shout
 
-        var css = {
+        let anonymousName = 'Anonymous'
+
+        let name = anonymous ? anonymousName : user.name
+        let email = anonymous ? anonymousName : user.email
+
+        let css = {
             display: this.state.visible ? 'block' : 'none'
         }
+
         return (
             <div className="card shout" style={css}>
                 <div className="card-content black-text">
@@ -68,13 +78,15 @@ var Shout = React.createClass({
                                 <Icon icon="more_vert"/>
                             </DropdownTitle>
                             <DropdownContent top={0}>
-                                <li><a href>Permalink</a></li>
-                                <li><a href>Share</a></li>
-                                <li><a href>Something Else</a></li>
+                                <li>
+                                    <Link to="shout" params={{shoutId: shout.id}}>
+                                        Permalink
+                                    </Link>
+                                </li>
                             </DropdownContent>
                         </Dropdown>
                     </div>
-                    <p>{this.props.shout.description}</p>
+                    <p>{shout.description}</p>
                 </div>
                 <div className="card-action right-align">
                     <a href="#"><Icon icon="grade"/></a>

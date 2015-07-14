@@ -1,7 +1,7 @@
 import React from 'react/addons'
 import { Grid, Cell } from '../grid/Grid'
 
-var Tab = React.createClass({
+let Tab = React.createClass({
     getInitialState() {
         return {
             activePosition: 0,
@@ -16,13 +16,13 @@ var Tab = React.createClass({
         })
     },
     render() {
-        var panelHeaders = []
+        let panelHeaders = []
 
-        var css = {
+        let css = {
             width: `${100 / this.props.children.length}%`
         }
 
-        var manipulatedChildren = React.Children.map(this.props.children, (child, index) => {
+        let manipulatedChildren = React.Children.map(this.props.children, (child, index) => {
             panelHeaders.push(<li key={child.props.title} className="tab col" style={css}><a href={true} onClick={this.makeActive.bind(this, child, index)}>{child.props.title}</a></li>)
 
             var active = false
@@ -55,7 +55,7 @@ var Tab = React.createClass({
     }
 })
 
-var TabPanel = React.createClass({
+let TabPanel = React.createClass({
     render() {
         var css = {
             display: this.props.isActive ? 'block' : 'none'

@@ -7,7 +7,7 @@ class AuthService {
             if ( ! err) {
                 let { token, user } = res
 
-                LoginActions.loginUser(token, user)
+                LoginActions.loginUser(token, user, true)
             }
 
             if (cb) cb(res, err)
@@ -16,7 +16,7 @@ class AuthService {
     loginUsingJwt(jwt, cb) {
         API.post("auth/me", null, (res, err) => {
             if ( ! err) {
-                LoginActions.loginUser(jwt, res)
+                LoginActions.loginUser(jwt, res, false)
             }
 
             if (cb) cb(res, err)

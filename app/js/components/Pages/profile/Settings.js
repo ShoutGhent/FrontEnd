@@ -9,7 +9,7 @@ function getStateFromStore() {
     return LoginStore.getState()
 }
 
-var Settings = React.createClass({
+let Settings = React.createClass({
     getInitialState() {
         return getStateFromStore()
     },
@@ -24,6 +24,7 @@ var Settings = React.createClass({
     },
     render() {
         let { user } = this.state
+
         return (
             <div>
                 <div className="settings container">

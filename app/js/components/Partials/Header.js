@@ -9,7 +9,7 @@ function getStateFromStore() {
     return LoginStore.getState()
 }
 
-var Header = React.createClass({
+let Header = React.createClass({
     getInitialState() {
         return getStateFromStore()
     },
@@ -35,6 +35,6 @@ var Header = React.createClass({
             </div>
         )
     }
-});
+})
 
 export default Header
