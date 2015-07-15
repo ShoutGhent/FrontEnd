@@ -13,10 +13,10 @@ class AuthService {
             if (cb) cb(res, err)
         })
     }
-    loginUsingJwt(jwt, cb) {
-        API.post("auth/me", null, (res, err) => {
+    fetchCurrentUser(jwt, cb) {
+        API.get("users/me", null, (res, err) => {
             if ( ! err) {
-                LoginActions.loginUser(jwt, res, false)
+                LoginActions.loginUser(jwt, res.user, false)
             }
 
             if (cb) cb(res, err)

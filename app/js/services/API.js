@@ -7,9 +7,6 @@ class API {
             prefix: "http://api.shout.app/"
         }
     }
-    static _refreshToken(token, cb) {
-        API._send('get', 'auth/token/refresh', { token: token }, cb)
-    }
     static _send(verb, url, data, cb) {
         if ( ! url.match(/https?/)) {
             url = API.options().prefix + url.replace(API.options().prefix, "").replace(/^\s+/, "")
@@ -32,15 +29,10 @@ class API {
             .end((err, res) => {
                 if (err) {
                     if (res && res.body && res.body.error && res.body.error == "token_expired") {
-                        API._refreshToken(WebStorage.fromStore('jwt'), (res, err) => {
-                            if (err) {
-                                // @TODO: cleanup, redirect to login page
-                                if (err.message == "Unauthorized") {
-                                    WebStorage.remove('jwt')
-                                    WebStorage.remove('user')
-                                }
-                            }
-                        })
+                        if (err.message == "Unauthorized") {
+                            WebStorage.remove('jwt')
+                            WebStorage.remove('user')
+                        }
                     }
                 }
                 if (res.body && res.body.token) {

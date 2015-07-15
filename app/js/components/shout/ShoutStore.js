@@ -14,40 +14,49 @@ function getDefaultPaginationData() {
 
 class ShoutStore {
     constructor() {
-        this.shouts = []
-        this.paginationData = getDefaultPaginationData()
+        this.shouts = {}
+        this.paginationData = {}
         this.loading = true
 
         this.bindActions(ShoutActions)
     }
-    onCleanShouts() {
-        this.shouts = []
-        this.paginationData = getDefaultPaginationData()
+    onRegister(url) {
+        if ( ! this.shouts[url]) {
+            this.shouts[url] = []
+            this.paginationData[url] = getDefaultPaginationData()
+        }
     }
-    onFetchShouts(response) {
-        this.setPaginationData(response)
-        this.shouts = response.data
+    onFetchShouts(data) {
+        let { response, url } = data
+
+        this.setPaginationData(response, url)
+
+        this.shouts[url] = response.data
     }
-    onLoadMore(response) {
-        this.setPaginationData(response)
+    onLoadMore(data) {
+        let { response, url } = data
+
+        this.setPaginationData(response, url)
 
         response.data.forEach((shout) => {
-            this.shouts.push(shout)
+            this.shouts[url].push(shout)
         })
     }
-    onRemoveShout(shout) {
-        this.shouts.map((item, key) => {
+    onRemoveShout(data) {
+        let { shout, url } = data
+
+        this.shouts[url].map((item, key) => {
             if (item.uuid == shout.uuid) {
-                this.shouts.splice(key, 1)
+                this.shouts[url].splice(key, 1)
             }
         })
     }
     onSetLoading() {
         this.loading = true
     }
-    setPaginationData(response) {
+    setPaginationData(response, url) {
         let { total, per_page, current_page, last_page, next_page_url, prev_page_url } = response
-        this.paginationData = { total, per_page, current_page, next_page_url, prev_page_url, last_page }
+        this.paginationData[url] = { total, per_page, current_page, next_page_url, prev_page_url, last_page }
         this.loading = false
     }
 }

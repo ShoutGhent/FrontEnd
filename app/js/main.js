@@ -15,7 +15,7 @@ RouterContainer.set(router)
 let jwt = WebStorage.fromStore('jwt')
 
 if (jwt) {
-    Auth.loginUsingJwt(jwt)
+    Auth.fetchCurrentUser(jwt)
 }
 
 let mountNode = document.getElementById('mount-node')

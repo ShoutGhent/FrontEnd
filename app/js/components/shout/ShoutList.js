@@ -3,6 +3,7 @@ import ShoutStore from './ShoutStore'
 import ShoutActions from './ShoutActions'
 import Shout from './Shout'
 import Loading from '../loading/Loading'
+import WebStorage from '../../services/WebStorage'
 
 function getStateFromStore() {
     return ShoutStore.getState()
@@ -25,31 +26,37 @@ let ShoutList = React.createClass({
         this.setState(getStateFromStore())
     },
     componentWillMount() {
-        ShoutActions.cleanShouts()
+        ShoutActions.register(this.props.url)
         ShoutActions.fetchShouts(this.props.url)
     },
     removeShout(shout) {
-        ShoutActions.removeShout(shout)
-    },
-    removeShout(shout) {
-        ShoutActions.removeShout(shout)
+        let { url } = this.props
+
+        if (url == "shouts") {
+            ShoutActions.removeShout(shout, url)
+        }
     },
     loadMore() {
-        let currentPage = this.state.paginationData.current_page
+        let { url } = this.props
+
+        let currentPage = this.state.paginationData[url].current_page
         let nextPage = currentPage + 1
 
         ShoutActions.setLoading()
-        ShoutActions.loadMore(nextPage)
+        ShoutActions.loadMore(nextPage, url)
     },
     render() {
-        let { loading, paginationData } = this.state
+        let { url } = this.props
+
+        let { loading, shouts } = this.state
+        let paginationData = this.state.paginationData[url]
 
         let { next_page_url } = paginationData
 
         return (
             <div>
-                {this.state.shouts.map((shout) =>
-                    <Shout key={shout.uuid} shout={shout} onRemove={this.removeShout}/>
+                {shouts[url].map((shout) =>
+                    <Shout user={shout.user || WebStorage.fromStore('user') } key={shout.uuid} shout={shout} onRemove={this.removeShout}/>
                 )}
                 {loading ? <Loading /> : ''}
                 {next_page_url ? (

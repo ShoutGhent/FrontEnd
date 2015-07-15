@@ -2,20 +2,26 @@ import alt from "../../alt"
 import API from '../../services/API'
 
 class ShoutActions {
-    cleanShouts() {
-        this.dispatch()
+    register(url) {
+        this.dispatch(url)
     }
     fetchShouts(url) {
-        API.get('shouts', {}, (data) => {
-            this.dispatch(data)
+        API.get(url, {}, (data) => {
+            this.dispatch({
+                response: data,
+                url: url
+            })
         })
     }
-    removeShout(shout) {
-        this.dispatch(shout)
+    removeShout(shout, url) {
+        this.dispatch({ shout, url })
     }
-    loadMore(page) {
-        API.get(`shouts`, { page: page }, (data) => {
-            this.dispatch(data)
+    loadMore(page, url) {
+        API.get(url, { page: page }, (data) => {
+            this.dispatch({
+                response: data,
+                url: url
+            })
         })
     }
     setLoading() {

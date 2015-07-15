@@ -76,11 +76,9 @@ let Shout = React.createClass({
     },
     render() {
         let { currentUser, width, modalOpen, shout } = this.state
-        let { user, anonymous } = shout
+        let { anonymous } = shout
 
-        if (this.props.user) {
-            user = this.props.user
-        }
+        let user = this.props.user
 
         let anonymousName = 'Anonymous'
 
