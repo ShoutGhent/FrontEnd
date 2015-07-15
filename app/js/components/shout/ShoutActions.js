@@ -2,7 +2,10 @@ import alt from "../../alt"
 import API from '../../services/API'
 
 class ShoutActions {
-    fetchShouts() {
+    cleanShouts() {
+        this.dispatch()
+    }
+    fetchShouts(url) {
         API.get('shouts', {}, (data) => {
             this.dispatch(data)
         })

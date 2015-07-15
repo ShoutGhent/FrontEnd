@@ -1,20 +1,28 @@
 import alt from '../../alt'
 import ShoutActions from './ShoutActions'
 
+function getDefaultPaginationData() {
+    return {
+        total: null,
+        per_page: null,
+        current_page: null,
+        last_page: null,
+        next_page_url: null,
+        prev_page_url: null
+    }
+}
+
 class ShoutStore {
     constructor() {
         this.shouts = []
-        this.paginationData = {
-            total: null,
-            per_page: null,
-            current_page: null,
-            last_page: null,
-            next_page_url: null,
-            prev_page_url: null
-        }
+        this.paginationData = getDefaultPaginationData()
         this.loading = true
 
         this.bindActions(ShoutActions)
+    }
+    onCleanShouts() {
+        this.shouts = []
+        this.paginationData = getDefaultPaginationData()
     }
     onFetchShouts(response) {
         this.setPaginationData(response)
@@ -22,7 +30,7 @@ class ShoutStore {
     }
     onLoadMore(response) {
         this.setPaginationData(response)
-        
+
         response.data.forEach((shout) => {
             this.shouts.push(shout)
         })

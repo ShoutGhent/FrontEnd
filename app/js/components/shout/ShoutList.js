@@ -9,6 +9,9 @@ function getStateFromStore() {
 }
 
 let ShoutList = React.createClass({
+    propTypes: {
+        url: React.PropTypes.string.isRequired
+    },
     getInitialState() {
         return getStateFromStore()
     },
@@ -22,7 +25,8 @@ let ShoutList = React.createClass({
         this.setState(getStateFromStore())
     },
     componentWillMount() {
-        ShoutActions.fetchShouts()
+        ShoutActions.cleanShouts()
+        ShoutActions.fetchShouts(this.props.url)
     },
     removeShout(shout) {
         ShoutActions.removeShout(shout)
