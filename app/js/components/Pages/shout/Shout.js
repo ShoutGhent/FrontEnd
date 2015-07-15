@@ -40,7 +40,7 @@ let ShoutPage = React.createClass({
                 <Loading />
             ) : (
                 shout ? (
-                    <Shout key={shout.uuid} shout={shout} onRemove={this.removeShout}/>
+                    <Shout user={shout.user || WebStorage.fromStore('user')} key={shout.uuid} shout={shout} onRemove={this.removeShout}/>
                 ) : (
                     <div>
                         <h3>Shout bestaat niet meer...</h3>

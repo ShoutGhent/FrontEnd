@@ -12,10 +12,6 @@ class API {
             url = API.options().prefix + url.replace(API.options().prefix, "").replace(/^\s+/, "")
         }
 
-        if (verb == "get") {
-
-        }
-
         var req = request[verb](url)
 
         if (verb == "get") {

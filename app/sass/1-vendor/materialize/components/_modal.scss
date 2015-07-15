@@ -35,12 +35,24 @@
   }
 
   .modal-footer {
+    position: relative;
     border-top: 1px solid rgba(0,0,0,.1);
     border-radius: 0 0 2px 2px;
     background-color: #fafafa;
     padding: 4px 6px;
     height: 56px;
     width: 100%;
+
+    .footer-left {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translate(10%, -50%);
+
+      span {
+        margin-right: 10px;
+      }
+    }
 
     .btn, .btn-flat {
       float: right;

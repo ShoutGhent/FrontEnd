@@ -10,6 +10,9 @@ import EditShout from '../pages/shout/EditShout'
 moment.locale('nl')
 
 let Shout = React.createClass({
+    propTypes: {
+        user: React.PropTypes.object.isRequired
+    },
     getInitialState() {
         let { shout } = this.props
 
