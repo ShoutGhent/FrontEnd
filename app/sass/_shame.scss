@@ -1,3 +1,9 @@
 input:-webkit-autofill {
     background-color: colour("pink");
 }
+
+.avatar-changeable {
+    &:hover {
+        cursor: pointer;
+    }
+}

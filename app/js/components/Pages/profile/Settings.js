@@ -35,20 +35,28 @@ let Settings = React.createClass({
                                 <ShoutList />
                             </TabPanel>
                             <TabPanel title="Persoonlijk">
-                                <Avatar email={user.email}/>
                                 <form>
                                     <Grid>
-                                        <Cell width={1/2}>
-                                            <MaterialInput label="Voornaam" id="first_name" type="text" className="validate" />
+                                        <Cell width={2/12}>
+                                            <div className="center">
+                                                <Avatar email={user.email} size={100} round changeAble/>
+                                            </div>
                                         </Cell>
-                                        <Cell width={1/2}>
-                                            <MaterialInput label="Achternaam" id="last_name" type="text" className="validate m6" />
-                                        </Cell>
-                                        <Cell width={1/1}>
-                                            <MaterialInput label="Adres" id="address" type="text" className="validate" />
-                                        </Cell>
-                                        <Cell width={1/1}>
-                                            <MaterialInput label="Email" id="email" type="email" className="validate" />
+                                        <Cell width={10/12}>
+                                            <Grid>
+                                                <Cell width={1/2}>
+                                                    <MaterialInput label="Voornaam" id="first_name" type="text" className="validate" />
+                                                </Cell>
+                                                <Cell width={1/2}>
+                                                    <MaterialInput label="Achternaam" id="last_name" type="text" className="validate m6" />
+                                                </Cell>
+                                                <Cell width={1/1}>
+                                                    <MaterialInput label="Adres" id="address" type="text" className="validate" />
+                                                </Cell>
+                                                <Cell width={1/1}>
+                                                    <MaterialInput label="Email" id="email" type="email" className="validate" />
+                                                </Cell>
+                                            </Grid>
                                         </Cell>
                                     </Grid>
                                 </form>

@@ -30,15 +30,27 @@ let ShoutList = React.createClass({
     removeShout(shout) {
         ShoutActions.removeShout(shout)
     },
+    loadMore() {
+        let currentPage = this.state.paginationData.current_page
+        let nextPage = currentPage + 1
+
+        ShoutActions.setLoading()
+        ShoutActions.loadMore(nextPage)
+    },
     render() {
-        let { loading } = this.state
+        let { loading, paginationData } = this.state
+
+        let { next_page_url } = paginationData
 
         return (
             <div>
-            {loading ? <Loading /> : ''}
-            {this.state.shouts.map((shout) =>
-                <Shout key={shout.uuid} shout={shout} onRemove={this.removeShout}/>
-            )}
+                {this.state.shouts.map((shout) =>
+                    <Shout key={shout.uuid} shout={shout} onRemove={this.removeShout}/>
+                )}
+                {loading ? <Loading /> : ''}
+                {next_page_url ? (
+                    <button className="btn-large" onClick={this.loadMore}>Meer Tonen</button>
+                ) : ''}
             </div>
         )
     }

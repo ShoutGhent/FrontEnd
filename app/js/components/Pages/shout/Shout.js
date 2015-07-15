@@ -2,43 +2,51 @@ import React from 'react'
 import Shout from '../../shout/Shout'
 import API from '../../../services/API'
 import { Link } from 'react-router'
+import WebStorage from '../../../services/WebStorage'
+import Loading from '../../loading/Loading'
 
 let ShoutPage = React.createClass({
     getInitialState() {
         return {
-            shout: null
+            shout: null,
+            loading: true
         }
     },
     componentDidMount() {
         let { shoutId } = this.props.params
 
-        API.get(`shouts/${shoutId}`, {}, (res, err) => {
+        API.get(`shouts/${shoutId}`, {}, (shout, err) => {
             if ( ! err) {
                 if (this.isMounted()) {
-                    this.setState({
-                        shout: res
-                    })
+                    let loading = false
+                    this.setState({ shout, loading })
                 }
             }
         })
     },
     removeShout() {
-        this.setState({
-            shout: null
-        })
+        if (this.state.shout.user.uuid != WebStorage.fromStore('user', { user: { uuid: null }}).uuid) {
+            let shout = null
+
+            this.setState({ shout })
+        }
     },
     render() {
-        let { shout } = this.state
+        let { shout, loading } = this.state
 
         return (
             <div className="container">
-            {shout ? (
-                <Shout key={shout.uuid} shout={shout} onRemove={this.removeShout}/>
+            {loading ? (
+                <Loading />
             ) : (
-                <div>
-                    <h3>Shout bestaat niet meer...</h3>
-                    <Link to="home" className="btn btn-large">Ga Terug</Link>
-                </div>
+                shout ? (
+                    <Shout key={shout.uuid} shout={shout} onRemove={this.removeShout}/>
+                ) : (
+                    <div>
+                        <h3>Shout bestaat niet meer...</h3>
+                        <Link to="home" className="btn btn-large">Ga Terug</Link>
+                    </div>
+                )
             )}
             </div>
         )

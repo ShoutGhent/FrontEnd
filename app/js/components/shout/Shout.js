@@ -88,9 +88,9 @@ let Shout = React.createClass({
         let email = anonymous ? anonymousName : user.email
 
         let myShout = currentUser.uuid == user.uuid
-        
+
         let links = [
-            <li><a href onClick={this.openModal}>Edit</a></li>,
+            <li key="edit"><a href onClick={this.openModal}>Edit</a></li>,
             //null ? <li><a href onClick={(event) => {event.preventDefault}}>Republish</a></li> : ''
         ]
 

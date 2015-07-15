@@ -11,9 +11,23 @@ class API {
         API._send('get', 'auth/token/refresh', { token: token }, cb)
     }
     static _send(verb, url, data, cb) {
-        request[verb](API.options().prefix + url)
-            .send(data || {})
-            .set('Authorization', `Bearer ${WebStorage.fromStore('jwt')}`)
+        if ( ! url.match(/https?/)) {
+            url = API.options().prefix + url.replace(API.options().prefix, "").replace(/^\s+/, "")
+        }
+
+        if (verb == "get") {
+
+        }
+
+        var req = request[verb](url)
+
+        if (verb == "get") {
+            req.query(data || {})
+        } else {
+            req.send(data || {})
+        }
+
+        req.set('Authorization', `Bearer ${WebStorage.fromStore('jwt')}`)
             .set('Accept', 'application/json')
             .end((err, res) => {
                 if (err) {
@@ -29,7 +43,7 @@ class API {
                         })
                     }
                 }
-                if (res.body.token) {
+                if (res.body && res.body.token) {
                     WebStorage.toStore('jwt', res.body.token)
                 }
 

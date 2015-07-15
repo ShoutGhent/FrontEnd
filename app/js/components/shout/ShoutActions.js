@@ -10,6 +10,14 @@ class ShoutActions {
     removeShout(shout) {
         this.dispatch(shout)
     }
+    loadMore(page) {
+        API.get(`shouts`, { page: page }, (data) => {
+            this.dispatch(data)
+        })
+    }
+    setLoading() {
+        this.dispatch()
+    }
 }
 
 export default alt.createActions(ShoutActions)
