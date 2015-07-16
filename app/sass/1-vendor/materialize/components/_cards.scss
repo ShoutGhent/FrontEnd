@@ -122,12 +122,32 @@
   }
 
   .card-action {
+    $card-action-height: 60px;
+
     border-top: 1px solid rgba(160,160,160,.2);
     padding: $card-padding;
+    position: relative;
+    height: $card-action-height;
+
+    .card-action-box {
+      position: absolute;
+      top: 50%;
+      left: $card-padding;
+      right: $card-padding;
+      transform: translate(0, -50%);
+      vertical-align: middle;
+      display: inline-block;
+      height: $card-action-height;
+      line-height: $card-action-height;
+
+      span, a, i {
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
 
     a {
       color: $card-link-color;
-      margin-right: $card-padding;
       @include transition(color .3s ease);
       text-transform: uppercase;
 

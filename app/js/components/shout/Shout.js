@@ -6,6 +6,8 @@ import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
 import { Link } from 'react-router'
 import WebStorage from '../../services/WebStorage'
 import EditShout from '../pages/shout/EditShout'
+import TransitiveNumber from 'react-transitive-number'
+import ShoutActions from './ShoutActions'
 
 moment.locale('nl')
 
@@ -21,11 +23,11 @@ let Shout = React.createClass({
             intervalId: null,
             currentUser: WebStorage.fromStore('user'),
             modalOpen: false,
-            shout: shout
+            shout: shout,
+            secondsLeft: 0
         }
     },
-    calcPercentage() {
-        let { shout, onRemove } = this.props
+    calcPercentage(shout, onRemove) {
         let { created_at, publish_until} = shout
 
         let begin = moment(created_at).format('X')
@@ -37,18 +39,19 @@ let Shout = React.createClass({
                 let now = moment().format('X')
                 let percentage = 100 - (((now - begin) / (end - begin)) * 100)
 
-                if (percentage < 0) {
+                if (percentage >= 0) {
+                    this.setState({
+                        width: `${percentage}%`,
+                        secondsLeft: end - now
+                    })
+                } else {
                     clearInterval(this.state.intervalId)
                     this.setState({
                         intervalId: null
                     })
                     onRemove(shout)
-                } else {
-                    this.setState({
-                        width: `${percentage}%`
-                    })
                 }
-            }, 800)
+            }, 1000)
 
             this.setState({
                 intervalId: interval
@@ -56,7 +59,8 @@ let Shout = React.createClass({
         }
     },
     componentDidMount() {
-        this.calcPercentage()
+        let { shout, onRemove } = this.props
+        this.calcPercentage(shout, onRemove)
     },
     componentWillUnmount() {
         clearInterval(this.state.intervalId)
@@ -68,9 +72,11 @@ let Shout = React.createClass({
         })
     },
     save(shout) {
-        this.setState({
-            shout: shout
-        })
+        this.setState({ shout })
+
+        ShoutActions.editShout(shout)
+
+        this.calcPercentage(shout, this.props.onRemove)
     },
     closeModal() {
         this.setState({
@@ -117,8 +123,11 @@ let Shout = React.createClass({
                     <p>{shout.description}</p>
                 </div>
                 <div className="card-action">
-                    <div className="right-align">
-                        <a href="#"><Icon icon="grade"/></a>
+                    <div className="card-action-box">
+                        {(this.state.secondsLeft < 10 && this.state.secondsLeft != 0) ? (
+                            <TransitiveNumber>{this.state.secondsLeft}</TransitiveNumber>
+                        ) : ''}
+                        <a href="#" className="right"><Icon icon="grade"/></a>
                     </div>
                 </div>
                 <div className="shout-progress">

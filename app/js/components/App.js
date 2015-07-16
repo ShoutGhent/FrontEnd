@@ -2,6 +2,7 @@ import React from 'react'
 import { RouteHandler} from 'react-router'
 import Header from './partials/Header'
 import Footer from './partials/Footer'
+import Notification from './notification/Notification'
 
 var App = React.createClass({
     render() {
@@ -10,6 +11,7 @@ var App = React.createClass({
                 <Header />
                 <RouteHandler/>
                 <Footer />
+                <Notification />
             </div>
         )
     }
