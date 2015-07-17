@@ -51,7 +51,7 @@ let Shout = React.createClass({
                     })
                     onRemove(shout)
                 }
-            }, 1000)
+            }, 500)
 
             this.setState({
                 intervalId: interval
