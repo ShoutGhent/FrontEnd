@@ -115,7 +115,7 @@ let Shout = React.createClass({
                             </DropdownTitle>
                             <DropdownContent top={0}>
                                 <li><Link to="shout" params={{shoutId: shout.uuid}}>Permalink</Link></li>
-                                {myShout ? links.map((item) => { return item }) : ''}
+                                {myShout ? links.map(item => item) : ''}
                             </DropdownContent>
                         </Dropdown>
                         <EditShout isOpen={modalOpen} onSave={this.save} onClose={this.closeModal} shout={shout} />
