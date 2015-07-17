@@ -3,6 +3,12 @@ import Parallax from '../../partials/Parallax'
 import Headline from '../../partials/Headline'
 import Icon from '../../partials/Icon'
 import { Grid, Cell } from '../../grid/Grid'
+import { Gmaps, Marker } from 'react-gmaps'
+
+const coords = {
+    lat: 51.0393565,
+    lng: 3.7271276
+}
 
 var _IndexLoggedOut = React.createClass({
     render() {
@@ -79,6 +85,20 @@ var _IndexLoggedOut = React.createClass({
                 <Parallax img='/img/background3.jpg'>
                     <Headline>A modern responsive front-end framework based on Material Design</Headline>
                 </Parallax>
+
+                <div>
+                    <Gmaps
+                        ref='Gmaps'
+                        width={'100%'}
+                        height={'400px'}
+                        lat={coords.lat}
+                        lng={coords.lng}
+                        zoom={17}>
+                        <Marker
+                            lat={coords.lat}
+                            lng={coords.lng} />
+                    </Gmaps>
+                </div>
             </div>
         )
     }

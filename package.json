@@ -10,6 +10,7 @@
     "moment": "^2.10.3",
     "node-uuid": "^1.4.3",
     "react": "^0.13.0",
+    "react-gmaps": "^0.1.10",
     "react-highlightable": "0.0.2",
     "react-notification-system": "^0.1.13",
     "react-portal": "^0.6.0",
