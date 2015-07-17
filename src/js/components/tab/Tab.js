@@ -49,7 +49,9 @@ let Tab = React.createClass({
                     {panelHeaders}
                     <div className="indicator" style={indicatorCss}></div>
                 </ul>
-                {manipulatedChildren}
+                <div className="tabs-content">
+                    {manipulatedChildren}
+                </div>
             </div>
         )
     }
