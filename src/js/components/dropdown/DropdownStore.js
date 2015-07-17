@@ -30,4 +30,4 @@ class DropdownStore {
     }
 }
 
-export default alt.createStore(DropdownStore)
+export default alt.createStore(DropdownStore, "DropdownStore")

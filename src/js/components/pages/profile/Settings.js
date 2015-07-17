@@ -4,7 +4,6 @@ import MaterialInput from '../../partials/MaterialInput'
 import { Grid, Cell } from '../../grid/Grid'
 import Avatar from '../../users/Avatar'
 import LoginStore from '../../../auth/LoginStore'
-import ShoutList from '../../shout/ShoutList'
 
 function getStateFromStore() {
     return LoginStore.getState()
@@ -31,9 +30,6 @@ let Settings = React.createClass({
                 <div className="settings container">
                     <div className="section">
                         <Tab>
-                            <TabPanel title="Shouts">
-                                <ShoutList url="shouts/mine" />
-                            </TabPanel>
                             <TabPanel title="Persoonlijk">
                                 <form>
                                     <Grid>

@@ -27,4 +27,4 @@ class LoginStore {
     }
 }
 
-export default alt.createStore(LoginStore)
+export default alt.createStore(LoginStore, "LoginStore")

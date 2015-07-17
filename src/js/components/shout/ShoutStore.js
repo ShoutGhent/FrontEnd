@@ -61,4 +61,4 @@ class ShoutStore {
     }
 }
 
-export default alt.createStore(ShoutStore)
+export default alt.createStore(ShoutStore, "ShoutStore")

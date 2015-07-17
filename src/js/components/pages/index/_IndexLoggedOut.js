@@ -12,7 +12,7 @@ var _IndexLoggedOut = React.createClass({
                     <div id="index-banner">
                         <div className="section">
                             <div className="container">
-                                <h1 className="header center white-text text-lighten-2">Schreeuw het van de daken</h1>
+                                <h1 className="header center white-text text-lighten-2">Schreeuw het van de daken!</h1>
                                 <Grid>
                                     <Cell width={12/12} center>
                                         <h5 className="header light white-text">Shout! verenigt studenten en maakt van hen een hechte groep. Registreer je nu en ontdek de voordelen.</h5>

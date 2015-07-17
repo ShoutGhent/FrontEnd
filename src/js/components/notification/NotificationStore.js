@@ -11,4 +11,4 @@ class NotificationStore {
     }
 }
 
-export default alt.createStore(NotificationStore)
+export default alt.createStore(NotificationStore, "NotificationStore")

@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "start": "gulp"
+    "start": "node server.js",
+    "lint": "eslint app"
   },
   "dependencies": {
     "MD5": "^1.2.2",
@@ -17,8 +18,14 @@
     "superagent": "^1.2.0"
   },
   "devDependencies": {
-    "gulp": "^3.8.8",
+    "babel-core": "^5.4.7",
+    "babel-eslint": "^3.1.9",
+    "babel-loader": "^5.1.2",
+    "eslint-plugin-react": "^2.3.0",
     "gulp-livereload": "^3.8.0",
-    "laravel-elixir": "^2.0.0"
+    "laravel-elixir": "^2.3.13",
+    "react-hot-loader": "^1.2.7",
+    "webpack": "^1.9.6",
+    "webpack-dev-server": "^1.8.2"
   }
 }

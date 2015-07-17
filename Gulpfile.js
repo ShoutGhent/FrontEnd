@@ -3,17 +3,15 @@ var elixir     = require('laravel-elixir');
 var livereload = require('gulp-livereload');
 
 elixir.config.sourcemaps = false;
-elixir.config.srcDir = 'app';
+elixir.config.srcDir = 'src';
 elixir.config.publicDir = 'dist';
-elixir.config.assetsDir = 'app/';
+elixir.config.assetsDir = 'src/';
 elixir.config.cssOutput = 'dist/css';
 elixir.config.jsOutput = 'dist/js';
 
 elixir(function (mix) {
     mix.sass('style.scss')
-        .browserify('main.js')
-        .copy('./app/index.html', './dist/index.html')
-        .copy('./app/img/**/*.*', './dist/img/');
+        .copy('./src/img/**/*.*', './dist/img/');
 });
 
 gulp.on('task_start', function (e) {
@@ -24,8 +22,4 @@ gulp.on('task_start', function (e) {
 
 gulp.task('watch-lr-css', function () {
     livereload.changed('app.css');
-});
-
-gulp.task('watch-lr', function () {
-    livereload.changed('app.js');
 });

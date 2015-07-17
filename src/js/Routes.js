@@ -6,6 +6,7 @@ import Login from './components/users/Login'
 import Register from './components/users/Register'
 import Index from './components/pages/index/Index'
 import Settings from './components/pages/profile/Settings'
+import Profile from './components/pages/profile/Profile'
 import Shout from './components/pages/shout/Shout'
 
 var routes = (
@@ -16,12 +17,11 @@ var routes = (
             <Route name="register" path="register" handler={Register}/>
         </Route>
         <Route handler={LoggedIn}>
-            <Route name="profile" path="profile">
-                <Route name="settings" path="settings" handler={Settings}/>
-            </Route>
+            <Route name="profile" path="/profile" handler={Profile}/>
+            <Route name="settings" path="profile/settings" handler={Settings}/>
             <Route name="shout" path="shouts/:shoutId" handler={Shout} />
         </Route>
     </Route>
-);
+)
 
 export default routes

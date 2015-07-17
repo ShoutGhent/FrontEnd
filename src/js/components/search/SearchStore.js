@@ -27,4 +27,4 @@ class SearchStore {
     }
 }
 
-export default alt.createStore(SearchStore)
+export default alt.createStore(SearchStore, "SearchStore")
