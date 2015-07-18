@@ -1,21 +1,34 @@
 import React from 'react/addons'
-import DropdownStore from './DropdownStore'
-import DropdownActions from './DropdownActions'
 import uuid from 'node-uuid'
 
 var Dropdown = React.createClass({
     getInitialState() {
         return {
-            dropdown_id: uuid.v4()
+            isOpen: true
         }
     },
-    componentDidMount() {
-        DropdownActions.register(this.state.dropdown_id)
+    closeDropdown(event) {
+        event.preventDefault()
+
+        this.setState({ isOpen: false })
+    },
+    toggleDropdown(event) {
+        event.preventDefault()
+
+        this.setState({
+            isOpen: ! this.state.isOpen
+        })
     },
     render() {
-        var renderedChildren = React.Children.map(this.props.children, (child) => {
+        let { children } = this.props
+        let { isOpen } = this.state
+
+        var renderedChildren = React.Children.map(children, (child) => {
             return React.addons.cloneWithProps(child, {
-                dropdown_id: this.state.dropdown_id
+                openDropdown: this.openDropdown,
+                closeDropdown: this.closeDropdown,
+                toggleDropdown: this.toggleDropdown,
+                isOpen: isOpen
             })
         })
 
@@ -24,67 +37,37 @@ var Dropdown = React.createClass({
 })
 
 var DropdownTitle = React.createClass({
-    toggleDropdown(event) {
-        event.preventDefault()
-        DropdownActions.toggle(this.props.dropdown_id)
-    },
     render() {
+        let { children, toggleDropdown } = this.props
+
         return (
-            <a href={true} onClick={this.toggleDropdown}>{this.props.children}</a>
+            <a href={true} onClick={toggleDropdown}>{children}</a>
         )
     }
 })
 
-function getStateFromStore(key) {
-    var dropdowns = DropdownStore.getState().dropdowns
-    var isOpen = false
-
-    dropdowns.forEach((item) => {
-        if (item.key == key) {
-            isOpen = item.isOpen
-        }
-    })
-
-    return { isOpen }
-}
-
 var DropdownContent = React.createClass({
-    getInitialState() {
-        return getStateFromStore(this.props.dropdown_id)
-    },
-    componentDidMount() {
-        DropdownStore.listen(this._onChange)
-    },
-    componentWillUnmount() {
-        DropdownStore.unlisten(this._onChange)
-    },
-    _onChange() {
-        this.setState(getStateFromStore(this.props.dropdown_id))
-    },
-    toggleDropdown(event) {
-        event.preventDefault()
-        DropdownActions.toggle(this.props.dropdown_id)
+    propTypes: {
+        top: React.PropTypes.string,
+        isOpen: React.PropTypes.bool.isRequired
     },
     getDefaultProps() {
         return {
-            right: 0,
             top: '10px'
         }
     },
     render() {
-        var css = {
-            opacity: this.state.isOpen ? 1 : 0,
-            display: this.state.isOpen ? 'block' : 'none',
-            marginTop: this.props.top
-        }
+        let { top, isOpen, closeDropdown, children } = this.props
 
-        if (this.props.right) {
-            css.right = this.props.right
+        let css = {
+            opacity: isOpen ? 1 : 0,
+            display: isOpen ? 'block' : 'none',
+            marginTop: top
         }
 
         return (
-            <ul className="dropdown-content" onMouseLeave={this.toggleDropdown} style={css}>
-                {this.props.children}
+            <ul className="dropdown-content" onMouseLeave={closeDropdown} style={css}>
+                {children}
             </ul>
         )
     }

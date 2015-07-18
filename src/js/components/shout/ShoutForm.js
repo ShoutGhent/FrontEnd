@@ -7,7 +7,7 @@ import moment from 'moment'
 var ShoutForm = React.createClass({
     propTypes: {
         shout: React.PropTypes.object.isRequired,
-        buttonName: React.PropTypes.object.isRequired,
+        buttonName: React.PropTypes.string.isRequired,
         onSave: React.PropTypes.func.isRequired,
         onDone: React.PropTypes.func.isRequired
     },
