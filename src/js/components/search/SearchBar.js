@@ -3,13 +3,9 @@ import Icon from '../partials/Icon'
 import SearchStore from './SearchStore'
 import SearchActions from './SearchActions'
 
-function getStateFromStore() {
-    return SearchStore.getState()
-}
-
 let SearchBar = React.createClass({
     getInitialState() {
-        return getStateFromStore()
+        return SearchStore.getState()
     },
     componentDidMount() {
         SearchStore.listen(this._onChange)
@@ -17,8 +13,8 @@ let SearchBar = React.createClass({
     componentWillUnmount() {
         SearchStore.unlisten(this._onChange)
     },
-    _onChange() {
-        this.setState(getStateFromStore())
+    _onChange(state) {
+        this.setState(state)
 
         if ( ! this.state.isOpen) {
             this.refs.search.getDOMNode().focus()
@@ -35,7 +31,7 @@ let SearchBar = React.createClass({
     render() {
         let css = {
             border: 'none',
-            height: '40px',
+            height: 40,
             width: '100%',
             padding: '5px 10px',
             outline: 'none'
@@ -44,7 +40,7 @@ let SearchBar = React.createClass({
         let wrapStyles = {
             overflow: 'hidden',
             transition: 'height .3s ease-in-out',
-            height: this.state.isOpen ? '40px' : '0'
+            height: this.state.isOpen ? 40 : 0
         }
 
         return (

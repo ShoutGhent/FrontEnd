@@ -40,7 +40,7 @@ let Tab = React.createClass({
         var indicatorCss = {
             width: `${100 / this.props.children.length}%`,
             left: `${(100 / this.props.children.length) * this.state.activePosition}%`,
-            transition: 'left .3s ease-in-out'
+            transition: 'left .6s ease-in-out'
         }
 
         return (
@@ -59,13 +59,14 @@ let Tab = React.createClass({
 
 let TabPanel = React.createClass({
     render() {
-        var css = {
+        let { children } = this.props
+
+        let css = {
             display: this.props.isActive ? 'block' : 'none'
         }
+
         return (
-            <div style={css}>
-                {this.props.children}
-            </div>
+            <div style={css}>{children}</div>
         )
     }
 })
