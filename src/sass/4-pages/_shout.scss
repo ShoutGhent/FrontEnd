@@ -5,6 +5,12 @@
         width: 100%;
 
         height: 11px;
+
+        .progress {
+            .determinate {
+                transition: width 1s linear;
+            }
+        }
     }
 
     .avatar{

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 import Parallax from '../../partials/Parallax'
 import Headline from '../../partials/Headline'
 import Icon from '../../partials/Icon'
@@ -14,7 +15,7 @@ var _IndexLoggedOut = React.createClass({
     render() {
         return (
             <div>
-                <Parallax img='/img/background1.jpg'>
+                <Parallax img='/dist/img/background1.jpg'>
                     <div id="index-banner">
                         <div className="section">
                             <div className="container">
@@ -24,7 +25,7 @@ var _IndexLoggedOut = React.createClass({
                                         <h5 className="header light white-text">Shout! verenigt studenten en maakt van hen een hechte groep. Registreer je nu en ontdek de voordelen.</h5>
                                     </Cell>
                                     <Cell width={12/12} center>
-                                        <a href="register" className="btn btn-large waves-effect waves-light">Registeren</a>
+                                        <Link to="register" className="btn btn-large waves-effect waves-light">Registeren</Link>
                                     </Cell>
                                 </Grid>
                             </div>
@@ -66,12 +67,12 @@ var _IndexLoggedOut = React.createClass({
                 </div>
 
 
-                <Parallax img='/img/background2.jpg'>
+                <Parallax img='/dist/img/background2.jpg'>
                     <Headline>A modern responsive front-end framework based on Material Design</Headline>
                 </Parallax>
 
                 <div className="container">
-                    <div className="section">
+                    <div className="section center">
                         <Grid>
                             <Cell width={12/12}>
                                 <h3><Icon icon="send" /></h3>
@@ -82,7 +83,7 @@ var _IndexLoggedOut = React.createClass({
                     </div>
                 </div>
 
-                <Parallax img='/img/background3.jpg'>
+                <Parallax img='/dist/img/background3.jpg'>
                     <Headline>A modern responsive front-end framework based on Material Design</Headline>
                 </Parallax>
 

@@ -1,12 +1,18 @@
 import React from 'react'
+import { Link } from 'react-router'
 import Icon from './Icon'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
 import Auth from '../../auth/AuthService'
 import SearchActions from '../search/SearchActions'
-import { Link } from 'react-router'
 import Avatar from '../users/Avatar'
+import AddShout from '../pages/shout/AddShout'
 
 let LoggedInHeader = React.createClass({
+    getInitialState() {
+        return {
+            isAddShoutFormOpen: false
+        }
+    },
     logout(event) {
         event.preventDefault()
         Auth.logout()
@@ -15,8 +21,21 @@ let LoggedInHeader = React.createClass({
         event.preventDefault()
         SearchActions.toggleSearch()
     },
+    openAddShoutForm(event) {
+        event.preventDefault()
+
+        this.setState({
+            isAddShoutFormOpen: true
+        })
+    },
+    AddShoutFormDone(shout) {
+        this.setState({
+            isAddShoutFormOpen: false
+        })
+    },
     render() {
         let { user } = this.props
+        let { isAddShoutFormOpen } = this.state
 
         return (
             <ul className="right hide-on-med-and-down">
@@ -65,19 +84,17 @@ let LoggedInHeader = React.createClass({
                             {user.name} <Avatar email={user.email} size={30} round/>
                         </DropdownTitle>
                         <DropdownContent>
-                            <li>
-                                <Link to="settings">
-                                    Profile
-                                </Link>
-                            </li>
+                            <li><Link to="profile">Profiel</Link></li>
+                            <li><Link to="settings">Instellingen</Link></li>
                             <li className="divider"></li>
-                            <li><a href="#!">Nieuwe shout</a></li>
+                            <li><a href onClick={this.openAddShoutForm}>Nieuwe shout</a></li>
                             <li><a href="#!">Nieuwe groep</a></li>
 
                             <li className="divider"></li>
-                            <li><a href onClick={this.logout}>Log out</a></li>
+                            <li><a href onClick={this.logout}>Uitloggen</a></li>
                         </DropdownContent>
                     </Dropdown>
+                    <AddShout isOpen={isAddShoutFormOpen} onDone={this.AddShoutFormDone}/>
                 </li>
             </ul>
         )

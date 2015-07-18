@@ -16,12 +16,14 @@ let Profile = React.createClass({
                         </Cell>
                         <Cell width={4/12}>
                             <Card>
-                                <CardContent>
-                                    <Avatar email="malfait.robin@gmail.com"/>
-                                </CardContent>
-                                <CardFooter>
-                                    <Link to="settings">Instellingen</Link>
-                                </CardFooter>
+                                <div className="center">
+                                    <CardContent>
+                                        <Avatar email="malfait.robin@gmail.com" round/>
+                                    </CardContent>
+                                    <CardFooter>
+                                        <Link to="settings">Instellingen</Link>
+                                    </CardFooter>
+                                </div>
                             </Card>
                         </Cell>
                     </Grid>
