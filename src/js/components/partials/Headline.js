@@ -3,7 +3,7 @@ import React from 'react'
 let Headline = React.createClass({
     render() {
         let css = {
-            marginBottom: '0'
+            marginBottom: 0
         }
 
         return (

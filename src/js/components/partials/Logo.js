@@ -5,8 +5,8 @@ let Logo = React.createClass({
     render() {
         let css = {
             fill: 'white',
-            width: '100px',
-            height: '64px'
+            width: 100,
+            height: 64
         }
 
         return (

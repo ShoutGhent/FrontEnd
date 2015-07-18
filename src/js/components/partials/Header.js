@@ -5,13 +5,9 @@ import SearchBar from '../search/SearchBar'
 import LoggedInHeader from './LoggedInHeader'
 import LoggedOutHeader from './LoggedOutHeader'
 
-function getStateFromStore() {
-    return LoginStore.getState()
-}
-
 let Header = React.createClass({
     getInitialState() {
-        return getStateFromStore()
+        return LoginStore.getState()
     },
     componentDidMount() {
         LoginStore.listen(this._onChange)
@@ -19,8 +15,8 @@ let Header = React.createClass({
     componentWillUnmount() {
         LoginStore.unlisten(this._onChange)
     },
-    _onChange() {
-        this.setState(getStateFromStore())
+    _onChange(state) {
+        this.setState(state)
     },
     render() {
         return (
