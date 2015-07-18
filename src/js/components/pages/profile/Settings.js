@@ -5,13 +5,9 @@ import { Grid, Cell } from '../../grid/Grid'
 import Avatar from '../../users/Avatar'
 import LoginStore from '../../../auth/LoginStore'
 
-function getStateFromStore() {
-    return LoginStore.getState()
-}
-
 let Settings = React.createClass({
     getInitialState() {
-        return getStateFromStore()
+        return LoginStore.getState()
     },
     componentDidMount() {
         LoginStore.listen(this._onChange)
@@ -19,8 +15,8 @@ let Settings = React.createClass({
     componentWillUnmount() {
         LoginStore.unlisten(this._onChange)
     },
-    _onChange() {
-        this.setState(getStateFromStore())
+    _onChange(state) {
+        this.setState(state)
     },
     render() {
         let { user } = this.state

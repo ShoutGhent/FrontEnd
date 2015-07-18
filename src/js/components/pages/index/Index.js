@@ -3,13 +3,9 @@ import LoggedIn from './_IndexLoggedIn'
 import LoggedOut from './_IndexLoggedOut'
 import LoginStore from '../../../auth/LoginStore'
 
-function getStateFromStore() {
-    return LoginStore.getState()
-}
-
 var Index = React.createClass({
     getInitialState() {
-        return getStateFromStore()
+        return LoginStore.getState()
     },
     componentDidMount() {
         LoginStore.listen(this._onChange)
@@ -17,8 +13,8 @@ var Index = React.createClass({
     componentWillUnmount() {
         LoginStore.unlisten(this._onChange)
     },
-    _onChange() {
-        this.setState(getStateFromStore())
+    _onChange(state) {
+        this.setState(state)
     },
     render() {
         return LoginStore.isLoggedIn() ? (
