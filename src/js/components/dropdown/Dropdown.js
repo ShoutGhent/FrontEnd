@@ -3,7 +3,7 @@ import React from 'react/addons'
 var Dropdown = React.createClass({
     getInitialState() {
         return {
-            isOpen: true
+            isOpen: false
         }
     },
     closeDropdown(event) {
