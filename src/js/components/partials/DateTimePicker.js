@@ -6,49 +6,37 @@ import moment from 'moment'
 var DateTimePicker = React.createClass({
     propTypes: {
         time: React.PropTypes.string,
-        date: React.PropTypes.string
+        date: React.PropTypes.string,
+        onChange: React.PropTypes.func.isRequired
     },
-    getInitialState() {
+    getDefaultProps() {
         return {
-            date: this.props.date || moment().format("YYYY-MM-DD"),
-            time: this.props.time || moment().format("HH:mm")
+            date: moment().format("YYYY-MM-DD"),
+            time: moment().format("HH:mm")
         }
     },
-    setDate(event) {
-        this.setState({
-            date: event.target.value
-        })
-
-        this.onChange({
+    changeDate(event) {
+        this.props.onChange({
             date: event.target.value,
-            time: this.state.time
+            time: this.props.time
         })
     },
-    setTime(event) {
-        this.setState({
+    changeTime(event) {
+        this.props.onChange({
+            date: this.props.date,
             time: event.target.value
         })
-
-        this.onChange({
-            time: event.target.value,
-            date: this.state.date
-        })
-    },
-    onChange(data) {
-        let { date, time } = data
-
-        this.props.onChange({ date, time })
     },
     render() {
-        let { date, time } = this.state
+        let { date, time } = this.props
 
         return (
             <Grid>
                 <Cell width={1/2}>
-                    <MaterialInput label="Datum" type="date" value={date} onChange={this.setDate}/>
+                    <MaterialInput label="Datum" type="date" value={date} onChange={this.changeDate}/>
                 </Cell>
                 <Cell width={1/2}>
-                    <MaterialInput label="Tijd" type="time" value={time} onChange={this.setTime}/>
+                    <MaterialInput label="Tijd" type="time" value={time} onChange={this.changeTime}/>
                 </Cell>
             </Grid>
         )

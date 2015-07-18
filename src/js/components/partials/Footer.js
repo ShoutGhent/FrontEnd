@@ -7,11 +7,11 @@ let Footer = React.createClass({
             <footer className="page-footer">
                 <div className="container">
                     <Grid>
-                        <Cell width={7/12} inline>
+                        <Cell width={7/12}>
                             <h5 className="white-text">Shout!</h5>
                             <p className="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
                         </Cell>
-                        <Cell width={5/12} inline>
+                        <Cell width={5/12}>
                             <h5 className="white-text">Settings</h5>
                             <ul>
                                 <li><a className="white-text" href="#!">Link 1</a></li>

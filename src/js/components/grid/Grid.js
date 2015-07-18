@@ -12,11 +12,11 @@ var Grid = React.createClass({
 
 var Cell = React.createClass({
     propTypes: {
-        width: React.PropTypes.number.isRequired,
         center: React.PropTypes.bool
     },
     getDefaultProps() {
         return {
+            width: 12/12,
             center: false
         }
     },
