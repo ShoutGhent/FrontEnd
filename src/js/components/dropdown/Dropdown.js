@@ -1,5 +1,4 @@
 import React from 'react/addons'
-import uuid from 'node-uuid'
 
 var Dropdown = React.createClass({
     getInitialState() {
