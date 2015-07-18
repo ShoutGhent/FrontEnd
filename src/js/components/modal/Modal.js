@@ -1,10 +1,7 @@
 import React from 'react'
 import Portal from 'react-portal'
-import { addons } from 'react/addons'
-var { PureRenderMixin } = addons
 
 var Modal = React.createClass({
-    mixins: [PureRenderMixin],
     getDefaultProps() {
         isOpen: false
     },
@@ -23,7 +20,6 @@ var Modal = React.createClass({
 })
 
 var ModalContent = React.createClass({
-    mixins: [PureRenderMixin],
     render() {
         let { children } = this.props
 
@@ -34,7 +30,6 @@ var ModalContent = React.createClass({
 })
 
 var ModalFooter = React.createClass({
-    mixins: [PureRenderMixin],
     render() {
         let { children } = this.props
 

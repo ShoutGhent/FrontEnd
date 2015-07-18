@@ -2,11 +2,8 @@ import React from 'react'
 import Auth from '../../auth/AuthService'
 import Avatar from './Avatar'
 import MaterialInput from '../partials/MaterialInput'
-import { addons } from 'react/addons'
-var { PureRenderMixin } = addons
 
 var Login = React.createClass({
-    mixins: [PureRenderMixin],
     getInitialState() {
         return {
             email: null,

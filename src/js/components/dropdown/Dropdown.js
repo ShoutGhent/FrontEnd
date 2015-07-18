@@ -2,11 +2,8 @@ import React from 'react/addons'
 import DropdownStore from './DropdownStore'
 import DropdownActions from './DropdownActions'
 import uuid from 'node-uuid'
-import { addons } from 'react/addons'
-var { PureRenderMixin } = addons
 
 var Dropdown = React.createClass({
-    mixins: [PureRenderMixin],
     getInitialState() {
         return {
             dropdown_id: uuid.v4()
@@ -27,7 +24,6 @@ var Dropdown = React.createClass({
 })
 
 var DropdownTitle = React.createClass({
-    mixins: [PureRenderMixin],
     toggleDropdown(event) {
         event.preventDefault()
         DropdownActions.toggle(this.props.dropdown_id)
@@ -53,7 +49,6 @@ function getStateFromStore(key) {
 }
 
 var DropdownContent = React.createClass({
-    mixins: [PureRenderMixin],
     getInitialState() {
         return getStateFromStore(this.props.dropdown_id)
     },

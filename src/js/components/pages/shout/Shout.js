@@ -4,11 +4,8 @@ import API from '../../../services/API'
 import { Link } from 'react-router'
 import WebStorage from '../../../services/WebStorage'
 import Loading from '../../loading/Loading'
-import { addons } from 'react/addons'
-var { PureRenderMixin } = addons
 
 let ShoutPage = React.createClass({
-    mixins: [PureRenderMixin],
     getInitialState() {
         return {
             shout: null,

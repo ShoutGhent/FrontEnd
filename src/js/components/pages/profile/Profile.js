@@ -4,11 +4,8 @@ import { Grid, Cell } from '../../grid/Grid'
 import ShoutList from '../../shout/ShoutList'
 import Avatar from '../../users/Avatar'
 import { Card, CardContent, CardFooter } from '../../card/Card'
-import { addons } from 'react/addons'
-var { PureRenderMixin } = addons
 
 let Profile = React.createClass({
-    mixins: [PureRenderMixin],
     render() {
         return (
             <div>

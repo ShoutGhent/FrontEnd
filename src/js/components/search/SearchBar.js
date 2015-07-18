@@ -2,15 +2,12 @@ import React from 'react'
 import Icon from '../partials/Icon'
 import SearchStore from './SearchStore'
 import SearchActions from './SearchActions'
-import { addons } from 'react/addons'
-var { PureRenderMixin } = addons
 
 function getStateFromStore() {
     return SearchStore.getState()
 }
 
 let SearchBar = React.createClass({
-    mixins: [PureRenderMixin],
     getInitialState() {
         return getStateFromStore()
     },

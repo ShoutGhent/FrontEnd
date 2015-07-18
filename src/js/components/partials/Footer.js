@@ -1,10 +1,7 @@
 import React from 'react'
 import { Grid, Cell } from '../grid/Grid'
-import { addons } from 'react/addons'
-var { PureRenderMixin } = addons
 
 let Footer = React.createClass({
-    mixins: [PureRenderMixin],
     render() {
         return (
             <footer className="page-footer">

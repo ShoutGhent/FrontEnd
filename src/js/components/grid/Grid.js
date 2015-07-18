@@ -1,9 +1,6 @@
 import React from 'react'
-import { addons } from 'react/addons'
-var { PureRenderMixin } = addons
 
 var Grid = React.createClass({
-    mixins: [PureRenderMixin],
     render() {
         let { children } = this.props
 

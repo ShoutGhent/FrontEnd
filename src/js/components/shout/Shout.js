@@ -8,13 +8,10 @@ import WebStorage from '../../services/WebStorage'
 import EditShout from '../pages/shout/EditShout'
 import TransitiveNumber from 'react-transitive-number'
 import ShoutActions from './ShoutActions'
-import { addons } from 'react/addons'
-var { PureRenderMixin } = addons
 
 moment.locale('nl')
 
 let Shout = React.createClass({
-    mixins: [PureRenderMixin],
     propTypes: {
         user: React.PropTypes.object.isRequired
     },

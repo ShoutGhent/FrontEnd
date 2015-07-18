@@ -1,10 +1,7 @@
 import React from 'react/addons'
 import { Grid, Cell } from '../grid/Grid'
-import { addons } from 'react/addons'
-var { PureRenderMixin } = addons
 
 let Tab = React.createClass({
-    mixins: [PureRenderMixin],
     getInitialState() {
         return {
             activePosition: 0,
@@ -61,7 +58,6 @@ let Tab = React.createClass({
 })
 
 let TabPanel = React.createClass({
-    mixins: [PureRenderMixin],
     render() {
         var css = {
             display: this.props.isActive ? 'block' : 'none'
