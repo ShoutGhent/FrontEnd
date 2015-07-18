@@ -1,6 +1,9 @@
 import React from 'react'
+import { addons } from 'react/addons'
+var { PureRenderMixin } = addons
 
 let Parallax = React.createClass({
+    mixins: [PureRenderMixin],
     propTypes: {
         img: React.PropTypes.string.isRequired
     },

@@ -6,8 +6,11 @@ import Auth from '../../auth/AuthService'
 import SearchActions from '../search/SearchActions'
 import Avatar from '../users/Avatar'
 import AddShout from '../pages/shout/AddShout'
+import { addons } from 'react/addons'
+var { PureRenderMixin } = addons
 
 let LoggedInHeader = React.createClass({
+    mixins: [PureRenderMixin],
     getInitialState() {
         return {
             isAddShoutFormOpen: false

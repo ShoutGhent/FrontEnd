@@ -4,17 +4,16 @@ import ShoutActions from './ShoutActions'
 import Shout from './Shout'
 import Loading from '../loading/Loading'
 import WebStorage from '../../services/WebStorage'
-
-function getStateFromStore() {
-    return ShoutStore.getState()
-}
+import { addons } from 'react/addons'
+var { PureRenderMixin } = addons
 
 let ShoutList = React.createClass({
+    mixins: [PureRenderMixin],
     propTypes: {
         url: React.PropTypes.string.isRequired
     },
     getInitialState() {
-        return getStateFromStore()
+        return ShoutStore.getState()
     },
     componentDidMount() {
         ShoutStore.listen(this._onChange)
@@ -22,8 +21,8 @@ let ShoutList = React.createClass({
     componentWillUnmount() {
         ShoutStore.unlisten(this._onChange)
     },
-    _onChange() {
-        this.setState(getStateFromStore())
+    _onChange(state) {
+        this.setState(state)
     },
     componentWillMount() {
         ShoutActions.register(this.props.url)

@@ -5,6 +5,8 @@ import Headline from '../../partials/Headline'
 import Icon from '../../partials/Icon'
 import { Grid, Cell } from '../../grid/Grid'
 import { Gmaps, Marker } from 'react-gmaps'
+import { addons } from 'react/addons'
+var { PureRenderMixin } = addons
 
 const coords = {
     lat: 51.0393565,
@@ -12,6 +14,7 @@ const coords = {
 }
 
 var _IndexLoggedOut = React.createClass({
+    mixins: [PureRenderMixin],
     render() {
         return (
             <div>

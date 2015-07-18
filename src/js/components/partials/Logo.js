@@ -1,7 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router'
+import { addons } from 'react/addons'
+var { PureRenderMixin } = addons
 
 let Logo = React.createClass({
+    mixins: [PureRenderMixin],
     render() {
         let css = {
             fill: 'white',

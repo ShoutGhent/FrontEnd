@@ -1,8 +1,11 @@
 import React from 'react'
 import { Modal } from '../../modal/Modal'
 import ShoutForm from '../../shout/ShoutForm'
+import { addons } from 'react/addons'
+var { PureRenderMixin } = addons
 
 var EditShout = React.createClass({
+    mixins: [PureRenderMixin],
     propTypes: {
         isOpen: React.PropTypes.bool,
         onSave: React.PropTypes.func,

@@ -1,7 +1,10 @@
 import React from 'react'
 import md5 from 'MD5'
+import { addons } from 'react/addons'
+var { PureRenderMixin } = addons
 
 var Avatar = React.createClass({
+    mixins: [PureRenderMixin],
     propTypes: {
         email: React.PropTypes.string.isRequired,
         size: React.PropTypes.number,

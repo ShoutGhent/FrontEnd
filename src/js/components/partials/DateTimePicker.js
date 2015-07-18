@@ -2,8 +2,11 @@ import React from 'react'
 import { Grid, Cell } from '../grid/Grid'
 import MaterialInput from '../partials/MaterialInput'
 import moment from 'moment'
+import { addons } from 'react/addons'
+var { PureRenderMixin } = addons
 
 var DateTimePicker = React.createClass({
+    mixins: [PureRenderMixin],
     propTypes: {
         time: React.PropTypes.string,
         date: React.PropTypes.string

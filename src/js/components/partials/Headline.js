@@ -1,6 +1,9 @@
 import React from 'react'
+import { addons } from 'react/addons'
+var { PureRenderMixin } = addons
 
 let Headline = React.createClass({
+    mixins: [PureRenderMixin],
     render() {
         let css = {
             marginBottom: '0'

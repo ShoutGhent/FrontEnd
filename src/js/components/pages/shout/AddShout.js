@@ -1,6 +1,8 @@
 import React from 'react'
 import { Modal } from '../../modal/Modal'
 import ShoutForm from '../../shout/ShoutForm'
+import { addons } from 'react/addons'
+var { PureRenderMixin } = addons
 
 function getEmptyCleanShout() {
     return {
@@ -12,6 +14,7 @@ function getEmptyCleanShout() {
 }
 
 var AddShout = React.createClass({
+    mixins: [PureRenderMixin],
     propTypes: {
         isOpen: React.PropTypes.bool.isRequired,
         onDone: React.PropTypes.func.isRequired

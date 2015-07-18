@@ -1,6 +1,9 @@
 import React from 'react'
+import { addons } from 'react/addons'
+var { PureRenderMixin } = addons
 
 var Card = React.createClass({
+    mixins: [PureRenderMixin],
     render() {
         let { children } = this.props
 
@@ -11,6 +14,7 @@ var Card = React.createClass({
 })
 
 var CardTitle = React.createClass({
+    mixins: [PureRenderMixin],
     render() {
         let { children } = this.props
 
@@ -21,6 +25,7 @@ var CardTitle = React.createClass({
 })
 
 var CardContent = React.createClass({
+    mixins: [PureRenderMixin],
     render() {
         let { children } = this.props
 
@@ -31,6 +36,7 @@ var CardContent = React.createClass({
 })
 
 var CardFooter = React.createClass({
+    mixins: [PureRenderMixin],
     render() {
         let { children } = this.props
 

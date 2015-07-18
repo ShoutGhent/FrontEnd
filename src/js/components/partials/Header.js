@@ -4,12 +4,15 @@ import LoginStore from '../../auth/LoginStore'
 import SearchBar from '../search/SearchBar'
 import LoggedInHeader from './LoggedInHeader'
 import LoggedOutHeader from './LoggedOutHeader'
+import { addons } from 'react/addons'
+var { PureRenderMixin } = addons
 
 function getStateFromStore() {
     return LoginStore.getState()
 }
 
 let Header = React.createClass({
+    mixins: [PureRenderMixin],
     getInitialState() {
         return getStateFromStore()
     },

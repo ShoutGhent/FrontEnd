@@ -2,12 +2,15 @@ import React from 'react'
 import LoggedIn from './_IndexLoggedIn'
 import LoggedOut from './_IndexLoggedOut'
 import LoginStore from '../../../auth/LoginStore'
+import { addons } from 'react/addons'
+var { PureRenderMixin } = addons
 
 function getStateFromStore() {
     return LoginStore.getState()
 }
 
 var Index = React.createClass({
+    mixins: [PureRenderMixin],
     getInitialState() {
         return getStateFromStore()
     },

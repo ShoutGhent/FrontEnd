@@ -4,12 +4,15 @@ import MaterialInput from '../../partials/MaterialInput'
 import { Grid, Cell } from '../../grid/Grid'
 import Avatar from '../../users/Avatar'
 import LoginStore from '../../../auth/LoginStore'
+import { addons } from 'react/addons'
+var { PureRenderMixin } = addons
 
 function getStateFromStore() {
     return LoginStore.getState()
 }
 
 let Settings = React.createClass({
+    mixins: [PureRenderMixin],
     getInitialState() {
         return getStateFromStore()
     },

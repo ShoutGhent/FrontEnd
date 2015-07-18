@@ -1,7 +1,10 @@
 import React from 'react/addons'
 import { Grid, Cell } from '../grid/Grid'
+import { addons } from 'react/addons'
+var { PureRenderMixin } = addons
 
 let MaterialInput = React.createClass({
+    mixins: [PureRenderMixin],
     getInitialState() {
         return {
             open: false,
