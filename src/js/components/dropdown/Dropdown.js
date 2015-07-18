@@ -24,7 +24,6 @@ var Dropdown = React.createClass({
 
         var renderedChildren = React.Children.map(children, (child) => {
             return React.addons.cloneWithProps(child, {
-                openDropdown: this.openDropdown,
                 closeDropdown: this.closeDropdown,
                 toggleDropdown: this.toggleDropdown,
                 isOpen: isOpen
