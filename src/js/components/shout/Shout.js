@@ -113,7 +113,7 @@ let Shout = React.createClass({
                             <DropdownTitle>
                                 <Icon icon="more_vert"/>
                             </DropdownTitle>
-                            <DropdownContent top="0px">
+                            <DropdownContent top={0}>
                                 <li><Link to="shout" params={{shoutId: shout.uuid}}>Permalink</Link></li>
                                 {myShout ? links.map(item => item) : ''}
                             </DropdownContent>
