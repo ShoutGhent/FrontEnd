@@ -47,11 +47,12 @@ var DropdownTitle = React.createClass({
 var DropdownContent = React.createClass({
     propTypes: {
         top: React.PropTypes.number,
-        isOpen: React.PropTypes.bool.isRequired
+        isOpen: React.PropTypes.bool
     },
     getDefaultProps() {
         return {
-            top: 10
+            top: 10,
+            isOpen: false
         }
     },
     render() {
