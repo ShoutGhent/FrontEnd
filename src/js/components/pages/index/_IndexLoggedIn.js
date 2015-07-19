@@ -5,9 +5,7 @@ var _IndexLoggedIn = React.createClass({
     render() {
         return (
             <div className="container">
-                <div className="section">
-                    <ShoutList url="shouts" />
-                </div>
+                <ShoutList url="shouts" />
             </div>
         )
     }

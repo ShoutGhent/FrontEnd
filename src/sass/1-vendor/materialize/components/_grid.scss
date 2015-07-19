@@ -37,7 +37,10 @@
 .row {
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 20px;
+
+  &:not(&:last-child) {
+    margin-bottom: 20px;
+  }
 
   // Clear floating children
   &:after {
