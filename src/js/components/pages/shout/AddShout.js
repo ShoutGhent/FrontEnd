@@ -1,6 +1,8 @@
 import React from 'react'
 import { Modal } from '../../modal/Modal'
 import ShoutForm from '../../shout/ShoutForm'
+import API from '../../../services/API'
+import RouterContainer from '../../../services/RouterContainer'
 
 function getEmptyCleanShout() {
     return {
@@ -22,7 +24,9 @@ var AddShout = React.createClass({
         }
     },
     save(shout) {
-        console.log(shout)
+        API.post('shouts/add', shout, (res, err) => {
+            RouterContainer.get().transitionTo('shout', { shoutId: res.uuid })
+        })
         this.done()
     },
     done() {
