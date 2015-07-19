@@ -56,20 +56,18 @@ var Login = React.createClass({
         let iconClass = `material-icons right ${this.state.loading ? 'icon-spin' : ''}`
 
         return (
-            <div className="container">
-                <div className="section">
-                    <h4>Log in</h4>
-                    <form onSubmit={this.login}>
-                        <MaterialInput label="E-mail" type="email" id="email" name="email" value={this.state.email} onChange={this.setEmail} focus/>
-                        <MaterialInput label="Wachtwoord" type="password" id="password" name="password" value={this.state.password} onChange={this.setPassword}/>
+            <div>
+                <h4>Log in</h4>
+                <form onSubmit={this.login}>
+                    <MaterialInput label="E-mail" type="email" id="email" name="email" value={this.state.email} onChange={this.setEmail} focus/>
+                    <MaterialInput label="Wachtwoord" type="password" id="password" name="password" value={this.state.password} onChange={this.setPassword}/>
 
-                        <div className="right-align">
-                            <button className={`btn btn-large waves-effect waves-light ${this.state.error ? 'red' : ''}`} type="submit" name="action">
-                                <i className={iconClass}>{loading ? 'loop' : 'lock'}</i>{loginButton}
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                    <div className="right-align">
+                        <button className={`btn btn-large waves-effect waves-light ${this.state.error ? 'red' : ''}`} type="submit" name="action">
+                            <i className={iconClass}>{loading ? 'loop' : 'lock'}</i>{loginButton}
+                        </button>
+                    </div>
+                </form>
             </div>
         )
     }

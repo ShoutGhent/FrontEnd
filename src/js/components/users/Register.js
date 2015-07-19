@@ -71,22 +71,20 @@ var Register = React.createClass({
         let iconClass = `material-icons right ${this.state.loading ? 'icon-spin' : ''}`
 
         return (
-            <div className="container">
-                <div className="section">
-                    <h4>Registreren</h4>
-                    <form onSubmit={this.register}>
-                        <MaterialInput label="E-mail" type="email" id="email" name="email" value={this.state.email} onChange={this.setEmail} focus/>
-                        <MaterialInput label="Naam" type="text" id="name" name="name" value={this.state.name} onChange={this.setName}/>
-                        <MaterialInput label="Wachtwoord" type="password" id="password" name="password" value={this.state.password} onChange={this.setPassword}/>
-                        <MaterialInput label="Herhaal Wachtwoord" type="password" id="password_repeat" name="password_repeat" value={this.state.passwordRepeat} onChange={this.setPasswordRepeat}/>
+            <div>
+                <h4>Registreren</h4>
+                <form onSubmit={this.register}>
+                    <MaterialInput label="E-mail" type="email" id="email" name="email" value={this.state.email} onChange={this.setEmail} focus/>
+                    <MaterialInput label="Naam" type="text" id="name" name="name" value={this.state.name} onChange={this.setName}/>
+                    <MaterialInput label="Wachtwoord" type="password" id="password" name="password" value={this.state.password} onChange={this.setPassword}/>
+                    <MaterialInput label="Herhaal Wachtwoord" type="password" id="password_repeat" name="password_repeat" value={this.state.passwordRepeat} onChange={this.setPasswordRepeat}/>
 
-                        <div className="right-align">
-                            <button className={`btn btn-large waves-effect waves-light ${this.state.error ? 'red' : ''}`} type="submit" name="action">
-                                <i className={iconClass}>{loading ? 'loop' : 'send'}</i>{registerButton}
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                    <div className="right-align">
+                        <button className={`btn btn-large waves-effect waves-light ${this.state.error ? 'red' : ''}`} type="submit" name="action">
+                            <i className={iconClass}>{loading ? 'loop' : 'send'}</i>{registerButton}
+                        </button>
+                    </div>
+                </form>
             </div>
         )
     }

@@ -2,8 +2,8 @@ import React from "react"
 import { Route } from "react-router"
 import App from './components/App'
 import LoggedIn from './components/pages/LoggedIn'
-import Login from './components/users/Login'
-import Register from './components/users/Register'
+import Login from './components/pages/auth/Login'
+import Register from './components/pages/auth/Register'
 import Index from './components/pages/index/Index'
 import Settings from './components/pages/profile/Settings'
 import Profile from './components/pages/profile/Profile'
