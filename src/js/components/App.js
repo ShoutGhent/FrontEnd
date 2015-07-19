@@ -9,9 +9,7 @@ var App = React.createClass({
         return (
             <div>
                 <Header />
-                <section className="section">
-                    <RouteHandler/>
-                </section>
+                <RouteHandler/>
                 <Footer />
                 <Notification />
             </div>

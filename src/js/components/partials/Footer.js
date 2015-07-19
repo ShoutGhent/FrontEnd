@@ -3,8 +3,16 @@ import { Grid, Cell } from '../grid/Grid'
 
 let Footer = React.createClass({
     render() {
+        let marginTop = 0
+
+        if (window.innerHeight > document.documentElement.offsetHeight) {
+            marginTop: window.innerHeight - document.documentElement.offsetHeight
+        }
+
+        let css = { marginTop }
+
         return (
-            <footer className="page-footer">
+            <footer className="page-footer" style={css}>
                 <div className="container">
                     <Grid>
                         <Cell width={7/12}>
@@ -15,7 +23,7 @@ let Footer = React.createClass({
                             </p>
                         </Cell>
                         <Cell width={5/12}>
-                            <h5 className="white-text">Settings</h5>
+                            <h5 className="white-text">Contact</h5>
                             <ul>
                                 <li><a className="white-text" href="#!">Link 1</a></li>
                                 <li><a className="white-text" href="#!">Link 2</a></li>

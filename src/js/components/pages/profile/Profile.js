@@ -8,7 +8,7 @@ import { Card, CardContent, CardFooter } from '../../card/Card'
 let Profile = React.createClass({
     render() {
         return (
-            <div>
+            <section className="section">
                 <div className="container">
                     <Grid>
                         <Cell width={8/12}>
@@ -28,7 +28,7 @@ let Profile = React.createClass({
                         </Cell>
                     </Grid>
                 </div>
-            </div>
+            </section>
         )
     }
 })

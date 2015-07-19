@@ -73,7 +73,7 @@ var Register = React.createClass({
         return (
             <div className="container">
                 <div className="section">
-                    <h1>Registreren</h1>
+                    <h4>Registreren</h4>
                     <form onSubmit={this.register}>
                         <MaterialInput label="E-mail" type="email" id="email" name="email" value={this.state.email} onChange={this.setEmail} focus/>
                         <MaterialInput label="Naam" type="text" id="name" name="name" value={this.state.name} onChange={this.setName}/>

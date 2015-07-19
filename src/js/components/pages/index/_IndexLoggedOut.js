@@ -5,27 +5,30 @@ import Headline from '../../partials/Headline'
 import Icon from '../../partials/Icon'
 import { Grid, Cell } from '../../grid/Grid'
 import { Gmaps, Marker } from 'react-gmaps'
-
-const coords = {
-    lat: 51.0393565,
-    lng: 3.7271276
-}
+import Register from '../../users/Register'
+import Login from '../../users/Login'
 
 var _IndexLoggedOut = React.createClass({
     render() {
+        let map = {
+            height: 400
+        }
+
+        let coords = {
+            lat: 51.0393565,
+            lng: 3.7271276
+        }
+
         return (
             <div>
                 <Parallax img='/dist/img/background1.jpg'>
                     <div id="index-banner">
                         <div className="section">
                             <div className="container">
-                                <h1 className="header center white-text text-lighten-2">Schreeuw het van de daken!</h1>
+                                <h1 className="header center white-text">Schreeuw het van de daken!</h1>
                                 <Grid>
-                                    <Cell width={12/12} center>
+                                    <Cell center>
                                         <h5 className="header light white-text">Shout! verenigt studenten en maakt van hen een hechte groep. Registreer je nu en ontdek de voordelen.</h5>
-                                    </Cell>
-                                    <Cell width={12/12} center>
-                                        <Link to="register" className="btn btn-large waves-effect waves-light">Registeren</Link>
                                     </Cell>
                                 </Grid>
                             </div>
@@ -37,35 +40,21 @@ var _IndexLoggedOut = React.createClass({
                     <div className="section">
                         <div className="row">
                             <Grid>
-                                <Cell width={4/12}>
+                                <Cell width={6/12}>
                                     <div className="icon-block">
                                         <h2 className="center brown-text"><Icon icon="flash_on" /></h2>
-                                        <h5 className="center">Speeds up development</h5>
+                                        <h5 className="center">Subtekst</h5>
 
                                         <p className="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
                                     </div>
                                 </Cell>
-                                <Cell width={4/12}>
-                                    <div className="icon-block">
-                                        <h2 className="center brown-text"><Icon icon="group" /></h2>
-                                        <h5 className="center">User Experience Focused</h5>
-
-                                        <p className="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
-                                    </div>
-                                </Cell>
-                                <Cell width={4/12}>
-                                    <div className="icon-block">
-                                        <h2 className="center brown-text"><Icon icon="settings" /></h2>
-                                        <h5 className="center">Easy to work with</h5>
-
-                                        <p className="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
-                                    </div>
+                                <Cell width={6/12}>
+                                    <Register/>
                                 </Cell>
                             </Grid>
                         </div>
                     </div>
                 </div>
-
 
                 <Parallax img='/dist/img/background2.jpg'>
                     <Headline>A modern responsive front-end framework based on Material Design</Headline>
@@ -77,7 +66,11 @@ var _IndexLoggedOut = React.createClass({
                             <Cell width={12/12} center>
                                 <h3><Icon icon="send" /></h3>
                                 <h4>Contact Us</h4>
-                                <p className="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
+                                <p className="left-align light">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur excepturi non nostrum porro quae quisquam sed similique velit? Beatae consectetur cum nobis, non odit quidem soluta suscipit tempore. Facilis!
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci amet at beatae commodi corporis cupiditate dicta, eligendi est ex excepturi expedita harum hic impedit in ipsum labore nam, sapiente veniam.
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet architecto culpa delectus, deserunt doloremque, excepturi illum impedit incidunt itaque laudantium nemo neque quae quia quis rerum veniam vero voluptas voluptatem!
+                                </p>
                             </Cell>
                         </Grid>
                     </div>
@@ -88,7 +81,7 @@ var _IndexLoggedOut = React.createClass({
                 </Parallax>
 
                 <div>
-                    <Gmaps ref='Gmaps' width={'100%'} height={'400px'} lat={coords.lat} lng={coords.lng} zoom={17}>
+                    <Gmaps ref='Gmaps' width={'100%'} height={map.height} lat={coords.lat} lng={coords.lng} zoom={17}>
                         <Marker lat={coords.lat} lng={coords.lng} />
                     </Gmaps>
                 </div>

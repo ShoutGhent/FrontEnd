@@ -11,7 +11,7 @@ var Modal = React.createClass({
         return (
             <Portal isOpened={isOpen} closeOnEsc={true} closeOnOutsideClick={true}>
                 <div>
-                    <div className="modal">{children}</div>
+                    <div className="modal" style={{width: (1280/2) * 1.618}}>{children}</div>
                     <div className="lean-overlay"></div>
                 </div>
             </Portal>

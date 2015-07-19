@@ -10,7 +10,9 @@ let Parallax = React.createClass({
             backgroundSize: 'cover'
         }
 
-        return (<div style={css}>{this.props.children}</div>)
+        let { children } = this.props
+
+        return (<div style={css}>{children}</div>)
     }
 })
 
