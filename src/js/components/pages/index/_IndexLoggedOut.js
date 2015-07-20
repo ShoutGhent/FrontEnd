@@ -5,7 +5,6 @@ import Headline from '../../partials/Headline'
 import Icon from '../../partials/Icon'
 import { Grid, Cell } from '../../grid/Grid'
 import { Gmaps, Marker } from 'react-gmaps'
-import Register from '../../users/Register'
 
 var _IndexLoggedOut = React.createClass({
     render() {
@@ -52,7 +51,6 @@ var _IndexLoggedOut = React.createClass({
                             </div>
                         </div>
                     </div>
-
 
                     <Parallax img='/dist/img/background2.jpg'>
                         <Headline>A modern responsive front-end framework based on Material Design</Headline>
