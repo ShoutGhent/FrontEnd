@@ -10,7 +10,8 @@ import AddShout from '../pages/shout/AddShout'
 let LoggedInHeader = React.createClass({
     getInitialState() {
         return {
-            isAddShoutFormOpen: false
+            isAddShoutFormOpen: false,
+            isAddGroupFormOpen: false
         }
     },
     logout(event) {
@@ -26,6 +27,13 @@ let LoggedInHeader = React.createClass({
 
         this.setState({
             isAddShoutFormOpen: true
+        })
+    },
+    openAddGroupForm(event) {
+        event.preventDefault()
+
+        this.setState({
+            isAddGroupFormOpen: true
         })
     },
     AddShoutFormDone(shout) {
@@ -88,7 +96,7 @@ let LoggedInHeader = React.createClass({
                             <li><Link to="settings">Instellingen</Link></li>
                             <li className="divider"></li>
                             <li><a href onClick={this.openAddShoutForm}>Nieuwe shout</a></li>
-                            <li><a href="#!">Nieuwe groep</a></li>
+                            <li><a href onClick={this.openAddGroupForm}>Nieuwe groep</a></li>
 
                             <li className="divider"></li>
                             <li><a href onClick={this.logout}>Uitloggen</a></li>

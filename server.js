@@ -11,7 +11,7 @@ new WebpackDevServer(compiler, {
     stats: {
         colors: true
     }
-}).listen(port, '192.168.1.56', function (err, result) {
+}).listen(port, '192.168.1.18', function (err, result) {
     if (err) {
         console.log(err);
     }
