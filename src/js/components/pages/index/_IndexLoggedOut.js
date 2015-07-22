@@ -20,7 +20,15 @@ var _IndexLoggedOut = React.createClass({
         return (
             <div>
                 <div>
-                    <Parallax img='/dist/img/background1.jpg'>
+                    <Parallax img='https://scontent-bru2-1.xx.fbcdn.net/hphotos-xfp1/t31.0-8/904729_514822191887059_1844192855_o.jpg'>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
                         <div id="index-banner">
                             <div className="section">
                                 <div className="container">
@@ -33,6 +41,14 @@ var _IndexLoggedOut = React.createClass({
                                 </div>
                             </div>
                         </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
                     </Parallax>
 
                     <div className="container">
