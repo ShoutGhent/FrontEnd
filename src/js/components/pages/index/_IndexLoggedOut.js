@@ -20,7 +20,7 @@ var _IndexLoggedOut = React.createClass({
         return (
             <div>
                 <div>
-                    <Parallax img='https://scontent-bru2-1.xx.fbcdn.net/hphotos-xfp1/t31.0-8/904729_514822191887059_1844192855_o.jpg'>
+                    <Parallax img='http://d.pr/i/1c42M+'>
                         <br/>
                         <br/>
                         <br/>
