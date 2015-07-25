@@ -6,7 +6,7 @@ let Logo = React.createClass({
         let css = {
             fill: 'white',
             width: 100,
-            height: 64
+            verticalAlign: 'middle'
         }
 
         return (
