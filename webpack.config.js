@@ -1,10 +1,11 @@
 var path = require('path');
 var webpack = require('webpack');
+var ip = require('./IP');
 
 module.exports = {
     devtool: 'eval',
     entry: [
-        'webpack-dev-server/client?http://0.0.0.0:8080',
+        'webpack-dev-server/client?http://' + ip + ':8080',
         'webpack/hot/only-dev-server',
         './src/js/main.js'
     ],

@@ -115,6 +115,7 @@ let Shout = React.createClass({
                             </DropdownTitle>
                             <DropdownContent top={0}>
                                 <li><Link to="shout" params={{shoutId: shout.uuid}}>Permalink</Link></li>
+                                <li><a>Rapporteren</a></li>
                                 {myShout ? links.map(item => item) : ''}
                             </DropdownContent>
                         </Dropdown>
