@@ -3,7 +3,7 @@ import Shout from '../../shout/Shout'
 import API from '../../../services/API'
 import { Link } from 'react-router'
 import WebStorage from '../../../services/WebStorage'
-import Loading from '../../loading/Loading'
+import LoadingShouts from '../../loading/LoadingShouts'
 
 let ShoutPage = React.createClass({
     getInitialState() {
@@ -37,7 +37,7 @@ let ShoutPage = React.createClass({
         return (
             <div className="container">
             {loading ? (
-                <Loading />
+                <LoadingShouts />
             ) : (
                 shout ? (
                     <Shout user={shout.user || WebStorage.fromStore('user')} key={shout.uuid} shout={shout} onRemove={this.removeShout}/>

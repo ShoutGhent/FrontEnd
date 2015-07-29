@@ -9,12 +9,14 @@ import EditShout from '../pages/shout/EditShout'
 import TransitiveNumber from 'react-transitive-number'
 import ShoutActions from './ShoutActions'
 import { Modal, ModalContent, ModalFooter } from '../modal/Modal'
+import { Grid, Cell } from '../grid/Grid'
 
 moment.locale('nl')
 
 let Shout = React.createClass({
     propTypes: {
-        user: React.PropTypes.object.isRequired
+        user: React.PropTypes.object.isRequired,
+        shout: React.PropTypes.object.isRequired
     },
     getInitialState() {
         let { shout } = this.props
@@ -23,7 +25,8 @@ let Shout = React.createClass({
             width: '100%',
             intervalId: null,
             currentUser: WebStorage.fromStore('user'),
-            modalOpen: false,
+            editModalOpen: false,
+            reportModalOpen: false,
             shout: shout,
             secondsLeft: 0
         }
@@ -66,14 +69,16 @@ let Shout = React.createClass({
     componentWillUnmount() {
         clearInterval(this.state.intervalId)
     },
-    reportShout(event) {
-        event.preventDefault()
-        console.log(this.state.shout)
-    },
-    openModal(event) {
+    openReportModal(event) {
         event.preventDefault()
         this.setState({
-            modalOpen: true
+            reportModalOpen: true
+        })
+    },
+    openEditModal(event) {
+        event.preventDefault()
+        this.setState({
+            editModalOpen: true
         })
     },
     save(shout) {
@@ -83,13 +88,18 @@ let Shout = React.createClass({
 
         this.calcPercentage(shout, this.props.onRemove)
     },
-    closeModal() {
+    closeEditModal() {
         this.setState({
-            modalOpen: false
+            editModalOpen: false
+        })
+    },
+    closeReportModal() {
+        this.setState({
+            reportModalOpen: false
         })
     },
     render() {
-        let { currentUser, width, modalOpen, shout } = this.state
+        let { currentUser, width, editModalOpen, reportModalOpen, shout } = this.state
         let { anonymous } = shout
 
         let user = this.props.user
@@ -102,18 +112,24 @@ let Shout = React.createClass({
         let myShout = currentUser.uuid == user.uuid
 
         let whenMyShout = [
-            <li key="edit"><a href onClick={this.openModal}>Edit</a></li>,
+            <li key="edit"><a href onClick={this.openEditModal}>Edit</a></li>,
             //null ? <li><a href onClick={(event) => {event.preventDefault}}>Republish</a></li> : ''
         ]
 
         let whenNotMyShout = [
             <li key="report">
-                <a href onClick={this.reportShout}>Rapporteren</a>
-                <Modal isOpen={true}>
+                <a href onClick={this.openReportModal}>Rapporteren</a>
+                <Modal isOpen={reportModalOpen}>
                     <ModalContent>
                         Some Content
                     </ModalContent>
-                    <ModalFooter>Teeheee</ModalFooter>
+                    <ModalFooter>
+                        <Grid>
+                            <Cell>
+                                <button className="waves-effect waves-green btn-flat">Report</button>
+                            </Cell>
+                        </Grid>
+                    </ModalFooter>
                 </Modal>
             </li>
         ]
@@ -138,7 +154,7 @@ let Shout = React.createClass({
                                 {!myShout ? whenNotMyShout.map(item => item) : ''}
                             </DropdownContent>
                         </Dropdown>
-                        <EditShout isOpen={modalOpen} onSave={this.save} onClose={this.closeModal} shout={shout} />
+                        <EditShout isOpen={editModalOpen} onSave={this.save} onClose={this.closeEditModal} shout={shout} />
                     </div>
                     <p>{shout.description}</p>
                 </div>

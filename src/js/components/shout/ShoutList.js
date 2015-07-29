@@ -2,7 +2,7 @@ import React from 'react'
 import ShoutStore from './ShoutStore'
 import ShoutActions from './ShoutActions'
 import Shout from './Shout'
-import Loading from '../loading/Loading'
+import LoadingShouts from '../loading/LoadingShouts'
 import WebStorage from '../../services/WebStorage'
 
 function getStateFromStore() {
@@ -58,7 +58,7 @@ let ShoutList = React.createClass({
                 {shouts[url].map((shout) =>
                     <Shout user={shout.user || WebStorage.fromStore('user') } key={shout.uuid} shout={shout} onRemove={this.removeShout}/>
                 )}
-                {loading ? <Loading /> : ''}
+                {loading ? <LoadingShouts /> : ''}
                 {next_page_url ? (
                     <button className="btn-large" onClick={this.loadMore}>Meer Tonen</button>
                 ) : ''}

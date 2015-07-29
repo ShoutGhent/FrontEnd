@@ -104,7 +104,7 @@ var _IndexLoggedOut = React.createClass({
                                                     <Card>
                                                         <CardContent>
                                                             <CardTitle>Yigit Abbas</CardTitle>
-                                                            <Avatar email="yigit_geniemaster@telenet.be" round/>
+                                                            <Avatar email="yigit_geniemaster@telenet.be" size={100} round/>
                                                             <p>Home Fabiola</p>
                                                         </CardContent>
                                                         <CardFooter>
@@ -116,7 +116,7 @@ var _IndexLoggedOut = React.createClass({
                                                     <Card>
                                                         <CardContent>
                                                             <CardTitle>Robin Malfait</CardTitle>
-                                                            <Avatar email="malfait.robin@gmail.com" round/>
+                                                            <Avatar email="malfait.robin@gmail.com" size={100} round/>
                                                             <p>Home Heymans</p>
                                                         </CardContent>
                                                         <CardFooter>
@@ -128,7 +128,7 @@ var _IndexLoggedOut = React.createClass({
                                                     <Card>
                                                         <CardContent>
                                                             <CardTitle>Mike Brants</CardTitle>
-                                                            <Avatar email="mike.brants@gmail.com" round/>
+                                                            <Avatar email="mike.brants@gmail.com" size={100} round/>
                                                             <p>Home Fabiola</p>
                                                         </CardContent>
                                                         <CardFooter>

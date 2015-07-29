@@ -83,24 +83,25 @@ var ShoutForm = React.createClass({
                     { ! forever ? (
                         <DateTimePicker onChange={this.setPublishUntil} date={date} time={time}/>
                     ) : ''}
-                </ModalContent>
-                <ModalFooter>
+
                     <Grid>
                         <Cell width={6/12}>
                             <span>
                                 <input type="checkbox" id="anonymous" checked={anonymous} onChange={this.setAnonymous} />
                                 <label htmlFor="anonymous">Anoniem</label>
                             </span>
+                        </Cell>
+                        <Cell width={6/12}>
                             <span>
                                 <input type="checkbox" id="forever" checked={forever} onChange={this.setForever} />
                                 <label htmlFor="forever">Voor altijd tonen</label>
                             </span>
                         </Cell>
-                        <Cell width={6/12}>
-                            <button className="waves-effect waves-green btn-flat" onClick={this.save}>{buttonName}</button>
-                            <button className="waves-effect waves-red btn-flat" onClick={this.cancel}>Annuleren</button>
-                        </Cell>
                     </Grid>
+                </ModalContent>
+                <ModalFooter>
+                    <button style={{float: 'right'}} className="waves-effect waves-green btn-flat" onClick={this.save}>{buttonName}</button>
+                    <button style={{float: 'right'}} className="waves-effect waves-red btn-flat" onClick={this.cancel}>Annuleren</button>
                 </ModalFooter>
             </div>
         )

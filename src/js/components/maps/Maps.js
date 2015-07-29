@@ -1,29 +1,15 @@
 import React from 'react'
 
 var Maps = React.createClass({
-    getInitialState() {
-        return {
-            clickable: false
-        }
-    },
-    enableInteraction() {
-        this.setState({
-            clickable: true
-        })
-    },
     render() {
-        let { clickable } = this.state
+        let { children } = this.props
 
         let css = {
-            pointerEvents: clickable ? 'all' : 'none'
+            pointerEvents: 'none'
         }
 
         return (
-            <div onClick={this.enableInteraction}>
-                <div style={css}>
-                    {this.props.children}
-                </div>
-            </div>
+            <div style={css}>{children}</div>
         )
     }
 })
