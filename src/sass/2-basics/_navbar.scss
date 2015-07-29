@@ -19,8 +19,10 @@ nav {
 }
 
 .dropdown-content{
-   top: 70px !important;
-   width: 200px !important;
+//   top: 70px !important;
+    min-width: 200px !important;
+    right: 0;
+    left: auto;
 }
 
 .badge.overlay{

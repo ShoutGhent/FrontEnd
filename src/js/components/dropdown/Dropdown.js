@@ -30,7 +30,11 @@ var Dropdown = React.createClass({
             })
         })
 
-        return <div {...this.props}>{renderedChildren}</div>
+        let css = {
+            position: 'relative'
+        }
+
+        return <div {...this.props} style={css}>{renderedChildren}</div>
     }
 })
 
@@ -61,7 +65,7 @@ var DropdownContent = React.createClass({
         let css = {
             opacity: isOpen ? 1 : 0,
             display: isOpen ? 'block' : 'none',
-            marginTop: top
+            //marginTop: top
         }
 
         return (

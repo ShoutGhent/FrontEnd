@@ -1,4 +1,33 @@
 .shout{
+    .more {
+        position: relative;
+        border-radius: 50%;
+        font-size: 24px;
+        height: 32px;
+        margin-left: 0;
+        margin-right: 0;
+        min-width: 32px;
+        width: 32px;
+        padding: 0;
+        overflow: hidden;
+        line-height: normal;
+
+        i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-12px,-12px);
+            line-height: 24px;
+            width: 24px;
+        }
+
+        color: #616161;
+
+        &:hover {
+            background-color: rgba(158,158,158,.2);
+        }
+    }
+
     &-progress{
         position: absolute;
         bottom: 0;

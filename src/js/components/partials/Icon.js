@@ -5,10 +5,12 @@ let Icon = React.createClass({
         icon: React.PropTypes.string.isRequired
     },
     render() {
-        let { icon } = this.props
+        let { icon, className } = this.props
+        className = `material-icons ${className}`
+
 
         return (
-            <i className="material-icons">{icon}</i>
+            <i className={className}>{icon}</i>
         )
     }
 });

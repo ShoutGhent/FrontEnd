@@ -8,6 +8,7 @@ import WebStorage from '../../services/WebStorage'
 import EditShout from '../pages/shout/EditShout'
 import TransitiveNumber from 'react-transitive-number'
 import ShoutActions from './ShoutActions'
+import { Modal, ModalContent, ModalFooter } from '../modal/Modal'
 
 moment.locale('nl')
 
@@ -65,6 +66,10 @@ let Shout = React.createClass({
     componentWillUnmount() {
         clearInterval(this.state.intervalId)
     },
+    reportShout(event) {
+        event.preventDefault()
+        console.log(this.state.shout)
+    },
     openModal(event) {
         event.preventDefault()
         this.setState({
@@ -96,9 +101,21 @@ let Shout = React.createClass({
 
         let myShout = currentUser.uuid == user.uuid
 
-        let links = [
+        let whenMyShout = [
             <li key="edit"><a href onClick={this.openModal}>Edit</a></li>,
             //null ? <li><a href onClick={(event) => {event.preventDefault}}>Republish</a></li> : ''
+        ]
+
+        let whenNotMyShout = [
+            <li key="report">
+                <a href onClick={this.reportShout}>Rapporteren</a>
+                <Modal isOpen={true}>
+                    <ModalContent>
+                        Some Content
+                    </ModalContent>
+                    <ModalFooter>Teeheee</ModalFooter>
+                </Modal>
+            </li>
         ]
 
         return (
@@ -111,12 +128,14 @@ let Shout = React.createClass({
                         {name}
                         <Dropdown className="right">
                             <DropdownTitle>
-                                <Icon icon="more_vert"/>
+                                <div className="more">
+                                    <Icon icon="more_vert"/>
+                                </div>
                             </DropdownTitle>
                             <DropdownContent top={0}>
                                 <li><Link to="shout" params={{shoutId: shout.uuid}}>Permalink</Link></li>
-                                <li><a>Rapporteren</a></li>
-                                {myShout ? links.map(item => item) : ''}
+                                {myShout ? whenMyShout.map(item => item) : ''}
+                                {!myShout ? whenNotMyShout.map(item => item) : ''}
                             </DropdownContent>
                         </Dropdown>
                         <EditShout isOpen={modalOpen} onSave={this.save} onClose={this.closeModal} shout={shout} />
