@@ -5,6 +5,8 @@ import Headline from '../../partials/Headline'
 import Icon from '../../partials/Icon'
 import { Grid, Cell } from '../../grid/Grid'
 import { Gmaps, Marker } from 'react-gmaps'
+import Avatar from '../../users/Avatar'
+import { Card, CardContent, CardTitle, CardFooter } from '../../card/Card'
 
 var _IndexLoggedOut = React.createClass({
     render() {
@@ -31,7 +33,7 @@ var _IndexLoggedOut = React.createClass({
                                     <h1 className="header center white-text text-lighten-2">Shout!</h1>
                                     <Grid>
                                         <Cell center>
-                                            <h5 className="header light white-text">Gooi het in de groep!</h5>
+                                            <h5 className="header light white-text">Voor en door studenten</h5>
                                         </Cell>
                                     </Grid>
                                 </div>
@@ -45,34 +47,97 @@ var _IndexLoggedOut = React.createClass({
 
                     <div className="container">
                         <div className="section">
-                            <div className="row">
-                                <Grid>
-                                    <Cell width={12/12} center>
-                                        <p className="left-align light">
-                                            We zijn drie studenten die zich engageren om de sociale netwerksite Shout te ontwikkelen voor de hogeschool- en universiteitsstudenten in Gent.
-                                        </p>
-                                        <p className="left-align light">
-                                            Shout heeft als doel om studentenverenigingen te helpen met het verwerven van sponsors, maar daarnaast ook om het Gentse studentenleven online te brengen.
-                                        </p>
-                                    </Cell>
-                                </Grid>
-                            </div>
+                            <Grid>
+                                <Cell width={4/12} justify>
+                                    <Card>
+                                        <CardContent>
+                                            <CardTitle center>Wat?</CardTitle>
+                                            <p>
+                                                Shout is een sociale netwerksite gemaakt door studenten voor de studenten, meer bepaald voor de hogeschool en universiteitsstudenten in Gent. Met Shout willen we een speciale plaats op het net creëren, waar de studenten naar harte lust hun ervaringen kunnen delen met hun medestudenten.
+                                            </p>
+                                        </CardContent>
+                                    </Card>
+                                </Cell>
+                                <Cell width={4/12} justify>
+                                    <Card>
+                                        <CardContent>
+                                            <CardTitle center>Hoe?</CardTitle>
+                                            <p>
+                                                Omdat het onder de studenten blijft, kan je je een stuk losser en zotter zijn, maar met een paar extra functies in Shout wordt dat nog beter. Namelijk je kan je shouts zowel anoniem als tijdelijk plaatsen, als je dat wenst natuurlijk. Zo kan je bijvoorbeeld wijze foto’s van een nachtje Overpoort gemakkelijk en zorgeloos kwijt op Shout!
+                                            </p>
+                                        </CardContent>
+                                    </Card>
+                                </Cell>
+                                <Cell width={4/12}>
+                                    <Card>
+                                        <CardContent>
+                                            <CardTitle center>Waarom?</CardTitle>
+                                            <p>
+                                                Daarnaast is Shout zo ontworpen, dat je nieuwigheden en activiteiten van allerlei studentenkringen gemakkelijker te horen krijgt. Door lid te worden van Shout steun je indirect de studentenverenigingen met het verwerven van sponsors. Waardoor wij, de studenten, o.a. meer toffe activiteiten kunnen organiseren!
+                                            </p>
+                                        </CardContent>
+                                    </Card>
+                                </Cell>
+                            </Grid>
                         </div>
                     </div>
 
                     <div className="container">
                         <div className="section">
                             <Grid>
-                                <Cell width={12/12} center>
-                                    <h4>Contacteer Ons</h4>
-                                    <p className="left-align light">
-                                        Shout is momenteel nog in volle ontwikkeling, als je toffe ideeën of bevindingen hebt, kan je altijd een mailtje sturen of gewoon even bij ons op de deur komen kloppen:
-                                        <ul>
-                                            <li>Yigit Abbas</li>
-                                            <li>Robin Malfait</li>
-                                            <li>Mike Brants</li>
-                                        </ul>
-                                    </p>
+                                <Cell width={12/12}>
+                                    <Card>
+                                        <CardContent>
+                                            <CardTitle>Contact</CardTitle>
+                                            <blockquote>
+                                                <p>
+                                                    Shout is momenteel nog in volle ontwikkeling, er is nog geen mobiele app maar we doen ons best om het zo snel mogelijk gebruiksklaar te krijgen.
+                                                </p>
+                                                <p>
+                                                    Als je toffe ideeën of bevindingen hebt, kan je altijd een mailtje sturen of ons komen zoeken in de homes:
+                                                </p>
+                                            </blockquote>
+
+                                            <Grid>
+                                                <Cell width={4/12} center>
+                                                    <Card>
+                                                        <CardContent>
+                                                            <CardTitle>Yigit Abbas</CardTitle>
+                                                            <Avatar email="yigit_geniemaster@telenet.be" round/>
+                                                            <p>Home Fabiola</p>
+                                                        </CardContent>
+                                                        <CardFooter>
+                                                            <a href="mailto:yigit.abbas@ugent.be">Mail Me</a>
+                                                        </CardFooter>
+                                                    </Card>
+                                                </Cell>
+                                                <Cell width={4/12} center>
+                                                    <Card>
+                                                        <CardContent>
+                                                            <CardTitle>Robin Malfait</CardTitle>
+                                                            <Avatar email="malfait.robin@gmail.com" round/>
+                                                            <p>Home Heymans</p>
+                                                        </CardContent>
+                                                        <CardFooter>
+                                                            <a href="mailto:robin.malfait.v3534@student.hogent.be">Mail Me</a>
+                                                        </CardFooter>
+                                                    </Card>
+                                                </Cell>
+                                                <Cell width={4/12} center>
+                                                    <Card>
+                                                        <CardContent>
+                                                            <CardTitle>Mike Brants</CardTitle>
+                                                            <Avatar email="mike.brants@gmail.com" round/>
+                                                            <p>Home Fabiola</p>
+                                                        </CardContent>
+                                                        <CardFooter>
+                                                            <a href="mailto:mike.brants@ugent.be">Mail Me</a>
+                                                        </CardFooter>
+                                                    </Card>
+                                                </Cell>
+                                            </Grid>
+                                        </CardContent>
+                                    </Card>
                                 </Cell>
                             </Grid>
                         </div>

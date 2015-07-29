@@ -11,11 +11,17 @@ var Card = React.createClass({
 })
 
 var CardTitle = React.createClass({
+    getDefaultProps() {
+        return {
+            center: false
+        }
+    },
     render() {
-        let { children } = this.props
+        let { children, center } = this.props
+        let className = `card-title black-text ${center ? 'center' : ''}`
 
         return (
-            <div className="card-title black-text">{children}</div>
+            <div className={className}>{children}</div>
         )
     }
 })
