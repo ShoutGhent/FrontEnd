@@ -7,6 +7,7 @@ import { Grid, Cell } from '../../grid/Grid'
 import { Gmaps, Marker } from 'react-gmaps'
 import Avatar from '../../users/Avatar'
 import { Card, CardContent, CardTitle, CardFooter } from '../../card/Card'
+import Maps from '../../maps/Maps'
 
 var _IndexLoggedOut = React.createClass({
     render() {
@@ -48,21 +49,21 @@ var _IndexLoggedOut = React.createClass({
                     <div className="container">
                         <div className="section">
                             <Grid>
-                                <Cell width={4/12} justify>
+                                <Cell width={4/12}>
                                     <Card>
                                         <CardContent>
                                             <CardTitle center>Wat?</CardTitle>
-                                            <p>
+                                            <p className="justify-content">
                                                 Shout is een sociale netwerksite gemaakt door studenten voor de studenten, meer bepaald voor de hogeschool en universiteitsstudenten in Gent. Met Shout willen we een speciale plaats op het net creëren, waar de studenten naar harte lust hun ervaringen kunnen delen met hun medestudenten.
                                             </p>
                                         </CardContent>
                                     </Card>
                                 </Cell>
-                                <Cell width={4/12} justify>
+                                <Cell width={4/12}>
                                     <Card>
                                         <CardContent>
                                             <CardTitle center>Hoe?</CardTitle>
-                                            <p>
+                                            <p className="justify-content">
                                                 Omdat het onder de studenten blijft, kan je je een stuk losser en zotter zijn, maar met een paar extra functies in Shout wordt dat nog beter. Namelijk je kan je shouts zowel anoniem als tijdelijk plaatsen, als je dat wenst natuurlijk. Zo kan je bijvoorbeeld wijze foto’s van een nachtje Overpoort gemakkelijk en zorgeloos kwijt op Shout!
                                             </p>
                                         </CardContent>
@@ -72,7 +73,7 @@ var _IndexLoggedOut = React.createClass({
                                     <Card>
                                         <CardContent>
                                             <CardTitle center>Waarom?</CardTitle>
-                                            <p>
+                                            <p className="justify-content">
                                                 Daarnaast is Shout zo ontworpen, dat je nieuwigheden en activiteiten van allerlei studentenkringen gemakkelijker te horen krijgt. Door lid te worden van Shout steun je indirect de studentenverenigingen met het verwerven van sponsors. Waardoor wij, de studenten, o.a. meer toffe activiteiten kunnen organiseren!
                                             </p>
                                         </CardContent>
@@ -143,9 +144,11 @@ var _IndexLoggedOut = React.createClass({
                         </div>
                     </div>
 
-                    <Gmaps ref='Gmaps' width={'100%'} height={map.height} lat={coords.lat} lng={coords.lng} zoom={17}>
-                        <Marker lat={coords.lat} lng={coords.lng} />
-                    </Gmaps>
+                    <Maps width={'100%'} height={map.height}>
+                        <Gmaps ref='Gmaps' width={'100%'} height={map.height} lat={coords.lat} lng={coords.lng} zoom={17}>
+                            <Marker lat={coords.lat} lng={coords.lng} />
+                        </Gmaps>
+                    </Maps>
                 </div>
             </div>
         )
