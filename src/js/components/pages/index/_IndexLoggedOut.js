@@ -8,6 +8,7 @@ import { Gmaps, Marker } from 'react-gmaps'
 import Avatar from '../../users/Avatar'
 import { Card, CardContent, CardTitle, CardFooter } from '../../card/Card'
 import Maps from '../../maps/Maps'
+import Footer from '../../partials/Footer'
 
 var _IndexLoggedOut = React.createClass({
     render() {
@@ -150,6 +151,7 @@ var _IndexLoggedOut = React.createClass({
                         </Gmaps>
                     </Maps>
                 </div>
+                <Footer />
             </div>
         )
     }
