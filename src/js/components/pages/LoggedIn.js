@@ -12,8 +12,20 @@ var LoggedIn = React.createClass({
             }
         }
     },
+    getInitialState() {
+        return LoginStore.getState()
+    },
+    componentDidMount() {
+        LoginStore.listen(this._onChange)
+    },
+    componentWillUnmount() {
+        LoginStore.unlisten(this._onChange)
+    },
+    _onChange(state) {
+        this.setState(state)
+    },
     render() {
-        return (<RouteHandler />)
+        return (<RouteHandler currentUser={this.state.user} />)
     }
 })
 

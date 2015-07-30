@@ -7,6 +7,8 @@ import { Card, CardContent, CardFooter } from '../../card/Card'
 
 let Profile = React.createClass({
     render() {
+        let { currentUser } = this.props
+        
         return (
             <section className="section">
                 <div className="container">
@@ -18,7 +20,7 @@ let Profile = React.createClass({
                             <Card>
                                 <div className="center">
                                     <CardContent>
-                                        <Avatar email="malfait.robin@gmail.com" round/>
+                                        <Avatar email={currentUser.email} round/>
                                     </CardContent>
                                     <CardFooter>
                                         <Link to="settings">Instellingen</Link>
