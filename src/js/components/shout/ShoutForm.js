@@ -85,13 +85,13 @@ var ShoutForm = React.createClass({
                     ) : ''}
 
                     <Grid>
-                        <Cell width={6/12}>
+                        <Cell width={3/12}>
                             <span>
                                 <input type="checkbox" id="anonymous" checked={anonymous} onChange={this.setAnonymous} />
                                 <label htmlFor="anonymous">Anoniem</label>
                             </span>
                         </Cell>
-                        <Cell width={6/12}>
+                        <Cell width={9/12}>
                             <span>
                                 <input type="checkbox" id="forever" checked={forever} onChange={this.setForever} />
                                 <label htmlFor="forever">Voor altijd tonen</label>

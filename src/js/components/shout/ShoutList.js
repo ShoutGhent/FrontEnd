@@ -5,16 +5,12 @@ import Shout from './Shout'
 import LoadingShouts from '../loading/LoadingShouts'
 import WebStorage from '../../services/WebStorage'
 
-function getStateFromStore() {
-    return ShoutStore.getState()
-}
-
 let ShoutList = React.createClass({
     propTypes: {
         url: React.PropTypes.string.isRequired
     },
     getInitialState() {
-        return getStateFromStore()
+        return ShoutStore.getState()
     },
     componentDidMount() {
         ShoutStore.listen(this._onChange)
@@ -22,8 +18,8 @@ let ShoutList = React.createClass({
     componentWillUnmount() {
         ShoutStore.unlisten(this._onChange)
     },
-    _onChange() {
-        this.setState(getStateFromStore())
+    _onChange(state) {
+        this.setState(state)
     },
     componentWillMount() {
         ShoutActions.register(this.props.url)
