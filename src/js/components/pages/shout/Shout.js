@@ -4,6 +4,7 @@ import API from '../../../services/API'
 import { Link } from 'react-router'
 import WebStorage from '../../../services/WebStorage'
 import LoadingShouts from '../../loading/LoadingShouts'
+import Notification from '../../notification/NotificationActions'
 
 let ShoutPage = React.createClass({
     getInitialState() {
@@ -24,12 +25,23 @@ let ShoutPage = React.createClass({
             }
         })
     },
-    removeShout() {
+    hideShout() {
         if (this.state.shout.user.uuid != WebStorage.fromStore('user', { user: { uuid: null }}).uuid) {
             let shout = null
 
             this.setState({ shout })
         }
+    },
+    editShout(shout) {
+        API.put(`shouts/${shout.uuid}`, {
+            shout_id: shout.uuid,
+            user_id: shout.user_id,
+            description: shout.description,
+            anonymous: shout.anonymous,
+            publish_until: shout.publish_until
+        }, (data) => {
+            Notification.success("Shout is bewerkt!")
+        })
     },
     render() {
         let { shout, loading } = this.state
@@ -40,7 +52,13 @@ let ShoutPage = React.createClass({
                 <LoadingShouts />
             ) : (
                 shout ? (
-                    <Shout user={shout.user || WebStorage.fromStore('user')} key={shout.uuid} shout={shout} onRemove={this.removeShout}/>
+                    <Shout
+                        user={shout.user || WebStorage.fromStore('user')}
+                        key={shout.uuid}
+                        shout={shout}
+                        onHide={this.hideShout}
+                        onEdit={this.editShout}
+                    />
                 ) : (
                     <div>
                         <h3>Shout bestaat niet meer...</h3>

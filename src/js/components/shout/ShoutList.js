@@ -1,58 +1,111 @@
 import React from 'react'
-import ShoutStore from './ShoutStore'
-import ShoutActions from './ShoutActions'
 import Shout from './Shout'
 import LoadingShouts from '../loading/LoadingShouts'
 import WebStorage from '../../services/WebStorage'
+import API from '../../services/API'
+import Notification from '../notification/NotificationActions'
 
 let ShoutList = React.createClass({
     propTypes: {
         url: React.PropTypes.string.isRequired
     },
     getInitialState() {
-        return ShoutStore.getState()
-    },
-    componentDidMount() {
-        ShoutStore.listen(this._onChange)
-    },
-    componentWillUnmount() {
-        ShoutStore.unlisten(this._onChange)
-    },
-    _onChange(state) {
-        this.setState(state)
-    },
-    componentWillMount() {
-        ShoutActions.register(this.props.url)
-        ShoutActions.fetchShouts(this.props.url)
-    },
-    removeShout(shout) {
-        let { url } = this.props
-
-        if (url == "shouts") {
-            ShoutActions.removeShout(shout, url)
+        return {
+            shouts: [],
+            paginationData: {
+                total: null,
+                per_page: null,
+                current_page: null,
+                last_page: null,
+                next_page_url: null,
+                prev_page_url: null
+            },
+            loading: true
         }
     },
-    loadMore() {
+    componentWillMount() {
+        this.fetch({}, (shouts) => {
+            this.setState({ shouts })
+        })
+    },
+    fetch(data, cb) {
         let { url } = this.props
 
-        let currentPage = this.state.paginationData[url].current_page
+        this.setState({
+            loading: true
+        })
+
+        API.get(url, data, (response) => {
+            this.setPaginationData(response)
+
+            if (cb) {
+                cb(response.data)
+            }
+
+            this.setState({
+                loading: false
+            })
+        })
+    },
+    loadMore() {
+        let currentPage = this.state.paginationData.current_page
         let nextPage = currentPage + 1
 
-        ShoutActions.setLoading()
-        ShoutActions.loadMore(nextPage, url)
+        this.fetch({ page: nextPage }, (shouts) => {
+            shouts.forEach((shout) => {
+                this.shouts.push(shout)
+            })
+        })
+    },
+    hideShout(shout) {
+        if (this.props.url == "shouts") {
+            this.shouts.map((item, key) => {
+                if (item.uuid == shout.uuid) {
+                    this.shouts.splice(key, 1)
+                }
+            })
+        }
+    },
+    editShout(shout) {
+        API.put(`shouts/${shout.uuid}`, {
+            shout_id: shout.uuid,
+            user_id: shout.user_id,
+            description: shout.description,
+            anonymous: shout.anonymous,
+            publish_until: shout.publish_until
+        }, (data) => {
+            Notification.success("Shout is bewerkt!")
+        })
+    },
+    setPaginationData(response) {
+        let { total, per_page, current_page, last_page, next_page_url, prev_page_url } = response
+
+        this.setState({
+            paginationData: {
+                total,
+                per_page,
+                current_page,
+                next_page_url,
+                prev_page_url,
+                last_page
+            }
+        })
     },
     render() {
-        let { url } = this.props
-
-        let { loading, shouts } = this.state
-        let paginationData = this.state.paginationData[url]
+        let { loading, shouts, paginationData } = this.state
 
         let { next_page_url } = paginationData
 
         return (
             <div>
-                {shouts[url].map((shout) =>
-                    <Shout user={shout.user || WebStorage.fromStore('user') } key={shout.uuid} shout={shout} onRemove={this.removeShout}/>
+                {shouts.map((shout) =>
+                    <Shout
+                        user={shout.user || WebStorage.fromStore('user') }
+                        key={shout.uuid}
+                        shout={shout}
+                        onHide={this.hideShout}
+                        onEdit={this.editShout}
+                    />
                 )}
                 {loading ? <LoadingShouts /> : ''}
                 {next_page_url ? (

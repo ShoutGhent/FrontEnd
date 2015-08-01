@@ -11,7 +11,9 @@ var Notification = React.createClass({
         NotificationStore.unlisten(this._onChange)
     },
     _onChange(e) {
-        this.refs.notificationSystem.addNotification(
+        let { notificationSystem } = this.refs
+
+        notificationSystem.addNotification(
             e.notification
         )
     },

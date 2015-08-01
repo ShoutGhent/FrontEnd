@@ -7,7 +7,6 @@ import { Link } from 'react-router'
 import WebStorage from '../../services/WebStorage'
 import EditShout from '../pages/shout/EditShout'
 import TransitiveNumber from 'react-transitive-number'
-import ShoutActions from './ShoutActions'
 import { Modal, ModalContent, ModalFooter } from '../modal/Modal'
 import { Grid, Cell } from '../grid/Grid'
 
@@ -16,7 +15,9 @@ moment.locale('nl')
 let Shout = React.createClass({
     propTypes: {
         user: React.PropTypes.object.isRequired,
-        shout: React.PropTypes.object.isRequired
+        shout: React.PropTypes.object.isRequired,
+        onHide: React.PropTypes.func.isRequired,
+        onEdit: React.PropTypes.func.isRequired
     },
     getInitialState() {
         let { shout } = this.props
@@ -31,7 +32,7 @@ let Shout = React.createClass({
             secondsLeft: 0
         }
     },
-    calcPercentage(shout, onRemove) {
+    calcPercentage(shout, onHide) {
         let { created_at, publish_until} = shout
 
         let begin = moment(created_at).format('X')
@@ -53,7 +54,7 @@ let Shout = React.createClass({
                     this.setState({
                         intervalId: null
                     })
-                    onRemove(shout)
+                    onHide(shout)
                 }
             }, 500)
 
@@ -63,8 +64,8 @@ let Shout = React.createClass({
         }
     },
     componentDidMount() {
-        let { shout, onRemove } = this.props
-        this.calcPercentage(shout, onRemove)
+        let { shout, onHide } = this.props
+        this.calcPercentage(shout, onHide)
     },
     componentWillUnmount() {
         clearInterval(this.state.intervalId)
@@ -84,7 +85,7 @@ let Shout = React.createClass({
     save(shout) {
         this.setState({ shout })
 
-        ShoutActions.editShout(shout)
+        this.props.onEdit(shout)
 
         this.calcPercentage(shout, this.props.onRemove)
     },
