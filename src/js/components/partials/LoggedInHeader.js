@@ -47,12 +47,12 @@ let LoggedInHeader = React.createClass({
 
         return (
             <ul className="right hide-on-med-and-down">
-                <li>
+                <li className="hidden">
                     <a href onClick={this.toggleSearch}>
                         <Icon icon="search" />
                     </a>
                 </li>
-                <li>
+                <li className="hidden">
                     <Dropdown>
                         <DropdownTitle>
                             <Icon icon="view_module" />
@@ -66,12 +66,12 @@ let LoggedInHeader = React.createClass({
                         </DropdownContent>
                     </Dropdown>
                 </li>
-                <li>
+                <li className="hidden">
                     <Link to="home">
                         <Icon icon="chat_bubble_outline" />
                     </Link>
                 </li>
-                <li>
+                <li className="hidden">
                     <Dropdown>
                         <DropdownTitle>
                             <Icon icon="schedule" />
