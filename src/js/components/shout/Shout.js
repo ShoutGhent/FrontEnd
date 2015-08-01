@@ -163,7 +163,6 @@ let Shout = React.createClass({
                         {(this.state.secondsLeft < 10 && this.state.secondsLeft != 0) ? (
                             <TransitiveNumber>{this.state.secondsLeft}</TransitiveNumber>
                         ) : ''}
-                        <a href="#" className="right"><Icon icon="grade"/></a>
                     </div>
                 </div>
                 <div className="shout-progress">
