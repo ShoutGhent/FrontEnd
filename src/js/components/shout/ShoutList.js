@@ -12,14 +12,7 @@ let ShoutList = React.createClass({
     getInitialState() {
         return {
             shouts: [],
-            paginationData: {
-                total: null,
-                per_page: null,
-                current_page: null,
-                last_page: null,
-                next_page_url: null,
-                prev_page_url: null
-            },
+            paginationData: {},
             loading: true
         }
     },

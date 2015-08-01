@@ -6,6 +6,7 @@ import Auth from '../../auth/AuthService'
 import SearchActions from '../search/SearchActions'
 import Avatar from '../users/Avatar'
 import AddShout from '../pages/shout/AddShout'
+import AddGroup from '../pages/group/AddGroup'
 
 let LoggedInHeader = React.createClass({
     getInitialState() {
@@ -26,24 +27,31 @@ let LoggedInHeader = React.createClass({
         event.preventDefault()
 
         this.setState({
-            isAddShoutFormOpen: true
+            isAddShoutFormOpen: true,
+            isAddGroupFormOpen: false
         })
     },
     openAddGroupForm(event) {
         event.preventDefault()
 
         this.setState({
-            isAddGroupFormOpen: true
+            isAddGroupFormOpen: true,
+            isAddShoutFormOpen: false
         })
     },
-    AddShoutFormDone(shout) {
+    shoutWasAdded() {
         this.setState({
             isAddShoutFormOpen: false
         })
     },
+    groupWasAdded() {
+        this.setState({
+            isAddGroupFormOpen: false
+        })
+    },
     render() {
         let { user } = this.props
-        let { isAddShoutFormOpen } = this.state
+        let { isAddShoutFormOpen, isAddGroupFormOpen } = this.state
 
         return (
             <ul className="right hide-on-med-and-down">
@@ -102,7 +110,8 @@ let LoggedInHeader = React.createClass({
                             <li><a href onClick={this.logout}>Uitloggen</a></li>
                         </DropdownContent>
                     </Dropdown>
-                    <AddShout isOpen={isAddShoutFormOpen} onDone={this.AddShoutFormDone}/>
+                    <AddShout isOpen={isAddShoutFormOpen} onDone={this.shoutWasAdded}/>
+                    <AddGroup isOpen={isAddGroupFormOpen} onDone={this.groupWasAdded}></AddGroup>
                 </li>
             </ul>
         )
