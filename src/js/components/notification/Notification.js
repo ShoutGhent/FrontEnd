@@ -10,11 +10,11 @@ var Notification = React.createClass({
     componentWillUnmount() {
         NotificationStore.unlisten(this._onChange)
     },
-    _onChange(e) {
+    _onChange(state) {
         let { notificationSystem } = this.refs
 
         notificationSystem.addNotification(
-            e.notification
+            state.notification
         )
     },
     render() {
