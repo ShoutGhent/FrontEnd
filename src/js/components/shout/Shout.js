@@ -7,8 +7,7 @@ import { Link } from 'react-router'
 import WebStorage from '../../services/WebStorage'
 import EditShout from '../pages/shout/EditShout'
 import TransitiveNumber from 'react-transitive-number'
-import { Modal, ModalContent, ModalFooter } from '../modal/Modal'
-import { Grid, Cell } from '../grid/Grid'
+import ReportShout from '../pages/shout/ReportShout'
 
 moment.locale('nl')
 
@@ -17,7 +16,8 @@ let Shout = React.createClass({
         user: React.PropTypes.object.isRequired,
         shout: React.PropTypes.object.isRequired,
         onHide: React.PropTypes.func.isRequired,
-        onEdit: React.PropTypes.func.isRequired
+        onEdit: React.PropTypes.func.isRequired,
+        onReport: React.PropTypes.func.isRequired
     },
     getInitialState() {
         let { shout } = this.props
@@ -89,6 +89,9 @@ let Shout = React.createClass({
 
         this.calcPercentage(shout, this.props.onRemove)
     },
+    report(data) {
+        this.props.onReport(data)
+    },
     closeEditModal() {
         this.setState({
             editModalOpen: false
@@ -120,18 +123,7 @@ let Shout = React.createClass({
         let whenNotMyShout = [
             <li key="report">
                 <a href onClick={this.openReportModal}>Rapporteren</a>
-                <Modal isOpen={reportModalOpen}>
-                    <ModalContent>
-                        Some Content
-                    </ModalContent>
-                    <ModalFooter>
-                        <Grid>
-                            <Cell>
-                                <button className="waves-effect waves-green btn-flat">Report</button>
-                            </Cell>
-                        </Grid>
-                    </ModalFooter>
-                </Modal>
+                <ReportShout isOpen={reportModalOpen} onReport={this.report} onClose={this.closeReportModal} />
             </li>
         ]
 

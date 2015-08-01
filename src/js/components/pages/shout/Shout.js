@@ -43,6 +43,15 @@ let ShoutPage = React.createClass({
             Notification.success("Shout is bewerkt!")
         })
     },
+    reportShout(data) {
+        let payload = {
+            shout_id: this.state.shout.uuid,
+            reason: data.reason
+        }
+        API.post('shouts/report', payload, (response) => {
+            Notification.success("Shout werd gerapporteerd!")
+        })
+    },
     render() {
         let { shout, loading } = this.state
 
@@ -58,6 +67,7 @@ let ShoutPage = React.createClass({
                         shout={shout}
                         onHide={this.hideShout}
                         onEdit={this.editShout}
+                        onReport={this.reportShout}
                     />
                 ) : (
                     <div>

@@ -77,6 +77,11 @@ let ShoutList = React.createClass({
             Notification.success("Shout is bewerkt!")
         })
     },
+    reportShout(data) {
+        API.post('shouts/report', data, (response) => {
+            Notification.success("Shout werd gerapporteerd!")
+        })
+    },
     setPaginationData(response) {
         let { total, per_page, current_page, last_page, next_page_url, prev_page_url } = response
 
@@ -105,6 +110,7 @@ let ShoutList = React.createClass({
                         shout={shout}
                         onHide={this.hideShout}
                         onEdit={this.editShout}
+                        onReport={this.reportShout}
                     />
                 )}
                 {loading ? <LoadingShouts /> : ''}
