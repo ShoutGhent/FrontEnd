@@ -10,27 +10,25 @@ let Profile = React.createClass({
         let { currentUser } = this.props
         
         return (
-            <section className="section">
-                <div className="container">
-                    <Grid>
-                        <Cell width={8/12}>
-                            <ShoutList url="shouts/mine" />
-                        </Cell>
-                        <Cell width={4/12}>
-                            <Card>
-                                <div className="center">
-                                    <CardContent>
-                                        <Avatar email={currentUser.email} round/>
-                                    </CardContent>
-                                    <CardFooter>
-                                        <Link to="settings">Instellingen</Link>
-                                    </CardFooter>
-                                </div>
-                            </Card>
-                        </Cell>
-                    </Grid>
-                </div>
-            </section>
+            <div className="container">
+                <Grid>
+                    <Cell width={8/12}>
+                        <ShoutList url="shouts/mine" />
+                    </Cell>
+                    <Cell width={4/12}>
+                        <Card>
+                            <div className="center">
+                                <CardContent>
+                                    <Avatar email={currentUser.email} round/>
+                                </CardContent>
+                                <CardFooter>
+                                    <Link to="settings">Instellingen</Link>
+                                </CardFooter>
+                            </div>
+                        </Card>
+                    </Cell>
+                </Grid>
+            </div>
         )
     }
 })

@@ -19,6 +19,7 @@
     width: 100%;
     text-align: left;
     text-transform: none;
+    font-weight: 400;
 
     &:hover, &.active {
       background-color: $dropdown-hover-bg-color;
