@@ -44,7 +44,7 @@ let Settings = React.createClass({
                                                 </Cell>
                                                 <Cell>
                                                     <InfoPanel>
-                                                        Je kan je afbeelding wijzigen op: <a href="https://avatarize.me/" target="_blank">avatarize.me</a>,
+                                                        Je kan je afbeelding wijzigen op: <a href={`https://avatarize.me/?email=${user.email}`} target="_blank">avatarize.me</a>,
                                                         heb je nog geen account, maak dan een met het volgende email adres: <strong>{user.email}</strong>
                                                     </InfoPanel>
                                                 </Cell>
@@ -53,46 +53,6 @@ let Settings = React.createClass({
                                     </Card>
                                 </Cell>
                             </Grid>
-                        </TabPanel>
-                        <TabPanel title="Account">
-                            <form>
-                                <Grid>
-                                    <Cell>
-                                        <MaterialInput label="Huidig wachtwoord" id="password1" type="password" className="validate" />
-                                    </Cell>
-                                </Grid>
-                                <Grid>
-                                    <Cell>
-                                        <MaterialInput label="Nieuw wachtwoord" id="password2" type="password" className="validate" />
-                                    </Cell>
-                                </Grid>
-                                <Grid>
-                                    <Cell>
-                                        <MaterialInput label="Wachtwoord herhalen" id="password3" type="password" className="validate" />
-                                    </Cell>
-                                </Grid>
-                            </form>
-                        </TabPanel>
-                        <TabPanel title="Groepen">
-                            <ul className="collection with-header">
-                                <li className="collection-item"><div>Alvin<a href="#!" className="secondary-content"><i className="material-icons">send</i></a></div></li>
-                                <li className="collection-item"><div>Alvin<a href="#!" className="secondary-content"><i className="material-icons">send</i></a></div></li>
-                                <li className="collection-item"><div>Alvin<a href="#!" className="secondary-content"><i className="material-icons">send</i></a></div></li>
-                                <li className="collection-item"><div>Alvin<a href="#!" className="secondary-content"><i className="material-icons">send</i></a></div></li>
-                            </ul>
-                        </TabPanel>
-                        <TabPanel title="Notificaties">
-                            <form action="#">
-                                <div className="row">
-                                    <div className="col s9" htmlFor="email">
-                                        E-mails ontvangen
-                                    </div>
-                                    <div className="col s3 right-align">
-                                        <input type="checkbox" id="email" />
-                                        <label htmlFor="email"> </label>
-                                    </div>
-                                </div>
-                            </form>
                         </TabPanel>
                     </Tab>
                 </div>

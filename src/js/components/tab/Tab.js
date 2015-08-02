@@ -3,9 +3,12 @@ import { Grid, Cell } from '../grid/Grid'
 
 let Tab = React.createClass({
     getInitialState() {
+        let { children } = this.props
+        children = [].concat(children)
+
         return {
             activePosition: 0,
-            activePanel: this.props.children[0]
+            activePanel: children[0]
         }
     },
     makeActive(child, index, event) {
@@ -16,13 +19,16 @@ let Tab = React.createClass({
         })
     },
     render() {
+        let { children } = this.props
+        children = [].concat(children)
+
         let panelHeaders = []
 
         let css = {
-            width: `${100 / this.props.children.length}%`
+            width: `${100 / children.length}%`
         }
 
-        let manipulatedChildren = React.Children.map(this.props.children, (child, index) => {
+        let manipulatedChildren = React.Children.map(children, (child, index) => {
             panelHeaders.push(<li key={child.props.title} className="tab col" style={css}><a href={true} onClick={this.makeActive.bind(this, child, index)}>{child.props.title}</a></li>)
 
             var active = false
@@ -38,8 +44,8 @@ let Tab = React.createClass({
         })
 
         var indicatorCss = {
-            width: `${100 / this.props.children.length}%`,
-            left: `${(100 / this.props.children.length) * this.state.activePosition}%`,
+            width: `${100 / children.length}%`,
+            left: `${(100 / children.length) * this.state.activePosition}%`,
             transition: 'left .6s ease-in-out'
         }
 
