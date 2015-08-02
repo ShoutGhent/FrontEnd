@@ -11,14 +11,20 @@ var ShoutForm = React.createClass({
         shout: React.PropTypes.object.isRequired,
         buttonName: React.PropTypes.string.isRequired,
         onSave: React.PropTypes.func.isRequired,
-        onDone: React.PropTypes.func.isRequired
+        onDone: React.PropTypes.func.isRequired,
+        valid: React.PropTypes.bool
     },
     getInitialState() {
         let { shout } = this.props
 
         return {
             shout: shout,
-            descriptionIsValid: false
+            descriptionIsValid: this.props.valid
+        }
+    },
+    getDefaultProps() {
+        return {
+            valid: false
         }
     },
     setDescription(event) {
@@ -60,7 +66,8 @@ var ShoutForm = React.createClass({
 
         this.props.onSave(this.state.shout)
     },
-    cancel() {
+    cancel(event) {
+        event.preventDefault()
         this.props.onDone()
     },
     validateDescription(result) {

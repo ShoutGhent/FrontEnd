@@ -22,7 +22,7 @@ var EditShout = React.createClass({
         return (
             <div>
                 <Modal isOpen={isOpen}>
-                    <ShoutForm shout={shout} onSave={this.save} onDone={this.done} buttonName="Wijzigen"/>
+                    <ShoutForm valid={true} shout={shout} onSave={this.save} onDone={this.done} buttonName="Wijzigen"/>
                 </Modal>
             </div>
         )
