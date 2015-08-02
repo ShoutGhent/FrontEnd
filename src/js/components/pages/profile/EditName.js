@@ -31,7 +31,9 @@ var EditName = React.createClass({
             last_name: event.target.value
         })
     },
-    edit() {
+    edit(event) {
+        event.preventDefault()
+
         let { first_name, last_name } = this.state
 
         API.post('users/me/changeName', { first_name, last_name }, (data) => {
@@ -59,21 +61,21 @@ var EditName = React.createClass({
 
         return (
             <div>
-                <form>
+                <form onSubmit={this.edit}>
                     <Card>
                         <CardContent>
                             <CardTitle>Naam Wijzigen</CardTitle>
                             <Grid>
                                 <Cell width={6/12}>
-                                    <MaterialInput onValidate={this.validFirstName} validate rules={['required']} label="Voornaam" id="first_name" value={first_name} onChange={this.changeFirstName} type="text"/>
+                                    <MaterialInput onValidate={this.validFirstName} validate rules={['required']} label="Voornaam" name="first_name" id="first_name" value={first_name} onChange={this.changeFirstName} type="text"/>
                                 </Cell>
                                 <Cell width={6/12}>
-                                    <MaterialInput onValidate={this.validLastName} validate rules={['required']} label="Achternaam" id="last_name" value={last_name} onChange={this.changeLastName} type="text"/>
+                                    <MaterialInput onValidate={this.validLastName} validate rules={['required']} label="Achternaam" name="last_name" id="last_name" value={last_name} onChange={this.changeLastName} type="text"/>
                                 </Cell>
                             </Grid>
                         </CardContent>
                         <CardFooter>
-                            <button style={{float: 'right', marginTop: -8}} onClick={this.edit} disabled={ ! isValid} className={className}>Wijzigen</button>
+                            <button style={{float: 'right', marginTop: -8}} disabled={ ! isValid} className={className}>Wijzigen</button>
                         </CardFooter>
                     </Card>
                 </form>

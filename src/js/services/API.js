@@ -1,10 +1,11 @@
 import request from 'superagent'
 import WebStorage from '../services/WebStorage'
+import { SERVER_URL } from '../consts'
 
 class API {
     static options() {
         return {
-            prefix: "http://api.shout.app/"
+            prefix: SERVER_URL
         }
     }
     static _send(verb, url, data, cb) {
