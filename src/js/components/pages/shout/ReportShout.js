@@ -21,6 +21,7 @@ var ReportShout = React.createClass({
         let payload = {
             reason: this.state.reason
         }
+
         this.props.onReport(payload)
         this.props.onClose()
     },
@@ -46,8 +47,8 @@ var ReportShout = React.createClass({
 
         return (
             <div>
-                <form onSubmit={this.report}>
-                    <Modal isOpen={isOpen}>
+                <Modal isOpen={isOpen}>
+                    <form onSubmit={this.report}>
                         <ModalContent>
                             <Grid>
                                 <Cell>
@@ -67,8 +68,8 @@ var ReportShout = React.createClass({
                             <button disabled={ ! isValid} style={{float: 'right'}} className="waves-effect waves-green btn">Rapporteer</button>
                             <button style={{float: 'right'}} className="waves-effect waves-red btn-flat" onClick={this.cancel}>Annuleren</button>
                         </ModalFooter>
-                    </Modal>
-                </form>
+                    </form>
+                </Modal>
             </div>
         )
     }
