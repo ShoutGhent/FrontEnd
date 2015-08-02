@@ -1,5 +1,6 @@
 import React from 'react'
 import md5 from 'MD5'
+import moment from 'moment'
 
 var Avatar = React.createClass({
     propTypes: {
@@ -10,6 +11,11 @@ var Avatar = React.createClass({
         greyscale: React.PropTypes.bool,
         blur: React.PropTypes.number
     },
+    getInitialState() {
+        return {
+            time: moment().format('x')
+        }
+    },
     getDefaultProps() {
         return {
             size: 80,
@@ -19,10 +25,23 @@ var Avatar = React.createClass({
             blur: 0
         }
     },
+    componentWillMount() {
+        window.addEventListener('focus', () => {
+            if (this.isMounted()) {
+                this.setState({
+                    time: moment().format('x')
+                })
+            }
+        }, false)
+    },
+    componentWillUnmount() {
+        window.removeEventListener('focus')
+    },
     render() {
         let { email, size, round } = this.props
+        let { time } = this.state
 
-        let url = `https://avatarize.me/a/${md5(email)}?size=${size}`
+        let url = `https://avatarize.me/a/${md5(email)}?size=${size}&time=${time}`
 
         let x = ['default', 'pixelate', 'greyscale', 'blur']
 
@@ -34,7 +53,7 @@ var Avatar = React.createClass({
 
         let className = `img-${size} avatar ${round ? 'circle' : ''}`
 
-        return <img className={className} {...this.props} src={url} />
+        return <img onFocus={this.focused} className={className} {...this.props} src={url} />
     }
 })
 

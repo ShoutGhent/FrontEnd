@@ -7,6 +7,41 @@
   background-color: $card-bg-color;
 }
 
+.card-info {
+  @extend .card-panel;
+  font-weight: 400;
+  position: relative;
+
+  i {
+    font-size: 3em;
+    float: left;
+    color: colour("blue");
+    position: absolute;
+    top: 50%;
+    left: $card-padding;
+    transform: translate(0, -50%);
+  }
+
+  .contents {
+    margin-left: $card-padding * 3;
+    margin-top: 0;
+    margin-bottom: 0;
+
+    strong {
+      font-weight: bolder;
+    }
+
+    a {
+      font-weight: bolder;
+      color: colour("blue", 300);
+
+      &:hover {
+        color: colour("blue", 600);
+      }
+    }
+  }
+}
+
 .card {
   overflow: visible;
   position: relative;

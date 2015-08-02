@@ -4,6 +4,7 @@ import MaterialInput from '../../partials/MaterialInput'
 import { Grid, Cell } from '../../grid/Grid'
 import Avatar from '../../users/Avatar'
 import LoginStore from '../../../auth/LoginStore'
+import InfoPanel from '../../partials/InfoPanel'
 
 let Settings = React.createClass({
     getInitialState() {
@@ -48,6 +49,12 @@ let Settings = React.createClass({
                                                 <MaterialInput label="Email" id="email" type="email" className="validate" />
                                             </Cell>
                                         </Grid>
+                                    </Cell>
+                                    <Cell>
+                                        <InfoPanel>
+                                            Je kan je afbeelding wijzigen op: <a href="https://avatarize.me/" target="_blank">avatarize.me</a>,
+                                            heb je nog geen account, maak dan een met het volgende email adres: <strong>{user.email}</strong>
+                                        </InfoPanel>
                                     </Cell>
                                 </Grid>
                             </form>
