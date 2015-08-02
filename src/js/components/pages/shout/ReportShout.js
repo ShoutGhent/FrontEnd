@@ -1,5 +1,6 @@
 import React from 'react'
 
+import MaterialTextarea from '../../partials/MaterialTextarea'
 import { Grid, Cell } from '../../grid/Grid'
 import { Modal, ModalContent, ModalFooter } from '../../modal/Modal'
 
@@ -11,14 +12,20 @@ var ReportShout = React.createClass({
     },
     getInitialState() {
         return {
-            reason: ''
+            reason: '',
+            reasonIsValid: false
         }
     },
-    report() {
-        this.props.onReport(this.state)
+    report(event) {
+        event.preventDefault()
+        let payload = {
+            reason: this.state.reason
+        }
+        this.props.onReport(payload)
         this.props.onClose()
     },
-    cancel() {
+    cancel(event) {
+        event.preventDefault()
         this.props.onClose()
     },
     setReason(event) {
@@ -26,30 +33,42 @@ var ReportShout = React.createClass({
             reason: event.target.value
         })
     },
+    validateReason(result) {
+        this.setState({
+            reasonIsValid: result
+        })
+    },
     render() {
         let { isOpen } = this.props
+        let { reasonIsValid } = this.state
+
+        let isValid = reasonIsValid
 
         return (
             <div>
-                <Modal isOpen={isOpen}>
-                    <ModalContent>
-                        <Grid>
-                            <Cell>
-                                <div className="input-field">
-                                    <textarea
-                                        placeholder="Waarom?"
-                                        className="materialize-textarea"
-                                        onChange={this.setReason}
-                                    />
-                                </div>
-                            </Cell>
-                        </Grid>
-                    </ModalContent>
-                    <ModalFooter>
-                        <button style={{float: 'right'}} className="waves-effect waves-green btn-flat" onClick={this.report}>Rapporteer</button>
-                        <button style={{float: 'right'}} className="waves-effect waves-red btn-flat" onClick={this.cancel}>Annuleren</button>
-                    </ModalFooter>
-                </Modal>
+                <form onSubmit={this.report}>
+                    <Modal isOpen={isOpen}>
+                        <ModalContent>
+                            <Grid>
+                                <Cell>
+                                    <div className="input-field">
+                                        <MaterialTextarea
+                                            rules={['required', 'min:20']}
+                                            onValidate={this.validateReason}
+                                            placeholder="Waarom?"
+                                            className="materialize-textarea"
+                                            onChange={this.setReason}
+                                        />
+                                    </div>
+                                </Cell>
+                            </Grid>
+                        </ModalContent>
+                        <ModalFooter>
+                            <button disabled={ ! isValid} style={{float: 'right'}} className="waves-effect waves-green btn">Rapporteer</button>
+                            <button style={{float: 'right'}} className="waves-effect waves-red btn-flat" onClick={this.cancel}>Annuleren</button>
+                        </ModalFooter>
+                    </Modal>
+                </form>
             </div>
         )
     }
