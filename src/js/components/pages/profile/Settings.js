@@ -1,10 +1,12 @@
 import React from 'react'
-import { Tab, TabPanel } from '../../tab/Tab'
-import MaterialInput from '../../partials/MaterialInput'
-import { Grid, Cell } from '../../grid/Grid'
 import Avatar from '../../users/Avatar'
-import LoginStore from '../../../auth/LoginStore'
+import EditName from './EditName'
 import InfoPanel from '../../partials/InfoPanel'
+import LoginStore from '../../../auth/LoginStore'
+import MaterialInput from '../../partials/MaterialInput'
+import { Card, CardContent, CardTitle } from '../../card/Card'
+import { Grid, Cell } from '../../grid/Grid'
+import { Tab, TabPanel } from '../../tab/Tab'
 
 let Settings = React.createClass({
     getInitialState() {
@@ -27,37 +29,30 @@ let Settings = React.createClass({
                 <div className="settings container">
                     <Tab>
                         <TabPanel title="Persoonlijk">
-                            <form>
-                                <Grid>
-                                    <Cell width={2/12}>
-                                        <div className="center">
-                                            <Avatar email={user.email} size={100} round/>
-                                        </div>
-                                    </Cell>
-                                    <Cell width={10/12}>
-                                        <Grid>
-                                            <Cell width={1/2}>
-                                                <MaterialInput label="Voornaam" id="first_name" type="text" className="validate" />
-                                            </Cell>
-                                            <Cell width={1/2}>
-                                                <MaterialInput label="Achternaam" id="last_name" type="text" className="validate m6" />
-                                            </Cell>
-                                            <Cell width={1/1}>
-                                                <MaterialInput label="Adres" id="address" type="text" className="validate" />
-                                            </Cell>
-                                            <Cell width={1/1}>
-                                                <MaterialInput label="Email" id="email" type="email" className="validate" />
-                                            </Cell>
-                                        </Grid>
-                                    </Cell>
-                                    <Cell>
-                                        <InfoPanel>
-                                            Je kan je afbeelding wijzigen op: <a href="https://avatarize.me/" target="_blank">avatarize.me</a>,
-                                            heb je nog geen account, maak dan een met het volgende email adres: <strong>{user.email}</strong>
-                                        </InfoPanel>
-                                    </Cell>
-                                </Grid>
-                            </form>
+                            <Grid>
+                                <Cell width={6/12}>
+                                    <EditName user={user}/>
+                                </Cell>
+                                <Cell width={6/12}>
+                                    <Card>
+                                        <CardContent>
+                                            <CardTitle>Foto Wijzigen</CardTitle>
+
+                                            <Grid>
+                                                <Cell center>
+                                                    <Avatar email={user.email} size={100} round/>
+                                                </Cell>
+                                                <Cell>
+                                                    <InfoPanel>
+                                                        Je kan je afbeelding wijzigen op: <a href="https://avatarize.me/" target="_blank">avatarize.me</a>,
+                                                        heb je nog geen account, maak dan een met het volgende email adres: <strong>{user.email}</strong>
+                                                    </InfoPanel>
+                                                </Cell>
+                                            </Grid>
+                                        </CardContent>
+                                    </Card>
+                                </Cell>
+                            </Grid>
                         </TabPanel>
                         <TabPanel title="Account">
                             <form>
