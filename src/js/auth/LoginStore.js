@@ -25,6 +25,11 @@ class LoginStore {
         this.user = null
         this.jwt = null
     }
+
+    onChangeUserInformation(payload) {
+        let { user } = payload
+        this.user = user
+    }
 }
 
 export default alt.createStore(LoginStore, "LoginStore")

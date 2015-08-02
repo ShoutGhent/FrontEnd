@@ -24,6 +24,15 @@ class LoginActions {
 
         this.dispatch()
     }
+
+    changeUserInformation(data) {
+        let user = WebStorage.fromStore('user')
+        for(var key in data) {
+            user[key] = data[key]
+        }
+        WebStorage.toStore('user', user)
+        this.dispatch({ user })
+    }
 }
 
 export default alt.createActions(LoginActions)

@@ -4,6 +4,7 @@ import MaterialInput from '../../partials/MaterialInput'
 import { Card, CardContent, CardTitle, CardFooter } from '../../card/Card'
 import { Grid, Cell } from '../../grid/Grid'
 import Notification from '../../notification/NotificationActions'
+import LoginActions from '../../../auth/LoginActions'
 
 var EditName = React.createClass({
     propTypes: {
@@ -27,8 +28,15 @@ var EditName = React.createClass({
         })
     },
     edit() {
+        let { first_name, last_name } = this.state
+
         API.post('users/me/changeName', this.state, (data) => {
             Notification.success('Je naam werd gewijzigd!')
+            LoginActions.changeUserInformation({
+                first_name,
+                last_name,
+                full_name: first_name + ' ' + last_name
+            })
         })
     },
     render() {
