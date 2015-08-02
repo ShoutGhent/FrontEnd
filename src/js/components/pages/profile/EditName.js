@@ -38,7 +38,7 @@ var EditName = React.createClass({
 
         API.post('users/me/changeName', { first_name, last_name }, (data) => {
             let { first_name, last_name, full_name } = data
-            LoginActions.changeUserInformation({ first_name, last_name,  full_name })
+            LoginActions.changeUserInformation({ first_name, last_name, full_name })
 
             Notification.success('Je naam werd gewijzigd!')
         })

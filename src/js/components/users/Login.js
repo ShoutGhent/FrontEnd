@@ -11,7 +11,9 @@ var Login = React.createClass({
             password: null,
             error: false,
             loading: false,
-            loginButton: 'Log In'
+            loginButton: 'Log In',
+            emailIsValid: false,
+            passwordIsValid: false
         }
     },
     login(event) {
@@ -51,19 +53,27 @@ var Login = React.createClass({
             password: event.target.value
         })
     },
+    validateEmail(result) {
+        this.setState({ emailIsValid: result })
+    },
+    validatePassword(result) {
+        this.setState({ passwordIsValid: result })
+    },
     render() {
-        let { loading, loginButton } = this.state
+        let { loading, loginButton, emailIsValid, passwordIsValid } = this.state
 
         let iconClass = `material-icons right ${this.state.loading ? 'icon-spin' : ''}`
+
+        let isValid = emailIsValid && passwordIsValid
 
         return (
             <div>
                 <form onSubmit={this.login}>
-                    <MaterialInput label="E-mail" type="email" id="email" name="email" value={this.state.email} onChange={this.setEmail}/>
-                    <MaterialInput label="Wachtwoord" type="password" id="password" name="password" value={this.state.password} onChange={this.setPassword}/>
+                    <MaterialInput onValidate={this.validateEmail} validate rules={['required', 'email']} label="E-mail" type="email" id="email" name="email" value={this.state.email} onChange={this.setEmail}/>
+                    <MaterialInput onValidate={this.validatePassword} validate rules={['required']} label="Wachtwoord" type="password" id="password" name="password" value={this.state.password} onChange={this.setPassword}/>
 
                     <div className="right-align">
-                        <button className={`btn btn-large waves-effect waves-light ${this.state.error ? 'red' : ''}`} type="submit" name="action">
+                        <button disabled={ ! isValid} className={`btn btn-large waves-effect waves-light ${this.state.error ? 'red' : ''}`} type="submit" name="action">
                             <i className={iconClass}>{loading ? 'loop' : 'lock'}</i>{loginButton}
                         </button>
                     </div>
