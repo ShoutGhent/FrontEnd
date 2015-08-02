@@ -1,8 +1,21 @@
 import React from 'react/addons'
 
 import { Grid, Cell } from '../grid/Grid'
+import Validation from '../forms/Validation/Validation'
 
 let MaterialInput = React.createClass({
+    propTypes: {
+        validate: React.PropTypes.bool,
+        rules: React.PropTypes.array,
+        onValidate: React.PropTypes.func
+    },
+    getDefaultProps() {
+        return {
+            validate: false,
+            rules: [],
+            onValidate: (result) => {}
+        }
+    },
     getInitialState() {
         return {
             open: false,
@@ -41,17 +54,11 @@ let MaterialInput = React.createClass({
             this.closeLabel()
         }
     },
-    focusable(component) {
-        if (this.props.focus) {
-            let node = React.findDOMNode(component)
-
-            if (node) {
-                node.focus()
-            }
-        }
+    onValidate(result) {
+        this.props.onValidate(result)
     },
     render() {
-        let { label } = this.props
+        let { label, validate, rules } = this.props
 
         let labelStyles = {
             pointerEvents: 'none'
@@ -59,7 +66,9 @@ let MaterialInput = React.createClass({
 
         return (
             <div className="input-field">
-                <input {...this.props} onChange={this.changeValue} onBlur={this.check} ref={this.focusable}/>
+                <Validation onValidate={this.onValidate} rules={rules} validate={validate} inValidClass="invalid" validClass="" onChange={this.changeValue} onBlur={this.check}>
+                    <input {...this.props} autoComplete='off'/>
+                </Validation>
                 <label style={labelStyles} className={this.state.open ? 'active' : ''}>{label}</label>
             </div>
         )

@@ -50,7 +50,7 @@ var AddGroup = React.createClass({
             <div>
                 <Modal isOpen={isOpen}>
                     <ModalContent>
-                        <MaterialInput label="Groep Naam" type="email" id="email" name="email" onChange={this.setName} focus/>
+                        <MaterialInput label="Groep Naam" type="email" id="email" name="email" onChange={this.setName}/>
                         <ul className="list-unstyled">
                             <li>
                                 <input checked={type == 'open'} className="with-gap" name="open_type" id="open_type" type="radio" value="open" onChange={this.setType}/>

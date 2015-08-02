@@ -74,7 +74,7 @@ var Register = React.createClass({
         return (
             <div>
                 <form onSubmit={this.register}>
-                    <MaterialInput label="E-mail" type="email" id="email" name="email" value={this.state.email} onChange={this.setEmail} focus/>
+                    <MaterialInput label="E-mail" type="email" id="email" name="email" value={this.state.email} onChange={this.setEmail}/>
                     <MaterialInput label="Naam" type="text" id="name" name="name" value={this.state.name} onChange={this.setName}/>
                     <MaterialInput label="Wachtwoord" type="password" id="password" name="password" value={this.state.password} onChange={this.setPassword}/>
                     <MaterialInput label="Herhaal Wachtwoord" type="password" id="password_repeat" name="password_repeat" value={this.state.passwordRepeat} onChange={this.setPasswordRepeat}/>

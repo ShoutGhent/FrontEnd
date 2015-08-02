@@ -15,7 +15,10 @@ var EditName = React.createClass({
         let { user } = this.props
         return {
             first_name: user.first_name,
-            last_name: user.last_name
+            last_name: user.last_name,
+            isValid: true,
+            firstNameIsValid: true,
+            lastNameIsValid: true
         }
     },
     changeFirstName(event) {
@@ -31,36 +34,49 @@ var EditName = React.createClass({
     edit() {
         let { first_name, last_name } = this.state
 
-        API.post('users/me/changeName', this.state, (data) => {
+        API.post('users/me/changeName', { first_name, last_name }, (data) => {
+            let { first_name, last_name, full_name } = data
+            LoginActions.changeUserInformation({ first_name, last_name,  full_name })
+
             Notification.success('Je naam werd gewijzigd!')
-            LoginActions.changeUserInformation({
-                first_name,
-                last_name,
-                full_name: first_name + ' ' + last_name
-            })
+        })
+    },
+    validFirstName(result) {
+        this.setState({
+            firstNameIsValid: result
+        })
+    },
+    validLastName(result) {
+        this.setState({
+            lastNameIsValid: result
         })
     },
     render() {
-        let { first_name, last_name } = this.state
+        let { first_name, last_name, firstNameIsValid, lastNameIsValid } = this.state
+        let isValid = firstNameIsValid && lastNameIsValid
+
+        let className = `waves-effect waves-green btn-flat ${isValid ? '' : 'disabled'}`
 
         return (
             <div>
-                <Card>
-                    <CardContent>
-                        <CardTitle>Naam Wijzigen</CardTitle>
-                        <Grid>
-                            <Cell width={6/12}>
-                                <MaterialInput label="Voornaam" id="first_name" value={first_name} onChange={this.changeFirstName} type="text"/>
-                            </Cell>
-                            <Cell width={6/12}>
-                                <MaterialInput label="Achternaam" id="last_name" value={last_name} onChange={this.changeLastName} type="text"/>
-                            </Cell>
-                        </Grid>
-                    </CardContent>
-                    <CardFooter>
-                        <button style={{float: 'right', marginTop: -8}} onClick={this.edit} className="waves-effect waves-green btn-flat">Wijzigen</button>
-                    </CardFooter>
-                </Card>
+                <form>
+                    <Card>
+                        <CardContent>
+                            <CardTitle>Naam Wijzigen</CardTitle>
+                            <Grid>
+                                <Cell width={6/12}>
+                                    <MaterialInput onValidate={this.validFirstName} validate rules={['required']} label="Voornaam" id="first_name" value={first_name} onChange={this.changeFirstName} type="text"/>
+                                </Cell>
+                                <Cell width={6/12}>
+                                    <MaterialInput onValidate={this.validLastName} validate rules={['required']} label="Achternaam" id="last_name" value={last_name} onChange={this.changeLastName} type="text"/>
+                                </Cell>
+                            </Grid>
+                        </CardContent>
+                        <CardFooter>
+                            <button style={{float: 'right', marginTop: -8}} onClick={this.edit} disabled={ ! isValid} className={className}>Wijzigen</button>
+                        </CardFooter>
+                    </Card>
+                </form>
             </div>
         )
     }

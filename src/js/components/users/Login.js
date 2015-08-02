@@ -59,7 +59,7 @@ var Login = React.createClass({
         return (
             <div>
                 <form onSubmit={this.login}>
-                    <MaterialInput label="E-mail" type="email" id="email" name="email" value={this.state.email} onChange={this.setEmail} focus/>
+                    <MaterialInput label="E-mail" type="email" id="email" name="email" value={this.state.email} onChange={this.setEmail}/>
                     <MaterialInput label="Wachtwoord" type="password" id="password" name="password" value={this.state.password} onChange={this.setPassword}/>
 
                     <div className="right-align">
