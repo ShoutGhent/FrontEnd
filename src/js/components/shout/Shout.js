@@ -110,7 +110,7 @@ let Shout = React.createClass({
 
         let anonymousName = 'Anonymous'
 
-        let name = anonymous ? anonymousName : user.name
+        let name = anonymous ? anonymousName : user.full_name
         let email = anonymous ? anonymousName : user.email
 
         let myShout = currentUser.uuid == user.uuid

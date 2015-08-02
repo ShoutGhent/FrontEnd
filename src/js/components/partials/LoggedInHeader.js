@@ -97,7 +97,7 @@ let LoggedInHeader = React.createClass({
                 <li>
                     <Dropdown>
                         <DropdownTitle>
-                            {user.name} <Avatar email={user.email} size={30} round/>
+                            {user.full_name} <Avatar email={user.email} size={30} round/>
                         </DropdownTitle>
                         <DropdownContent>
                             <li><Link to="profile">Profiel</Link></li>
