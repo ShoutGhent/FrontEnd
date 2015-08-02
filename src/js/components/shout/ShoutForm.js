@@ -4,6 +4,7 @@ import DateTimePicker from '../partials/DateTimePicker'
 import moment from 'moment'
 import { Grid, Cell } from '../grid/Grid'
 import { ModalContent, ModalFooter } from '../modal/Modal'
+import MaterialTextarea from '../partials/MaterialTextarea'
 
 var ShoutForm = React.createClass({
     propTypes: {
@@ -71,14 +72,14 @@ var ShoutForm = React.createClass({
                 <ModalContent>
                     <Grid>
                         <Cell>
-                            <div className="input-field">
-                                <textarea
-                                    placeholder="Wat wil je shouten?"
-                                    className="materialize-textarea"
-                                    value={description}
-                                    onChange={this.setDescription}
-                                    ref="description"/>
-                            </div>
+                            <MaterialTextarea
+                                rules={['required', 'min:10']}
+                                onValidate={() => {}}
+                                placeholder="Wat wil je shouten?"
+                                className="materialize-textarea"
+                                value={description}
+                                onChange={this.setDescription}
+                            />
                         </Cell>
                     </Grid>
                     { ! forever ? (
