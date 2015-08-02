@@ -20,7 +20,7 @@ var Avatar = React.createClass({
         }
     },
     render() {
-        let { email, size, round, changeAble } = this.props
+        let { email, size, round } = this.props
 
         let url = `https://avatarize.me/a/${md5(email)}?size=${size}`
 
@@ -32,13 +32,9 @@ var Avatar = React.createClass({
             }
         })
 
-        let className = `img-${size} avatar ${round ? 'circle' : ''} ${changeAble ? 'avatar-changeable' : ''}`
+        let className = `img-${size} avatar ${round ? 'circle' : ''}`
 
-        return changeAble ? (
-            <img data-avatarize-invoke onClick={(event) => {event.preventDefault()}} className={className} {...this.props} src={url} />
-        ) : (
-            <img className={className} {...this.props} src={url} />
-        )
+        return <img className={className} {...this.props} src={url} />
     }
 })
 

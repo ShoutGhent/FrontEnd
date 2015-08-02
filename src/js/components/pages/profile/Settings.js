@@ -30,7 +30,7 @@ let Settings = React.createClass({
                                 <Grid>
                                     <Cell width={2/12}>
                                         <div className="center">
-                                            <Avatar email={user.email} size={100} round changeAble/>
+                                            <Avatar email={user.email} size={100} round/>
                                         </div>
                                     </Cell>
                                     <Cell width={10/12}>
