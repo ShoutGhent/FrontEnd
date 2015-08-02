@@ -65,10 +65,28 @@ var EditName = React.createClass({
                             <CardTitle>Naam Wijzigen</CardTitle>
                             <Grid>
                                 <Cell width={6/12}>
-                                    <MaterialInput onValidate={this.validFirstName} validate rules={['required']} label="Voornaam" name="first_name" id="first_name" value={first_name} onChange={this.changeFirstName} type="text"/>
+                                    <MaterialInput
+                                        onValidate={this.validFirstName}
+                                        rules={['required']}
+                                        label="Voornaam"
+                                        name="first_name"
+                                        id="first_name"
+                                        value={first_name}
+                                        onChange={this.changeFirstName}
+                                        type="text"
+                                    />
                                 </Cell>
                                 <Cell width={6/12}>
-                                    <MaterialInput onValidate={this.validLastName} validate rules={['required']} label="Achternaam" name="last_name" id="last_name" value={last_name} onChange={this.changeLastName} type="text"/>
+                                    <MaterialInput
+                                        onValidate={this.validLastName}
+                                        rules={['required']}
+                                        label="Achternaam"
+                                        name="last_name"
+                                        id="last_name"
+                                        value={last_name}
+                                        onChange={this.changeLastName}
+                                        type="text"
+                                    />
                                 </Cell>
                             </Grid>
                         </CardContent>

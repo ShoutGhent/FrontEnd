@@ -100,10 +100,49 @@ var Register = React.createClass({
         return (
             <div>
                 <form onSubmit={this.register}>
-                    <MaterialInput onValidate={this.validateEmail} validate rules={['required', 'email']} label="E-mail" type="email" id="email" name="email" value={this.state.email} onChange={this.setEmail}/>
-                    <MaterialInput onValidate={this.validateName} validate rules={['required']} label="Naam" type="text" id="name" name="name" value={this.state.name} onChange={this.setName}/>
-                    <MaterialInput onValidate={this.validatePassword} validate rules={['required']} label="Wachtwoord" type="password" id="password" name="password" value={this.state.password} onChange={this.setPassword}/>
-                    <MaterialInput onValidate={this.validatePasswordRepeat} validate rules={['required']} label="Herhaal Wachtwoord" type="password" id="password_repeat" name="password_repeat" value={this.state.passwordRepeat} onChange={this.setPasswordRepeat}/>
+                    <MaterialInput
+                        onValidate={this.validateEmail}
+                        rules={['required', 'email']}
+                        label="E-mail"
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={this.state.email}
+                        onChange={this.setEmail}
+                    />
+
+                    <MaterialInput
+                        onValidate={this.validateName}
+                        rules={['required']}
+                        label="Naam"
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={this.state.name}
+                        onChange={this.setName}
+                    />
+
+                    <MaterialInput
+                        onValidate={this.validatePassword}
+                        rules={['required']}
+                        label="Wachtwoord"
+                        type="password"
+                        id="password"
+                        name="password"
+                        value={this.state.password}
+                        onChange={this.setPassword}
+                    />
+
+                    <MaterialInput
+                        onValidate={this.validatePasswordRepeat}
+                        rules={['required']}
+                        label="Herhaal Wachtwoord"
+                        type="password"
+                        id="password_repeat"
+                        name="password_repeat"
+                        value={this.state.passwordRepeat}
+                        onChange={this.setPasswordRepeat}
+                    />
 
                     <div className="right-align">
                         <button disabled={ ! isValid} className={`btn btn-large waves-effect waves-light ${this.state.error ? 'red' : ''}`} type="submit" name="action">

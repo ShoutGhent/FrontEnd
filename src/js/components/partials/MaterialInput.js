@@ -3,7 +3,7 @@ import React from 'react/addons'
 import { Grid, Cell } from '../grid/Grid'
 import Validation from '../forms/Validation/Validation'
 
-let MaterialInput = React.createClass({
+let MaterialTextarea = React.createClass({
     propTypes: {
         validate: React.PropTypes.bool,
         rules: React.PropTypes.array,
@@ -13,7 +13,7 @@ let MaterialInput = React.createClass({
         return {
             validate: false,
             rules: [],
-            onValidate: (result) => {}
+            onValidate: null
         }
     },
     getInitialState() {
@@ -55,18 +55,22 @@ let MaterialInput = React.createClass({
         }
     },
     onValidate(result) {
-        this.props.onValidate(result)
+        if (typeof this.props.onValidate == "function") {
+            this.props.onValidate(result)
+        }
     },
     render() {
-        let { label, validate, rules } = this.props
+        let { label, rules } = this.props
 
         let labelStyles = {
             pointerEvents: 'none'
         }
 
+        let valid = typeof this.props.onValidate == "function"
+
         return (
             <div className="input-field">
-                <Validation onValidate={this.onValidate} rules={rules} validate={validate} inValidClass="invalid" validClass="" onChange={this.changeValue} onBlur={this.check}>
+                <Validation onValidate={this.onValidate} rules={rules} validate={valid} inValidClass="invalid" validClass="" onChange={this.changeValue} onBlur={this.check}>
                     <input {...this.props} autoComplete='off'/>
                 </Validation>
                 <label style={labelStyles} className={this.state.open ? 'active' : ''}>{label}</label>
@@ -75,4 +79,4 @@ let MaterialInput = React.createClass({
     }
 })
 
-export default MaterialInput
+export default MaterialTextarea
