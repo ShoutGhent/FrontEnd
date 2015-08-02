@@ -43,20 +43,27 @@ let ShoutList = React.createClass({
     loadMore() {
         let currentPage = this.state.paginationData.current_page
         let nextPage = currentPage + 1
+        let listShouts = this.state.shouts
 
         this.fetch({ page: nextPage }, (shouts) => {
             shouts.forEach((shout) => {
-                this.shouts.push(shout)
+                listShouts.push(shout)
             })
         })
+
+        this.setState({ shouts: listShouts })
     },
     hideShout(shout) {
         if (this.props.url == "shouts") {
-            this.shouts.map((item, key) => {
+            let shouts = this.state.shouts
+
+            shouts.map((item, key) => {
                 if (item.uuid == shout.uuid) {
-                    this.shouts.splice(key, 1)
+                    shouts.splice(key, 1)
                 }
             })
+
+            this.setState({ shouts })
         }
     },
     editShout(shout) {

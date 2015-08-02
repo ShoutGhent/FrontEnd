@@ -90,7 +90,10 @@ let Shout = React.createClass({
         this.calcPercentage(shout, this.props.onRemove)
     },
     report(data) {
-        this.props.onReport(data)
+        this.props.onReport({
+            shout_id: this.state.shout.uuid,
+            reason: data.reason
+        })
     },
     closeEditModal() {
         this.setState({
