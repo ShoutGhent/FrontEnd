@@ -57,8 +57,6 @@ var EditName = React.createClass({
         let { first_name, last_name, firstNameIsValid, lastNameIsValid } = this.state
         let isValid = firstNameIsValid && lastNameIsValid
 
-        let className = `waves-effect waves-green btn-flat ${isValid ? '' : 'disabled'}`
-
         return (
             <div>
                 <form onSubmit={this.edit}>
@@ -75,7 +73,7 @@ var EditName = React.createClass({
                             </Grid>
                         </CardContent>
                         <CardFooter>
-                            <button style={{float: 'right', marginTop: -8}} disabled={ ! isValid} className={className}>Wijzigen</button>
+                            <button style={{float: 'right', marginTop: -8}} disabled={ ! isValid} className="waves-effect waves-green btn">Wijzigen</button>
                         </CardFooter>
                     </Card>
                 </form>
