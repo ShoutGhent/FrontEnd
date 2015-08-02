@@ -6,6 +6,7 @@ class Max extends Rule {
         super.setMessage("Het veld mag maximum :max characters bevatten")
     }
     validate(text, options) {
+        text = text.trim()
         let passes = text.length <= options[0]
 
         return super.getResult(passes, [

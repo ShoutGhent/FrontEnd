@@ -6,6 +6,7 @@ class Min extends Rule {
         super.setMessage("Het veld moet minstens :min characters bevatten")
     }
     validate(text, options) {
+        text = text.trim()
         let passes = text.length >= options[0]
 
         return super.getResult(passes, [
