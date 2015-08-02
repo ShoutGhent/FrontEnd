@@ -90,7 +90,9 @@ var Validation = React.createClass({
                         color: "#F44336",
                         fontSize: 12
                     }}>{message}</span>
-                ) : ('')}
+                ) : (
+                    <span>&nbsp;</span>
+                )}
             </div>
         )
     }
