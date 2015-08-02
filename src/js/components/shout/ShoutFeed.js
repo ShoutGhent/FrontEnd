@@ -6,7 +6,7 @@ import Notification from '../notification/NotificationActions'
 import Shout from './Shout'
 import WebStorage from '../../services/WebStorage'
 
-let ShoutList = React.createClass({
+let ShoutFeed = React.createClass({
     propTypes: {
         url: React.PropTypes.string.isRequired
     },
@@ -123,5 +123,5 @@ let ShoutList = React.createClass({
     }
 })
 
-export default ShoutList
+export default ShoutFeed
 

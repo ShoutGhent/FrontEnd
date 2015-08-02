@@ -1,12 +1,12 @@
 import React from 'react'
 
-import ShoutList from '../../shout/ShoutList'
+import ShoutFeed from '../../shout/ShoutFeed'
 
 var _IndexLoggedIn = React.createClass({
     render() {
         return (
             <div className="container">
-                <ShoutList url="shouts" />
+                <ShoutFeed url="shouts" />
             </div>
         )
     }

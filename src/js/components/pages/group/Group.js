@@ -1,6 +1,9 @@
 import React from 'react'
 
 import API from '../../../services/API'
+import ShoutForm from '../../shout/ShoutForm'
+import ShoutFeed from '../../shout/ShoutFeed'
+import { Card, CardContent, CardTitle } from '../../card/Card'
 
 let GroupPage = React.createClass({
     getInitialState() {
@@ -24,12 +27,17 @@ let GroupPage = React.createClass({
 
         return (
             <div className="container">
-            {group ? (
-                <h3>{group.name}</h3>
-            ) : (
-                <h3>Geen Groep</h3>
-            )}
+                <Card>
+                    <CardContent>
+                        <CardTitle>
+                            {group ? (group.name) : ('Geen Groep')}
+                        </CardTitle>
+                    </CardContent>
+                </Card>
 
+                {group ? (
+                    <ShoutFeed url={`shouts/group/${group.uuid}`}/>
+                ): ''}
             </div>
         )
     }

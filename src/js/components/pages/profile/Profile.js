@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Avatar from '../../users/Avatar'
-import ShoutList from '../../shout/ShoutList'
+import ShoutFeed from '../../shout/ShoutFeed'
 import { Card, CardContent, CardFooter } from '../../card/Card'
 import { Grid, Cell } from '../../grid/Grid'
 import { Link } from 'react-router'
@@ -14,7 +14,7 @@ let Profile = React.createClass({
             <div className="container">
                 <Grid>
                     <Cell width={8/12}>
-                        <ShoutList url="shouts/mine" />
+                        <ShoutFeed url="shouts/mine" />
                     </Cell>
                     <Cell width={4/12}>
                         <Card>

@@ -2,8 +2,10 @@ import React from 'react'
 
 import DateTimePicker from '../partials/DateTimePicker'
 import moment from 'moment'
+import { CardContent, CardFooter } from '../card/Card'
 import { Grid, Cell } from '../grid/Grid'
 import { ModalContent, ModalFooter } from '../modal/Modal'
+
 import MaterialTextarea from '../partials/MaterialTextarea'
 
 var ShoutForm = React.createClass({
@@ -12,7 +14,8 @@ var ShoutForm = React.createClass({
         buttonName: React.PropTypes.string.isRequired,
         onSave: React.PropTypes.func.isRequired,
         onDone: React.PropTypes.func.isRequired,
-        valid: React.PropTypes.bool
+        valid: React.PropTypes.bool,
+        type: React.PropTypes.string
     },
     getInitialState() {
         let { shout } = this.props
@@ -24,7 +27,8 @@ var ShoutForm = React.createClass({
     },
     getDefaultProps() {
         return {
-            valid: false
+            valid: false,
+            type: 'modal'
         }
     },
     setDescription(event) {
@@ -75,7 +79,7 @@ var ShoutForm = React.createClass({
     },
     render() {
         let { shout, descriptionIsValid } = this.state
-        let { buttonName } = this.props
+        let { buttonName, type } = this.props
 
         let { anonymous, forever, description } = shout
 
@@ -84,10 +88,13 @@ var ShoutForm = React.createClass({
 
         let isValid = descriptionIsValid
 
+        let Content = type == 'modal' ? ModalContent : CardContent
+        let Footer = type == 'modal' ? ModalFooter : CardFooter
+
         return (
             <div>
                 <form onSubmit={this.save}>
-                    <ModalContent>
+                    <Content>
                         <Grid>
                             <Cell>
                                 <MaterialTextarea
@@ -118,11 +125,11 @@ var ShoutForm = React.createClass({
                                 </span>
                             </Cell>
                         </Grid>
-                    </ModalContent>
-                    <ModalFooter>
+                    </Content>
+                    <Footer>
                         <button disabled={ ! isValid} style={{float: 'right'}} className="waves-effect waves-green btn">{buttonName}</button>
                         <button style={{float: 'right'}} className="waves-effect waves-red btn-flat" onClick={this.cancel}>Annuleren</button>
-                    </ModalFooter>
+                    </Footer>
                 </form>
             </div>
         )
