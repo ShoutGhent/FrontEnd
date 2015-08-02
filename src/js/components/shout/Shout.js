@@ -88,7 +88,7 @@ let Shout = React.createClass({
 
         this.props.onEdit(shout)
 
-        this.calcPercentage(shout, this.props.onRemove)
+        this.calcPercentage(shout, this.props.onHide)
     },
     report(data) {
         this.props.onReport({

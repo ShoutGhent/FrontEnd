@@ -13,7 +13,7 @@ var DateTimePicker = React.createClass({
     getDefaultProps() {
         return {
             date: moment().format("YYYY-MM-DD"),
-            time: moment().format("HH:mm")
+            time: moment().format("HH:mm:ss")
         }
     },
     changeDate(event) {

@@ -16,7 +16,10 @@ var ShoutForm = React.createClass({
     getInitialState() {
         let { shout } = this.props
 
-        return { shout }
+        return {
+            shout: shout,
+            descriptionIsValid: false
+        }
     },
     setDescription(event) {
         let shout = this.state.shout
@@ -52,59 +55,68 @@ var ShoutForm = React.createClass({
 
         this.setState({ shout })
     },
-    save() {
+    save(event) {
+        event.preventDefault()
+
         this.props.onSave(this.state.shout)
     },
     cancel() {
         this.props.onDone()
     },
+    validateDescription(result) {
+        this.setState({ descriptionIsValid: result })
+    },
     render() {
-        let { shout } = this.state
+        let { shout, descriptionIsValid } = this.state
         let { buttonName } = this.props
 
         let { anonymous, forever, description } = shout
 
         let date = moment(shout.publish_until || moment()).format('YYYY-MM-DD')
-        let time = moment(shout.publish_until || moment()).format('HH:mm:ss')
+        let time = moment(shout.publish_until || moment()).format('HH:mm')
+
+        let isValid = descriptionIsValid
 
         return (
             <div>
-                <ModalContent>
-                    <Grid>
-                        <Cell>
-                            <MaterialTextarea
-                                rules={['required', 'min:10']}
-                                onValidate={() => {}}
-                                placeholder="Wat wil je shouten?"
-                                className="materialize-textarea"
-                                value={description}
-                                onChange={this.setDescription}
-                            />
-                        </Cell>
-                    </Grid>
+                <form onSubmit={this.save}>
+                    <ModalContent>
+                        <Grid>
+                            <Cell>
+                                <MaterialTextarea
+                                    rules={['required', 'min:3']}
+                                    onValidate={this.validateDescription}
+                                    placeholder="Wat wil je shouten?"
+                                    className="materialize-textarea"
+                                    value={description}
+                                    onChange={this.setDescription}
+                                />
+                            </Cell>
+                        </Grid>
                     { ! forever ? (
                         <DateTimePicker onChange={this.setPublishUntil} date={date} time={time}/>
                     ) : ''}
 
-                    <Grid>
-                        <Cell width={3/12}>
-                            <span>
-                                <input type="checkbox" id="anonymous" checked={anonymous} onChange={this.setAnonymous} />
-                                <label htmlFor="anonymous">Anoniem</label>
-                            </span>
-                        </Cell>
-                        <Cell width={9/12}>
-                            <span>
-                                <input type="checkbox" id="forever" checked={forever} onChange={this.setForever} />
-                                <label htmlFor="forever">Voor altijd tonen</label>
-                            </span>
-                        </Cell>
-                    </Grid>
-                </ModalContent>
-                <ModalFooter>
-                    <button style={{float: 'right'}} className="waves-effect waves-green btn-flat" onClick={this.save}>{buttonName}</button>
-                    <button style={{float: 'right'}} className="waves-effect waves-red btn-flat" onClick={this.cancel}>Annuleren</button>
-                </ModalFooter>
+                        <Grid>
+                            <Cell width={3/12}>
+                                <span>
+                                    <input type="checkbox" id="anonymous" checked={anonymous} onChange={this.setAnonymous} />
+                                    <label htmlFor="anonymous">Anoniem</label>
+                                </span>
+                            </Cell>
+                            <Cell width={9/12}>
+                                <span>
+                                    <input type="checkbox" id="forever" checked={forever} onChange={this.setForever} />
+                                    <label htmlFor="forever">Voor altijd tonen</label>
+                                </span>
+                            </Cell>
+                        </Grid>
+                    </ModalContent>
+                    <ModalFooter>
+                        <button disabled={ ! isValid} style={{float: 'right'}} className="waves-effect waves-green btn">{buttonName}</button>
+                        <button style={{float: 'right'}} className="waves-effect waves-red btn-flat" onClick={this.cancel}>Annuleren</button>
+                    </ModalFooter>
+                </form>
             </div>
         )
     }
