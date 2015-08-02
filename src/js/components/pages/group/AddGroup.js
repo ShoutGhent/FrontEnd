@@ -1,9 +1,10 @@
 import React from 'react'
-import { Modal, ModalContent, ModalFooter } from '../../modal/Modal'
-import ShoutForm from '../../shout/ShoutForm'
+
 import API from '../../../services/API'
-import RouterContainer from '../../../services/RouterContainer'
 import MaterialInput from '../../partials/MaterialInput'
+import RouterContainer from '../../../services/RouterContainer'
+import ShoutForm from '../../shout/ShoutForm'
+import { Modal, ModalContent, ModalFooter } from '../../modal/Modal'
 
 var AddGroup = React.createClass({
     propTypes: {

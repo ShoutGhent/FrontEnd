@@ -1,4 +1,5 @@
 import alt from '../../alt'
+
 import SearchActions from './SearchActions'
 
 class SearchStore {

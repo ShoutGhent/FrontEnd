@@ -1,6 +1,7 @@
 import React from 'react'
-import { Modal } from '../../modal/Modal'
+
 import ShoutForm from '../../shout/ShoutForm'
+import { Modal } from '../../modal/Modal'
 
 var EditShout = React.createClass({
     propTypes: {

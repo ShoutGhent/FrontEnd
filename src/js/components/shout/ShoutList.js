@@ -1,9 +1,10 @@
 import React from 'react'
-import Shout from './Shout'
-import LoadingShouts from '../loading/LoadingShouts'
-import WebStorage from '../../services/WebStorage'
+
 import API from '../../services/API'
+import LoadingShouts from '../loading/LoadingShouts'
 import Notification from '../notification/NotificationActions'
+import Shout from './Shout'
+import WebStorage from '../../services/WebStorage'
 
 let ShoutList = React.createClass({
     propTypes: {

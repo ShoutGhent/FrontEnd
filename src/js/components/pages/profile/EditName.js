@@ -1,10 +1,11 @@
 import React from 'react'
+
 import API from '../../../services/API'
+import LoginActions from '../../../auth/LoginActions'
 import MaterialInput from '../../partials/MaterialInput'
+import Notification from '../../notification/NotificationActions'
 import { Card, CardContent, CardTitle, CardFooter } from '../../card/Card'
 import { Grid, Cell } from '../../grid/Grid'
-import Notification from '../../notification/NotificationActions'
-import LoginActions from '../../../auth/LoginActions'
 
 var EditName = React.createClass({
     propTypes: {

@@ -1,8 +1,9 @@
 import React from 'react'
-import { Modal } from '../../modal/Modal'
-import ShoutForm from '../../shout/ShoutForm'
+
 import API from '../../../services/API'
 import RouterContainer from '../../../services/RouterContainer'
+import ShoutForm from '../../shout/ShoutForm'
+import { Modal } from '../../modal/Modal'
 
 function getEmptyCleanShout() {
     return {

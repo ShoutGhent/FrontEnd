@@ -1,8 +1,9 @@
 import React from 'react'
-import { ModalContent, ModalFooter } from '../modal/Modal'
+
 import DateTimePicker from '../partials/DateTimePicker'
-import { Grid, Cell } from '../grid/Grid'
 import moment from 'moment'
+import { Grid, Cell } from '../grid/Grid'
+import { ModalContent, ModalFooter } from '../modal/Modal'
 
 var ShoutForm = React.createClass({
     propTypes: {

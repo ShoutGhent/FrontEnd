@@ -1,7 +1,8 @@
 import React from 'react'
-import { Grid, Cell } from '../grid/Grid'
+
 import MaterialInput from '../partials/MaterialInput'
 import moment from 'moment'
+import { Grid, Cell } from '../grid/Grid'
 
 var DateTimePicker = React.createClass({
     propTypes: {

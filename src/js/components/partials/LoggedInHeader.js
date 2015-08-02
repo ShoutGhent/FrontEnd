@@ -1,12 +1,13 @@
 import React from 'react'
-import { Link } from 'react-router'
-import Icon from './Icon'
-import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
-import Auth from '../../auth/AuthService'
-import SearchActions from '../search/SearchActions'
-import Avatar from '../users/Avatar'
-import AddShout from '../pages/shout/AddShout'
+
 import AddGroup from '../pages/group/AddGroup'
+import AddShout from '../pages/shout/AddShout'
+import Auth from '../../auth/AuthService'
+import Avatar from '../users/Avatar'
+import Icon from './Icon'
+import SearchActions from '../search/SearchActions'
+import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
+import { Link } from 'react-router'
 
 let LoggedInHeader = React.createClass({
     getInitialState() {

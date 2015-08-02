@@ -1,4 +1,5 @@
 import React from 'react'
+
 import API from '../../../services/API'
 
 let GroupPage = React.createClass({

@@ -1,9 +1,10 @@
 import React from "react"
+
+import Auth from './auth/AuthService'
 import Router from "react-router"
+import RouterContainer from './services/RouterContainer'
 import routes from "./Routes"
 import WebStorage from './services/WebStorage'
-import RouterContainer from './services/RouterContainer'
-import Auth from './auth/AuthService'
 
 let router = Router.create({
     routes: routes,

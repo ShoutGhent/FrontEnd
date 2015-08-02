@@ -1,7 +1,8 @@
 import React from 'react'
+
 import Icon from '../partials/Icon'
-import SearchStore from './SearchStore'
 import SearchActions from './SearchActions'
+import SearchStore from './SearchStore'
 
 let SearchBar = React.createClass({
     getInitialState() {

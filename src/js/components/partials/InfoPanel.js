@@ -1,7 +1,8 @@
 import React from 'react'
+
+import Icon from './Icon'
 import { addons } from 'react/addons'
 var { PureRenderMixin } = addons
-import Icon from './Icon'
 
 var InfoPanel = React.createClass({
     mixins: [PureRenderMixin],

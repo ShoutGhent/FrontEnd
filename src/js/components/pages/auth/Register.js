@@ -1,7 +1,8 @@
 import React from 'react'
+
 import RegisterForm from '../../users/Register'
-import { Grid, Cell } from '../../grid/Grid'
 import { Card, CardTitle, CardContent } from '../../card/Card'
+import { Grid, Cell } from '../../grid/Grid'
 
 var Register = React.createClass({
     render() {

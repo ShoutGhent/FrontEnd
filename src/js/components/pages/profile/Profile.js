@@ -1,9 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router'
-import { Grid, Cell } from '../../grid/Grid'
-import ShoutList from '../../shout/ShoutList'
+
 import Avatar from '../../users/Avatar'
+import ShoutList from '../../shout/ShoutList'
 import { Card, CardContent, CardFooter } from '../../card/Card'
+import { Grid, Cell } from '../../grid/Grid'
+import { Link } from 'react-router'
 
 let Profile = React.createClass({
     render() {

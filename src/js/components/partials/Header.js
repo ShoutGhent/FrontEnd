@@ -1,9 +1,10 @@
 import React from 'react'
-import Logo from './Logo'
-import LoginStore from '../../auth/LoginStore'
-import SearchBar from '../search/SearchBar'
+
 import LoggedInHeader from './LoggedInHeader'
 import LoggedOutHeader from './LoggedOutHeader'
+import LoginStore from '../../auth/LoginStore'
+import Logo from './Logo'
+import SearchBar from '../search/SearchBar'
 
 let Header = React.createClass({
     getInitialState() {

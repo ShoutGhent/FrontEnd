@@ -1,6 +1,7 @@
 import React from 'react'
-import { Modal, ModalContent, ModalFooter } from '../../modal/Modal'
+
 import { Grid, Cell } from '../../grid/Grid'
+import { Modal, ModalContent, ModalFooter } from '../../modal/Modal'
 
 var ReportShout = React.createClass({
     propTypes: {

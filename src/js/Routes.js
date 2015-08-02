@@ -1,14 +1,15 @@
 import React from "react"
-import { Route } from "react-router"
+
 import App from './components/App'
+import Group from './components/pages/group/Group'
+import Index from './components/pages/index/Index'
 import LoggedIn from './components/pages/LoggedIn'
 import Login from './components/pages/auth/Login'
-import Register from './components/pages/auth/Register'
-import Index from './components/pages/index/Index'
-import Settings from './components/pages/profile/Settings'
 import Profile from './components/pages/profile/Profile'
+import Register from './components/pages/auth/Register'
+import Settings from './components/pages/profile/Settings'
 import Shout from './components/pages/shout/Shout'
-import Group from './components/pages/group/Group'
+import { Route } from "react-router"
 
 var routes = (
     <Route path="/" handler={App}>

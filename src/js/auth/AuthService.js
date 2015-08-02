@@ -1,5 +1,5 @@
-import LoginActions from './LoginActions'
 import API from '../services/API'
+import LoginActions from './LoginActions'
 
 class AuthService {
     login(payload, cb) {

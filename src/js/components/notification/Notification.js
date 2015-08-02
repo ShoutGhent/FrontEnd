@@ -1,7 +1,7 @@
 import React from 'react'
-import NotificationSystem from 'react-notification-system'
-import NotificationStore from './NotificationStore'
 import NotificationActions from './NotificationActions'
+import NotificationStore from './NotificationStore'
+import NotificationSystem from 'react-notification-system'
 
 var Notification = React.createClass({
     componentDidMount() {

@@ -8,7 +8,6 @@ import MaterialInput from '../../partials/MaterialInput'
 import { Card, CardContent, CardTitle } from '../../card/Card'
 import { Grid, Cell } from '../../grid/Grid'
 
-
 let Settings = React.createClass({
     getInitialState() {
         return LoginStore.getState()

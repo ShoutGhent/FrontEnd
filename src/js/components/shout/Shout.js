@@ -1,13 +1,14 @@
 import React from 'react'
+
 import Avatar from '../users/Avatar'
+import EditShout from '../pages/shout/EditShout'
 import Icon from '../partials/Icon'
 import moment from 'moment'
+import ReportShout from '../pages/shout/ReportShout'
+import TransitiveNumber from 'react-transitive-number'
+import WebStorage from '../../services/WebStorage'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
 import { Link } from 'react-router'
-import WebStorage from '../../services/WebStorage'
-import EditShout from '../pages/shout/EditShout'
-import TransitiveNumber from 'react-transitive-number'
-import ReportShout from '../pages/shout/ReportShout'
 
 moment.locale('nl')
 

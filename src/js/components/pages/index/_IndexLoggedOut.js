@@ -1,14 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router'
-import Parallax from '../../partials/Parallax'
+
+import Avatar from '../../users/Avatar'
+import Footer from '../../partials/Footer'
 import Headline from '../../partials/Headline'
 import Icon from '../../partials/Icon'
-import { Grid, Cell } from '../../grid/Grid'
-import { Gmaps, Marker } from 'react-gmaps'
-import Avatar from '../../users/Avatar'
-import { Card, CardContent, CardTitle, CardFooter } from '../../card/Card'
 import Maps from '../../maps/Maps'
-import Footer from '../../partials/Footer'
+import Parallax from '../../partials/Parallax'
+import { Card, CardContent, CardTitle, CardFooter } from '../../card/Card'
+import { Gmaps, Marker } from 'react-gmaps'
+import { Grid, Cell } from '../../grid/Grid'
+import { Link } from 'react-router'
 
 var _IndexLoggedOut = React.createClass({
     render() {

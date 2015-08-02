@@ -1,4 +1,5 @@
 import React from 'react'
+
 import ShoutList from '../../shout/ShoutList'
 
 var _IndexLoggedIn = React.createClass({

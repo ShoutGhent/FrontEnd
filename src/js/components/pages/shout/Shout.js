@@ -1,10 +1,11 @@
 import React from 'react'
-import Shout from '../../shout/Shout'
+
 import API from '../../../services/API'
-import { Link } from 'react-router'
-import WebStorage from '../../../services/WebStorage'
 import LoadingShouts from '../../loading/LoadingShouts'
 import Notification from '../../notification/NotificationActions'
+import Shout from '../../shout/Shout'
+import WebStorage from '../../../services/WebStorage'
+import { Link } from 'react-router'
 
 let ShoutPage = React.createClass({
     getInitialState() {

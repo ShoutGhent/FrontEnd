@@ -1,4 +1,5 @@
 import React from 'react/addons'
+
 import { Grid, Cell } from '../grid/Grid'
 
 let Tab = React.createClass({

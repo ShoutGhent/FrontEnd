@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { Grid, Cell } from '../grid/Grid'
 
 let Footer = React.createClass({

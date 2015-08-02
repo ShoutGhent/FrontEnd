@@ -1,7 +1,8 @@
 import React from 'react'
-import { RouteHandler} from 'react-router'
+
 import Header from './partials/Header'
 import Notification from './notification/Notification'
+import { RouteHandler} from 'react-router'
 
 var App = React.createClass({
     render() {
