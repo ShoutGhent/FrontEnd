@@ -23,7 +23,17 @@ let ShoutFeed = React.createClass({
         })
     },
     componentWillUnmount() {
-        WebStorage.toStore(`shouts.${this.props.url}`, this.state.shouts);
+        this.cacheShouts()
+    },
+    cacheShouts() {
+        let key = `shouts.${this.props.url}`
+        WebStorage.toStore(key, this.state.shouts)
+
+        let cachedUrls = WebStorage.fromStore('cachedShoutUrls', [])
+        if (cachedUrls.indexOf(key) == -1) {
+            cachedUrls.push(key)
+            WebStorage.toStore('cachedShoutUrls', cachedUrls)
+        }
     },
     fetch(data, cb) {
         let { url } = this.props
