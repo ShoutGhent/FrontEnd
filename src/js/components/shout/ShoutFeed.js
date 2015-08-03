@@ -12,7 +12,7 @@ let ShoutFeed = React.createClass({
     },
     getInitialState() {
         return {
-            shouts: [],
+            shouts: WebStorage.fromStore(`shouts.${this.props.url}`, []),
             paginationData: {},
             loading: true
         }
@@ -21,6 +21,9 @@ let ShoutFeed = React.createClass({
         this.fetch({}, (shouts) => {
             this.setState({ shouts })
         })
+    },
+    componentWillUnmount() {
+        WebStorage.toStore(`shouts.${this.props.url}`, this.state.shouts);
     },
     fetch(data, cb) {
         let { url } = this.props
