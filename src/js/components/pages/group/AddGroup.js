@@ -24,7 +24,7 @@ var AddGroup = React.createClass({
         }
 
         API.post('groups/add', payload, (res, err) => {
-            RouterContainer.get().transitionTo('group', { groupId: res.uuid })
+            RouterContainer.get().transitionTo('group', { groupId: res.id })
         })
         this.done(payload)
     },

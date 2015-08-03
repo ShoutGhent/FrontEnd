@@ -26,7 +26,7 @@ var AddShout = React.createClass({
     },
     save(shout) {
         API.post('shouts/add', shout, (res, err) => {
-            RouterContainer.get().transitionTo('shout', { shoutId: res.uuid })
+            RouterContainer.get().transitionTo('shout', { shoutId: res.id })
         })
         this.done()
     },

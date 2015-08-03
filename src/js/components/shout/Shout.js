@@ -92,7 +92,7 @@ let Shout = React.createClass({
     },
     report(data) {
         this.props.onReport({
-            shout_id: this.state.shout.uuid,
+            shout_id: this.state.shout.id,
             reason: data.reason
         })
     },
@@ -117,7 +117,7 @@ let Shout = React.createClass({
         let name = anonymous ? anonymousName : user.full_name
         let email = anonymous ? anonymousName : user.email
 
-        let myShout = currentUser.uuid == user.uuid
+        let myShout = currentUser.id == user.id
 
         let whenMyShout = [
             <li key="edit"><a href onClick={this.openEditModal}>Edit</a></li>,
@@ -146,7 +146,7 @@ let Shout = React.createClass({
                                 </div>
                             </DropdownTitle>
                             <DropdownContent top={0}>
-                                <li><Link to="shout" params={{shoutId: shout.uuid}}>Permalink</Link></li>
+                                <li><Link to="shout" params={{shoutId: shout.id}}>Permalink</Link></li>
                                 {myShout ? whenMyShout.map(item => item) : ''}
                                 {!myShout ? whenNotMyShout.map(item => item) : ''}
                             </DropdownContent>

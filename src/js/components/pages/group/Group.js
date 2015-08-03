@@ -36,7 +36,7 @@ let GroupPage = React.createClass({
                 </Card>
 
                 {group ? (
-                    <ShoutFeed url={`shouts/group/${group.uuid}`}/>
+                    <ShoutFeed url={`shouts/group/${group.id}`}/>
                 ): ''}
             </div>
         )

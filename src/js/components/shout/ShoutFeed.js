@@ -72,7 +72,7 @@ let ShoutFeed = React.createClass({
             let shouts = this.state.shouts
 
             shouts.map((item, key) => {
-                if (item.uuid == shout.uuid) {
+                if (item.id == shout.id) {
                     shouts.splice(key, 1)
                 }
             })
@@ -81,8 +81,8 @@ let ShoutFeed = React.createClass({
         }
     },
     editShout(shout) {
-        API.put(`shouts/${shout.uuid}`, {
-            shout_id: shout.uuid,
+        API.put(`shouts/${shout.id}`, {
+            shout_id: shout.id,
             user_id: shout.user_id,
             description: shout.description,
             anonymous: shout.anonymous,
@@ -120,7 +120,7 @@ let ShoutFeed = React.createClass({
                 {shouts.map((shout) =>
                     <Shout
                         user={shout.user || WebStorage.fromStore('user') }
-                        key={shout.uuid}
+                        key={shout.id}
                         shout={shout}
                         onHide={this.hideShout}
                         onEdit={this.editShout}

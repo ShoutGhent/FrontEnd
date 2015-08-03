@@ -27,15 +27,15 @@ let ShoutPage = React.createClass({
         })
     },
     hideShout() {
-        if (this.state.shout.user.uuid != WebStorage.fromStore('user', { user: { uuid: null }}).uuid) {
+        if (this.state.shout.user.id != WebStorage.fromStore('user', { user: { id: null }}).id) {
             let shout = null
 
             this.setState({ shout })
         }
     },
     editShout(shout) {
-        API.put(`shouts/${shout.uuid}`, {
-            shout_id: shout.uuid,
+        API.put(`shouts/${shout.id}`, {
+            shout_id: shout.id,
             user_id: shout.user_id,
             description: shout.description,
             anonymous: shout.anonymous,
@@ -46,7 +46,7 @@ let ShoutPage = React.createClass({
     },
     reportShout(data) {
         let payload = {
-            shout_id: this.state.shout.uuid,
+            shout_id: this.state.shout.id,
             reason: data.reason
         }
         API.post('shouts/report', payload, (response) => {
@@ -64,7 +64,7 @@ let ShoutPage = React.createClass({
                 shout ? (
                     <Shout
                         user={shout.user || WebStorage.fromStore('user')}
-                        key={shout.uuid}
+                        key={shout.id}
                         shout={shout}
                         onHide={this.hideShout}
                         onEdit={this.editShout}
