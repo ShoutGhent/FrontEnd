@@ -1,6 +1,7 @@
 import React from 'react'
 
 import API from '../../services/API'
+import InfoPanel from '../partials/InfoPanel'
 import LoadingShouts from '../loading/LoadingShouts'
 import Notification from '../notification/NotificationActions'
 import Shout from './Shout'
@@ -115,6 +116,8 @@ let ShoutFeed = React.createClass({
 
         let { next_page_url } = paginationData
 
+        let noShouts = ! loading && shouts.length <= 0
+
         return (
             <div>
                 {shouts.map((shout) =>
@@ -128,6 +131,11 @@ let ShoutFeed = React.createClass({
                     />
                 )}
                 {loading ? <LoadingShouts /> : ''}
+                {noShouts ? (
+                    <InfoPanel>
+                        <h4>Wees de eerste om hier een shout te plaatsen!</h4>
+                    </InfoPanel>
+                ): ''}
                 {next_page_url ? (
                     <button className="btn-large" onClick={this.loadMore}>Meer Tonen</button>
                 ) : ''}
