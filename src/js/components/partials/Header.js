@@ -21,7 +21,7 @@ let Header = React.createClass({
     },
     render() {
         return (
-            <div>
+            <div className="navbar-fixed">
                 <SearchBar />
                 <nav role="navigation">
                     <div className="nav-wrapper container">
