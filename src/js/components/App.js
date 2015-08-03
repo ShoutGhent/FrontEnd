@@ -2,8 +2,8 @@ import React from 'react'
 
 import Header from './partials/Header'
 import Notification from './notification/Notification'
-import { RouteHandler} from 'react-router'
 import WebStorage from '../services/WebStorage'
+import { RouteHandler} from 'react-router'
 
 var App = React.createClass({
     componentWillMount() {
