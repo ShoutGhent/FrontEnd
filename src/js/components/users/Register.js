@@ -3,19 +3,22 @@ import React from 'react'
 import Auth from '../../auth/AuthService'
 import Avatar from './Avatar'
 import MaterialInput from '../partials/MaterialInput'
+import { Grid, Cell } from '../grid/Grid'
 
 var Register = React.createClass({
     getInitialState() {
         return {
             email: '',
-            name: '',
+            first_name: '',
+            last_name: '',
             password: '',
             passwordRepeat: '',
             error: false,
             loading: false,
             registerButton: 'Ga Verder',
             emailIsValid: false,
-            nameIsValid: false,
+            firstNameIsValid: false,
+            lastNameIsValid: false,
             passwordIsValid: false,
             passwordRepeatIsValid: false
         }
@@ -23,7 +26,11 @@ var Register = React.createClass({
     register(event) {
         event.preventDefault()
 
-        var user = this.state
+        let { email, first_name, last_name, password, passwordRepeat } = this.state
+
+        let user = {
+            email, first_name, last_name, password, passwordRepeat
+        }
         this.setState({
             registerButton: 'Bezig met registreren...',
             loading: true
@@ -36,7 +43,8 @@ var Register = React.createClass({
                     error: true,
                     loading: false,
                     email: '',
-                    name: '',
+                    first_name: '',
+                    last_name: '',
                     password: '',
                     passwordRepeat: ''
                 })
@@ -55,9 +63,14 @@ var Register = React.createClass({
             email: event.target.value
         })
     },
-    setName(event) {
+    setFirstName(event) {
         this.setState({
-            name: event.target.value
+            first_name: event.target.value
+        })
+    },
+    setLastName(event) {
+        this.setState({
+            last_name: event.target.value
         })
     },
     setPassword(event) {
@@ -75,9 +88,14 @@ var Register = React.createClass({
             emailIsValid: result
         })
     },
-    validateName(result) {
+    validateFirstName(result) {
         this.setState({
-            nameIsValid: result
+            firstNameIsValid: result
+        })
+    },
+    validateLastName(result) {
+        this.setState({
+            lastNameIsValid: result
         })
     },
     validatePassword(result) {
@@ -91,58 +109,78 @@ var Register = React.createClass({
         })
     },
     render() {
-        let { loading, registerButton, emailIsValid, nameIsValid, passwordIsValid, passwordRepeatIsValid } = this.state
+        let { loading, registerButton, emailIsValid, firstNameIsValid, lastNameIsValid, passwordIsValid, passwordRepeatIsValid } = this.state
 
         let iconClass = `material-icons right ${this.state.loading ? 'icon-spin' : ''}`
 
-        let isValid = emailIsValid && nameIsValid && passwordIsValid && passwordRepeatIsValid
+        let isValid = emailIsValid && firstNameIsValid && lastNameIsValid && passwordIsValid && passwordRepeatIsValid
 
         return (
             <div>
                 <form onSubmit={this.register}>
-                    <MaterialInput
-                        onValidate={this.validateEmail}
-                        rules={['required', 'email']}
-                        label="E-mail"
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={this.state.email}
-                        onChange={this.setEmail}
-                    />
+                    <Grid>
+                        <Cell>
+                            <MaterialInput
+                                onValidate={this.validateEmail}
+                                rules={['required', 'email']}
+                                label="E-mail"
+                                type="email"
+                                id="email"
+                                name="email"
+                                value={this.state.email}
+                                onChange={this.setEmail}
+                            />
+                        </Cell>
+                        <Cell width={6/12}>
+                            <MaterialInput
+                                onValidate={this.validateFirstName}
+                                rules={['required']}
+                                label="Voornaam"
+                                type="text"
+                                id="first_name"
+                                name="first_name"
+                                value={this.state.first_name}
+                                onChange={this.setFirstName}
+                            />
+                        </Cell>
+                        <Cell width={6/12}>
+                            <MaterialInput
+                                onValidate={this.validateLastName}
+                                rules={['required']}
+                                label="Achternaam"
+                                type="text"
+                                id="last_name"
+                                name="last_name"
+                                value={this.state.last_name}
+                                onChange={this.setLastName}
+                            />
+                        </Cell>
+                        <Cell>
+                            <MaterialInput
+                                onValidate={this.validatePassword}
+                                rules={['required']}
+                                label="Wachtwoord"
+                                type="password"
+                                id="password"
+                                name="password"
+                                value={this.state.password}
+                                onChange={this.setPassword}
+                            />
+                        </Cell>
+                        <Cell>
+                            <MaterialInput
+                                onValidate={this.validatePasswordRepeat}
+                                rules={['required']}
+                                label="Herhaal Wachtwoord"
+                                type="password"
+                                id="password_repeat"
+                                name="password_repeat"
+                                value={this.state.passwordRepeat}
+                                onChange={this.setPasswordRepeat}
+                            />
 
-                    <MaterialInput
-                        onValidate={this.validateName}
-                        rules={['required']}
-                        label="Naam"
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={this.state.name}
-                        onChange={this.setName}
-                    />
-
-                    <MaterialInput
-                        onValidate={this.validatePassword}
-                        rules={['required']}
-                        label="Wachtwoord"
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={this.state.password}
-                        onChange={this.setPassword}
-                    />
-
-                    <MaterialInput
-                        onValidate={this.validatePasswordRepeat}
-                        rules={['required']}
-                        label="Herhaal Wachtwoord"
-                        type="password"
-                        id="password_repeat"
-                        name="password_repeat"
-                        value={this.state.passwordRepeat}
-                        onChange={this.setPasswordRepeat}
-                    />
+                        </Cell>
+                    </Grid>
 
                     <div className="right-align">
                         <button disabled={ ! isValid} className={`btn btn-large waves-effect waves-light ${this.state.error ? 'red' : ''}`} type="submit" name="action">
