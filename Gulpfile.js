@@ -11,6 +11,7 @@ elixir.config.jsOutput = 'dist/js';
 
 elixir(function (mix) {
     mix.sass('style.scss')
+        .browserify('main.js')
         .copy('./src/img/**/*.*', './dist/img/');
 });
 
