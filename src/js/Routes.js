@@ -9,10 +9,11 @@ import Profile from './components/pages/profile/Profile'
 import Register from './components/pages/auth/Register'
 import Settings from './components/pages/profile/Settings'
 import Shout from './components/pages/shout/Shout'
-import { Route } from "react-router"
+import { Route, NotFoundRoute } from "react-router"
 
 var routes = (
     <Route path="/" handler={App}>
+        <NotFoundRoute handler={Index} />
         <Route name="home" path="/" handler={Index}></Route>
         <Route name="auth" path="auth">
             <Route name="login" path="login" handler={Login}/>
