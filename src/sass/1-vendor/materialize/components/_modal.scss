@@ -21,7 +21,7 @@
 
     @media #{$medium-and-up} {
         width: 55%;
-        min-height: 70%;
+        max-height: 70%;
     }
 
     h1,h2,h3,h4 {

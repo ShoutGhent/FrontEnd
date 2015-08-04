@@ -1,11 +1,17 @@
 import React from 'react'
 
-import Header from './partials/Header'
+import Header from './header/Header'
+import HeaderActions from './header/HeaderActions'
 import Notification from './notification/Notification'
 import WebStorage from '../services/WebStorage'
 import { RouteHandler} from 'react-router'
 
 var App = React.createClass({
+    statics: {
+        willTransitionTo(transition) {
+            HeaderActions.closeNavigation()
+        }
+    },
     componentWillMount() {
         this.cleanCache()
     },

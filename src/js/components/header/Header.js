@@ -1,31 +1,33 @@
 import React from 'react'
 
+import HeaderStore from './HeaderStore'
+import HeaderActions from './HeaderActions'
+import Icon from '../partials/Icon'
 import LoggedInHeader from './LoggedInHeader'
 import LoggedOutHeader from './LoggedOutHeader'
 import LoginStore from '../../auth/LoginStore'
 import Logo from './Logo'
 import SearchBar from '../search/SearchBar'
-import Icon from '../partials/Icon'
 
 let Header = React.createClass({
     getInitialState() {
         let { user, jwt } = LoginStore.getState()
-        return {
-            user: user,
-            jwt: jwt,
-            isOpen: false
-        }
+        let { isOpen } = HeaderStore.getState()
+
+        return { user, jwt, isOpen }
     },
     componentDidMount() {
         LoginStore.listen(this._onChange)
+        HeaderStore.listen(this._onChange)
+
         window.addEventListener('resize', () => {
-            this.setState({
-                isOpen: false
-            })
+            HeaderActions.closeNavigation()
         }, true)
     },
     componentWillUnmount() {
         LoginStore.unlisten(this._onChange)
+        HeaderStore.unlisten(this._onChange)
+
         window.removeEventListener('resize')
     },
     _onChange(state) {
@@ -34,9 +36,7 @@ let Header = React.createClass({
     toggleNavigation(evt) {
         evt.preventDefault()
 
-        this.setState({
-            isOpen: ! this.state.isOpen
-        })
+        HeaderActions.toggleNavigation()
     },
     render() {
         let { user, isOpen } = this.state
