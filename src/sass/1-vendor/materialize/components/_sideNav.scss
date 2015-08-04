@@ -1,7 +1,7 @@
 .side-nav {
   position: fixed;
-  width: 240px;
-  left: -105%;
+  width: 85%;
+  left: 0;
   top: 0;
   margin: 0;
   height: 100%;
@@ -14,6 +14,19 @@
 
   @extend .z-depth-1;
   will-change: left;
+
+  .dropdown-content {
+    left: 0;
+    right: 0;
+
+    li {
+      a {
+        height: 49px;
+        line-height: 49px;
+        padding: 0;
+      }
+    }
+  }
 
   // Right Align
   &.right-aligned {

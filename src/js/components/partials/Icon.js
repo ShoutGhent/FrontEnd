@@ -6,7 +6,7 @@ let Icon = React.createClass({
     },
     render() {
         let { icon, className } = this.props
-        className = `material-icons ${className}`
+        className = `material-icons ${className ? className : ''}`
 
 
         return (

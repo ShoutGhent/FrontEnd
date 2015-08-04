@@ -10,6 +10,9 @@ import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
 import { Link } from 'react-router'
 
 let LoggedInHeader = React.createClass({
+    propTypes: {
+        className: React.PropTypes.string.isRequired
+    },
     getInitialState() {
         return {
             isAddShoutFormOpen: false,
@@ -51,11 +54,11 @@ let LoggedInHeader = React.createClass({
         })
     },
     render() {
-        let { user } = this.props
+        let { user, className } = this.props
         let { isAddShoutFormOpen, isAddGroupFormOpen } = this.state
 
         return (
-            <ul className="right hide-on-med-and-down">
+            <ul className={className}>
                 <li className="hidden">
                     <a href onClick={this.toggleSearch}>
                         <Icon icon="search" />
