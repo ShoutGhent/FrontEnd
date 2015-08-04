@@ -1,7 +1,7 @@
 import React from 'react/addons'
 
-import { Grid, Cell } from '../grid/Grid'
 import Validation from '../forms/Validation/Validation'
+import { Grid, Cell } from '../grid/Grid'
 
 let MaterialTextarea = React.createClass({
     propTypes: {
