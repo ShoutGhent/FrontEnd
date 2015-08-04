@@ -22,6 +22,10 @@ var _IndexLoggedOut = React.createClass({
             lng: 3.7271276
         }
 
+        let cardCss = {
+            height: 300
+        }
+
         return (
             <div>
                 <div>
@@ -53,7 +57,7 @@ var _IndexLoggedOut = React.createClass({
                             <Grid>
                                 <Cell width={4/12}>
                                     <Card>
-                                        <CardContent>
+                                        <CardContent style={cardCss}>
                                             <CardTitle center>Wat?</CardTitle>
                                             <p className="justify-content">
                                                 Shout is een sociale netwerksite gemaakt door en voor studenten,
@@ -66,7 +70,7 @@ var _IndexLoggedOut = React.createClass({
                                 </Cell>
                                 <Cell width={4/12}>
                                     <Card>
-                                        <CardContent>
+                                        <CardContent style={cardCss}>
                                             <CardTitle center>Hoe?</CardTitle>
                                             <p className="justify-content">
                                                 Omdat het onder de studenten blijft, kan je een stuk losser en zotter zijn.
@@ -78,7 +82,7 @@ var _IndexLoggedOut = React.createClass({
                                 </Cell>
                                 <Cell width={4/12}>
                                     <Card>
-                                        <CardContent>
+                                        <CardContent style={cardCss}>
                                             <CardTitle center>Waarom?</CardTitle>
                                             <p className="justify-content">
                                                 Daarnaast is Shout zo ontworpen, dat je nieuwigheden en activiteiten van allerlei studentenkringen gemakkelijker te horen krijgt.

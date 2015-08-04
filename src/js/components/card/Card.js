@@ -31,7 +31,7 @@ var CardContent = React.createClass({
         let { children } = this.props
 
         return (
-            <div className="card-content black-text">{children}</div>
+            <div className="card-content black-text" {...this.props}>{children}</div>
         )
     }
 })
