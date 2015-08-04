@@ -5,6 +5,10 @@
   border-radius: 2px;
   @extend .z-depth-1;
   background-color: $card-bg-color;
+
+  &:first-of-type {
+    margin-top: 18px;
+  }
 }
 
 .card-info {

@@ -15,11 +15,11 @@ var InfoPanel = React.createClass({
         }
     },
     render() {
-        let { children } = this.props
+        let { children, icon } = this.props
 
         return (
             <div className="card-info">
-                {this.props.icon ? <Icon icon="info_outline"/> : ''}
+                {icon ? <Icon icon="info_outline"/> : ''}
                 <div className="contents">{children}</div>
             </div>
         )
