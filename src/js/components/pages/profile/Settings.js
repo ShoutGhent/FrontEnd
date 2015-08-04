@@ -1,13 +1,11 @@
 import React from 'react'
 
-import Avatar from '../../users/Avatar'
 import EditName from './EditName'
 import EditPassword from './EditPassword'
-import InfoPanel from '../../partials/InfoPanel'
+import EditProfilePicture from './EditProfilePicture'
 import LoginStore from '../../../auth/LoginStore'
-import MaterialInput from '../../partials/MaterialInput'
-import { Card, CardContent, CardTitle } from '../../card/Card'
 import { Grid, Cell } from '../../grid/Grid'
+import { Tab, TabPanel } from '../../tab/Tab'
 
 let Settings = React.createClass({
     getInitialState() {
@@ -27,31 +25,19 @@ let Settings = React.createClass({
 
         return (
             <div className="container">
-                <Grid>
-                    <Cell width={6/12}>
-                        <EditName user={user}/>
-                        <EditPassword/>
-                    </Cell>
-                    <Cell width={6/12}>
-                        <Card>
-                            <CardContent>
-                                <CardTitle>Foto Wijzigen</CardTitle>
-
-                                <Grid>
-                                    <Cell center>
-                                        <Avatar email={user.email} size={100} round/>
-                                    </Cell>
-                                    <Cell>
-                                        <InfoPanel>
-                                            Je kan je afbeelding wijzigen op: <a href={`https://avatarize.me/?email=${user.email}`} target="_blank">avatarize.me</a>,
-                                            heb je nog geen account, maak dan een met het volgende email adres: <strong>{user.email}</strong>
-                                        </InfoPanel>
-                                    </Cell>
-                                </Grid>
-                            </CardContent>
-                        </Card>
-                    </Cell>
-                </Grid>
+                <Tab>
+                    <TabPanel title="Algemeen">
+                        <Grid>
+                            <Cell width={6/12}>
+                                <EditName user={user}/>
+                                <EditPassword/>
+                            </Cell>
+                            <Cell width={6/12}>
+                                <EditProfilePicture user={user}/>
+                            </Cell>
+                        </Grid>
+                    </TabPanel>
+                </Tab>
             </div>
         )
     }

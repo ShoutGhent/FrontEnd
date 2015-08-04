@@ -51,7 +51,7 @@ let Tab = React.createClass({
         }
 
         return (
-            <div>
+            <div style={{marginTop: 18}}>
                 <ul className="tabs">
                     {panelHeaders}
                     <div className="indicator" style={indicatorCss}></div>
