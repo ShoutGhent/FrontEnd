@@ -56,7 +56,10 @@ var _IndexLoggedOut = React.createClass({
                                         <CardContent>
                                             <CardTitle center>Wat?</CardTitle>
                                             <p className="justify-content">
-                                                Shout is een sociale netwerksite gemaakt door studenten voor de studenten, meer bepaald voor de hogeschool en universiteitsstudenten in Gent. Met Shout willen we een speciale plaats op het net creëren, waar de studenten naar harte lust hun ervaringen kunnen delen met hun medestudenten.
+                                                Shout is een sociale netwerksite gemaakt door en voor studenten,
+                                                meer bepaald voor de hogeschool en universiteitsstudenten in Gent.
+                                                Met Shout willen we een speciale plaats op het net creëren,
+                                                waar de studenten hun ervaringen kunnen delen met hun medestudenten.
                                             </p>
                                         </CardContent>
                                     </Card>
@@ -66,7 +69,9 @@ var _IndexLoggedOut = React.createClass({
                                         <CardContent>
                                             <CardTitle center>Hoe?</CardTitle>
                                             <p className="justify-content">
-                                                Omdat het onder de studenten blijft, kan je je een stuk losser en zotter zijn, maar met een paar extra functies in Shout wordt dat nog beter. Namelijk je kan je shouts zowel anoniem als tijdelijk plaatsen, als je dat wenst natuurlijk. Zo kan je bijvoorbeeld wijze foto’s van een nachtje Overpoort gemakkelijk en zorgeloos kwijt op Shout!
+                                                Omdat het onder de studenten blijft, kan je een stuk losser en zotter zijn.
+                                                Je kan je shouts zowel anoniem als tijdelijk plaatsen.
+                                                Zo kan je bijvoorbeeld wijze foto’s van een nachtje Overpoort gemakkelijk en zorgeloos kwijt op Shout!
                                             </p>
                                         </CardContent>
                                     </Card>
@@ -76,7 +81,9 @@ var _IndexLoggedOut = React.createClass({
                                         <CardContent>
                                             <CardTitle center>Waarom?</CardTitle>
                                             <p className="justify-content">
-                                                Daarnaast is Shout zo ontworpen, dat je nieuwigheden en activiteiten van allerlei studentenkringen gemakkelijker te horen krijgt. Door lid te worden van Shout steun je indirect de studentenverenigingen met het verwerven van sponsors. Waardoor wij, de studenten, o.a. meer toffe activiteiten kunnen organiseren!
+                                                Daarnaast is Shout zo ontworpen, dat je nieuwigheden en activiteiten van allerlei studentenkringen gemakkelijker te horen krijgt.
+                                                Door lid te worden van Shout steun je indirect de studentenverenigingen met het verwerven van sponsors, waardoor wij,
+                                                de studenten, onder andere meer toffe activiteiten kunnen organiseren!
                                             </p>
                                         </CardContent>
                                     </Card>
