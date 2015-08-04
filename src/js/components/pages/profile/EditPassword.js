@@ -11,7 +11,7 @@ var EditPassword = React.createClass({
     getInitialState() {
         return {
             password: '',
-            password_repeat: '',
+            password_confirmation: '',
             passwordIsValid: true,
             passwordRepeatIsValid: true
         }
@@ -21,17 +21,17 @@ var EditPassword = React.createClass({
             password: event.target.value
         })
     },
-    changePasswordRepeat(event) {
+    changePasswordConfirmation(event) {
         this.setState({
-            password_repeat: event.target.value
+            password_confirmation: event.target.value
         })
     },
     edit(event) {
         event.preventDefault()
 
-        let { password, password_repeat } = this.state
+        let { password, password_confirmation } = this.state
 
-        API.post('users/me/changePassword', { password, password_repeat }, (data) => {
+        API.post('users/me/changePassword', { password, password_confirmation }, (data) => {
             Notification.success('Je wachtwoor werd gewijzigd!')
         })
     },
@@ -40,15 +40,15 @@ var EditPassword = React.createClass({
             passwordIsValid: result
         })
     },
-    validPasswordRepeat(result) {
+    validPasswordConfirmation(result) {
         this.setState({
-            passwordRepeatIsValid: result
+            passwordConfirmationIsValid: result
         })
     },
     render() {
-        let { passwordIsValid, passwordRepeatIsValid, password, password_repeat } = this.state
-        let passwordEquals = password == password_repeat
-        let isValid = passwordIsValid && passwordRepeatIsValid && passwordEquals
+        let { passwordIsValid, passwordConfirmationIsValid, password, password_confirmation } = this.state
+        let passwordEquals = password == password_confirmation
+        let isValid = passwordIsValid && passwordConfirmationIsValid && passwordEquals
 
         return (
             <div>
@@ -70,12 +70,12 @@ var EditPassword = React.createClass({
                                 </Cell>
                                 <Cell width={6/12}>
                                     <MaterialInput
-                                        onValidate={this.validPasswordRepeat}
+                                        onValidate={this.validPasswordConfirmation}
                                         rules={['required']}
                                         label="Wachtwoord Herhalen"
-                                        name="password_repeat"
-                                        id="password_repeat"
-                                        onChange={this.changePasswordRepeat}
+                                        name="password_confirmation"
+                                        id="password_confirmation"
+                                        onChange={this.changePasswordConfirmation}
                                         type="password"
                                     />
                                 </Cell>
