@@ -24,7 +24,6 @@ var Dropdown = React.createClass({
 
         var renderedChildren = React.Children.map(children, (child) => {
             return React.addons.cloneWithProps(child, {
-                closeDropdown: this.closeDropdown,
                 toggleDropdown: this.toggleDropdown,
                 isOpen: isOpen
             })
@@ -34,7 +33,7 @@ var Dropdown = React.createClass({
             position: 'relative'
         }
 
-        return <div {...this.props} style={css}>{renderedChildren}</div>
+        return <div {...this.props} style={css} onMouseLeave={this.closeDropdown}>{renderedChildren}</div>
     }
 })
 
@@ -50,26 +49,23 @@ var DropdownTitle = React.createClass({
 
 var DropdownContent = React.createClass({
     propTypes: {
-        top: React.PropTypes.number,
         isOpen: React.PropTypes.bool
     },
     getDefaultProps() {
         return {
-            top: 10,
             isOpen: false
         }
     },
     render() {
-        let { top, isOpen, closeDropdown, children } = this.props
+        let { isOpen, children } = this.props
 
         let css = {
             opacity: isOpen ? 1 : 0,
-            display: isOpen ? 'block' : 'none',
-            //marginTop: top
+            display: isOpen ? 'block' : 'none'
         }
 
         return (
-            <ul className="dropdown-content" onMouseLeave={closeDropdown} style={css}>
+            <ul className="dropdown-content" style={css}>
                 {children}
             </ul>
         )
