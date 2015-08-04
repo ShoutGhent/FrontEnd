@@ -2,6 +2,7 @@ import React from 'react'
 
 import Avatar from '../../users/Avatar'
 import EditName from './EditName'
+import EditPassword from './EditPassword'
 import InfoPanel from '../../partials/InfoPanel'
 import LoginStore from '../../../auth/LoginStore'
 import MaterialInput from '../../partials/MaterialInput'
@@ -29,6 +30,7 @@ let Settings = React.createClass({
                 <Grid>
                     <Cell width={6/12}>
                         <EditName user={user}/>
+                        <EditPassword/>
                     </Cell>
                     <Cell width={6/12}>
                         <Card>
