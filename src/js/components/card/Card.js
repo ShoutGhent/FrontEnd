@@ -5,7 +5,7 @@ var Card = React.createClass({
         let { children } = this.props
 
         return (
-            <div className="card">{children}</div>
+            <div className="card" {...this.props}>{children}</div>
         )
     }
 })
