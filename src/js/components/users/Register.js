@@ -122,7 +122,7 @@ var Register = React.createClass({
                         <Cell>
                             <MaterialInput
                                 onValidate={this.validateEmail}
-                                rules={['required', 'email']}
+                                rules={['required', 'email', 'endsWith:@ugent.be:@student.hogent.be']}
                                 label="E-mail"
                                 type="email"
                                 id="email"
