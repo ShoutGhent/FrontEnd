@@ -32,7 +32,7 @@ var EditPassword = React.createClass({
         let { password, password_confirmation } = this.state
 
         API.post('users/me/changePassword', { password, password_confirmation }, (data) => {
-            Notification.success('Je wachtwoor werd gewijzigd!')
+            Notification.success('Je wachtwoord werd gewijzigd!')
         })
     },
     validPassword(result) {
