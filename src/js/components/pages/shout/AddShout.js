@@ -5,35 +5,36 @@ import RouterContainer from '../../../services/RouterContainer'
 import ShoutForm from '../../shout/ShoutForm'
 import { Modal } from '../../modal/Modal'
 
-function getEmptyCleanShout() {
+function getEmptyCleanShout(groupId) {
     return {
         description: '',
         anonymous: false,
         forever: false,
-        publish_until: null
+        publish_until: null,
+        group_id: groupId
     }
 }
 
 var AddShout = React.createClass({
     propTypes: {
         isOpen: React.PropTypes.bool.isRequired,
-        onDone: React.PropTypes.func.isRequired
+        onDone: React.PropTypes.func.isRequired,
+        groupId: React.PropTypes.string.isRequired
     },
     getInitialState() {
         return {
-            shout: getEmptyCleanShout()
+            shout: getEmptyCleanShout(this.props.groupId)
         }
     },
     save(shout) {
         API.post('shouts/add', shout, (res, err) => {
-            RouterContainer.get().transitionTo('shout', { shoutId: res.id })
+            this.done()
         })
-        this.done()
     },
     done() {
         this.props.onDone(this.state.shout)
         this.setState({
-            shout: getEmptyCleanShout()
+            shout: getEmptyCleanShout(this.props.groupId)
         })
     },
     render() {

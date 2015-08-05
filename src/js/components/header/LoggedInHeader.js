@@ -1,7 +1,6 @@
 import React from 'react'
 
 import AddGroup from '../pages/group/AddGroup'
-import AddShout from '../pages/shout/AddShout'
 import Auth from '../../auth/AuthService'
 import Avatar from '../users/Avatar'
 import Icon from '../partials/Icon'
@@ -15,7 +14,6 @@ let LoggedInHeader = React.createClass({
     },
     getInitialState() {
         return {
-            isAddShoutFormOpen: false,
             isAddGroupFormOpen: false
         }
     },
@@ -27,25 +25,11 @@ let LoggedInHeader = React.createClass({
         event.preventDefault()
         SearchActions.toggleSearch()
     },
-    openAddShoutForm(event) {
-        event.preventDefault()
-
-        this.setState({
-            isAddShoutFormOpen: true,
-            isAddGroupFormOpen: false
-        })
-    },
     openAddGroupForm(event) {
         event.preventDefault()
 
         this.setState({
-            isAddGroupFormOpen: true,
-            isAddShoutFormOpen: false
-        })
-    },
-    shoutWasAdded() {
-        this.setState({
-            isAddShoutFormOpen: false
+            isAddGroupFormOpen: true
         })
     },
     groupWasAdded() {
@@ -55,7 +39,7 @@ let LoggedInHeader = React.createClass({
     },
     render() {
         let { user, className } = this.props
-        let { isAddShoutFormOpen, isAddGroupFormOpen } = this.state
+        let { isAddGroupFormOpen } = this.state
 
         return (
             <ul className={className}>
@@ -107,14 +91,12 @@ let LoggedInHeader = React.createClass({
                             <li><Link to="profile">Profiel</Link></li>
                             <li><Link to="settings" params={{tabId: 'general'}}>Instellingen</Link></li>
                             <li className="divider"></li>
-                            <li><a href onClick={this.openAddShoutForm}>Nieuwe shout</a></li>
                             <li><a href onClick={this.openAddGroupForm}>Nieuwe groep</a></li>
 
                             <li className="divider"></li>
                             <li><a href onClick={this.logout}>Uitloggen</a></li>
                         </DropdownContent>
                     </Dropdown>
-                    <AddShout isOpen={isAddShoutFormOpen} onDone={this.shoutWasAdded}/>
                     <AddGroup isOpen={isAddGroupFormOpen} onDone={this.groupWasAdded}></AddGroup>
                 </li>
             </ul>
