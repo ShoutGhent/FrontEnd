@@ -107,9 +107,9 @@ var ShoutForm = React.createClass({
                                 />
                             </Cell>
                         </Grid>
-                    { ! forever ? (
-                        <DateTimePicker onChange={this.setPublishUntil} date={date} time={time}/>
-                    ) : ''}
+                        { ! forever ? (
+                            <DateTimePicker onChange={this.setPublishUntil} date={date} time={time}/>
+                        ) : ''}
 
                         <Grid>
                             <Cell width={3/12}>
