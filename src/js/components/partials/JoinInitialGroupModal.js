@@ -55,7 +55,7 @@ var JoinInitialGroupModal = React.createClass({
         })
     },
     render() {
-        let { groups, open, loading } = this.state
+        let { groups, open, loading, selected } = this.state
 
         groups = groups.sort((prev, next) => {
             let first = [prev.name, next.name].sort()[0]
@@ -79,7 +79,6 @@ var JoinInitialGroupModal = React.createClass({
                             cursor: 'pointer'
                         }
 
-                        let selected = this.state.selected
                         let inGroup = false
 
                         for (var i = 0; i < selected.length; i++) {
@@ -108,7 +107,8 @@ var JoinInitialGroupModal = React.createClass({
                     {loading ? <Loading/> : ''}
                 </ModalContent>
                 <ModalFooter>
-                    <button style={{float: 'right'}} disabled={this.state.selected.length == 0} className="waves-effect waves-green btn" onClick={this.joinGroups}>Join groepen</button>
+                    <button style={{float: 'left'}} disabled={true} className="btn-flat">{selected.length} geselecteerd</button>
+                    <button style={{float: 'right'}} disabled={selected.length == 0} className="waves-effect waves-green btn" onClick={this.joinGroups}>Join groepen</button>
                 </ModalFooter>
             </Modal>
         )
