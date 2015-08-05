@@ -15,7 +15,8 @@ var AddGroup = React.createClass({
     getInitialState() {
         return {
             name: '',
-            type: 'open'
+            type: 'open',
+            nameIsValid: false
         }
     },
     save() {
@@ -43,9 +44,15 @@ var AddGroup = React.createClass({
             type: event.target.value
         })
     },
+    validateName(result) {
+        this.setState({
+            nameIsValid: result
+        })
+    },
     render() {
         let { isOpen } = this.props
-        let { type } = this.state
+        let { type, nameIsValid } = this.state
+        let valid = nameIsValid
 
         return (
             <div>
@@ -54,6 +61,7 @@ var AddGroup = React.createClass({
                         <Grid>
                             <Cell>
                                 <MaterialTextarea
+                                    onValidate={this.validateName}
                                     rules={['required']}
                                     placeholder="Groep Naam"
                                     className="materialize-textarea"
@@ -79,7 +87,7 @@ var AddGroup = React.createClass({
                         </Grid>
                     </ModalContent>
                     <ModalFooter>
-                        <button style={{float: 'right'}} className="waves-effect waves-green btn-flat" onClick={this.save}>Maak Groep</button>
+                        <button style={{float: 'right'}} disabled={ ! valid} className="waves-effect waves-green btn" onClick={this.save}>Maak Groep</button>
                         <button style={{float: 'right'}} className="waves-effect waves-red btn-flat" onClick={this.done}>Annuleren</button>
                     </ModalFooter>
                 </Modal>
