@@ -105,7 +105,7 @@ let LoggedInHeader = React.createClass({
                         </DropdownTitle>
                         <DropdownContent>
                             <li><Link to="profile">Profiel</Link></li>
-                            <li><Link to="settings">Instellingen</Link></li>
+                            <li><Link to="settings" params={{tabId: 'general'}}>Instellingen</Link></li>
                             <li className="divider"></li>
                             <li><a href onClick={this.openAddShoutForm}>Nieuwe shout</a></li>
                             <li><a href onClick={this.openAddGroupForm}>Nieuwe groep</a></li>

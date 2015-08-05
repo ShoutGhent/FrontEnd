@@ -21,7 +21,7 @@ var routes = (
         </Route>
         <Route handler={LoggedIn}>
             <Route name="profile" path="/profile" handler={Profile}/>
-            <Route name="settings" path="profile/settings" handler={Settings}/>
+            <Route name="settings" path="profile/settings/:tabId" handler={Settings}/>
             <Route name="shout" path="shouts/:shoutId" handler={Shout} />
             <Route name="group" path="groups/:groupId" handler={Group} />
         </Route>

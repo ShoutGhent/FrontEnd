@@ -3,13 +3,35 @@ import React from 'react/addons'
 import { Grid, Cell } from '../grid/Grid'
 
 let Tab = React.createClass({
+    propTypes: {
+        activeTab: React.PropTypes.string,
+        onTabChange: React.PropTypes.func
+    },
+    getDefaultProps() {
+        return {
+            activeTab: null,
+            onTabChange: (tabId) => {}
+        }
+    },
     getInitialState() {
-        let { children } = this.props
+        let { children, activeTab } = this.props
         children = [].concat(children)
 
+        var index = 0
+
+        if (activeTab) {
+            for (var i = 0; i < children.length; i++) {
+                var child = children[i]
+
+                if (child.props.tabId == this.props.activeTab) {
+                    index = i
+                }
+            }
+        }
+
         return {
-            activePosition: 0,
-            activePanel: children[0]
+            activePosition: index,
+            activePanel: children[index]
         }
     },
     makeActive(child, index, event) {
@@ -18,6 +40,7 @@ let Tab = React.createClass({
             activePosition: index,
             activePanel: child
         })
+        this.props.onTabChange(child.props.tabId)
     },
     render() {
         let { children } = this.props

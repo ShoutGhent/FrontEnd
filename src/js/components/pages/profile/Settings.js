@@ -6,6 +6,7 @@ import EditProfilePicture from './EditProfilePicture'
 import LoginStore from '../../../auth/LoginStore'
 import { Grid, Cell } from '../../grid/Grid'
 import { Tab, TabPanel } from '../../tab/Tab'
+import RouterContainer from '../../../services/RouterContainer'
 
 let Settings = React.createClass({
     getInitialState() {
@@ -20,13 +21,17 @@ let Settings = React.createClass({
     _onChange(state) {
         this.setState(state)
     },
+    changeTab(tabId) {
+        RouterContainer.get().transitionTo("settings", { tabId })
+    },
     render() {
         let { user } = this.state
+        let { params } = this.props
 
         return (
             <div className="container">
-                <Tab>
-                    <TabPanel title="Algemeen">
+                <Tab activeTab={params.tabId} onTabChange={this.changeTab}>
+                    <TabPanel title="Algemeen" tabId="general">
                         <Grid>
                             <Cell width={6/12}>
                                 <EditName user={user}/>
