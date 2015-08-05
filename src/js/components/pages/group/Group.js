@@ -5,6 +5,7 @@ import API from '../../../services/API'
 import Icon from '../../partials/Icon'
 import Loading from '../../loading/Loading'
 import Parallax from '../../partials/Parallax'
+import RouterContainer from '../../../services/RouterContainer'
 import ShoutFeed from '../../shout/ShoutFeed'
 import ShoutForm from '../../shout/ShoutForm'
 import { Card, CardContent, CardTitle } from '../../card/Card'
@@ -40,8 +41,12 @@ let GroupPage = React.createClass({
             isAddShoutFormOpen: true
         })
     },
+    changeTab(tabId) {
+        RouterContainer.get().transitionTo("group", { tabId, groupId: this.props.params.groupId })
+    },
     render() {
         let { group, loading, isAddShoutFormOpen } = this.state
+        let { params } = this.props
 
         return (
             <div className="container">
@@ -72,20 +77,20 @@ let GroupPage = React.createClass({
                             </Card>
                         </Cell>
                         <Cell>
-                            <Tab className="white group" marginTop={0}>
-                                <TabPanel title="Shouts">
+                            <Tab className="white group" marginTop={0} activeTab={params.tabId} onTabChange={this.changeTab}>
+                                <TabPanel title="Shouts" tabId="shouts">
                                     <Grid>
                                         <Cell width={9/12}><ShoutFeed url={`shouts/group/${group.id}`}/></Cell>
                                         <Cell width={3/12}><h3>Sponsers</h3></Cell>
                                     </Grid>
                                 </TabPanel>
-                                <TabPanel title="Evenementen">
+                                <TabPanel title="Evenementen" tabId="events">
                                     <Grid>
                                         <Cell width={9/12}>Evenementen...</Cell>
                                         <Cell width={3/12}><h3>Sponsers</h3></Cell>
                                     </Grid>
                                 </TabPanel>
-                                <TabPanel title="Praesidium">
+                                <TabPanel title="Praesidium"  tabId="praesidium">
                                     <Grid>
                                         <Cell width={9/12}>Praesidium...</Cell>
                                         <Cell width={3/12}><h3>Sponsers</h3></Cell>

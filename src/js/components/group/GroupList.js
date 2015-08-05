@@ -44,7 +44,7 @@ var GroupList = React.createClass({
         return (
             <CollectionItem key={group.id}>
                 {group.name}
-                <Link to="group" params={{groupId: group.id}} className="secondary-content">
+                <Link to="group" params={{groupId: group.id, tabId: 'shouts'}} className="secondary-content">
                     <Icon icon="send"></Icon>
                 </Link>
             </CollectionItem>
