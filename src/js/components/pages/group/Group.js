@@ -4,13 +4,12 @@ import AddShout from '../../pages/shout/AddShout'
 import API from '../../../services/API'
 import Icon from '../../partials/Icon'
 import Loading from '../../loading/Loading'
+import Parallax from '../../partials/Parallax'
 import ShoutFeed from '../../shout/ShoutFeed'
 import ShoutForm from '../../shout/ShoutForm'
-import { Grid, Cell } from '../../grid/Grid'
 import { Card, CardContent, CardTitle } from '../../card/Card'
+import { Grid, Cell } from '../../grid/Grid'
 import { Tab, TabPanel } from '../../tab/Tab'
-import Parallax from '../../partials/Parallax'
-import NotificationActions from '../../notification/NotificationActions'
 
 let GroupPage = React.createClass({
     getInitialState() {
@@ -35,7 +34,6 @@ let GroupPage = React.createClass({
         this.setState({
             isAddShoutFormOpen: false
         })
-        NotificationActions.success("Je shout werd geplaatst!")
     },
     openAddShoutForm() {
         this.setState({
@@ -64,7 +62,7 @@ let GroupPage = React.createClass({
                                             <h4 className="left" style={{marginLeft: 20}}>{group.name}</h4>
                                         </Cell>
                                         <Cell width={6/12}>
-                                            
+
                                         </Cell>
                                     </Grid>
                                     <button className="btn-floating right" onClick={this.openAddShoutForm}>

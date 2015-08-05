@@ -1,6 +1,7 @@
 import React from 'react'
 
 import API from '../../../services/API'
+import NotificationActions from '../../notification/NotificationActions'
 import RouterContainer from '../../../services/RouterContainer'
 import ShoutForm from '../../shout/ShoutForm'
 import { Modal } from '../../modal/Modal'
@@ -29,6 +30,7 @@ var AddShout = React.createClass({
     save(shout) {
         API.post('shouts/add', shout, (res, err) => {
             this.done()
+            NotificationActions.success("Je shout werd geplaatst!")
         })
     },
     done() {
