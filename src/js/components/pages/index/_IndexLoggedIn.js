@@ -1,8 +1,10 @@
 import React from 'react'
 
-import ShoutFeed from '../../shout/ShoutFeed'
 import API from '../../../services/API'
+import GroupList from '../../group/GroupList'
 import JoinInitialGroupModal from '../../partials/JoinInitialGroupModal'
+import ShoutFeed from '../../shout/ShoutFeed'
+import { Grid, Cell } from '../../grid/Grid'
 
 var _IndexLoggedIn = React.createClass({
     getInitialState() {
@@ -27,7 +29,14 @@ var _IndexLoggedIn = React.createClass({
                 {doneFetching && groups.length <= 0 ? (
                     <JoinInitialGroupModal></JoinInitialGroupModal>
                 ) : ''}
-                <ShoutFeed url="shouts" />
+                <Grid>
+                    <Cell width={3/12}>
+                        <GroupList />
+                    </Cell>
+                    <Cell width={9/12}>
+                        <ShoutFeed url="shouts" />
+                    </Cell>
+                </Grid>
             </div>
         )
     }
