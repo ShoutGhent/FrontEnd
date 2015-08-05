@@ -17,7 +17,7 @@ var JoinInitialGroupModal = React.createClass({
         }
     },
     componentWillMount() {
-        API.get('groups', {}, (response, err) => {
+        API.get('groups/initial', {}, (response, err) => {
             if ( ! err) {
                 this.setState({
                     groups: response.data,
