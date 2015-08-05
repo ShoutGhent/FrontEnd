@@ -5,12 +5,14 @@ import { Grid, Cell } from '../grid/Grid'
 let Tab = React.createClass({
     propTypes: {
         activeTab: React.PropTypes.string,
-        onTabChange: React.PropTypes.func
+        onTabChange: React.PropTypes.func,
+        marginTop: React.PropTypes.number
     },
     getDefaultProps() {
         return {
             activeTab: null,
-            onTabChange: (tabId) => {}
+            onTabChange: (tabId) => {},
+            marginTop: 18
         }
     },
     getInitialState() {
@@ -74,7 +76,7 @@ let Tab = React.createClass({
         }
 
         return (
-            <div style={{marginTop: 18}}>
+            <div {...this.props} style={{marginTop: this.props.marginTop}}>
                 <ul className="tabs">
                     {panelHeaders}
                     <div className="indicator" style={indicatorCss}></div>

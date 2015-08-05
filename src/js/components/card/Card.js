@@ -2,10 +2,12 @@ import React from 'react'
 
 var Card = React.createClass({
     render() {
-        let { children } = this.props
+        let { children, className } = this.props
+
+        className = `card ${className ? className : ''}`
 
         return (
-            <div className="card" {...this.props}>{children}</div>
+            <div {...this.props} className={className}>{children}</div>
         )
     }
 })
