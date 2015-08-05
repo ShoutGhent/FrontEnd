@@ -10,7 +10,7 @@ let Icon = React.createClass({
 
 
         return (
-            <i className={className}>{icon}</i>
+            <i {...this.props} className={className}>{icon}</i>
         )
     }
 });
