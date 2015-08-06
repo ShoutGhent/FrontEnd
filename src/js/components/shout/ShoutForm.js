@@ -21,7 +21,7 @@ var ShoutForm = React.createClass({
         let { shout } = this.props
 
         return {
-            shout: shout,
+            shout: this.clone(shout),
             descriptionIsValid: this.props.valid
         }
     },
@@ -30,6 +30,17 @@ var ShoutForm = React.createClass({
             valid: false,
             type: 'modal'
         }
+    },
+    clone(obj) {
+        if (typeof Object.create !== 'function') {
+            Object.create = (o) => {
+                var F = () => {}
+                F.prototype = o
+                return new F()
+            };
+        }
+
+        return Object.create(obj)
     },
     setDescription(event) {
         let shout = this.state.shout
