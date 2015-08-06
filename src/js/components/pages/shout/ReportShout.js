@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import MaterialTextarea from '../../partials/MaterialTextarea'
 import { Grid, Cell } from '../../grid/Grid'
@@ -6,9 +6,9 @@ import { Modal, ModalContent, ModalFooter } from '../../modal/Modal'
 
 var ReportShout = React.createClass({
     propTypes: {
-        isOpen: React.PropTypes.bool.isRequired,
-        onReport: React.PropTypes.func.isRequired,
-        onClose: React.PropTypes.func.isRequired
+        isOpen: PropTypes.bool.isRequired,
+        onReport: PropTypes.func.isRequired,
+        onClose: PropTypes.func.isRequired
     },
     getInitialState() {
         return {

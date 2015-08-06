@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 var Loading = React.createClass({
     propTypes: {
-        type: React.PropTypes.string
+        type: PropTypes.string
     },
     getDefaultProps() {
         return {

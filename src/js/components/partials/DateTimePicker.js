@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import MaterialInput from '../partials/MaterialInput'
 import moment from 'moment'
@@ -6,9 +6,9 @@ import { Grid, Cell } from '../grid/Grid'
 
 var DateTimePicker = React.createClass({
     propTypes: {
-        time: React.PropTypes.string,
-        date: React.PropTypes.string,
-        onChange: React.PropTypes.func.isRequired
+        time: PropTypes.string,
+        date: PropTypes.string,
+        onChange: PropTypes.func.isRequired
     },
     getDefaultProps() {
         return {

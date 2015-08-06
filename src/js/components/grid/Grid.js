@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react/addons'
 
 var Grid = React.createClass({
     render() {
@@ -12,7 +12,7 @@ var Grid = React.createClass({
 
 var Cell = React.createClass({
     propTypes: {
-        center: React.PropTypes.bool
+        center: PropTypes.bool
     },
     getDefaultProps() {
         return {

@@ -1,13 +1,13 @@
-import React from 'react/addons'
+import React, { PropTypes } from 'react/addons'
 
 import Validation from '../forms/Validation/Validation'
 import { Grid, Cell } from '../grid/Grid'
 
 let MaterialTextarea = React.createClass({
     propTypes: {
-        validate: React.PropTypes.bool,
-        rules: React.PropTypes.array,
-        onValidate: React.PropTypes.func
+        validate: PropTypes.bool,
+        rules: PropTypes.array,
+        onValidate: PropTypes.func
     },
     getDefaultProps() {
         return {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import API from '../../../services/API'
 import LoginActions from '../../../auth/LoginActions'
@@ -9,7 +9,7 @@ import { Grid, Cell } from '../../grid/Grid'
 
 var EditName = React.createClass({
     propTypes: {
-        user: React.PropTypes.object.isRequired
+        user: PropTypes.object.isRequired
     },
     getInitialState() {
         let { user } = this.props

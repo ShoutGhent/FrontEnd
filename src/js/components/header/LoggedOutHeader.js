@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import { Link } from 'react-router'
 
 let LoggedOutHeader = React.createClass({
     propTypes: {
-        className: React.PropTypes.string.isRequired
+        className: PropTypes.string.isRequired
     },
     render() {
         let { className } = this.props

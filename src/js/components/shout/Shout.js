@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import Avatar from '../users/Avatar'
 import EditShout from '../pages/shout/EditShout'
@@ -10,15 +10,13 @@ import WebStorage from '../../services/WebStorage'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
 import { Link } from 'react-router'
 
-moment.locale('nl')
-
 let Shout = React.createClass({
     propTypes: {
-        user: React.PropTypes.object.isRequired,
-        shout: React.PropTypes.object.isRequired,
-        onHide: React.PropTypes.func.isRequired,
-        onEdit: React.PropTypes.func.isRequired,
-        onReport: React.PropTypes.func.isRequired
+        user: PropTypes.object.isRequired,
+        shout: PropTypes.object.isRequired,
+        onHide: PropTypes.func.isRequired,
+        onEdit: PropTypes.func.isRequired,
+        onReport: PropTypes.func.isRequired
     },
     getInitialState() {
         let { shout } = this.props

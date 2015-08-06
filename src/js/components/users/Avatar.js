@@ -1,16 +1,16 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import md5 from 'MD5'
 import moment from 'moment'
 
 var Avatar = React.createClass({
     propTypes: {
-        email: React.PropTypes.string.isRequired,
-        size: React.PropTypes.number,
-        default: React.PropTypes.string,
-        pixelate: React.PropTypes.number,
-        greyscale: React.PropTypes.bool,
-        blur: React.PropTypes.number
+        email: PropTypes.string.isRequired,
+        size: PropTypes.number,
+        default: PropTypes.string,
+        pixelate: PropTypes.number,
+        greyscale: PropTypes.bool,
+        blur: PropTypes.number
     },
     getInitialState() {
         return {

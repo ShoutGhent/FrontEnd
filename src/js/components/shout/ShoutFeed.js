@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import API from '../../services/API'
 import InfoPanel from '../partials/InfoPanel'
@@ -9,7 +9,7 @@ import WebStorage from '../../services/WebStorage'
 
 let ShoutFeed = React.createClass({
     propTypes: {
-        url: React.PropTypes.string.isRequired
+        url: PropTypes.string.isRequired
     },
     getInitialState() {
         return {

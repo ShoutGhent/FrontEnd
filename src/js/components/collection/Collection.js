@@ -1,5 +1,4 @@
-import React from 'react'
-import { addons } from 'react/addons'
+import React, { PropTypes, addons } from 'react/addons'
 var { PureRenderMixin } = addons
 
 var Collection = React.createClass({
@@ -27,7 +26,7 @@ var CollectionHeader = React.createClass({
 var CollectionItem = React.createClass({
     mixins: [PureRenderMixin],
     propTypes: {
-        active: React.PropTypes.bool
+        active: PropTypes.bool
     },
     getDefaultProps() {
         return {

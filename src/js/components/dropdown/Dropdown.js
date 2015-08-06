@@ -1,4 +1,4 @@
-import React from 'react/addons'
+import React, { PropTypes } from 'react/addons'
 
 var Dropdown = React.createClass({
     getInitialState() {
@@ -49,7 +49,7 @@ var DropdownTitle = React.createClass({
 
 var DropdownContent = React.createClass({
     propTypes: {
-        isOpen: React.PropTypes.bool
+        isOpen: PropTypes.bool
     },
     getDefaultProps() {
         return {

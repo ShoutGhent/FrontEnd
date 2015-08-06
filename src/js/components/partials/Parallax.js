@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 let Parallax = React.createClass({
     propTypes: {
-        img: React.PropTypes.string.isRequired,
-        height: React.PropTypes.number
+        img: PropTypes.string.isRequired,
+        height: PropTypes.number
     },
     getDefaultProps() {
         return {

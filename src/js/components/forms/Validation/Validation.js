@@ -1,16 +1,16 @@
-import React from 'react'
+import React, { PropTypes, addons } from 'react'
 
 import Validator from './Validator'
 
 var Validation = React.createClass({
     propTypes: {
-        validClass: React.PropTypes.string.isRequired,
-        inValidClass: React.PropTypes.string.isRequired,
-        validate: React.PropTypes.bool,
-        rules: React.PropTypes.array,
-        onValidate: React.PropTypes.func,
-        onChange: React.PropTypes.func,
-        onBlur: React.PropTypes.func
+        validClass: PropTypes.string.isRequired,
+        inValidClass: PropTypes.string.isRequired,
+        validate: PropTypes.bool,
+        rules: PropTypes.array,
+        onValidate: PropTypes.func,
+        onChange: PropTypes.func,
+        onBlur: PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -70,13 +70,13 @@ var Validation = React.createClass({
         let input = children
 
         if (this.props.validate) {
-            input = React.addons.cloneWithProps(input, {
+            input = addons.cloneWithProps(input, {
                 className: valid ? validClass : inValidClass,
                 onBlur: this.onBlur,
                 onChange: this.onChange
             })
         } else {
-            input = React.addons.cloneWithProps(input, {
+            input = addons.cloneWithProps(input, {
                 onBlur: this.props.onBlur,
                 onChange: this.props.onChange
             })

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import Avatar from '../../users/Avatar'
 import InfoPanel from '../../partials/InfoPanel'
@@ -10,7 +10,7 @@ var { PureRenderMixin } = addons
 var EditProfilePicture = React.createClass({
     mixins: [PureRenderMixin],
     propTypes: {
-        user: React.PropTypes.object.isRequired
+        user: PropTypes.object.isRequired
     },
     render() {
         let { user } = this.props

@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
+
 import Portal from 'react-portal'
 
 var Modal = React.createClass({
     propTypes: {
-        isOpen: React.PropTypes.bool,
-        onClose: React.PropTypes.func
+        isOpen: PropTypes.bool,
+        onClose: PropTypes.func
     },
     getDefaultProps() {
         return {

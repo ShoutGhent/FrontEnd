@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 let Icon = React.createClass({
     propTypes: {
-        icon: React.PropTypes.string.isRequired
+        icon: PropTypes.string.isRequired
     },
     render() {
         let { icon, className } = this.props

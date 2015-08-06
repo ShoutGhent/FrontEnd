@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import API from '../../../services/API'
 import MaterialTextarea from '../../partials/MaterialTextarea'
@@ -9,9 +9,9 @@ import { Modal, ModalContent, ModalFooter } from '../../modal/Modal'
 
 var AddGroup = React.createClass({
     propTypes: {
-        isOpen: React.PropTypes.bool.isRequired,
-        onDone: React.PropTypes.func.isRequired,
-        onClose: React.PropTypes.func
+        isOpen: PropTypes.bool.isRequired,
+        onDone: PropTypes.func.isRequired,
+        onClose: PropTypes.func
     },
     getDefaultProps() {
         return {

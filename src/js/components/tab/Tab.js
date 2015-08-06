@@ -1,12 +1,12 @@
-import React from 'react/addons'
+import React, { PropTypes } from 'react/addons'
 
 import { Grid, Cell } from '../grid/Grid'
 
 let Tab = React.createClass({
     propTypes: {
-        activeTab: React.PropTypes.string,
-        onTabChange: React.PropTypes.func,
-        marginTop: React.PropTypes.number
+        activeTab: PropTypes.string,
+        onTabChange: PropTypes.func,
+        marginTop: PropTypes.number
     },
     getDefaultProps() {
         return {

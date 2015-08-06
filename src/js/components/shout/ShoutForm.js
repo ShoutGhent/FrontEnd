@@ -1,21 +1,20 @@
-import React from 'react'
+import React, { PropTypes } from 'react/addons'
 
 import DateTimePicker from '../partials/DateTimePicker'
+import MaterialTextarea from '../partials/MaterialTextarea'
 import moment from 'moment'
 import { CardContent, CardFooter } from '../card/Card'
 import { Grid, Cell } from '../grid/Grid'
 import { ModalContent, ModalFooter } from '../modal/Modal'
 
-import MaterialTextarea from '../partials/MaterialTextarea'
-
 var ShoutForm = React.createClass({
     propTypes: {
-        shout: React.PropTypes.object.isRequired,
-        buttonName: React.PropTypes.string.isRequired,
-        onSave: React.PropTypes.func.isRequired,
-        onDone: React.PropTypes.func.isRequired,
-        valid: React.PropTypes.bool,
-        type: React.PropTypes.string
+        shout: PropTypes.object.isRequired,
+        buttonName: PropTypes.string.isRequired,
+        onSave: PropTypes.func.isRequired,
+        onDone: PropTypes.func.isRequired,
+        valid: PropTypes.bool,
+        type: PropTypes.string
     },
     getInitialState() {
         let { shout } = this.props

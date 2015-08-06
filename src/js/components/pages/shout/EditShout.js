@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import ShoutForm from '../../shout/ShoutForm'
 import { Modal } from '../../modal/Modal'
 
 var EditShout = React.createClass({
     propTypes: {
-        isOpen: React.PropTypes.bool,
-        onSave: React.PropTypes.func,
-        onClose: React.PropTypes.func
+        isOpen: PropTypes.bool,
+        onSave: PropTypes.func,
+        onClose: PropTypes.func
     },
     done() {
         this.props.onClose()

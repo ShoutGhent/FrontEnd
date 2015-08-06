@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import Icon from './Icon'
 import { addons } from 'react/addons'
@@ -7,7 +7,7 @@ var { PureRenderMixin } = addons
 var InfoPanel = React.createClass({
     mixins: [PureRenderMixin],
     propTypes: {
-        icon: React.PropTypes.bool
+        icon: PropTypes.bool
     },
     getDefaultProps() {
         return {
