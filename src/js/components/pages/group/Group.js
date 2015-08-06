@@ -17,7 +17,10 @@ let GroupPage = React.createClass({
         return {
             group: null,
             loading: true,
-            isAddShoutFormOpen: false
+            isAddShoutFormOpen: false,
+            buttonName: '',
+            joiningGroup: false,
+            leavingGroup: false,
         }
     },
     componentWillMount() {
@@ -26,7 +29,7 @@ let GroupPage = React.createClass({
         API.get(`groups/${groupId}`, {}, (group, err) => {
             if ( ! err) {
                 if (this.isMounted()) {
-                    this.setState({ group, loading: false })
+                    this.setState({ group, buttonName: group.meta_information.in_group ? 'Groep Verlaten' : 'Lid Worden', loading: false })
                 }
             }
         })
@@ -47,18 +50,26 @@ let GroupPage = React.createClass({
     leaveGroup() {
         let { group } = this.state
 
+        this.setState({
+            leavingGroup: true
+        })
+
         API.post('groups/leave', { group_id: group.id }, (response, err) => {
             if ( ! err) {
-                this.setState({ group: response })
+                this.setState({ group: response, buttonName: 'Lid Worden', leavingGroup: false })
             }
         })
     },
     joinGroup() {
         let { group } = this.state
 
+        this.setState({
+            joiningGroup: true
+        })
+
         API.post('groups/join', { group_id: group.id }, (response, err) => {
             if ( ! err) {
-                this.setState({ group: response })
+                this.setState({ group: response, buttonName: 'Groep Verlaten', joiningGroup: false })
             }
         })
     },
@@ -74,28 +85,26 @@ let GroupPage = React.createClass({
         )
     },
     renderGroup() {
-        let { group, isAddShoutFormOpen } = this.state
+        let { group, isAddShoutFormOpen, buttonName, joiningGroup, leavingGroup } = this.state
         let { params } = this.props
         let memberCount = group.meta_information.member_count
+        let inGroup = group.meta_information.in_group
+
+        let loading = joiningGroup || leavingGroup
 
         return (
             <div>
                 <Grid>
                     <Cell center>
                         <Parallax img='/dist/img/banner.jpg' height={300} relative>
-                            {group.meta_information.in_group ? (
-                                <button style={{
-                                    position: 'absolute',
-                                    right: 10,
-                                    bottom: 10
-                                }} className="btn" onClick={this.leaveGroup}>Groep Verlaten</button>
-                            ): (
-                                <button style={{
-                                    position: 'absolute',
-                                    right: 10,
-                                    bottom: 10
-                                }} className="btn" onClick={this.joinGroup}>Lid Worden</button>
-                            )}
+                            <button style={{
+                                position: 'absolute',
+                                right: 10,
+                                bottom: 10
+                            }} className="btn" onClick={() => {inGroup ? this.leaveGroup() : this.joinGroup()}}>
+                                {loading && <Icon className="right" icon="loop" spinning/>}
+                                {buttonName}
+                            </button>
                         </Parallax>
                     </Cell>
                     <Cell>
@@ -112,11 +121,11 @@ let GroupPage = React.createClass({
                                         </span>
                                     </Cell>
                                 </Grid>
-                                {group.meta_information.in_group ? (
+                                {inGroup && (
                                     <button className="btn-floating right" onClick={this.openAddShoutForm}>
                                         <Icon icon="add"/>
                                     </button>
-                                ) : ''}
+                                )}
                             </CardContent>
                         </Card>
                     </Cell>

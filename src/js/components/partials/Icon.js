@@ -2,11 +2,17 @@ import React, { PropTypes } from 'react'
 
 let Icon = React.createClass({
     propTypes: {
-        icon: PropTypes.string.isRequired
+        icon: PropTypes.string.isRequired,
+        spinning: PropTypes.bool
+    },
+    getDefaultProps() {
+        return {
+            spinning: false
+        }
     },
     render() {
-        let { icon, className } = this.props
-        className = `material-icons ${className ? className : ''}`
+        let { icon, className, spinning } = this.props
+        className = `material-icons ${className ? className : ''} ${spinning ? 'icon-spin' : ''}`
 
 
         return (
