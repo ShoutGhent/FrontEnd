@@ -26,6 +26,11 @@ let ShoutFeed = React.createClass({
     componentWillUnmount() {
         this.cacheShouts()
     },
+    refreshList() {
+        this.fetch({}, (shouts) => {
+            this.setState({ shouts })
+        })
+    },
     cacheShouts() {
         let key = `shouts.${this.props.url}`
         WebStorage.toStore(key, this.state.shouts)

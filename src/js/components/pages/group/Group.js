@@ -38,6 +38,7 @@ let GroupPage = React.createClass({
         this.setState({
             isAddShoutFormOpen: false
         })
+        this.refs.shoutfeed.refreshList()
     },
     openAddShoutForm() {
         this.setState({
@@ -110,9 +111,7 @@ let GroupPage = React.createClass({
                     <Cell>
                         <Card style={{marginTop: 0, marginBottom: 0}} className="no-shadow">
                             <CardContent>
-                                <Grid style={{
-                                    marginBottom: 0
-                                }}>
+                                <Grid style={{marginBottom: 0}}>
                                     <Cell width={6/12}>
                                         <img className="left" src="https://avatarize.me/a/malfait.robin@gmail.com?size=100"/>
                                         <h4 className="left" style={{marginLeft: 20}}>{group.name}</h4>
@@ -138,7 +137,7 @@ let GroupPage = React.createClass({
                         <Tab className="white group" marginTop={0} activeTab={params.tabId} onTabChange={this.changeTab}>
                             <TabPanel title="Shouts" tabId="shouts">
                                 <Grid>
-                                    <Cell width={9/12}><ShoutFeed url={`shouts/group/${group.id}`}/></Cell>
+                                    <Cell width={9/12}><ShoutFeed ref="shoutfeed" url={`shouts/group/${group.id}`}/></Cell>
                                     <Cell width={3/12}><h3>Sponsers</h3></Cell>
                                 </Grid>
                             </TabPanel>
