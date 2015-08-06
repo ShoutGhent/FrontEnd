@@ -8,7 +8,7 @@ import WebStorage from './services/WebStorage'
 
 let router = Router.create({
     routes: routes,
-    //location: Router.HistoryLocation
+    location: Router.HistoryLocation
 })
 
 RouterContainer.set(router)
