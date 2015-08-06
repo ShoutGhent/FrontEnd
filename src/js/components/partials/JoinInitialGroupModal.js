@@ -95,7 +95,7 @@ var JoinInitialGroupModal = React.createClass({
                                             color: 'green',
                                             position: 'absolute',
                                             right: -10,
-                                            top: -14,
+                                            top: -14
                                         }}/>
                                     ) : ''}
                                     {group.name}
@@ -108,7 +108,7 @@ var JoinInitialGroupModal = React.createClass({
                 </ModalContent>
                 <ModalFooter>
                     <button style={{float: 'left'}} disabled={true} className="btn-flat">{selected.length} geselecteerd</button>
-                    <button style={{float: 'right'}} disabled={selected.length == 0} className="waves-effect waves-green btn" onClick={this.joinGroups}>Join groepen</button>
+                    <button style={{float: 'right'}} disabled={selected.length == 0} className="waves-effect waves-green btn" onClick={this.joinGroups}>Lid Worden</button>
                 </ModalFooter>
             </Modal>
         )

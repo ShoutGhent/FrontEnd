@@ -44,64 +44,106 @@ let GroupPage = React.createClass({
     changeTab(tabId) {
         RouterContainer.get().transitionTo("group", { tabId, groupId: this.props.params.groupId })
     },
+    leaveGroup() {
+        let { group } = this.state
+
+        API.post('groups/leave', { group_id: group.id }, (response, err) => {
+            if ( ! err) {
+                this.setState({ group: response })
+            }
+        })
+    },
+    joinGroup() {
+        let { group } = this.state
+
+        API.post('groups/join', { group_id: group.id }, (response, err) => {
+            if ( ! err) {
+                this.setState({ group: response })
+            }
+        })
+    },
     render() {
-        let { group, loading, isAddShoutFormOpen } = this.state
-        let { params } = this.props
+        let { loading } = this.state
 
         return (
             <div className="container">
             {loading ? (
                 <Loading />
-            ) : (
-                <div>
-                    <Grid>
-                        <Cell center>
-                            <Parallax img='/dist/img/banner.jpg' height={300}/>
-                        </Cell>
-                        <Cell>
-                            <Card style={{marginTop: 0, marginBottom: 0}} className="no-shadow">
-                                <CardContent>
-                                    <Grid>
-                                        <Cell width={6/12}>
-                                            <img className="left" src="https://avatarize.me/a/malfait.robin@gmail.com?size=100"/>
-                                            <h4 className="left" style={{marginLeft: 20}}>{group.name}</h4>
-                                        </Cell>
-                                        <Cell width={6/12}>
+            ) : this.renderGroup()}
+            </div>
+        )
+    },
+    renderGroup() {
+        let { group, isAddShoutFormOpen } = this.state
+        let { params } = this.props
+        let memberCount = group.meta_information.member_count
 
-                                        </Cell>
-                                    </Grid>
+        return (
+            <div>
+                <Grid>
+                    <Cell center>
+                        <Parallax img='/dist/img/banner.jpg' height={300} relative>
+                            {group.meta_information.in_group ? (
+                                <button style={{
+                                    position: 'absolute',
+                                    right: 10,
+                                    bottom: 10
+                                }} className="btn" onClick={this.leaveGroup}>Groep Verlaten</button>
+                            ): (
+                                <button style={{
+                                    position: 'absolute',
+                                    right: 10,
+                                    bottom: 10
+                                }} className="btn" onClick={this.joinGroup}>Lid Worden</button>
+                            )}
+                        </Parallax>
+                    </Cell>
+                    <Cell>
+                        <Card style={{marginTop: 0, marginBottom: 0}} className="no-shadow">
+                            <CardContent>
+                                <Grid>
+                                    <Cell width={6/12}>
+                                        <img className="left" src="https://avatarize.me/a/malfait.robin@gmail.com?size=100"/>
+                                        <h4 className="left" style={{marginLeft: 20}}>{group.name}</h4>
+                                    </Cell>
+                                    <Cell width={6/12}>
+                                        <span className="right">
+                                            {memberCount} {memberCount == 1 ? 'lid' : 'leden'}
+                                        </span>
+                                    </Cell>
+                                </Grid>
+                                {group.meta_information.in_group ? (
                                     <button className="btn-floating right" onClick={this.openAddShoutForm}>
                                         <Icon icon="add"/>
                                     </button>
-                                </CardContent>
-                            </Card>
-                        </Cell>
-                        <Cell>
-                            <Tab className="white group" marginTop={0} activeTab={params.tabId} onTabChange={this.changeTab}>
-                                <TabPanel title="Shouts" tabId="shouts">
-                                    <Grid>
-                                        <Cell width={9/12}><ShoutFeed url={`shouts/group/${group.id}`}/></Cell>
-                                        <Cell width={3/12}><h3>Sponsers</h3></Cell>
-                                    </Grid>
-                                </TabPanel>
-                                <TabPanel title="Evenementen" tabId="events">
-                                    <Grid>
-                                        <Cell width={9/12}>Evenementen...</Cell>
-                                        <Cell width={3/12}><h3>Sponsers</h3></Cell>
-                                    </Grid>
-                                </TabPanel>
-                                <TabPanel title="Praesidium"  tabId="praesidium">
-                                    <Grid>
-                                        <Cell width={9/12}>Praesidium...</Cell>
-                                        <Cell width={3/12}><h3>Sponsers</h3></Cell>
-                                    </Grid>
-                                </TabPanel>
-                            </Tab>
-                        </Cell>
-                    </Grid>
-                    <AddShout groupId={group.id} isOpen={isAddShoutFormOpen} onDone={this.shoutWasAdded}/>
-                </div>
-            )}
+                                ) : ''}
+                            </CardContent>
+                        </Card>
+                    </Cell>
+                    <Cell>
+                        <Tab className="white group" marginTop={0} activeTab={params.tabId} onTabChange={this.changeTab}>
+                            <TabPanel title="Shouts" tabId="shouts">
+                                <Grid>
+                                    <Cell width={9/12}><ShoutFeed url={`shouts/group/${group.id}`}/></Cell>
+                                    <Cell width={3/12}><h3>Sponsers</h3></Cell>
+                                </Grid>
+                            </TabPanel>
+                            <TabPanel title="Evenementen" tabId="events">
+                                <Grid>
+                                    <Cell width={9/12}>Evenementen...</Cell>
+                                    <Cell width={3/12}><h3>Sponsers</h3></Cell>
+                                </Grid>
+                            </TabPanel>
+                            <TabPanel title="Praesidium"  tabId="praesidium">
+                                <Grid>
+                                    <Cell width={9/12}>Praesidium...</Cell>
+                                    <Cell width={3/12}><h3>Sponsers</h3></Cell>
+                                </Grid>
+                            </TabPanel>
+                        </Tab>
+                    </Cell>
+                </Grid>
+                <AddShout groupId={group.id} isOpen={isAddShoutFormOpen} onDone={this.shoutWasAdded}/>
             </div>
         )
     }

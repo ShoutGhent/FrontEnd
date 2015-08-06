@@ -3,11 +3,13 @@ import React, { PropTypes } from 'react'
 let Parallax = React.createClass({
     propTypes: {
         img: PropTypes.string.isRequired,
-        height: PropTypes.number
+        height: PropTypes.number,
+        relative: PropTypes.bool
     },
     getDefaultProps() {
         return {
-            height: 'auto'
+            height: 'auto',
+            relative: false
         }
     },
     render() {
@@ -16,6 +18,10 @@ let Parallax = React.createClass({
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             height: this.props.height
+        }
+
+        if (this.props.relative) {
+            css.position = 'relative'
         }
 
         let { children } = this.props
