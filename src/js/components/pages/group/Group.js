@@ -110,7 +110,9 @@ let GroupPage = React.createClass({
                     <Cell>
                         <Card style={{marginTop: 0, marginBottom: 0}} className="no-shadow">
                             <CardContent>
-                                <Grid>
+                                <Grid style={{
+                                    marginBottom: 0
+                                }}>
                                     <Cell width={6/12}>
                                         <img className="left" src="https://avatarize.me/a/malfait.robin@gmail.com?size=100"/>
                                         <h4 className="left" style={{marginLeft: 20}}>{group.name}</h4>
@@ -122,7 +124,10 @@ let GroupPage = React.createClass({
                                     </Cell>
                                 </Grid>
                                 {inGroup && (
-                                    <button className="btn-floating right" onClick={this.openAddShoutForm}>
+                                    <button className="btn-floating" style={{
+                                        position: 'absolute',
+                                        right: 20
+                                    }} onClick={this.openAddShoutForm}>
                                         <Icon icon="add"/>
                                     </button>
                                 )}

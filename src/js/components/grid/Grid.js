@@ -5,7 +5,7 @@ var Grid = React.createClass({
         let { children } = this.props
 
         return (
-            <div className="row">{children}</div>
+            <div {...this.props} className="row">{children}</div>
         )
     }
 })
