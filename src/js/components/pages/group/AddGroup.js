@@ -10,7 +10,13 @@ import { Modal, ModalContent, ModalFooter } from '../../modal/Modal'
 var AddGroup = React.createClass({
     propTypes: {
         isOpen: React.PropTypes.bool.isRequired,
-        onDone: React.PropTypes.func.isRequired
+        onDone: React.PropTypes.func.isRequired,
+        onClose: React.PropTypes.func
+    },
+    getDefaultProps() {
+        return {
+            onClose: () => {}
+        }
     },
     getInitialState() {
         return {
@@ -49,6 +55,9 @@ var AddGroup = React.createClass({
             nameIsValid: result
         })
     },
+    closeModal() {
+        this.props.onClose()
+    },
     render() {
         let { isOpen } = this.props
         let { type, nameIsValid } = this.state
@@ -56,7 +65,7 @@ var AddGroup = React.createClass({
 
         return (
             <div>
-                <Modal isOpen={isOpen}>
+                <Modal isOpen={isOpen} onClose={this.closeModal}>
                     <ModalContent>
                         <Grid>
                             <Cell>

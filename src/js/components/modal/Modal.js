@@ -2,14 +2,24 @@ import React from 'react'
 import Portal from 'react-portal'
 
 var Modal = React.createClass({
+    propTypes: {
+        isOpen: React.PropTypes.bool,
+        onClose: React.PropTypes.func
+    },
     getDefaultProps() {
-        isOpen: false
+        return {
+            isOpen: false,
+            onClose: () => {}
+        }
+    },
+    onClose() {
+        this.props.onClose()
     },
     render() {
         let { children, isOpen } = this.props
 
         return (
-            <Portal isOpened={isOpen} closeOnEsc={true} closeOnOutsideClick={true}>
+            <Portal isOpened={isOpen} onClose={this.onClose} closeOnEsc={true} closeOnOutsideClick={true}>
                 <div>
                     <div className="modal">{children}</div>
                     <div className="lean-overlay"></div>

@@ -37,6 +37,11 @@ let LoggedInHeader = React.createClass({
             isAddGroupFormOpen: false
         })
     },
+    closeAddGroupModal() {
+        this.setState({
+            isAddGroupFormOpen: false
+        })
+    },
     render() {
         let { user, className } = this.props
         let { isAddGroupFormOpen } = this.state
@@ -97,7 +102,7 @@ let LoggedInHeader = React.createClass({
                             <li><a href onClick={this.logout}>Uitloggen</a></li>
                         </DropdownContent>
                     </Dropdown>
-                    <AddGroup isOpen={isAddGroupFormOpen} onDone={this.groupWasAdded}></AddGroup>
+                    <AddGroup isOpen={isAddGroupFormOpen} onDone={this.groupWasAdded} onClose={this.closeAddGroupModal}></AddGroup>
                 </li>
             </ul>
         )
