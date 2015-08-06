@@ -20,7 +20,7 @@ let GroupPage = React.createClass({
             isAddShoutFormOpen: false
         }
     },
-    componentDidMount() {
+    componentWillMount() {
         let { groupId } = this.props.params
 
         API.get(`groups/${groupId}`, {}, (group, err) => {
