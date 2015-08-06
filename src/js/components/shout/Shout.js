@@ -16,7 +16,8 @@ let Shout = React.createClass({
         shout: PropTypes.object.isRequired,
         onHide: PropTypes.func.isRequired,
         onEdit: PropTypes.func.isRequired,
-        onReport: PropTypes.func.isRequired
+        onReport: PropTypes.func.isRequired,
+        onDelete: PropTypes.func.isRequired
     },
     getInitialState() {
         let { shout } = this.props
@@ -104,6 +105,11 @@ let Shout = React.createClass({
             reportModalOpen: false
         })
     },
+    onDelete(event) {
+        event.preventDefault()
+
+        this.props.onDelete(this.state.shout)
+    },
     render() {
         let { currentUser, width, editModalOpen, reportModalOpen, shout } = this.state
         let { anonymous } = shout
@@ -118,7 +124,8 @@ let Shout = React.createClass({
         let myShout = currentUser.id == user.id
 
         let whenMyShout = [
-            <li key="edit"><a href onClick={this.openEditModal}>Edit</a></li>,
+            <li key="edit"><a href onClick={this.openEditModal}>Bewerken</a></li>,
+            <li key="delete"><a href onClick={this.onDelete}>Verwijderen</a></li>
             //null ? <li><a href onClick={(event) => {event.preventDefault}}>Republish</a></li> : ''
         ]
 

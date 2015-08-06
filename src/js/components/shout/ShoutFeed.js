@@ -68,8 +68,8 @@ let ShoutFeed = React.createClass({
 
         this.setState({ shouts: listShouts })
     },
-    hideShout(shout) {
-        if (this.props.url == "shouts") {
+    hideShout(shout, force) {
+        if (force || this.props.url == "shouts") {
             let shouts = this.state.shouts
 
             shouts.map((item, key) => {
@@ -90,6 +90,12 @@ let ShoutFeed = React.createClass({
             publish_until: shout.publish_until
         }, (data) => {
             Notification.success("Shout is bewerkt!")
+        })
+    },
+    deleteShout(shout) {
+        API.del(`shouts/${shout.id}`, {}, (data) => {
+            this.hideShout(shout, true)
+            Notification.success("Shout is verwijdert!")
         })
     },
     reportShout(data) {
@@ -128,6 +134,7 @@ let ShoutFeed = React.createClass({
                         onHide={this.hideShout}
                         onEdit={this.editShout}
                         onReport={this.reportShout}
+                        onDelete={this.deleteShout}
                     />
                 )}
                 {loading ? <LoadingShouts /> : ''}

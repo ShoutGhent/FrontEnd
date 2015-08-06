@@ -50,8 +50,8 @@ class API {
     static put(url, data, cb) {
         API._send("put", url, data, cb)
     }
-    static delete(url, data, cb) {
-        API._send("delete", url, data, cb)
+    static del(url, data, cb) {
+        API._send("del", url, data, cb)
     }
 
 }

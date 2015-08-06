@@ -44,6 +44,14 @@ let ShoutPage = React.createClass({
             Notification.success("Shout is bewerkt!")
         })
     },
+    deleteShout(shout) {
+        API.del(`shouts/${shout.id}`, {}, (data) => {
+            this.setState({
+                shout: null
+            })
+            Notification.success("Shout is verwijdert!")
+        })
+    },
     reportShout(data) {
         let payload = {
             shout_id: this.state.shout.id,
@@ -69,6 +77,7 @@ let ShoutPage = React.createClass({
                         onHide={this.hideShout}
                         onEdit={this.editShout}
                         onReport={this.reportShout}
+                        onDelete={this.deleteShout}
                     />
                 ) : (
                     <div>
