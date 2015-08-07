@@ -11,7 +11,7 @@ import WebStorage from '../../services/WebStorage'
 let ShoutFeed = React.createClass({
     propTypes: {
         url: PropTypes.string.isRequired,
-        groupId: PropTypes.string.isRequired,
+        groupId: PropTypes.string,
         canShout: PropTypes.bool,
     },
     getInitialState() {
@@ -23,7 +23,8 @@ let ShoutFeed = React.createClass({
     },
     getDefaultProps() {
         return {
-            canShout: false
+            canShout: false,
+            groupId: ''
         }
     },
     componentWillMount() {
