@@ -40,7 +40,6 @@ var AddShout = React.createClass({
         })
     },
     render() {
-        console.log("Rendering")
         return (
             <Card>
                 <ShoutForm
