@@ -33,9 +33,9 @@
         bottom: 0;
         width: 100%;
 
-        height: 11px;
-
         .progress {
+            margin: 0;
+
             .determinate {
                 transition: width 1s linear;
             }

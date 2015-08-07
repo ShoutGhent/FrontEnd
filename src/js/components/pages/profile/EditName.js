@@ -90,7 +90,7 @@ var EditName = React.createClass({
                             </Grid>
                         </CardContent>
                         <CardFooter>
-                            <button style={{float: 'right', marginTop: -8}} disabled={ ! isValid} className="waves-effect waves-green btn">Wijzigen</button>
+                            <button disabled={ ! isValid} className="waves-effect waves-green btn right">Wijzigen</button>
                         </CardFooter>
                     </Card>
                 </form>

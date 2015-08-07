@@ -4,12 +4,21 @@ import API from '../../services/API'
 import InfoPanel from '../partials/InfoPanel'
 import LoadingShouts from '../loading/LoadingShouts'
 import Notification from '../notification/NotificationActions'
+import AddShout from '../pages/shout/AddShout'
 import Shout from './Shout'
 import WebStorage from '../../services/WebStorage'
 
 let ShoutFeed = React.createClass({
     propTypes: {
-        url: PropTypes.string.isRequired
+        url: PropTypes.string.isRequired,
+        canShout: PropTypes.bool,
+        groupId: PropTypes.string
+    },
+    getDefaultProps() {
+        return {
+            canShout: false,
+            groupId: ''
+        }
     },
     getInitialState() {
         return {
@@ -19,17 +28,10 @@ let ShoutFeed = React.createClass({
         }
     },
     componentWillMount() {
-        this.fetch({}, (shouts) => {
-            this.setState({ shouts })
-        })
+        this.fetch({}, shouts => this.setState({ shouts }))
     },
     componentWillUnmount() {
         this.cacheShouts()
-    },
-    refreshList() {
-        this.fetch({}, (shouts) => {
-            this.setState({ shouts })
-        })
     },
     cacheShouts() {
         let key = `shouts.${this.props.url}`
@@ -65,11 +67,7 @@ let ShoutFeed = React.createClass({
         let nextPage = currentPage + 1
         let listShouts = this.state.shouts
 
-        this.fetch({ page: nextPage }, (shouts) => {
-            shouts.forEach((shout) => {
-                listShouts.push(shout)
-            })
-        })
+        this.fetch({ page: nextPage }, shouts => shouts.forEach(shout => listShouts.push(shout)))
 
         this.setState({ shouts: listShouts })
     },
@@ -124,6 +122,7 @@ let ShoutFeed = React.createClass({
     },
     render() {
         let { loading, shouts, paginationData } = this.state
+        let { canShout, groupId } = this.props
 
         let { next_page_url } = paginationData
 
@@ -131,6 +130,7 @@ let ShoutFeed = React.createClass({
 
         return (
             <div>
+                {canShout && <AddShout groupId={groupId} onDone={(x) => {console.log(x)}}/>}
                 {shouts.map((shout) =>
                     <Shout
                         user={shout.user || WebStorage.fromStore('user') }

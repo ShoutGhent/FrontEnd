@@ -156,16 +156,19 @@ let Shout = React.createClass({
                                 {!myShout ? whenNotMyShout.map(item => item) : ''}
                             </DropdownContent>
                         </Dropdown>
-                        <EditShout isOpen={editModalOpen} onSave={this.save} onClose={this.closeEditModal} shout={shout} />
+                        <EditShout
+                            isOpen={editModalOpen}
+                            onSave={this.save}
+                            onClose={this.closeEditModal}
+                            shout={shout}
+                        />
                     </div>
-                    <p>{shout.description}</p>
+                    <p style={{whiteSpace: 'pre-line'}}>{shout.description}</p>
                 </div>
                 <div className="card-action">
-                    <div className="card-action-box">
-                        {(this.state.secondsLeft < 10 && this.state.secondsLeft != 0) ? (
-                            <TransitiveNumber>{this.state.secondsLeft}</TransitiveNumber>
-                        ) : ''}
-                    </div>
+                    {(this.state.secondsLeft < 10 && this.state.secondsLeft != 0) ? (
+                        <TransitiveNumber>{this.state.secondsLeft}</TransitiveNumber>
+                    ) : ''}
                 </div>
                 <div className="shout-progress">
                     <div className="progress">

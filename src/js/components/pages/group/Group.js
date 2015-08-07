@@ -1,6 +1,5 @@
 import React from 'react'
 
-import AddShout from '../../pages/shout/AddShout'
 import API from '../../../services/API'
 import Icon from '../../partials/Icon'
 import Loading from '../../loading/Loading'
@@ -17,7 +16,6 @@ let GroupPage = React.createClass({
         return {
             group: null,
             loading: true,
-            isAddShoutFormOpen: false,
             buttonName: '',
             joiningGroup: false,
             leavingGroup: false,
@@ -32,17 +30,6 @@ let GroupPage = React.createClass({
                     this.setState({ group, buttonName: group.meta_information.in_group ? 'Groep Verlaten' : 'Lid Worden', loading: false })
                 }
             }
-        })
-    },
-    shoutWasAdded(shout) {
-        this.setState({
-            isAddShoutFormOpen: false
-        })
-        this.refs.shoutfeed.refreshList()
-    },
-    openAddShoutForm() {
-        this.setState({
-            isAddShoutFormOpen: true
         })
     },
     changeTab(tabId) {
@@ -86,7 +73,7 @@ let GroupPage = React.createClass({
         )
     },
     renderGroup() {
-        let { group, isAddShoutFormOpen, buttonName, joiningGroup, leavingGroup } = this.state
+        let { group, buttonName, joiningGroup, leavingGroup } = this.state
         let { params } = this.props
         let memberCount = group.meta_information.member_count
         let inGroup = group.meta_information.in_group
@@ -122,14 +109,6 @@ let GroupPage = React.createClass({
                                         </span>
                                     </Cell>
                                 </Grid>
-                                {inGroup && (
-                                    <button className="btn-floating" style={{
-                                        position: 'absolute',
-                                        right: 20
-                                    }} onClick={this.openAddShoutForm}>
-                                        <Icon icon="add"/>
-                                    </button>
-                                )}
                             </CardContent>
                         </Card>
                     </Cell>
@@ -137,7 +116,7 @@ let GroupPage = React.createClass({
                         <Tab className="white group" marginTop={0} activeTab={params.tabId} onTabChange={this.changeTab}>
                             <TabPanel title="Shouts" tabId="shouts">
                                 <Grid>
-                                    <Cell width={9/12}><ShoutFeed ref="shoutfeed" url={`shouts/group/${group.id}`}/></Cell>
+                                    <Cell width={9/12}><ShoutFeed canShout={inGroup} groupId={group.id} url={`shouts/group/${group.id}`}/></Cell>
                                     <Cell width={3/12}><h3>Sponsers</h3></Cell>
                                 </Grid>
                             </TabPanel>
@@ -156,7 +135,6 @@ let GroupPage = React.createClass({
                         </Tab>
                     </Cell>
                 </Grid>
-                <AddShout groupId={group.id} isOpen={isAddShoutFormOpen} onDone={this.shoutWasAdded}/>
             </div>
         )
     }

@@ -172,28 +172,20 @@
   }
 
   .card-action {
-    $card-action-height: 60px;
+    $card-action-height: 49px;
 
     border-top: 1px solid rgba(160,160,160,.2);
-    padding: $card-padding;
     position: relative;
     height: $card-action-height;
+    line-height: $card-action-height;
+    padding: 0 $card-padding;
 
-    .card-action-box {
-      position: absolute;
-      top: 50%;
-      left: $card-padding;
-      right: $card-padding;
-      transform: translate(0, -50%);
-      vertical-align: middle;
-      display: inline-block;
-      height: $card-action-height;
-      line-height: $card-action-height;
+    span.card-item {
+      margin-right: ($card-padding / 2);
+    }
 
-      span, a, i {
-        display: inline-block;
-        vertical-align: middle;
-      }
+    .btn {
+      margin: 6px 0;
     }
 
     a {

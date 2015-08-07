@@ -5,12 +5,13 @@ import NotificationActions from '../../notification/NotificationActions'
 import RouterContainer from '../../../services/RouterContainer'
 import ShoutForm from '../../shout/ShoutForm'
 import { Modal } from '../../modal/Modal'
+import { Card } from '../../card/Card'
 
 function getEmptyCleanShout(groupId) {
     return {
         description: '',
         anonymous: false,
-        forever: false,
+        forever: true,
         publish_until: null,
         group_id: groupId
     }
@@ -18,7 +19,6 @@ function getEmptyCleanShout(groupId) {
 
 var AddShout = React.createClass({
     propTypes: {
-        isOpen: PropTypes.bool.isRequired,
         onDone: PropTypes.func.isRequired,
         groupId: PropTypes.string.isRequired
     },
@@ -40,15 +40,18 @@ var AddShout = React.createClass({
         })
     },
     render() {
-        let { isOpen } = this.props
         let { shout } = this.state
 
         return (
-            <div>
-                <Modal isOpen={isOpen}>
-                    <ShoutForm shout={shout} onSave={this.save} onDone={this.done} buttonName="Shout!"/>
-                </Modal>
-            </div>
+            <Card>
+                <ShoutForm
+                    type="card"
+                    shout={shout}
+                    onSave={this.save}
+                    onDone={this.done}
+                    buttonName="Shout!"
+                />
+            </Card>
         )
     }
 })

@@ -50,11 +50,6 @@ var LoadingShouts = React.createClass({
                         </ul>
                     </p>
                 </div>
-                <div className="card-action">
-                    <div className="card-action-box">
-                        <a href="#" className="right"><Icon icon="grade"/></a>
-                    </div>
-                </div>
                 <div className="shout-progress">
                     <div className="progress">
                         <div className="determinate" style={{width}}></div>
