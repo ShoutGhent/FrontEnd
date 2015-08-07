@@ -156,12 +156,12 @@ let Shout = React.createClass({
                                 {!myShout ? whenNotMyShout.map(item => item) : ''}
                             </DropdownContent>
                         </Dropdown>
-                        <EditShout
+                        {editModalOpen && <EditShout
                             isOpen={editModalOpen}
                             onSave={this.save}
                             onClose={this.closeEditModal}
                             shout={shout}
-                        />
+                        />}
                     </div>
                     <p style={{whiteSpace: 'pre-line'}}>{shout.description}</p>
                 </div>

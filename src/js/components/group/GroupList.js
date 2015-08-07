@@ -2,11 +2,11 @@ import React from 'react'
 
 import API from '../../services/API'
 import Icon from '../partials/Icon'
+import Loading from '../loading/Loading'
+import WebStorage from '../../services/WebStorage'
 import { Card, CardContent, CardTitle } from '../card/Card'
 import { Collection, CollectionItem } from '../collection/Collection'
 import { Link } from 'react-router'
-import WebStorage from '../../services/WebStorage'
-import Loading from '../loading/Loading'
 
 var GroupList = React.createClass({
     getInitialState() {

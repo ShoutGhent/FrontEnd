@@ -17,7 +17,7 @@ var ShoutForm = React.createClass({
         type: PropTypes.string
     },
     getInitialState() {
-        let { shout } = this.props
+        var { shout } = this.props
 
         return {
             shout: JSON.parse(JSON.stringify(shout)),
@@ -31,23 +31,23 @@ var ShoutForm = React.createClass({
         }
     },
     setDescription(event) {
-        let shout = this.state.shout
+        var shout = this.state.shout
 
         shout.description = event.target.value
 
         this.setState({ shout })
     },
     setAnonymous(event) {
-        let shout = this.state.shout
+        var shout = this.state.shout
 
-        shout.anonymous = ! shout.anonymous
+        shout.anonymous = event.target.checked
 
         this.setState({ shout })
     },
-    setForever() {
-        let shout = this.state.shout
+    setForever(event) {
+        var shout = this.state.shout
 
-        shout.forever = ! shout.forever
+        shout.forever = event.target.checked
 
         if (shout.forever) {
             shout.publish_until = null
@@ -56,9 +56,9 @@ var ShoutForm = React.createClass({
         this.setState({ shout })
     },
     setPublishUntil(data) {
-        let { date, time } = data
+        var { date, time } = data
 
-        let shout = this.state.shout
+        var shout = this.state.shout
 
         shout.publish_until = moment(`${date} ${time}`).format("YYYY-MM-DD HH:mm:ss")
 
@@ -69,26 +69,22 @@ var ShoutForm = React.createClass({
 
         this.props.onSave(this.state.shout)
     },
-    cancel(event) {
-        event.preventDefault()
-        this.props.onDone()
-    },
     validateDescription(result) {
         this.setState({ descriptionIsValid: result })
     },
     render() {
-        let { shout, descriptionIsValid } = this.state
-        let { buttonName, type } = this.props
+        var { shout, descriptionIsValid } = this.state
+        var { buttonName, type } = this.props
 
-        let { anonymous, forever, description } = shout
+        var { anonymous, forever, description } = shout
 
-        let date = moment(shout.publish_until || moment()).format('YYYY-MM-DD')
-        let time = moment(shout.publish_until || moment()).format('HH:mm')
+        var date = moment(shout.publish_until || moment()).format('YYYY-MM-DD')
+        var time = moment(shout.publish_until || moment()).format('HH:mm')
 
-        let isValid = descriptionIsValid
+        var isValid = descriptionIsValid
 
-        let Content = type == 'modal' ? ModalContent : CardContent
-        let Footer = type == 'modal' ? ModalFooter : CardFooter
+        var Content = type == 'modal' ? ModalContent : CardContent
+        var Footer = type == 'modal' ? ModalFooter : CardFooter
 
         return (
             <div>
@@ -106,6 +102,7 @@ var ShoutForm = React.createClass({
                                 />
                             </Cell>
                         </Grid>
+
                         { ! forever ? (
                             <DateTimePicker onChange={this.setPublishUntil} date={date} time={time}/>
                         ) : ''}
@@ -113,21 +110,20 @@ var ShoutForm = React.createClass({
                         <Grid>
                             <Cell width={3/12}>
                                 <span>
-                                    <input type="checkbox" id="anonymous" checked={anonymous} onChange={this.setAnonymous} />
-                                    <label htmlFor="anonymous">Anoniem</label>
+                                    <input type="checkbox" id={`anonymous.shout.${shout.id || 'add'}`} checked={anonymous} onChange={this.setAnonymous} />
+                                    <label htmlFor={`anonymous.shout.${shout.id || 'add'}`}>Anoniem</label>
                                 </span>
                             </Cell>
                             <Cell width={9/12}>
                                 <span>
-                                    <input type="checkbox" id="forever" checked={forever} onChange={this.setForever} />
-                                    <label htmlFor="forever">Voor altijd tonen</label>
+                                    <input type="checkbox" id={`forever.shout.${shout.id || 'add'}`} checked={forever} onChange={this.setForever} />
+                                    <label htmlFor={`forever.shout.${shout.id || 'add'}`}>Voor altijd tonen</label>
                                 </span>
                             </Cell>
                         </Grid>
                     </Content>
                     <Footer>
-                        <button disabled={ ! isValid} style={{float: 'right'}} className="waves-effect waves-green btn">{buttonName}</button>
-                        <button style={{float: 'right'}} className="waves-effect waves-red btn-flat" onClick={this.cancel}>Annuleren</button>
+                        <button disabled={ ! isValid} className="waves-effect waves-green btn right">{buttonName}</button>
                     </Footer>
                 </form>
             </div>

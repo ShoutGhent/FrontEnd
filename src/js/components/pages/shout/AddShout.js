@@ -7,16 +7,6 @@ import ShoutForm from '../../shout/ShoutForm'
 import { Modal } from '../../modal/Modal'
 import { Card } from '../../card/Card'
 
-function getEmptyCleanShout(groupId) {
-    return {
-        description: '',
-        anonymous: false,
-        forever: true,
-        publish_until: null,
-        group_id: groupId
-    }
-}
-
 var AddShout = React.createClass({
     propTypes: {
         onDone: PropTypes.func.isRequired,
@@ -24,30 +14,42 @@ var AddShout = React.createClass({
     },
     getInitialState() {
         return {
-            shout: getEmptyCleanShout(this.props.groupId)
+            cleanShout: {
+                description: '',
+                anonymous: false,
+                forever: true,
+                publish_until: null,
+                group_id: this.props.groupId
+            }
         }
     },
-    save(shout) {
+    addShout(shout) {
         API.post('shouts/add', shout, (res, err) => {
-            this.done()
+            this.done(res)
             NotificationActions.success("Je shout werd geplaatst!")
         })
+        var cleanShout = {
+            description: '',
+            anonymous: false,
+            forever: true,
+            publish_until: null,
+            group_id: this.props.groupId
+        }
+
+        this.setState({ cleanShout })
     },
-    done() {
-        this.props.onDone(this.state.shout)
-        this.setState({
-            shout: getEmptyCleanShout(this.props.groupId)
-        })
+    done(shout) {
+        this.props.onDone(shout)
     },
     render() {
-        let { shout } = this.state
+        var cleanShout = this.state.cleanShout
 
         return (
             <Card>
                 <ShoutForm
                     type="card"
-                    shout={shout}
-                    onSave={this.save}
+                    shout={cleanShout}
+                    onSave={this.addShout}
                     onDone={this.done}
                     buttonName="Shout!"
                 />

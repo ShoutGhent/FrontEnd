@@ -116,7 +116,9 @@ let GroupPage = React.createClass({
                         <Tab className="white group" marginTop={0} activeTab={params.tabId} onTabChange={this.changeTab}>
                             <TabPanel title="Shouts" tabId="shouts">
                                 <Grid>
-                                    <Cell width={9/12}><ShoutFeed canShout={inGroup} groupId={group.id} url={`shouts/group/${group.id}`}/></Cell>
+                                    <Cell width={9/12}>
+                                        <ShoutFeed canShout={inGroup} groupId={group.id} url={`shouts/group/${group.id}`}/>
+                                    </Cell>
                                     <Cell width={3/12}><h3>Sponsers</h3></Cell>
                                 </Grid>
                             </TabPanel>

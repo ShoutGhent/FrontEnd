@@ -1,24 +1,18 @@
 import React, { PropTypes } from 'react'
 
+import AddShout from '../pages/shout/AddShout'
 import API from '../../services/API'
 import InfoPanel from '../partials/InfoPanel'
 import LoadingShouts from '../loading/LoadingShouts'
 import Notification from '../notification/NotificationActions'
-import AddShout from '../pages/shout/AddShout'
 import Shout from './Shout'
 import WebStorage from '../../services/WebStorage'
 
 let ShoutFeed = React.createClass({
     propTypes: {
         url: PropTypes.string.isRequired,
+        groupId: PropTypes.string.isRequired,
         canShout: PropTypes.bool,
-        groupId: PropTypes.string
-    },
-    getDefaultProps() {
-        return {
-            canShout: false,
-            groupId: ''
-        }
     },
     getInitialState() {
         return {
@@ -27,8 +21,17 @@ let ShoutFeed = React.createClass({
             loading: true
         }
     },
+    getDefaultProps() {
+        return {
+            canShout: false
+        }
+    },
     componentWillMount() {
-        this.fetch({}, shouts => this.setState({ shouts }))
+        this.fetch({}, (shouts) => {
+            if (this.isMounted()) {
+                this.setState({ shouts })
+            }
+        })
     },
     componentWillUnmount() {
         this.cacheShouts()
@@ -106,6 +109,11 @@ let ShoutFeed = React.createClass({
             Notification.success("Shout werd gerapporteerd!")
         })
     },
+    prependShout(shout) {
+        let shouts = this.state.shouts
+        shouts.unshift(shout)
+        this.setState({ shouts })
+    },
     setPaginationData(response) {
         let { total, per_page, current_page, last_page, next_page_url, prev_page_url } = response
 
@@ -122,7 +130,6 @@ let ShoutFeed = React.createClass({
     },
     render() {
         let { loading, shouts, paginationData } = this.state
-        let { canShout, groupId } = this.props
 
         let { next_page_url } = paginationData
 
@@ -130,7 +137,7 @@ let ShoutFeed = React.createClass({
 
         return (
             <div>
-                {canShout && <AddShout groupId={groupId} onDone={(x) => {console.log(x)}}/>}
+                {this.props.canShout && <AddShout groupId={this.props.groupId} onDone={this.prependShout}/>}
                 {shouts.map((shout) =>
                     <Shout
                         user={shout.user || WebStorage.fromStore('user') }
