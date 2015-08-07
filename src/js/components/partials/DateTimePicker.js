@@ -34,10 +34,20 @@ var DateTimePicker = React.createClass({
         return (
             <Grid>
                 <Cell width={1/2}>
-                    <MaterialInput label="Datum" type="date" value={date} onChange={this.changeDate}/>
+                    <MaterialInput
+                        label="Datum"
+                        type="date"
+                        value={date}
+                        onChange={this.changeDate}
+                    />
                 </Cell>
                 <Cell width={1/2}>
-                    <MaterialInput label="Tijd" type="time" value={time} onChange={this.changeTime}/>
+                    <MaterialInput
+                        label="Tijd"
+                        type="time"
+                        value={time}
+                        onChange={this.changeTime}
+                    />
                 </Cell>
             </Grid>
         )
