@@ -2,9 +2,7 @@ import React, { PropTypes } from 'react'
 
 import API from '../../../services/API'
 import NotificationActions from '../../notification/NotificationActions'
-import RouterContainer from '../../../services/RouterContainer'
 import ShoutForm from '../../shout/ShoutForm'
-import { Modal } from '../../modal/Modal'
 import { Card } from '../../card/Card'
 
 var AddShout = React.createClass({
@@ -19,7 +17,7 @@ var AddShout = React.createClass({
                 anonymous: false,
                 forever: true,
                 publish_until: null,
-                group_id: this.props.groupId
+                group_id: this.props.groupId,
             }
         }
     },
@@ -28,27 +26,26 @@ var AddShout = React.createClass({
             this.done(res)
             NotificationActions.success("Je shout werd geplaatst!")
         })
-        var cleanShout = {
-            description: '',
-            anonymous: false,
-            forever: true,
-            publish_until: null,
-            group_id: this.props.groupId
-        }
-
-        this.setState({ cleanShout })
     },
     done(shout) {
         this.props.onDone(shout)
+        this.setState({
+            cleanShout: {
+                description: '',
+                anonymous: false,
+                forever: true,
+                publish_until: null,
+                group_id: this.props.groupId,
+            }
+        })
     },
     render() {
-        var cleanShout = this.state.cleanShout
-
+        console.log("Rendering")
         return (
             <Card>
                 <ShoutForm
                     type="card"
-                    shout={cleanShout}
+                    shout={this.state.cleanShout}
                     onSave={this.addShout}
                     onDone={this.done}
                     buttonName="Shout!"

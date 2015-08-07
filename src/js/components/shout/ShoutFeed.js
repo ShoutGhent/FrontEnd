@@ -131,6 +131,7 @@ let ShoutFeed = React.createClass({
     },
     render() {
         let { loading, shouts, paginationData } = this.state
+        let { canShout, groupId } = this.props
 
         let { next_page_url } = paginationData
 
@@ -138,7 +139,7 @@ let ShoutFeed = React.createClass({
 
         return (
             <div>
-                {this.props.canShout && <AddShout groupId={this.props.groupId} onDone={this.prependShout}/>}
+                {canShout && <AddShout groupId={groupId} onDone={this.prependShout}/>}
                 {shouts.map((shout) =>
                     <Shout
                         user={shout.user || WebStorage.fromStore('user') }

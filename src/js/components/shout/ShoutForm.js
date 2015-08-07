@@ -68,6 +68,7 @@ var ShoutForm = React.createClass({
         event.preventDefault()
 
         this.props.onSave(this.state.shout)
+        this.setState(this.getInitialState())
     },
     validateDescription(result) {
         this.setState({ descriptionIsValid: result })
