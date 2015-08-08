@@ -43,10 +43,10 @@ var _IndexLoggedIn = React.createClass({
                     <Cell width={9/12}>
                         <Tab>
                             <TabPanel title="Omgeving">
-                                <ShoutFeed url="shouts" />
+                                <ShoutFeed url="shouts/from/groups" />
                             </TabPanel>
                             <TabPanel title="Vrienden">
-                                <ShoutFeed url="shouts" />
+                                <ShoutFeed url="shouts/from/groups" />
                             </TabPanel>
                         </Tab>
                     </Cell>
