@@ -32,7 +32,7 @@ var AddGroup = React.createClass({
         }
 
         API.post('groups/add', payload, (res, err) => {
-            RouterContainer.get().transitionTo('group', { groupId: res.id })
+            RouterContainer.get().transitionTo('group', { groupId: res.id, tabId: 'shouts' })
         })
         this.done(payload)
     },
