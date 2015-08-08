@@ -4,9 +4,9 @@ import EditName from './EditName'
 import EditPassword from './EditPassword'
 import EditProfilePicture from './EditProfilePicture'
 import LoginStore from '../../../auth/LoginStore'
+import Redirecter from '../../../services/Redirecter'
 import { Grid, Cell } from '../../grid/Grid'
 import { Tab, TabPanel } from '../../tab/Tab'
-import RouterContainer from '../../../services/RouterContainer'
 
 let Settings = React.createClass({
     getInitialState() {
@@ -22,7 +22,7 @@ let Settings = React.createClass({
         this.setState(state)
     },
     changeTab(tabId) {
-        RouterContainer.get().transitionTo("settings", { tabId })
+        Redirecter.to('settings', { tabId })
     },
     render() {
         let { user } = this.state

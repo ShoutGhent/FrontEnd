@@ -4,7 +4,7 @@ import API from '../../../services/API'
 import Icon from '../../partials/Icon'
 import Loading from '../../loading/Loading'
 import Parallax from '../../partials/Parallax'
-import RouterContainer from '../../../services/RouterContainer'
+import Redirecter from '../../../services/Redirecter'
 import ShoutFeed from '../../shout/ShoutFeed'
 import ShoutForm from '../../shout/ShoutForm'
 import { Card, CardContent, CardTitle } from '../../card/Card'
@@ -33,7 +33,10 @@ let GroupPage = React.createClass({
         })
     },
     changeTab(tabId) {
-        RouterContainer.get().transitionTo("group", { tabId, groupId: this.props.params.groupId })
+        Redirecter.to('group', {
+            tabId,
+            groupId: this.props.params.groupId
+        })
     },
     leaveGroup() {
         let { group } = this.state

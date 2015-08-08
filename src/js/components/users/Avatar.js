@@ -26,7 +26,7 @@ var Avatar = React.createClass({
             blur: 0
         }
     },
-    componentWillMount() {
+    componentDidMount() {
         window.addEventListener('focus', () => {
             if (this.isMounted()) {
                 this.setState({

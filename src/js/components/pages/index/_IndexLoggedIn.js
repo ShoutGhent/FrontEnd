@@ -13,11 +13,11 @@ var _IndexLoggedIn = React.createClass({
         return MyGroupsStore.getState()
     },
     componentDidMount() {
-        if(this.isMounted()) {
+        MyGroupsStore.listen(this._onChange)
+
+        if (this.isMounted()) {
             MyGroupsActions.fetchMyGroups()
         }
-        
-        MyGroupsStore.listen(this._onChange)
     },
     componentWillUnmount() {
         MyGroupsStore.unlisten(this._onChange)

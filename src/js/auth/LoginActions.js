@@ -1,13 +1,11 @@
 import alt from "../alt"
-import RouterContainer from "../services/RouterContainer"
+import Redirecter from "../services/Redirecter"
 import WebStorage from "../services/WebStorage"
 
 class LoginActions {
     loginUser(jwt, user, redirect) {
         if (redirect) {
-            RouterContainer.get().transitionTo(
-                RouterContainer.get().getCurrentQuery().nextPath || '/'
-            )
+            Redirecter.toNext()
         }
 
         WebStorage.toStore('jwt', jwt)
@@ -20,7 +18,7 @@ class LoginActions {
         WebStorage.remove('jwt')
         WebStorage.remove('user')
 
-        RouterContainer.get().transitionTo('/auth/login')
+        Redirecter.to('/auth/login')
 
         this.dispatch()
     }

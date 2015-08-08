@@ -2,12 +2,11 @@ import React, { PropTypes } from 'react'
 
 import Icon from '../partials/Icon'
 import Loading from '../loading/Loading'
+import MyGroupsStore from './MyGroupsStore'
 import WebStorage from '../../services/WebStorage'
 import { Card, CardContent, CardTitle } from '../card/Card'
 import { Collection, CollectionItem } from '../collection/Collection'
 import { Link } from 'react-router'
-
-import MyGroupsStore from './MyGroupsStore'
 
 var GroupList = React.createClass({
     getInitialState() {
