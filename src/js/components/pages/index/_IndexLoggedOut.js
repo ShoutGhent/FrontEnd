@@ -141,7 +141,7 @@ var _IndexLoggedOut = React.createClass({
                                                     <Card>
                                                         <CardContent>
                                                             <CardTitle>Mike Brants</CardTitle>
-                                                            <Avatar email="mike.brants@gmail.com" size={100} round/>
+                                                            <Avatar email="mike.brants@ugent.be" size={100} round/>
                                                             <p>Home Fabiola</p>
                                                         </CardContent>
                                                         <CardFooter>
