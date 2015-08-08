@@ -60,7 +60,7 @@ let Group = React.createClass({
             <div>
                 <Grid>
                     <Cell center>
-                        <Parallax img={group.logo_path} height={300} relative>
+                        <Parallax img='/dist/img/banner.jpg' height={300} relative>
                             <button style={{
                                 position: 'absolute',
                                 right: 10,
@@ -76,7 +76,7 @@ let Group = React.createClass({
                             <CardContent>
                                 <Grid style={{marginBottom: 0}}>
                                     <Cell width={6/12}>
-                                        <img className="left" src="https://avatarize.me/a/malfait.robin@gmail.com?size=100"/>
+                                        <img className="left" src={group.logo_path}/>
                                         <h4 className="left" style={{marginLeft: 20}}>{group.name}</h4>
                                     </Cell>
                                     <Cell width={6/12}>
