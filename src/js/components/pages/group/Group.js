@@ -60,7 +60,7 @@ let Group = React.createClass({
             <div>
                 <Grid>
                     <Cell center>
-                        <Parallax img='/dist/img/banner.jpg' height={300} relative>
+                        <Parallax img={group.logo_path} height={300} relative>
                             <button style={{
                                 position: 'absolute',
                                 right: 10,
@@ -95,19 +95,6 @@ let Group = React.createClass({
                                     <Cell width={9/12}>
                                         <ShoutFeed canShout={inGroup} groupId={group.id} url={`shouts/group/${group.id}`}/>
                                     </Cell>
-                                    <Cell width={3/12}><h3>Sponsers</h3></Cell>
-                                </Grid>
-                            </TabPanel>
-                            <TabPanel title="Evenementen" tabId="events">
-                                <Grid>
-                                    <Cell width={9/12}>Evenementen...</Cell>
-                                    <Cell width={3/12}><h3>Sponsers</h3></Cell>
-                                </Grid>
-                            </TabPanel>
-                            <TabPanel title="Praesidium"  tabId="praesidium">
-                                <Grid>
-                                    <Cell width={9/12}>Praesidium...</Cell>
-                                    <Cell width={3/12}><h3>Sponsers</h3></Cell>
                                 </Grid>
                             </TabPanel>
                         </Tab>
