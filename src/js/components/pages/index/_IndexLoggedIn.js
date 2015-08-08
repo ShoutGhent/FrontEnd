@@ -1,12 +1,12 @@
 import React from 'react'
 
-import API from '../../../services/API'
 import GroupList from '../../group/GroupList'
 import JoinInitialGroupModal from '../../partials/JoinInitialGroupModal'
 import MyGroupsActions from '../../group/MyGroupsActions'
 import MyGroupsStore from '../../group/MyGroupsStore'
 import ShoutFeed from '../../shout/ShoutFeed'
 import { Grid, Cell } from '../../grid/Grid'
+import { Tab, TabPanel } from '../../tab/Tab'
 
 var _IndexLoggedIn = React.createClass({
     getInitialState() {
@@ -41,7 +41,14 @@ var _IndexLoggedIn = React.createClass({
                         <GroupList/>
                     </Cell>
                     <Cell width={9/12}>
-                        <ShoutFeed url="shouts" />
+                        <Tab>
+                            <TabPanel title="Omgeving">
+                                <ShoutFeed url="shouts" />
+                            </TabPanel>
+                            <TabPanel title="Vrienden">
+                                <ShoutFeed url="shouts" />
+                            </TabPanel>
+                        </Tab>
                     </Cell>
                 </Grid>
             </div>

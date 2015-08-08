@@ -1,6 +1,5 @@
 import React from 'react'
 
-import API from '../../../services/API'
 import GroupActions from './GroupActions'
 import GroupStore from './GroupStore'
 import Icon from '../../partials/Icon'
@@ -35,30 +34,10 @@ let Group = React.createClass({
         })
     },
     leaveGroup() {
-        let { group } = this.state
-
-        this.setState({
-            leavingGroup: true
-        })
-
-        API.post('groups/leave', { group_id: group.id }, (response, err) => {
-            if ( ! err) {
-                this.setState({ group: response, buttonName: 'Lid Worden', leavingGroup: false })
-            }
-        })
+        GroupActions.leaveGroup(this.state.group.id)
     },
     joinGroup() {
-        let { group } = this.state
-
-        this.setState({
-            joiningGroup: true
-        })
-
-        API.post('groups/join', { group_id: group.id }, (response, err) => {
-            if ( ! err) {
-                this.setState({ group: response, buttonName: 'Groep Verlaten', joiningGroup: false })
-            }
-        })
+        GroupActions.joinGroup(this.state.group.id)
     },
     render() {
         let { loading } = this.state
@@ -72,12 +51,10 @@ let Group = React.createClass({
         )
     },
     renderGroup() {
-        let { group, joiningGroup, leavingGroup } = this.state
+        let { group, leavingOrJoiningGroupLoading } = this.state
         let { params } = this.props
         let memberCount = group.meta_information.member_count
         let inGroup = group.meta_information.in_group
-
-        let loading = joiningGroup || leavingGroup
 
         return (
             <div>
@@ -89,7 +66,7 @@ let Group = React.createClass({
                                 right: 10,
                                 bottom: 10
                             }} className="btn" onClick={() => {inGroup ? this.leaveGroup() : this.joinGroup()}}>
-                                {loading && <Icon className="right" icon="loop" spinning/>}
+                                {leavingOrJoiningGroupLoading && <Icon className="right" icon="loop" spinning/>}
                                 {group.meta_information.in_group ? 'Groep Verlaten' : 'Lid Worden'}
                             </button>
                         </Parallax>
