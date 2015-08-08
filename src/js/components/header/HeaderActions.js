@@ -8,7 +8,6 @@ class HeaderActions {
         this.dispatch()
     }
     toggleNavigation() {
-        console.log("test")
         this.dispatch()
     }
 }

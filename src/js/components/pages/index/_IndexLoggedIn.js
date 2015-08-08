@@ -3,35 +3,42 @@ import React from 'react'
 import API from '../../../services/API'
 import GroupList from '../../group/GroupList'
 import JoinInitialGroupModal from '../../partials/JoinInitialGroupModal'
+import MyGroupsActions from '../../group/MyGroupsActions'
+import MyGroupsStore from '../../group/MyGroupsStore'
 import ShoutFeed from '../../shout/ShoutFeed'
 import { Grid, Cell } from '../../grid/Grid'
 
 var _IndexLoggedIn = React.createClass({
     getInitialState() {
-        return {
-            groups: [],
-            doneFetching: false
-        }
+        return MyGroupsStore.getState()
     },
     componentDidMount() {
-        API.get('groups/mine', {}, (response, err) => {
-            this.setState({
-                groups: response.data,
-                doneFetching: true
-            })
-        })
+        if(this.isMounted()) {
+            MyGroupsActions.fetchMyGroups()
+        }
+        
+        MyGroupsStore.listen(this._onChange)
+    },
+    componentWillUnmount() {
+        MyGroupsStore.unlisten(this._onChange)
+    },
+    _onChange(state) {
+        this.setState(state)
+    },
+    refetchGroups() {
+        MyGroupsActions.fetchMyGroups()
     },
     render() {
-        let { doneFetching, groups } = this.state
+        let { loading, myGroups } = this.state
 
         return (
             <div className="container">
-                {doneFetching && groups.length <= 0 ? (
-                    <JoinInitialGroupModal></JoinInitialGroupModal>
+                {!loading && myGroups.length <= 0 ? (
+                    <JoinInitialGroupModal onDone={this.refetchGroups}></JoinInitialGroupModal>
                 ) : ''}
                 <Grid>
                     <Cell width={3/12}>
-                        <GroupList />
+                        <GroupList/>
                     </Cell>
                     <Cell width={9/12}>
                         <ShoutFeed url="shouts" />

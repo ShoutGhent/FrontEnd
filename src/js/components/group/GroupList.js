@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
-import API from '../../services/API'
 import Icon from '../partials/Icon'
 import Loading from '../loading/Loading'
 import WebStorage from '../../services/WebStorage'
@@ -8,37 +7,20 @@ import { Card, CardContent, CardTitle } from '../card/Card'
 import { Collection, CollectionItem } from '../collection/Collection'
 import { Link } from 'react-router'
 
+import MyGroupsStore from './MyGroupsStore'
+
 var GroupList = React.createClass({
     getInitialState() {
-        let groups = WebStorage.fromStore(`groups.myGroups`, [])
-
-        return {
-            groups: groups,
-            loading: groups.length <= 0
-        }
+        return MyGroupsStore.getState()
     },
     componentDidMount() {
-        API.get('groups/mine', {}, (response, err) => {
-            if ( ! err) {
-                this.setState({
-                    groups: response.data,
-                    loading: false
-                })
-            }
-        })
+        MyGroupsStore.listen(this._onChange)
     },
     componentWillUnmount() {
-        this.cacheGroups()
+        MyGroupsStore.unlisten(this._onChange)
     },
-    cacheGroups() {
-        let key = `groups.myGroups`
-        WebStorage.toStore(key, this.state.groups)
-
-        let cachedUrls = WebStorage.fromStore('cachedShoutUrls', [])
-        if (cachedUrls.indexOf(key) == -1) {
-            cachedUrls.push(key)
-            WebStorage.toStore('cachedShoutUrls', cachedUrls)
-        }
+    _onChange(state) {
+        this.setState(state)
     },
     renderGroups(group) {
         return (
@@ -51,7 +33,7 @@ var GroupList = React.createClass({
         )
     },
     render() {
-        let { groups, loading } = this.state
+        let { myGroups, loading } = this.state
 
         return (
             <div>
@@ -63,7 +45,7 @@ var GroupList = React.createClass({
                             <Loading/>
                         ) : (
                             <Collection>
-                                {groups.map(this.renderGroups)}
+                                {myGroups .map(this.renderGroups)}
                             </Collection>
                         )}
                     </CardContent>

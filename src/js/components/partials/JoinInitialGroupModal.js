@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import API from '../../services/API'
 import Icon from '../partials/Icon'
@@ -8,6 +8,9 @@ import { Grid, Cell } from '../grid/Grid'
 import { Modal, ModalContent, ModalFooter } from '../modal/Modal'
 
 var JoinInitialGroupModal = React.createClass({
+    propTypes: {
+        onDone: PropTypes.func.isRequired
+    },
     getInitialState() {
         return {
             open: true,
@@ -50,6 +53,7 @@ var JoinInitialGroupModal = React.createClass({
                     this.setState({
                         open: false
                     })
+                    this.props.onDone()
                 }
             })
         })

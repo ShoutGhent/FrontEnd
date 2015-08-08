@@ -29,7 +29,7 @@ var _IndexLoggedOut = React.createClass({
         return (
             <div>
                 <div>
-                    <Parallax img='/dist/img/banner.jpg'>
+                    <Parallax img='/dist/img/banner.jpg' height={370}>
                         <br/>
                         <br/>
                         <br/>
@@ -46,10 +46,6 @@ var _IndexLoggedOut = React.createClass({
                                 </div>
                             </div>
                         </div>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
                     </Parallax>
 
                     <div className="container">
