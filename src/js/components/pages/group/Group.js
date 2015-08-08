@@ -1,39 +1,35 @@
 import React from 'react'
 
 import API from '../../../services/API'
+import GroupActions from './GroupActions'
+import GroupStore from './GroupStore'
 import Icon from '../../partials/Icon'
 import Loading from '../../loading/Loading'
 import Parallax from '../../partials/Parallax'
-import Redirecter from '../../../services/Redirecter'
+import Redirect from '../../../services/Redirect'
 import ShoutFeed from '../../shout/ShoutFeed'
 import ShoutForm from '../../shout/ShoutForm'
 import { Card, CardContent, CardTitle } from '../../card/Card'
 import { Grid, Cell } from '../../grid/Grid'
 import { Tab, TabPanel } from '../../tab/Tab'
 
-let GroupPage = React.createClass({
+let Group = React.createClass({
     getInitialState() {
-        return {
-            group: null,
-            loading: true,
-            buttonName: '',
-            joiningGroup: false,
-            leavingGroup: false,
-        }
+        return GroupStore.getState()
     },
-    componentWillMount() {
-        let { groupId } = this.props.params
+    componentDidMount() {
+        GroupStore.listen(this._onChange)
 
-        API.get(`groups/${groupId}`, {}, (group, err) => {
-            if ( ! err) {
-                if (this.isMounted()) {
-                    this.setState({ group, buttonName: group.meta_information.in_group ? 'Groep Verlaten' : 'Lid Worden', loading: false })
-                }
-            }
-        })
+        GroupActions.fetchGroupInformation(this.props.params.groupId)
+    },
+    componentWillUnmount() {
+        GroupStore.unlisten(this._onChange)
+    },
+    _onChange(state) {
+        this.setState(state)
     },
     changeTab(tabId) {
-        Redirecter.to('group', {
+        Redirect.to('group', {
             tabId,
             groupId: this.props.params.groupId
         })
@@ -76,7 +72,7 @@ let GroupPage = React.createClass({
         )
     },
     renderGroup() {
-        let { group, buttonName, joiningGroup, leavingGroup } = this.state
+        let { group, joiningGroup, leavingGroup } = this.state
         let { params } = this.props
         let memberCount = group.meta_information.member_count
         let inGroup = group.meta_information.in_group
@@ -94,7 +90,7 @@ let GroupPage = React.createClass({
                                 bottom: 10
                             }} className="btn" onClick={() => {inGroup ? this.leaveGroup() : this.joinGroup()}}>
                                 {loading && <Icon className="right" icon="loop" spinning/>}
-                                {buttonName}
+                                {group.meta_information.in_group ? 'Groep Verlaten' : 'Lid Worden'}
                             </button>
                         </Parallax>
                     </Cell>
@@ -145,4 +141,4 @@ let GroupPage = React.createClass({
     }
 })
 
-export default GroupPage
+export default Group

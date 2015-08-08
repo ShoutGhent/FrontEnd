@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react'
 
 import API from '../../../services/API'
+import GroupActions from '../../pages/group/GroupActions'
 import MaterialTextarea from '../../partials/MaterialTextarea'
-import Redirecter from "../../../services/Redirecter"
+import Redirect from "../../../services/Redirect"
 import ShoutForm from '../../shout/ShoutForm'
 import { Grid, Cell } from '../../grid/Grid'
 import { Modal, ModalContent, ModalFooter } from '../../modal/Modal'
@@ -32,7 +33,9 @@ var AddGroup = React.createClass({
         }
 
         API.post('groups/add', payload, (res, err) => {
-            Redirecter.to('group', {
+            GroupActions.fetchGroupInformation(res.id)
+
+            Redirect.to('group', {
                 groupId: res.id,
                 tabId: 'shouts'
             })

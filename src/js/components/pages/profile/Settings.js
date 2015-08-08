@@ -4,7 +4,7 @@ import EditName from './EditName'
 import EditPassword from './EditPassword'
 import EditProfilePicture from './EditProfilePicture'
 import LoginStore from '../../../auth/LoginStore'
-import Redirecter from '../../../services/Redirecter'
+import Redirect from '../../../services/Redirect'
 import { Grid, Cell } from '../../grid/Grid'
 import { Tab, TabPanel } from '../../tab/Tab'
 
@@ -22,7 +22,7 @@ let Settings = React.createClass({
         this.setState(state)
     },
     changeTab(tabId) {
-        Redirecter.to('settings', { tabId })
+        Redirect.to('settings', { tabId })
     },
     render() {
         let { user } = this.state

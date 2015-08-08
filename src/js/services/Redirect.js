@@ -1,9 +1,8 @@
 import RouterContainer from "./RouterContainer"
 
-class Redirecter {
+class Redirect {
     to(path, data) {
         setImmediate(() => {
-            console.log(path, data)
             RouterContainer.get().transitionTo(path, data || {})
         })
     }
@@ -17,4 +16,4 @@ class Redirecter {
     }
 }
 
-export default new Redirecter
+export default new Redirect

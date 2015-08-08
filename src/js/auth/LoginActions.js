@@ -1,11 +1,11 @@
 import alt from "../alt"
-import Redirecter from "../services/Redirecter"
+import Redirect from "../services/Redirect"
 import WebStorage from "../services/WebStorage"
 
 class LoginActions {
     loginUser(jwt, user, redirect) {
         if (redirect) {
-            Redirecter.toNext()
+            Redirect.toNext()
         }
 
         WebStorage.toStore('jwt', jwt)
@@ -18,7 +18,7 @@ class LoginActions {
         WebStorage.remove('jwt')
         WebStorage.remove('user')
 
-        Redirecter.to('/auth/login')
+        Redirect.to('/auth/login')
 
         this.dispatch()
     }
