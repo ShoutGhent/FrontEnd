@@ -1,5 +1,6 @@
 import React from 'react/addons'
 
+import Cloudinary from '../../partials/Cloudinary'
 import cx from "classnames"
 import EditHeader from './EditHeader'
 import EditLogo from './EditLogo'
@@ -21,7 +22,7 @@ let Group = React.createClass({
             editLogoFormOpen: false,
             editHeaderFormOpen: false,
             logoHover: false,
-            headerHover: false
+            headerWidth: 830
         })
     },
     merge(obj1, obj2) {
@@ -34,12 +35,25 @@ let Group = React.createClass({
         GroupStore.listen(this._onChange)
 
         GroupActions.fetchGroupInformation(this.props.params.groupId)
+
+        window.addEventListener('resize', (event) => {
+            this.calcHeaderWidth()
+        })
     },
     componentWillUnmount() {
         GroupStore.unlisten(this._onChange)
     },
     _onChange(state) {
         this.setState(state)
+    },
+    calcHeaderWidth() {
+        let width = React.findDOMNode(this.refs.header).offsetWidth
+
+        if (Math.abs(width - this.state.headerWidth) > 100) {
+            this.setState({
+                headerWidth: width
+            })
+        }
     },
     changeTab(tabId) {
         Redirect.to('group', {
@@ -68,11 +82,6 @@ let Group = React.createClass({
             logoHover: ! this.state.logoHover
         })
     },
-    hoverHeader() {
-        this.setState({
-            headerHover: ! this.state.headerHover
-        })
-    },
     onLogoEdited() {
         this.setState({
             editLogoFormOpen: false
@@ -95,7 +104,7 @@ let Group = React.createClass({
         )
     },
     renderGroup() {
-        let { group, leavingOrJoiningGroupLoading, editLogoFormOpen, editHeaderFormOpen, logoHover, headerHover } = this.state
+        let { group, leavingOrJoiningGroupLoading, editLogoFormOpen, editHeaderFormOpen, logoHover, headerWidth } = this.state
         let { params } = this.props
         let memberCount = group.meta_information.member_count
         let inGroup = group.meta_information.in_group
@@ -108,19 +117,21 @@ let Group = React.createClass({
 
         return (
             <div className="group">
-                {isAdmin && editLogoFormOpen && <EditLogo isOpen={editLogoFormOpen} onDone={this.onLogoEdited} image={group.logo_path} groupId={group.id}/>}
-                {isAdmin && editHeaderFormOpen && <EditHeader isOpen={editHeaderFormOpen} onDone={this.onHeaderEdited} image={group.header_path} groupId={group.id}/>}
+                {isAdmin && editLogoFormOpen && <EditLogo isOpen={editLogoFormOpen} onDone={this.onLogoEdited} image={group.header_data.url} groupId={group.id}/>}
+                {isAdmin && editHeaderFormOpen && <EditHeader isOpen={editHeaderFormOpen} onDone={this.onHeaderEdited} image={group.header_data.url} groupId={group.id}/>}
                 <Grid>
                     <Cell center>
-                        <div className="group__header">
-                            <Parallax img={group.header_path} height={300} relative>
+                        <div className="group__header" ref="header">
+                            <Cloudinary
+                                style={{position:'relative'}}
+                                image={group.header_data}
+                                options={{width: headerWidth}}
+                            >
                                 <div className="group__header__buttons">
                                     {isAdmin &&
                                         <button
                                             className="btn"
                                             onClick={this.editHeader}
-                                            onMouseEnter={this.hoverHeader}
-                                            onMouseLeave={this.hoverHeader}
                                         >
                                             Wijzig Afbeelding
                                         </button>
@@ -134,7 +145,7 @@ let Group = React.createClass({
                                     </button>
 
                                 </div>
-                            </Parallax>
+                            </Cloudinary>
                         </div>
                     </Cell>
                     <Cell>
@@ -143,7 +154,10 @@ let Group = React.createClass({
                                 <Grid style={{marginBottom: 0}}>
                                     <Cell width={6/12}>
                                         <div className={logoClass} onClick={this.editLogo} onMouseLeave={this.hoverLogo} onMouseEnter={this.hoverLogo}>
-                                            <img src={group.logo_path}/>
+                                            <Cloudinary
+                                                image={group.logo_data}
+                                                options={{ width: 100, height: 100, crop: 'fill' }}
+                                            />
                                         </div>
 
                                         <h4 className="left" style={{marginLeft: 20}}>{group.name}</h4>

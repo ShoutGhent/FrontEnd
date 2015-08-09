@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 
+import Cloudinary from '../partials/Cloudinary'
 import Icon from '../partials/Icon'
 import Loading from '../loading/Loading'
 import MyGroupsStore from './MyGroupsStore'
@@ -26,7 +27,10 @@ var GroupList = React.createClass({
             <CollectionItem key={group.id}>
                 {group.name}
                 <Link to="group" params={{groupId: group.id, tabId: 'shouts'}} className="secondary-content">
-                    <Icon icon="send"></Icon>
+                    <Cloudinary
+                        image={group.logo_data}
+                        options={{ width: 24, height: 24 }}
+                    />
                 </Link>
             </CollectionItem>
         )
