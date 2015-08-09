@@ -31,7 +31,7 @@ var EditImage = React.createClass({
             uploading: true
         })
 
-        API.post(this.props.link, { logo: file }, (res, err) => {
+        API.post(this.props.link, { image: file }, (res, err) => {
             GroupActions.setGroup(res)
             this.setState({
                 uploading: false
