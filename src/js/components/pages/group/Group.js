@@ -115,6 +115,7 @@ let Group = React.createClass({
             "group__logo--change": isAdmin && logoHover
         })
 
+        console.log(group.header_data, group.logo_data)
         return (
             <div className="group">
                 {isAdmin && editLogoFormOpen && <EditLogo isOpen={editLogoFormOpen} onDone={this.onLogoEdited} image={group.header_data.url} groupId={group.id}/>}
@@ -123,20 +124,20 @@ let Group = React.createClass({
                     <Cell center>
                         <div className="group__header" ref="header">
                             <Cloudinary
-                                fallbackHeight={headerWidth / (21/9)}
+                                fallbackHeight={Math.round(headerWidth / (21/9))}
                                 style={{position:'relative'}}
                                 image={group.header_data}
                                 options={{width: headerWidth}}
                             />
                             <div className="group__header__buttons">
-                                    {isAdmin &&
+                                {isAdmin &&
                                     <button
                                         className="btn"
                                         onClick={this.editHeader}
                                     >
                                         Wijzig Afbeelding
                                     </button>
-                                        }
+                                }
                                 <button
                                     className="btn"
                                     onClick={() => {inGroup ? this.leaveGroup() : this.joinGroup()}}
