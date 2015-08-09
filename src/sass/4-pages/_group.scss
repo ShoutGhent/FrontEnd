@@ -7,6 +7,25 @@
         background-color: whitesmoke;
     }
 
+    &__admin-toolbar {
+        height: 60px;
+        padding: 12px;
+        text-align: right;
+        background-color: white;
+        border-left: 1px solid #eee;
+        border-right: 1px solid #eee;
+    }
+
+    &__information {
+        margin-left: -1px;
+        margin-right: -1px;
+
+        border-left: 1px solid #eee;
+        border-right: 1px solid #eee;
+
+        border-radius: 0;
+    }
+
     &__header {
         position: relative;
         &__buttons {

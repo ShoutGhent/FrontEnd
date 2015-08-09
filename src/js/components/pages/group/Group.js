@@ -112,18 +112,19 @@ let Group = React.createClass({
                 {isAdmin && editHeaderFormOpen && <EditHeader isOpen={editHeaderFormOpen} onDone={this.onHeaderEdited} image={group.header_path} groupId={group.id}/>}
                 <Grid>
                     <Cell center>
+                        {isAdmin &&
+                            <div className="group__admin-toolbar">
+                                <button
+                                    className="btn"
+                                    onClick={this.editHeader}
+                                >
+                                    Wijzig Afbeelding
+                                </button>
+                            </div>
+                        }
                         <div className="group__header">
                             <Parallax img={group.header_path} height={300} relative>
                                 <div className="group__header__buttons">
-                                    {isAdmin &&
-                                        <button
-                                            className="btn"
-                                            onClick={this.editHeader}
-                                        >
-                                            Wijzig Afbeelding
-                                        </button>
-                                    }
-
                                     <button
                                         className="btn"
                                         onClick={() => {inGroup ? this.leaveGroup() : this.joinGroup()}}
@@ -137,7 +138,7 @@ let Group = React.createClass({
                         </div>
                     </Cell>
                     <Cell>
-                        <Card style={{marginTop: 0, marginBottom: 0}} className="no-shadow">
+                        <Card style={{marginTop: 0, marginBottom: 0}} className="no-shadow group__information">
                             <CardContent>
                                 <Grid style={{marginBottom: 0}}>
                                     <Cell width={6/12}>
