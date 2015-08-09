@@ -1,6 +1,7 @@
 import React from 'react/addons'
 
 import cx from "classnames"
+import EditHeader from './EditHeader'
 import EditLogo from './EditLogo'
 import GroupActions from './GroupActions'
 import GroupStore from './GroupStore'
@@ -17,8 +18,10 @@ import { Tab, TabPanel } from '../../tab/Tab'
 let Group = React.createClass({
     getInitialState() {
         return this.merge(GroupStore.getState(), {
-            formIsOpen: false,
-            logoHover: false
+            editLogoFormOpen: false,
+            editHeaderFormOpen: false,
+            logoHover: false,
+            headerHover: false
         })
     },
     merge(obj1, obj2) {
@@ -52,7 +55,12 @@ let Group = React.createClass({
     },
     editLogo() {
         this.setState({
-            formIsOpen: true
+            editLogoFormOpen: true
+        })
+    },
+    editHeader() {
+        this.setState({
+            editHeaderFormOpen: true
         })
     },
     hoverLogo() {
@@ -60,9 +68,19 @@ let Group = React.createClass({
             logoHover: ! this.state.logoHover
         })
     },
+    hoverHeader() {
+        this.setState({
+            headerHover: ! this.state.headerHover
+        })
+    },
     onLogoEdited() {
         this.setState({
-            formIsOpen: false
+            editLogoFormOpen: false
+        })
+    },
+    onHeaderEdited() {
+        this.setState({
+            editHeaderFormOpen: false
         })
     },
     render() {
@@ -77,11 +95,12 @@ let Group = React.createClass({
         )
     },
     renderGroup() {
-        let { group, leavingOrJoiningGroupLoading, formIsOpen, logoHover } = this.state
+        let { group, leavingOrJoiningGroupLoading, editLogoFormOpen, editHeaderFormOpen, logoHover, headerHover } = this.state
         let { params } = this.props
         let memberCount = group.meta_information.member_count
         let inGroup = group.meta_information.in_group
         let isAdmin = group.meta_information.my_type == "admin"
+
         let logoClass = cx({
             "group__logo": true,
             "group__logo--change": isAdmin && logoHover
@@ -89,19 +108,33 @@ let Group = React.createClass({
 
         return (
             <div className="group">
-                {isAdmin && formIsOpen && <EditLogo isOpen={formIsOpen} onDone={this.onLogoEdited} image={group.logo_path} groupId={group.id}/>}
+                {isAdmin && editLogoFormOpen && <EditLogo isOpen={editLogoFormOpen} onDone={this.onLogoEdited} image={group.logo_path} groupId={group.id}/>}
+                {isAdmin && editHeaderFormOpen && <EditHeader isOpen={editHeaderFormOpen} onDone={this.onHeaderEdited} image={group.header_path} groupId={group.id}/>}
                 <Grid>
                     <Cell center>
-                        <Parallax img='/dist/img/banner.jpg' height={300} relative>
-                            <button style={{
-                                position: 'absolute',
-                                right: 10,
-                                bottom: 10
-                            }} className="btn" onClick={() => {inGroup ? this.leaveGroup() : this.joinGroup()}}>
-                                {leavingOrJoiningGroupLoading && <Icon className="right" icon="loop" spinning/>}
-                                {group.meta_information.in_group ? 'Groep Verlaten' : 'Lid Worden'}
-                            </button>
-                        </Parallax>
+                        <div className="group__header">
+                            <Parallax img={group.header_path} height={300} relative>
+                                <div className="group__header__buttons">
+                                    {isAdmin &&
+                                        <button
+                                            className="btn"
+                                            onClick={this.editHeader}
+                                        >
+                                            Wijzig Afbeelding
+                                        </button>
+                                    }
+
+                                    <button
+                                        className="btn"
+                                        onClick={() => {inGroup ? this.leaveGroup() : this.joinGroup()}}
+                                    >
+                                        {leavingOrJoiningGroupLoading && <Icon className="right" icon="loop" spinning/>}
+                                        {group.meta_information.in_group ? 'Groep Verlaten' : 'Lid Worden'}
+                                    </button>
+
+                                </div>
+                            </Parallax>
+                        </div>
                     </Cell>
                     <Cell>
                         <Card style={{marginTop: 0, marginBottom: 0}} className="no-shadow">

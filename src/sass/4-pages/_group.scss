@@ -7,6 +7,19 @@
         background-color: whitesmoke;
     }
 
+    &__header {
+        position: relative;
+        &__buttons {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+
+            .btn {
+                margin-left: 10px;
+            }
+        }
+    }
+
     &__logo {
         position: relative;
         float: left;

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 
 import EditImage from './EditImage'
 
-var EditLogo = React.createClass({
+var EditHeader = React.createClass({
     propTypes: {
         groupId: PropTypes.string.isRequired,
         isOpen: PropTypes.bool.isRequired,
@@ -10,11 +10,11 @@ var EditLogo = React.createClass({
         onDone: PropTypes.func,
     },
     render() {
-        let link = `groups/${this.props.groupId}/logo`
+        let link = `groups/${this.props.groupId}/header`
 
         return (
             <EditImage
-                ratio={1/1}
+                ratio={16/9}
                 link={link}
                 isOpen={this.props.isOpen}
                 onDone={this.props.onDone}
@@ -24,4 +24,4 @@ var EditLogo = React.createClass({
     }
 })
 
-export default EditLogo
+export default EditHeader
