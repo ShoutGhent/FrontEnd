@@ -22,7 +22,7 @@ let Group = React.createClass({
             editLogoFormOpen: false,
             editHeaderFormOpen: false,
             logoHover: false,
-            headerWidth: 830
+            headerWidth: 0
         })
     },
     merge(obj1, obj2) {
@@ -39,6 +39,8 @@ let Group = React.createClass({
         window.addEventListener('resize', (event) => {
             this.calcHeaderWidth()
         })
+
+        this.calcHeaderWidth()
     },
     componentWillUnmount() {
         GroupStore.unlisten(this._onChange)
@@ -48,6 +50,13 @@ let Group = React.createClass({
         this.setState(state)
     },
     calcHeaderWidth() {
+        if ( ! this.refs.header) {
+            setTimeout(() => {
+                this.calcHeaderWidth()
+            }, 200)
+            return
+        }
+
         let width = React.findDOMNode(this.refs.header).offsetWidth
 
         if (Math.abs(width - this.state.headerWidth) > 30) {
