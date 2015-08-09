@@ -121,9 +121,14 @@ let Group = React.createClass({
                                             onClick={this.editHeader}
                                             onMouseEnter={this.hoverHeader}
                                             onMouseLeave={this.hoverHeader}
+                                            style={{
+                                                transition: 'all 3s ease-in-out'
+                                            }}
                                         >
-                                            <Icon icon="file_upload" className="left"/>
-                                            {headerHover && <span>Wijzig Afbeelding</span>}
+                                            <Icon icon="file_upload"/>
+                                            {headerHover && <span  style={{
+                                                transition: 'all 3s ease-in-out'
+                                            }} className="right">Wijzig Afbeelding</span>}
                                         </button>
                                     }
                                     <button
