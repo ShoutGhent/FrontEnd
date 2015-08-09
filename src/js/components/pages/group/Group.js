@@ -1,5 +1,6 @@
-import React from 'react'
+import React from 'react/addons'
 
+import cx from "classnames"
 import EditLogo from './EditLogo'
 import GroupActions from './GroupActions'
 import GroupStore from './GroupStore'
@@ -15,7 +16,16 @@ import { Tab, TabPanel } from '../../tab/Tab'
 
 let Group = React.createClass({
     getInitialState() {
-        return GroupStore.getState()
+        return this.merge(GroupStore.getState(), {
+            formIsOpen: false,
+            logoHover: false
+        })
+    },
+    merge(obj1, obj2) {
+        var obj3 = {}
+        for (var attrname in obj1) { obj3[attrname] = obj1[attrname] }
+        for (var attrname in obj2) { obj3[attrname] = obj2[attrname] }
+        return obj3
     },
     componentDidMount() {
         GroupStore.listen(this._onChange)
@@ -40,6 +50,21 @@ let Group = React.createClass({
     joinGroup() {
         GroupActions.joinGroup(this.state.group.id)
     },
+    editLogo() {
+        this.setState({
+            formIsOpen: true
+        })
+    },
+    hoverLogo() {
+        this.setState({
+            logoHover: ! this.state.logoHover
+        })
+    },
+    onLogoEdited() {
+        this.setState({
+            formIsOpen: false
+        })
+    },
     render() {
         let { loading } = this.state
 
@@ -52,14 +77,19 @@ let Group = React.createClass({
         )
     },
     renderGroup() {
-        let { group, leavingOrJoiningGroupLoading } = this.state
+        let { group, leavingOrJoiningGroupLoading, formIsOpen, logoHover } = this.state
         let { params } = this.props
         let memberCount = group.meta_information.member_count
         let inGroup = group.meta_information.in_group
         let isAdmin = group.meta_information.my_type == "admin"
+        let logoClass = cx({
+            "group__logo": true,
+            "group__logo--change": isAdmin && logoHover
+        })
 
         return (
-            <div>
+            <div className="group">
+                {isAdmin && formIsOpen && <EditLogo isOpen={formIsOpen} onDone={this.onLogoEdited} image={group.logo_path} groupId={group.id}/>}
                 <Grid>
                     <Cell center>
                         <Parallax img='/dist/img/banner.jpg' height={300} relative>
@@ -78,9 +108,11 @@ let Group = React.createClass({
                             <CardContent>
                                 <Grid style={{marginBottom: 0}}>
                                     <Cell width={6/12}>
-                                        <img className="left" src={group.logo_path} style={{width: 100, height: 100}}/>
+                                        <div className={logoClass} onClick={this.editLogo} onMouseLeave={this.hoverLogo} onMouseEnter={this.hoverLogo}>
+                                            <img src={group.logo_path}/>
+                                        </div>
+
                                         <h4 className="left" style={{marginLeft: 20}}>{group.name}</h4>
-                                        {isAdmin && <EditLogo groupId={group.id}/>}
                                     </Cell>
                                     <Cell width={6/12}>
                                         <span className="right">
@@ -92,7 +124,7 @@ let Group = React.createClass({
                         </Card>
                     </Cell>
                     <Cell>
-                        <Tab className="white group" marginTop={0} activeTab={params.tabId} onTabChange={this.changeTab}>
+                        <Tab className="white" marginTop={0} activeTab={params.tabId} onTabChange={this.changeTab}>
                             <TabPanel title="Shouts" tabId="shouts">
                                 <Grid>
                                     <Cell width={9/12}>
