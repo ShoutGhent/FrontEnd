@@ -48,7 +48,7 @@ let LoggedInHeader = React.createClass({
 
         return (
             <ul className={className}>
-                <li className="hidden">
+                <li className="hide-on-med-and-down">
                     <a href onClick={this.toggleSearch}>
                         <Icon icon="search" />
                     </a>

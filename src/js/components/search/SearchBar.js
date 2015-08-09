@@ -35,7 +35,8 @@ let SearchBar = React.createClass({
             height: 40,
             width: '100%',
             padding: '5px 10px',
-            outline: 'none'
+            outline: 'none',
+            backgroundColor: 'transparent'
         }
 
         let wrapStyles = {
@@ -44,9 +45,29 @@ let SearchBar = React.createClass({
             height: this.state.isOpen ? 40 : 0
         }
 
+        let position = {
+            backgroundColor: 'white',
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0
+        }
+
         return (
             <div style={wrapStyles}>
-                <input style={css} name="search" ref="search" value={this.state.searchText} onChange={this.updateSearchText} onKeyDown={this.handleKeyboard} placeholder="Zoeken..." />
+                <div style={position}>
+                    <div className="container">
+                        <input
+                            style={css}
+                            name="search"
+                            ref="search"
+                            value={this.state.searchText}
+                            onChange={this.updateSearchText}
+                            onKeyDown={this.handleKeyboard}
+                            placeholder="Zoeken..."
+                        />
+                    </div>
+                </div>
             </div>
         )
     }
