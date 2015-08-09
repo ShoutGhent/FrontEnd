@@ -33,7 +33,15 @@ let SearchBar = React.createClass({
     handleKeyboard(event) {
         if (event.keyCode == 27) { // Escape key
             SearchActions.closeSearch()
+            SearchActions.resetResults()
         }
+    },
+    closeMe() {
+        SearchActions.closeSearch()
+
+        setTimeout(() => {
+            SearchActions.resetResults()
+        }, 200)
     },
     goToGroup(group) {
         SearchActions.closeSearch()
@@ -44,6 +52,7 @@ let SearchBar = React.createClass({
         })
 
         GroupActions.fetchGroupInformation(group.id)
+        SearchActions.resetResults()
     },
     render() {
         let css = {
@@ -80,7 +89,7 @@ let SearchBar = React.createClass({
         }
 
         return (
-            <div style={wrapStyles}>
+            <div style={wrapStyles} onBlur={this.closeMe}>
                 <div style={position}>
                     <div className="container">
                         <input

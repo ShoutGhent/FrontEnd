@@ -11,20 +11,21 @@ class SearchStore {
 
         this.bindActions(SearchActions)
     }
+    onResetResults() {
+        this.results = []
+    }
     onOpenSearch() {
         this.isOpen = true
     }
     onCloseSearch() {
         this.isOpen = false
         this.searchText = ''
-        this.results = []
     }
     onToggleSearch() {
         this.isOpen = ! this.isOpen
 
         if ( ! this.isOpen) {
             this.searchText = ''
-            this.result = []
         }
     }
     onUpdateSearchText(text) {

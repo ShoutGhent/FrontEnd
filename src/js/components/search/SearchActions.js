@@ -12,6 +12,9 @@ class SearchActions {
     toggleSearch() {
         this.dispatch()
     }
+    resetResults() {
+        this.dispatch()
+    }
     updateSearchText(value) {
         if (value.trim()) {
             this.actions.fetchResults(value)
