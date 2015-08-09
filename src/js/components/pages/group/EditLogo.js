@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react'
 
 import API from '../../../services/API'
-import GroupActions from './GroupActions'
 import Cropper from 'react-cropper'
+import GroupActions from './GroupActions'
+import Icon from '../../partials/Icon'
 import { Modal, ModalContent, ModalFooter } from '../../modal/Modal'
 
 var EditLogo = React.createClass({
@@ -15,7 +16,8 @@ var EditLogo = React.createClass({
     getInitialState() {
         return {
             url: this.props.image,
-            cropped: null
+            cropped: null,
+            uploading: false
         }
     },
     getDefaultProps() {
@@ -23,11 +25,21 @@ var EditLogo = React.createClass({
             onDone: () => {}
         }
     },
-    upload(file) {
+    upload(file, cb) {
         let url = `groups/${this.props.groupId}/logo`
+        this.setState({
+            uploading: true
+        })
 
         API.post(url, { logo: file }, (res, err) => {
             GroupActions.setGroup(res)
+            this.setState({
+                uploading: false
+            })
+
+            if (cb) {
+                cb()
+            }
         })
     },
     getFileUrl() {
@@ -47,9 +59,12 @@ var EditLogo = React.createClass({
             reader.readAsDataURL(file)
         }
     },
-    submit() {
-        this.upload(this.state.cropped)
-        this.props.onDone()
+    submit(event) {
+        event.preventDefault()
+
+        this.upload(this.state.cropped, () => {
+            this.props.onDone()
+        })
     },
     _crop() {
         this.setState({
@@ -57,6 +72,8 @@ var EditLogo = React.createClass({
         })
     },
     render() {
+        let { uploading } = this.state
+        
         return (
             <div>
                 <Modal isOpen={this.props.isOpen} onClose={this.props.onDone}>
@@ -78,7 +95,16 @@ var EditLogo = React.createClass({
                         </div>
                     </ModalContent>
                     <ModalFooter>
-                        <button onClick={this.submit} disabled={ ! this.state.cropped} className="btn right">Wijzig Afbeelding</button>
+                        <button onClick={this.submit} disabled={ ! this.state.cropped} className="btn right">
+                            {uploading ? (
+                                <span>
+                                    <Icon className="right" icon="loop" spinning/>
+                                    Uploaden...
+                                </span>
+                            ) : (
+                                <span>Wijzig Afbeelding</span>
+                            )}
+                        </button>
                     </ModalFooter>
                 </Modal>
             </div>
