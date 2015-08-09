@@ -1,15 +1,15 @@
 import RouterContainer from "./RouterContainer"
-import setImmediate from "setimmediate"
+//import setImmediate from "setimmediate"
 
 class Redirect {
     to(path, data) {
-        setImmediate(() => {
+        setTimeout(() => {
             RouterContainer.get().transitionTo(path, data || {})
         })
     }
 
     toNext() {
-        setImmediate(() => {
+        setTimeout(() => {
             RouterContainer.get().transitionTo(
                 RouterContainer.get().getCurrentQuery().nextPath || '/'
             )

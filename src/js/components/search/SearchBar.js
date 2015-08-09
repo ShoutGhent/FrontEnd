@@ -37,12 +37,13 @@ let SearchBar = React.createClass({
     },
     goToGroup(group) {
         SearchActions.closeSearch()
-        GroupActions.fetchGroupInformation(group.id)
 
         Redirect.to('group', {
             groupId: group.id,
             tabId: 'shouts'
         })
+        
+        GroupActions.fetchGroupInformation(group.id)
     },
     render() {
         let css = {
@@ -99,7 +100,7 @@ let SearchBar = React.createClass({
                         {this.state.results.map((group) => {
                             return (
                                 <CollectionItem key={group.id}>
-                                    <div onClick={() => { this.goToGroup(group) }} style={{cursor: 'pointer'}}>
+                                    <div onClick={(event) => { this.goToGroup(group) }} style={{cursor: 'pointer'}}>
                                         <Grid>
                                             <Cell width={1/12}>
                                                 <Cloudinary
