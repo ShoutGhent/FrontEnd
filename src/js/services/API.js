@@ -53,6 +53,33 @@ class API {
     static del(url, data, cb) {
         API._send("del", url, data, cb)
     }
+    static postFile(url, data, cb) {
+        if ( ! url.match(/https?/)) {
+            url = API.options().prefix + url.replace(API.options().prefix, "").replace(/^\s+/, "")
+        }
+
+        request
+            .post(url)
+            .attach(data.key, data.value)
+            .set('Authorization', `Bearer ${WebStorage.fromStore('jwt')}`)
+            .end((err, res) => {
+                if (err) {
+                    if (res && res.body && res.body.error && res.body.error == "token_expired") {
+                        if (err.message == "Unauthorized") {
+                            WebStorage.remove('jwt')
+                            WebStorage.remove('user')
+                        }
+                    }
+                }
+                if (res.body && res.body.token) {
+                    WebStorage.toStore('jwt', res.body.token)
+                }
+
+                if (typeof cb == "function") {
+                    cb(res.body, err)
+                }
+            })
+    }
 
 }
 

@@ -11,6 +11,10 @@ class GroupStore {
         this.bindActions(GroupActions)
     }
 
+    onSetGroup(group) {
+        this.group = group
+    }
+
     onFetchGroupInformation(group) {
         this.group = group
     }

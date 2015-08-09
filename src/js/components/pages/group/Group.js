@@ -1,5 +1,6 @@
 import React from 'react'
 
+import EditLogo from './EditLogo'
 import GroupActions from './GroupActions'
 import GroupStore from './GroupStore'
 import Icon from '../../partials/Icon'
@@ -55,6 +56,7 @@ let Group = React.createClass({
         let { params } = this.props
         let memberCount = group.meta_information.member_count
         let inGroup = group.meta_information.in_group
+        let isAdmin = group.meta_information.my_type == "admin"
 
         return (
             <div>
@@ -76,8 +78,9 @@ let Group = React.createClass({
                             <CardContent>
                                 <Grid style={{marginBottom: 0}}>
                                     <Cell width={6/12}>
-                                        <img className="left" src={group.logo_path}/>
+                                        <img className="left" src={group.logo_path} style={{width: 100, height: 100}}/>
                                         <h4 className="left" style={{marginLeft: 20}}>{group.name}</h4>
+                                        {isAdmin && <EditLogo groupId={group.id}/>}
                                     </Cell>
                                     <Cell width={6/12}>
                                         <span className="right">

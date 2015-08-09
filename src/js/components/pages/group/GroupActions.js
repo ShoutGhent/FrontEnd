@@ -13,6 +13,11 @@ class GroupActions {
             }
         })
     }
+
+    setGroup(group) {
+        this.dispatch(group)
+    }
+
     setGroupLoading(value) {
         this.dispatch(value)
     }
@@ -38,6 +43,7 @@ class GroupActions {
             }
         })
     }
+
     setLeavingOrJoiningGroupLoading(value) {
         this.dispatch(value)
     }
