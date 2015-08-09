@@ -42,6 +42,7 @@ let Group = React.createClass({
     },
     componentWillUnmount() {
         GroupStore.unlisten(this._onChange)
+        window.removeEventListener('resize')
     },
     _onChange(state) {
         this.setState(state)

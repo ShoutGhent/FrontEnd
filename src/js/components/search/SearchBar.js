@@ -1,8 +1,14 @@
 import React from 'react'
 
+import Cloudinary from '../partials/Cloudinary'
+import GroupActions from '../pages/group/GroupActions'
 import Icon from '../partials/Icon'
+import Redirect from '../../services/Redirect'
 import SearchActions from './SearchActions'
 import SearchStore from './SearchStore'
+import { Collection, CollectionItem } from '../collection/Collection'
+import { Grid, Cell } from '../grid/Grid'
+import { Link } from 'react-router'
 
 let SearchBar = React.createClass({
     getInitialState() {
@@ -29,6 +35,15 @@ let SearchBar = React.createClass({
             SearchActions.closeSearch()
         }
     },
+    goToGroup(group) {
+        SearchActions.closeSearch()
+        GroupActions.fetchGroupInformation(group.id)
+
+        Redirect.to('group', {
+            groupId: group.id,
+            tabId: 'shouts'
+        })
+    },
     render() {
         let css = {
             border: 'none',
@@ -40,7 +55,7 @@ let SearchBar = React.createClass({
         }
 
         let wrapStyles = {
-            overflow: 'hidden',
+            position: 'relative',
             transition: 'height .3s ease-in-out',
             height: this.state.isOpen ? 40 : 0
         }
@@ -50,7 +65,17 @@ let SearchBar = React.createClass({
             position: 'fixed',
             top: 0,
             left: 0,
-            right: 0
+            right: 0,
+            zIndex: 0
+        }
+
+        let resultStyles = {
+            position: 'fixed',
+            zIndex: 2,
+            left: 0,
+            right: 0,
+            top: 40,
+            display: this.state.results.length > 0 ? 'block' : 'none'
         }
 
         return (
@@ -66,6 +91,33 @@ let SearchBar = React.createClass({
                             onKeyDown={this.handleKeyboard}
                             placeholder="Zoeken..."
                         />
+                    </div>
+                </div>
+                <div style={resultStyles}>
+                    <div className="container" style={{padding: 10, backgroundColor: 'white', border: '1px solid #ccc'}}>
+                        <Collection>
+                        {this.state.results.map((group) => {
+                            return (
+                                <CollectionItem key={group.id}>
+                                    <div onClick={() => { this.goToGroup(group) }} style={{cursor: 'pointer'}}>
+                                        <Grid>
+                                            <Cell width={1/12}>
+                                                <Cloudinary
+                                                    image={group.logo_data}
+                                                    options={{ width: 40, height: 40 }}
+                                                />
+                                            </Cell>
+                                            <Cell width={11/12}>
+                                            {group.name} <br/>
+                                                <span style={{color: '#aaa'}}>{group.meta_information.member_count} {group.meta_information.member_count == 1 ? 'lid' : 'leden'}</span>
+                                                <span style={{color: '#aaa', float: 'right'}}>Ik ben {group.meta_information.in_group ? '' : 'geen'} lid</span>
+                                            </Cell>
+                                        </Grid>
+                                    </div>
+                                </CollectionItem>
+                            )
+                        })}
+                        </Collection>
                     </div>
                 </div>
             </div>

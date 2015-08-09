@@ -26,16 +26,18 @@ var CollectionHeader = React.createClass({
 var CollectionItem = React.createClass({
     mixins: [PureRenderMixin],
     propTypes: {
-        active: PropTypes.bool
+        active: PropTypes.bool,
+        avatar: PropTypes.bool,
     },
     getDefaultProps() {
         return {
-            active: false
+            active: false,
+            avatar: false
         }
     },
     render() {
-        let { children, active } = this.props
-        let className = `collection-item ${active ? 'active' : ''}`
+        let { children, active, avatar } = this.props
+        let className = `collection-item ${active ? 'active' : ''} ${avatar ? 'avatar' : ''}`
 
         return (
             <li className={className}>{children}</li>

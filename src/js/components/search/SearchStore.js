@@ -7,6 +7,8 @@ class SearchStore {
         this.isOpen = false
         this.searchText = ''
 
+        this.results = []
+
         this.bindActions(SearchActions)
     }
     onOpenSearch() {
@@ -15,16 +17,21 @@ class SearchStore {
     onCloseSearch() {
         this.isOpen = false
         this.searchText = ''
+        this.results = []
     }
     onToggleSearch() {
         this.isOpen = ! this.isOpen
 
         if ( ! this.isOpen) {
             this.searchText = ''
+            this.result = []
         }
     }
     onUpdateSearchText(text) {
         this.searchText = text
+    }
+    onFetchResults(results) {
+        this.results = results.data
     }
 }
 
