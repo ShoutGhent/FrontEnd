@@ -3,18 +3,19 @@ var elixir     = require('laravel-elixir');
 var livereload = require('gulp-livereload');
 
 elixir.config.sourcemaps = false;
-elixir.config.srcDir = 'src';
-elixir.config.publicDir = 'dist';
-elixir.config.assetsDir = 'src/';
-elixir.config.cssOutput = 'dist/css';
-elixir.config.jsOutput = 'dist/js';
+elixir.config.assetsPath = 'src';
+elixir.config.publicPath = 'dist';
+
+elixir.config.js.browserify.transformers.push({
+    name: 'browserify-css',
+    options: {
+        global: true
+    }
+});
 
 elixir(function (mix) {
     mix.sass('style.scss')
-        .browserify('main.js', null, null, {
-            transform: 'browserify-css',
-            global: true
-        })
+        .browserify('main.js')
         .copy('./src/img/**/*.*', './dist/img/');
 });
 

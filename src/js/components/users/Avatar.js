@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-import md5 from 'MD5'
+import md5 from 'md5'
 import moment from 'moment'
 
 var Avatar = React.createClass({
