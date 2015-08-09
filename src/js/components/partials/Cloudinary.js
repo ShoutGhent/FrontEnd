@@ -6,15 +6,17 @@ import Icon from './Icon'
 var Cloudinary = React.createClass({
     propTypes: {
         image: PropTypes.array.isRequried,
-        options: PropTypes.object
+        options: PropTypes.object,
+        fallbackHeight: PropTypes.number
     },
     getDefaultProps() {
         return {
-            options: {}
+            options: {},
+            fallbackHeight: '100%'
         }
     },
     render() {
-        let { image, options } = this.props
+        let { image, options, fallbackHeight } = this.props
 
         let imageExists = image.length > 0
 
@@ -30,7 +32,7 @@ var Cloudinary = React.createClass({
             ) : (
                 <div {...this.props} style={{
                     width: options.width || '100%',
-                    height: options.height || '100%',
+                    height: options.height || fallbackHeight,
                     backgroundColor: 'transparent',
                     position: 'relative'
                 }}>

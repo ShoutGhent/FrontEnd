@@ -49,7 +49,7 @@ let Group = React.createClass({
     calcHeaderWidth() {
         let width = React.findDOMNode(this.refs.header).offsetWidth
 
-        if (Math.abs(width - this.state.headerWidth) > 100) {
+        if (Math.abs(width - this.state.headerWidth) > 30) {
             this.setState({
                 headerWidth: width
             })
@@ -123,29 +123,29 @@ let Group = React.createClass({
                     <Cell center>
                         <div className="group__header" ref="header">
                             <Cloudinary
+                                fallbackHeight={headerWidth / (21/9)}
                                 style={{position:'relative'}}
                                 image={group.header_data}
                                 options={{width: headerWidth}}
-                            >
-                                <div className="group__header__buttons">
+                            />
+                            <div className="group__header__buttons">
                                     {isAdmin &&
-                                        <button
-                                            className="btn"
-                                            onClick={this.editHeader}
-                                        >
-                                            Wijzig Afbeelding
-                                        </button>
-                                    }
                                     <button
                                         className="btn"
-                                        onClick={() => {inGroup ? this.leaveGroup() : this.joinGroup()}}
+                                        onClick={this.editHeader}
                                     >
+                                        Wijzig Afbeelding
+                                    </button>
+                                        }
+                                <button
+                                    className="btn"
+                                    onClick={() => {inGroup ? this.leaveGroup() : this.joinGroup()}}
+                                >
                                         {leavingOrJoiningGroupLoading && <Icon className="right" icon="loop" spinning/>}
                                         {group.meta_information.in_group ? 'Groep Verlaten' : 'Lid Worden'}
-                                    </button>
+                                </button>
 
-                                </div>
-                            </Cloudinary>
+                            </div>
                         </div>
                     </Cell>
                     <Cell>
