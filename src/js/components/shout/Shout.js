@@ -17,7 +17,8 @@ let Shout = React.createClass({
         onHide: PropTypes.func.isRequired,
         onEdit: PropTypes.func.isRequired,
         onReport: PropTypes.func.isRequired,
-        onDelete: PropTypes.func.isRequired
+        onDelete: PropTypes.func.isRequired,
+        onToggleFavorite: PropTypes.func.isRequired
     },
     getInitialState() {
         let { shout } = this.props
@@ -110,6 +111,9 @@ let Shout = React.createClass({
 
         this.props.onDelete(this.state.shout)
     },
+    toggleFavorite() {
+        this.props.onToggleFavorite(this.state.shout)
+    },
     render() {
         let { currentUser, width, editModalOpen, reportModalOpen, shout } = this.state
         let { anonymous } = shout
@@ -169,6 +173,28 @@ let Shout = React.createClass({
                     {(this.state.secondsLeft < 10 && this.state.secondsLeft != 0) ? (
                         <TransitiveNumber>{this.state.secondsLeft}</TransitiveNumber>
                     ) : ''}
+
+                    <span className="right">
+                        <TransitiveNumber>{shout.meta.favorite_count}</TransitiveNumber>
+                        <button style={{
+                            border: 0,
+                            background: 0,
+                            padding: 0,
+                            margin: 0
+                        }}
+                        onClick={this.toggleFavorite}>
+                            <span
+                                style={{
+                                    fontSize: 16,
+                                    verticalAlign: 'middle',
+                                    color: shout.meta.favorited_by_me ? '#ffab40' : 'rgba(0, 0, 0, .6)',
+                                    marginTop: -2,
+                                    marginLeft: 5
+                                }}
+                                className="material-icons"
+                            >star</span>
+                        </button>
+                    </span>
                 </div>
                 <div className="shout-progress">
                     <div className="progress">

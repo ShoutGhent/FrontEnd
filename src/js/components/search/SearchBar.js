@@ -119,8 +119,8 @@ let SearchBar = React.createClass({
                                             </Cell>
                                             <Cell width={11/12}>
                                             {group.name} <br/>
-                                                <span style={{color: '#aaa'}}>{group.meta_information.member_count} {group.meta_information.member_count == 1 ? 'lid' : 'leden'}</span>
-                                                <span style={{color: '#aaa', float: 'right'}}>Ik ben {group.meta_information.in_group ? '' : 'geen'} lid</span>
+                                                <span style={{color: '#aaa'}}>{group.meta.member_count} {group.meta.member_count == 1 ? 'lid' : 'leden'}</span>
+                                                <span style={{color: '#aaa', float: 'right'}}>Ik ben {group.meta.in_group ? '' : 'geen'} lid</span>
                                             </Cell>
                                         </Grid>
                                     </div>

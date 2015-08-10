@@ -61,6 +61,11 @@ let ShoutPage = React.createClass({
             Notification.success("Shout werd gerapporteerd!")
         })
     },
+    toggleFavorite(shout) {
+        let url = `shouts/${shout.id}/${shout.meta.favorited_by_me ? 'unfavorite' : 'favorite'}`
+
+        API.post(url, {}, (shout, err) => this.setState({ shout }))
+    },
     render() {
         let { shout, loading } = this.state
 
@@ -78,6 +83,7 @@ let ShoutPage = React.createClass({
                         onEdit={this.editShout}
                         onReport={this.reportShout}
                         onDelete={this.deleteShout}
+                        onToggleFavorite={this.toggleFavorite}
                     />
                 ) : (
                     <div>

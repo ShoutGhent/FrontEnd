@@ -79,11 +79,7 @@ let ShoutFeed = React.createClass({
         if (force || this.props.url == "shouts") {
             let shouts = this.state.shouts
 
-            shouts.map((item, key) => {
-                if (item.id == shout.id) {
-                    shouts.splice(key, 1)
-                }
-            })
+            shouts.splice(shouts.indexOf(shout), 1)
 
             this.setState({ shouts })
         }
@@ -129,6 +125,17 @@ let ShoutFeed = React.createClass({
             }
         })
     },
+    toggleFavorite(shout) {
+        let url = `shouts/${shout.id}/${shout.meta.favorited_by_me ? 'unfavorite' : 'favorite'}`
+
+        API.post(url, {}, (updatedShout, err) => {
+            var shouts = this.state.shouts
+
+            shouts[shouts.indexOf(updatedShout)] = updatedShout
+
+            this.setState({ shouts })
+        })
+    },
     render() {
         let { loading, shouts, paginationData } = this.state
         let { canShout, groupId } = this.props
@@ -149,6 +156,7 @@ let ShoutFeed = React.createClass({
                         onEdit={this.editShout}
                         onReport={this.reportShout}
                         onDelete={this.deleteShout}
+                        onToggleFavorite={this.toggleFavorite}
                     />
                 )}
                 {loading ? <LoadingShouts /> : ''}

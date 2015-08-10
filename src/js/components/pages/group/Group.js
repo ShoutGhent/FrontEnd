@@ -116,9 +116,9 @@ let Group = React.createClass({
     renderGroup() {
         let { group, leavingOrJoiningGroupLoading, editLogoFormOpen, editHeaderFormOpen, logoHover, headerWidth } = this.state
         let { params } = this.props
-        let memberCount = group.meta_information.member_count
-        let inGroup = group.meta_information.in_group
-        let isAdmin = group.meta_information.my_type == "admin"
+        let memberCount = group.meta.member_count
+        let inGroup = group.meta.in_group
+        let isAdmin = group.meta.my_type == "admin"
 
         let logoClass = cx({
             "group__logo": true,
@@ -153,7 +153,7 @@ let Group = React.createClass({
                                     onClick={() => {inGroup ? this.leaveGroup() : this.joinGroup()}}
                                 >
                                         {leavingOrJoiningGroupLoading && <Icon className="right" icon="loop" spinning/>}
-                                        {group.meta_information.in_group ? 'Groep Verlaten' : 'Lid Worden'}
+                                        {group.meta.in_group ? 'Groep Verlaten' : 'Lid Worden'}
                                 </button>
                             </div>
                         </div>
