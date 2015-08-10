@@ -40,7 +40,8 @@ let ShoutPage = React.createClass({
             description: shout.description,
             anonymous: shout.anonymous,
             publish_until: shout.publish_until
-        }, (data) => {
+        }, (updatedShout) => {
+            this.setState({ shout: updatedShout })
             Notification.success("Shout is bewerkt!")
         })
     },

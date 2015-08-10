@@ -21,15 +21,12 @@ let Shout = React.createClass({
         onToggleFavorite: PropTypes.func.isRequired
     },
     getInitialState() {
-        let { shout } = this.props
-
         return {
             width: '100%',
             intervalId: null,
             currentUser: WebStorage.fromStore('user'),
             editModalOpen: false,
             reportModalOpen: false,
-            shout: shout,
             secondsLeft: 0
         }
     },
@@ -84,15 +81,13 @@ let Shout = React.createClass({
         })
     },
     save(shout) {
-        this.setState({ shout })
-
         this.props.onEdit(shout)
 
         this.calcPercentage(shout, this.props.onHide)
     },
     report(data) {
         this.props.onReport({
-            shout_id: this.state.shout.id,
+            shout_id: this.props.shout.id,
             reason: data.reason
         })
     },
@@ -109,16 +104,15 @@ let Shout = React.createClass({
     onDelete(event) {
         event.preventDefault()
 
-        this.props.onDelete(this.state.shout)
+        this.props.onDelete(this.props.shout)
     },
     toggleFavorite() {
-        this.props.onToggleFavorite(this.state.shout)
+        this.props.onToggleFavorite(this.props.shout)
     },
     render() {
-        let { currentUser, width, editModalOpen, reportModalOpen, shout } = this.state
+        let { user, shout } = this.props
+        let { currentUser, width, editModalOpen, reportModalOpen } = this.state
         let { anonymous } = shout
-
-        let user = this.props.user
 
         let anonymousName = 'Anonymous'
 

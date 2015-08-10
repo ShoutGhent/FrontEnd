@@ -91,7 +91,16 @@ let ShoutFeed = React.createClass({
             description: shout.description,
             anonymous: shout.anonymous,
             publish_until: shout.publish_until
-        }, (data) => {
+        }, (updatedShout) => {
+            var shouts = this.state.shouts
+            shouts.map((item, key) => {
+                if (item.id == shout.id) {
+                    shouts[key] = updatedShout
+                }
+            })
+
+            this.setState({ shouts })
+
             Notification.success("Shout is bewerkt!")
         })
     },
@@ -130,9 +139,7 @@ let ShoutFeed = React.createClass({
 
         API.post(url, {}, (updatedShout, err) => {
             var shouts = this.state.shouts
-
-            shouts[shouts.indexOf(updatedShout)] = updatedShout
-
+            shouts[shouts.indexOf(shout)] = updatedShout
             this.setState({ shouts })
         })
     },
