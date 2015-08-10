@@ -20,7 +20,6 @@
     "react-portal": "^0.6.0",
     "react-router": "^0.13.0",
     "react-transitive-number": "^1.1.0",
-    "setimmediate": "^1.0.2",
     "superagent": "^1.2.0"
   },
   "devDependencies": {

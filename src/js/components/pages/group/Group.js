@@ -22,7 +22,7 @@ let Group = React.createClass({
             editLogoFormOpen: false,
             editHeaderFormOpen: false,
             logoHover: false,
-            headerWidth: 0
+            headerWidth: 800
         })
     },
     merge(obj1, obj2) {

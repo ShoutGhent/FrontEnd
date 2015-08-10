@@ -1,5 +1,4 @@
 import RouterContainer from "./RouterContainer"
-//import setImmediate from "setimmediate"
 
 class Redirect {
     to(path, data) {
