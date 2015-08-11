@@ -48,7 +48,7 @@ var GroupList = React.createClass({
                             <Loading/>
                         ) : (
                             <Collection>
-                                {myGroups .map(this.renderGroups)}
+                                {myGroups.map(this.renderGroups)}
                             </Collection>
                         )}
                     </CardContent>
