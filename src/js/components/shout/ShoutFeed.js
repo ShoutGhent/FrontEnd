@@ -71,7 +71,7 @@ let ShoutFeed = React.createClass({
         let nextPage = currentPage + 1
         let listShouts = this.state.shouts
 
-        this.fetch({ page: nextPage }, shouts => shouts.forEach(shout => listShouts.push(shout)))
+        this.fetch({ page: nextPage }, shouts => listShouts.concat(shouts))
 
         this.setState({ shouts: listShouts })
     },
