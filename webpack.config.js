@@ -16,7 +16,10 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
+        new webpack.NoErrorsPlugin(),
+        new webpack.DefinePlugin({
+            GA_TRACKING_CODE: JSON.stringify("UA-66177890-1")
+        })
     ],
     resolve: {
         extensions: ['', '.js', '.jsx']

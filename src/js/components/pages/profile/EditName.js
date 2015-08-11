@@ -56,8 +56,6 @@ var EditName = React.createClass({
         let { first_name, last_name, firstNameIsValid, lastNameIsValid } = this.state
         let isValid = firstNameIsValid && lastNameIsValid
 
-        console.log(first_name)
-
         return (
             <div>
                 <form onSubmit={this.edit}>

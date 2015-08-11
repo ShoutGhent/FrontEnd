@@ -5,6 +5,7 @@ import Router from "react-router"
 import RouterContainer from './services/RouterContainer'
 import routes from "./Routes"
 import WebStorage from './services/WebStorage'
+import analytics from 'ga-react-router'
 
 let router = Router.create({
     routes: routes,
@@ -20,4 +21,7 @@ if (jwt) {
 }
 
 let mountNode = document.getElementById('mount-node')
-router.run(Handler => React.render(<Handler />, mountNode))
+router.run((Handler, state) => {
+    React.render(<Handler />, mountNode)
+    analytics(state)
+})

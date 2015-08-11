@@ -32,6 +32,9 @@ module.exports = {
             filename: 'vendor.js'
         }),
         new webpack.DefinePlugin({
+            GA_TRACKING_CODE: JSON.stringify("UA-66177890-1")
+        }),
+        new webpack.DefinePlugin({
             'process.env': {
                 // This affects react lib size
                 'NODE_ENV': JSON.stringify('production')
