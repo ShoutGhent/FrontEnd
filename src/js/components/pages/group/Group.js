@@ -49,17 +49,24 @@ let Group = React.createClass({
     _onChange(state) {
         this.setState(state)
     },
-    calcHeaderWidth() {
+    calcHeaderWidth(force) {
         if ( ! this.refs.header) {
             setTimeout(() => {
-                this.calcHeaderWidth()
+                this.calcHeaderWidth(true)
             }, 200)
             return
         }
 
         let width = React.findDOMNode(this.refs.header).offsetWidth
 
-        if (Math.abs(width - this.state.headerWidth) > 30) {
+        if (Math.abs(width - this.state.headerWidth) > 30)
+        {
+            this.setState({
+                headerWidth: width
+            })
+        }
+
+        if(force) {
             this.setState({
                 headerWidth: width
             })
