@@ -4,6 +4,7 @@ import Cloudinary from '../../partials/Cloudinary'
 import cx from "classnames"
 import EditHeader from './EditHeader'
 import EditLogo from './EditLogo'
+import EditGroupName from './EditGroupName'
 import GroupActions from './GroupActions'
 import GroupStore from './GroupStore'
 import Icon from '../../partials/Icon'
@@ -94,6 +95,9 @@ let Group = React.createClass({
         this.setState({
             editHeaderFormOpen: true
         })
+    },
+    updateGroup(group) {
+        this.setState({ group })
     },
     hoverLogo() {
         this.setState({
@@ -211,6 +215,15 @@ let Group = React.createClass({
                                     </Cell>
                                 </Grid>
                             </TabPanel>
+                            {isAdmin &&
+                            <TabPanel title="Beheer" tabId="manage">
+                                <Grid>
+                                    <Cell width={6/12}>
+                                        <EditGroupName group={group} onChange={this.updateGroup}/>
+                                    </Cell>
+                                </Grid>
+                            </TabPanel>
+                            }
                         </Tab>
                     </Cell>
                 </Grid>
