@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react/addons'
 
 import API from '../../../services/API'
-import Cropper from 'react-cropper'
+import Cropper from '../../cropper/Cropper'
 import GroupActions from './GroupActions'
 import Icon from '../../partials/Icon'
 import Ink from 'react-ink'
