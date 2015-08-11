@@ -6,16 +6,16 @@ elixir.config.sourcemaps = false;
 elixir.config.assetsPath = 'src';
 elixir.config.publicPath = 'dist';
 
-elixir.config.js.browserify.transformers.push({
-    name: 'browserify-css',
-    options: {
-        global: true
-    }
-});
+//elixir.config.js.browserify.transformers.push({
+//    name: 'browserify-css',
+//    options: {
+//        global: true
+//    }
+//});
 
 elixir(function (mix) {
     mix.sass('style.scss')
-        .browserify('main.js')
+        //.browserify('main.js')
         .copy('./src/img/**/*.*', './dist/img/');
 });
 
