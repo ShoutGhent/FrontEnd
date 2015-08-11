@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 var Card = React.createClass({
     render() {
@@ -13,14 +13,19 @@ var Card = React.createClass({
 })
 
 var CardTitle = React.createClass({
+    propTypes: {
+        center: PropTypes.bool,
+        light: PropTypes.bool
+    },
     getDefaultProps() {
         return {
-            center: false
+            center: false,
+            light: false
         }
     },
     render() {
-        let { children, center } = this.props
-        let className = `card-title black-text ${center ? 'center' : ''}`
+        let { children, center, light } = this.props
+        let className = `card-title ${light ? 'white-text' : 'black-text'} ${center ? 'center' : ''}`
 
         return (
             <div className={className}>{children}</div>
@@ -29,11 +34,19 @@ var CardTitle = React.createClass({
 })
 
 var CardContent = React.createClass({
+    propTypes: {
+        light: PropTypes.bool
+    },
+    getDefaultProps() {
+        return {
+            light: false
+        }
+    },
     render() {
-        let { children } = this.props
+        let { children, light } = this.props
 
         return (
-            <div className="card-content black-text" {...this.props}>{children}</div>
+            <div className={`card-content ${light ? 'white-text' : 'black-text'}`} {...this.props}>{children}</div>
         )
     }
 })

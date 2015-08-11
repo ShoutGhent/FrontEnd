@@ -17,13 +17,20 @@ let Tab = React.createClass({
     },
     getInitialState() {
         let { children, activeTab } = this.props
+        let validChildren = []
         children = [].concat(children)
+
+        for(var i = 0; i < children.length; i++) {
+            if(children[i]) {
+                validChildren.push(children[i])
+            }
+        }
 
         var index = 0
 
         if (activeTab) {
-            for (var i = 0; i < children.length; i++) {
-                var child = children[i]
+            for (var i = 0; i < validChildren.length; i++) {
+                var child = validChildren[i]
 
                 if (child.props.tabId == this.props.activeTab) {
                     index = i
@@ -33,7 +40,7 @@ let Tab = React.createClass({
 
         return {
             activePosition: index,
-            activePanel: children[index]
+            activePanel: validChildren[index]
         }
     },
     makeActive(child, index, event) {
@@ -55,18 +62,20 @@ let Tab = React.createClass({
         }
 
         let manipulatedChildren = React.Children.map(children, (child, index) => {
-            panelHeaders.push(<li key={child.props.title} className="tab col" style={css}><a href={true} onClick={this.makeActive.bind(this, child, index)}>{child.props.title}</a></li>)
+            if (child) {
+                panelHeaders.push(<li key={child.props.title} className="tab col" style={css}><a href={true} onClick={this.makeActive.bind(this, child, index)}>{child.props.title}</a></li>)
 
-            var active = false
-            if (this.state.activePanel.props.title == child.props.title) {
-                active = true
+                var active = false
+                if (this.state.activePanel.props.title == child.props.title) {
+                    active = true
+                }
+
+                child = React.addons.cloneWithProps(child, {
+                    isActive: active
+                })
+
+                return child
             }
-
-            child = React.addons.cloneWithProps(child, {
-                isActive: active
-            })
-
-            return child
         })
 
         var indicatorCss = {

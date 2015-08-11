@@ -2,15 +2,16 @@ import React from 'react/addons'
 
 import Cloudinary from '../../partials/Cloudinary'
 import cx from "classnames"
+import EditGroupName from './EditGroupName'
 import EditHeader from './EditHeader'
 import EditLogo from './EditLogo'
-import EditGroupName from './EditGroupName'
 import GroupActions from './GroupActions'
 import GroupStore from './GroupStore'
 import Icon from '../../partials/Icon'
 import Loading from '../../loading/Loading'
 import Parallax from '../../partials/Parallax'
 import Redirect from '../../../services/Redirect'
+import RemoveGroup from './RemoveGroup'
 import ShoutFeed from '../../shout/ShoutFeed'
 import ShoutForm from '../../shout/ShoutForm'
 import { Button } from '../../button/MaterialButton'
@@ -113,6 +114,9 @@ let Group = React.createClass({
         this.setState({
             editHeaderFormOpen: false
         })
+    },
+    removeGroup() {
+        Redirect.to('home')
     },
     render() {
         let { loading } = this.state
@@ -220,6 +224,9 @@ let Group = React.createClass({
                                 <Grid>
                                     <Cell width={6/12}>
                                         <EditGroupName group={group} onChange={this.updateGroup}/>
+                                    </Cell>
+                                    <Cell width={6/12}>
+                                        <RemoveGroup group={group} onDelete={this.removeGroup}/>
                                     </Cell>
                                 </Grid>
                             </TabPanel>
