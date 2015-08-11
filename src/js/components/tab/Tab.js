@@ -17,20 +17,19 @@ let Tab = React.createClass({
     },
     getInitialState() {
         let { children, activeTab } = this.props
-        let validChildren = []
         children = [].concat(children)
 
         for(var i = 0; i < children.length; i++) {
-            if(children[i]) {
-                validChildren.push(children[i])
+            if( ! children[i]) {
+                children.splice(i, 1)
             }
         }
 
         var index = 0
 
         if (activeTab) {
-            for (var i = 0; i < validChildren.length; i++) {
-                var child = validChildren[i]
+            for (var i = 0; i < children.length; i++) {
+                var child = children[i]
 
                 if (child.props.tabId == this.props.activeTab) {
                     index = i
@@ -40,7 +39,7 @@ let Tab = React.createClass({
 
         return {
             activePosition: index,
-            activePanel: validChildren[index]
+            activePanel: children[index]
         }
     },
     makeActive(child, index, event) {
@@ -55,6 +54,12 @@ let Tab = React.createClass({
         let { children } = this.props
         children = [].concat(children)
 
+        for(var i = 0; i < children.length; i++) {
+            if( ! children[i]) {
+                children.splice(i, 1)
+            }
+        }
+
         let panelHeaders = []
 
         let css = {
@@ -62,20 +67,18 @@ let Tab = React.createClass({
         }
 
         let manipulatedChildren = React.Children.map(children, (child, index) => {
-            if (child) {
-                panelHeaders.push(<li key={child.props.title} className="tab col" style={css}><a href={true} onClick={this.makeActive.bind(this, child, index)}>{child.props.title}</a></li>)
+            panelHeaders.push(<li key={child.props.title} className="tab col" style={css}><a href={true} onClick={this.makeActive.bind(this, child, index)}>{child.props.title}</a></li>)
 
-                var active = false
-                if (this.state.activePanel.props.title == child.props.title) {
-                    active = true
-                }
-
-                child = React.addons.cloneWithProps(child, {
-                    isActive: active
-                })
-
-                return child
+            var active = false
+            if (this.state.activePanel.props.title == child.props.title) {
+                active = true
             }
+
+            child = React.addons.cloneWithProps(child, {
+                isActive: active
+            })
+
+            return child
         })
 
         var indicatorCss = {
