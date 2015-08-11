@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 
 import MaterialTextarea from '../../partials/MaterialTextarea'
+import { Button } from '../../button/MaterialButton'
 import { Grid, Cell } from '../../grid/Grid'
 import { Modal, ModalContent, ModalFooter } from '../../modal/Modal'
 
@@ -65,8 +66,8 @@ var ReportShout = React.createClass({
                             </Grid>
                         </ModalContent>
                         <ModalFooter>
-                            <button disabled={ ! isValid} style={{float: 'right'}} className="waves-effect waves-green btn">Rapporteer</button>
-                            <button style={{float: 'right'}} className="waves-effect waves-red btn-flat" onClick={this.cancel}>Annuleren</button>
+                            <Button disabled={ ! isValid} right>Rapporteer</Button>
+                            <Button onClick={this.cancel} right flat>Annuleren</Button>
                         </ModalFooter>
                     </form>
                 </Modal>

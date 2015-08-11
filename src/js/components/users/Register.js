@@ -3,6 +3,7 @@ import React from 'react'
 import Auth from '../../auth/AuthService'
 import Avatar from './Avatar'
 import MaterialInput from '../partials/MaterialInput'
+import { Button } from '../button/MaterialButton'
 import { Grid, Cell } from '../grid/Grid'
 
 var Register = React.createClass({
@@ -183,9 +184,9 @@ var Register = React.createClass({
                     </Grid>
 
                     <div className="right-align">
-                        <button disabled={ ! isValid} className={`btn btn-large waves-effect waves-light ${this.state.error ? 'red' : ''}`} type="submit" name="action">
+                        <Button disabled={ ! isValid} className={this.state.error ? 'red' : ''} large>
                             <i className={iconClass}>{loading ? 'loop' : 'send'}</i>{registerButton}
-                        </button>
+                        </Button>
                     </div>
                 </form>
             </div>

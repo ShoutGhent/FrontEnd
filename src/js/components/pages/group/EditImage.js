@@ -4,6 +4,8 @@ import API from '../../../services/API'
 import Cropper from 'react-cropper'
 import GroupActions from './GroupActions'
 import Icon from '../../partials/Icon'
+import Ink from 'react-ink'
+import { Button } from '../../button/MaterialButton'
 import { Modal, ModalContent, ModalFooter } from '../../modal/Modal'
 
 var EditImage = React.createClass({
@@ -87,15 +89,16 @@ var EditImage = React.createClass({
                         crop={this._crop}
                     />
                     <div className="file-field input-field">
-                        <div className="btn">
+                        <div className="btn" style={{position: 'relative'}}>
                             <span>Selecteer Afbeelding</span>
                             <input type="file" onChange={this.setImage}/>
+                            <Ink/>
                         </div>
                         <br/><br/>
                     </div>
                 </ModalContent>
                 <ModalFooter>
-                    <button onClick={this.submit} disabled={ ! cropped} className="btn right">
+                    <Button onClick={this.submit} disabled={ ! cropped} right>
                         {uploading ? (
                             <span>
                                 <Icon className="right" icon="loop" spinning/>
@@ -104,7 +107,7 @@ var EditImage = React.createClass({
                         ) : (
                             <span>Wijzig Afbeelding</span>
                         )}
-                    </button>
+                    </Button>
                 </ModalFooter>
             </Modal>
         )

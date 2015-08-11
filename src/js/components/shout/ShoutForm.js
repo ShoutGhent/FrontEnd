@@ -3,6 +3,7 @@ import React, { PropTypes } from 'react/addons'
 import DateTimePicker from '../partials/DateTimePicker'
 import MaterialTextarea from '../partials/MaterialTextarea'
 import moment from 'moment'
+import { Button } from '../button/MaterialButton'
 import { CardContent, CardFooter } from '../card/Card'
 import { Grid, Cell } from '../grid/Grid'
 import { ModalContent, ModalFooter } from '../modal/Modal'
@@ -124,7 +125,7 @@ var ShoutForm = React.createClass({
                         </Grid>
                     </Content>
                     <Footer>
-                        <button disabled={ ! isValid} className="waves-effect waves-green btn right">{buttonName}</button>
+                        <Button disabled={ ! isValid} right>{buttonName}</Button>
                     </Footer>
                 </form>
             </div>

@@ -5,6 +5,7 @@ import GroupActions from '../../pages/group/GroupActions'
 import MaterialTextarea from '../../partials/MaterialTextarea'
 import Redirect from "../../../services/Redirect"
 import ShoutForm from '../../shout/ShoutForm'
+import { Button } from '../../button/MaterialButton'
 import { Grid, Cell } from '../../grid/Grid'
 import { Modal, ModalContent, ModalFooter } from '../../modal/Modal'
 
@@ -102,8 +103,8 @@ var AddGroup = React.createClass({
                         </Grid>
                     </ModalContent>
                     <ModalFooter>
-                        <button style={{float: 'right'}} disabled={ ! valid} className="waves-effect waves-green btn" onClick={this.save}>Maak Groep</button>
-                        <button style={{float: 'right'}} className="waves-effect waves-red btn-flat" onClick={this.done}>Annuleren</button>
+                        <Button disabled={ ! valid} onClick={this.save} right>Maak Groep</Button>
+                        <Button onClick={this.done} right flat>Annuleren</Button>
                     </ModalFooter>
                 </Modal>
             </div>

@@ -3,6 +3,7 @@ import React from 'react'
 import Auth from '../../auth/AuthService'
 import Avatar from './Avatar'
 import MaterialInput from '../partials/MaterialInput'
+import { Button } from '../button/MaterialButton'
 
 var Login = React.createClass({
     getInitialState() {
@@ -91,9 +92,9 @@ var Login = React.createClass({
                     />
 
                     <div className="right-align">
-                        <button disabled={ ! isValid} className={`btn btn-large waves-effect waves-light ${this.state.error ? 'red' : ''}`} type="submit" name="action">
+                        <Button disabled={ ! isValid} className={this.state.error ? 'red' : ''} large>
                             <i className={iconClass}>{loading ? 'loop' : 'lock'}</i>{loginButton}
-                        </button>
+                        </Button>
                     </div>
                 </form>
             </div>

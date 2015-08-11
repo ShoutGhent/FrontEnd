@@ -4,6 +4,7 @@ import API from '../../../services/API'
 import LoginActions from '../../../auth/LoginActions'
 import MaterialInput from '../../partials/MaterialInput'
 import Notification from '../../notification/NotificationActions'
+import { Button } from '../../button/MaterialButton'
 import { Card, CardContent, CardTitle, CardFooter } from '../../card/Card'
 import { Grid, Cell } from '../../grid/Grid'
 
@@ -90,7 +91,7 @@ var EditName = React.createClass({
                             </Grid>
                         </CardContent>
                         <CardFooter>
-                            <button disabled={ ! isValid} className="waves-effect waves-green btn right">Wijzigen</button>
+                            <Button disabled={ ! isValid} right>Wijzigen</Button>
                         </CardFooter>
                     </Card>
                 </form>

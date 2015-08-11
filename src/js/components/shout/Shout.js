@@ -7,6 +7,7 @@ import moment from 'moment'
 import ReportShout from '../pages/shout/ReportShout'
 import TransitiveNumber from 'react-transitive-number'
 import WebStorage from '../../services/WebStorage'
+import { Button } from '../button/MaterialButton'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
 import { Link } from 'react-router'
 
@@ -170,13 +171,7 @@ let Shout = React.createClass({
 
                     <span className="right">
                         <TransitiveNumber>{shout.meta.favorite_count}</TransitiveNumber>
-                        <button style={{
-                            border: 0,
-                            background: 0,
-                            padding: 0,
-                            margin: 0
-                        }}
-                        onClick={this.toggleFavorite}>
+                        <Button onClick={this.toggleFavorite} flat>
                             <span
                                 style={{
                                     fontSize: 16,
@@ -187,7 +182,7 @@ let Shout = React.createClass({
                                 }}
                                 className="material-icons"
                             >star</span>
-                        </button>
+                        </Button>
                     </span>
                 </div>
                 <div className="shout-progress">

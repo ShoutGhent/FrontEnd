@@ -3,6 +3,7 @@ import React, { PropTypes } from 'react'
 import API from '../../services/API'
 import Icon from '../partials/Icon'
 import Loading from '../loading/Loading'
+import { Button } from '../button/MaterialButton'
 import { Card, CardContent } from '../card/Card'
 import { Grid, Cell } from '../grid/Grid'
 import { Modal, ModalContent, ModalFooter } from '../modal/Modal'
@@ -111,8 +112,8 @@ var JoinInitialGroupModal = React.createClass({
                     {loading ? <Loading/> : ''}
                 </ModalContent>
                 <ModalFooter>
-                    <button style={{float: 'left'}} disabled={true} className="btn-flat">{selected.length} geselecteerd</button>
-                    <button style={{float: 'right'}} disabled={selected.length == 0} className="waves-effect waves-green btn" onClick={this.joinGroups}>Lid Worden</button>
+                    <Button disabled={true} right flat>{selected.length} geselecteerd</Button>
+                    <Button disabled={selected.length == 0} onClick={this.joinGroups} right>Lid Worden</Button>
                 </ModalFooter>
             </Modal>
         )

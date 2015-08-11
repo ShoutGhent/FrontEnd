@@ -7,6 +7,7 @@ import LoadingShouts from '../loading/LoadingShouts'
 import Notification from '../notification/NotificationActions'
 import Shout from './Shout'
 import WebStorage from '../../services/WebStorage'
+import { Button } from '../button/MaterialButton'
 
 let ShoutFeed = React.createClass({
     propTypes: {
@@ -173,7 +174,7 @@ let ShoutFeed = React.createClass({
                     </InfoPanel>
                 ): ''}
                 {next_page_url ? (
-                    <button className="btn-large" onClick={this.loadMore}>Meer Tonen</button>
+                    <Button className="btn-large" onClick={this.loadMore}>Meer Tonen</Button>
                 ) : ''}
             </div>
         )

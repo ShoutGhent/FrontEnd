@@ -12,6 +12,7 @@ import Parallax from '../../partials/Parallax'
 import Redirect from '../../../services/Redirect'
 import ShoutFeed from '../../shout/ShoutFeed'
 import ShoutForm from '../../shout/ShoutForm'
+import { Button } from '../../button/MaterialButton'
 import { Card, CardContent, CardTitle } from '../../card/Card'
 import { Grid, Cell } from '../../grid/Grid'
 import { Tab, TabPanel } from '../../tab/Tab'
@@ -147,21 +148,17 @@ let Group = React.createClass({
                             />
                             <div className="group__header__buttons">
                                 {isAdmin &&
-                                    <button
-                                        className="btn"
-                                        onClick={this.editHeader}
-                                    >
+                                    <Button onClick={this.editHeader}>
                                         Wijzig Afbeelding
-                                    </button>
+                                    </Button>
                                 }
-                                <button
-                                    className="btn"
+                                <Button
                                     disabled={memberCount == 1}
                                     onClick={() => {inGroup ? this.leaveGroup() : this.joinGroup()}}
                                 >
                                         {leavingOrJoiningGroupLoading && <Icon className="right" icon="loop" spinning/>}
                                         {group.meta.in_group ? 'Groep Verlaten' : 'Lid Worden'}
-                                </button>
+                                </Button>
                             </div>
                         </div>
                     </Cell>
