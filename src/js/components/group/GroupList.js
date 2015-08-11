@@ -30,6 +30,16 @@ var GroupList = React.createClass({
                     <Cloudinary
                         image={group.logo_data}
                         options={{ width: 24, height: 24 }}
+                        defaultElement={<span style={{
+                            position: 'absolute',
+                            left: '50%',
+                            top: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            color: 'rgba(0, 0, 0, 0.4)',
+                            fontWeight: 'bold',
+                            margin: 0,
+                            fontSize: 18
+                        }}>{group.name.substr(0, 1).toUpperCase()}</span>}
                     />
                 </Link>
             </CollectionItem>
