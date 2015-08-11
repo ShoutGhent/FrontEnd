@@ -9,9 +9,6 @@ class SearchActions {
     closeSearch() {
         this.dispatch()
     }
-    toggleSearch() {
-        this.dispatch()
-    }
     resetResults() {
         this.dispatch()
     }

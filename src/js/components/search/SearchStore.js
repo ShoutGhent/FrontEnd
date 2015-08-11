@@ -21,13 +21,6 @@ class SearchStore {
         this.isOpen = false
         this.searchText = ''
     }
-    onToggleSearch() {
-        this.isOpen = ! this.isOpen
-
-        if ( ! this.isOpen) {
-            this.searchText = ''
-        }
-    }
     onUpdateSearchText(text) {
         this.searchText = text
     }

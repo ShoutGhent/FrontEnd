@@ -8,7 +8,6 @@ import SearchActions from './SearchActions'
 import SearchStore from './SearchStore'
 import { Collection, CollectionItem } from '../collection/Collection'
 import { Grid, Cell } from '../grid/Grid'
-import { Link } from 'react-router'
 
 let SearchBar = React.createClass({
     getInitialState() {
@@ -22,8 +21,7 @@ let SearchBar = React.createClass({
     },
     _onChange(state) {
         this.setState(state)
-
-        if ( ! this.state.isOpen) {
+        if (state.isOpen) {
             this.refs.search.getDOMNode().focus()
         }
     },
@@ -43,7 +41,8 @@ let SearchBar = React.createClass({
             SearchActions.resetResults()
         }, 200)
     },
-    goToGroup(group) {
+    goToGroup(group, event) {
+        event.preventDefault()
         SearchActions.closeSearch()
 
         Redirect.to('group', {
@@ -109,7 +108,7 @@ let SearchBar = React.createClass({
                         {this.state.results.map((group) => {
                             return (
                                 <CollectionItem key={group.id}>
-                                    <div onClick={(event) => { this.goToGroup(group) }} style={{cursor: 'pointer'}}>
+                                    <div onClick={(event) => { this.goToGroup(group, event) }} style={{cursor: 'pointer'}}>
                                         <Grid>
                                             <Cell width={1/12}>
                                                 <Cloudinary

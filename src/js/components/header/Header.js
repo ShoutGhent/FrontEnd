@@ -53,9 +53,7 @@ let Header = React.createClass({
                             <Icon icon="menu"/>
                         </a>
                         {LoginStore.isLoggedIn() ? <LoggedInHeader className={className} user={user}/> : <LoggedOutHeader className={className}/>}
-                        { isOpen ? (
-                            <div id="sidenav-overlay" onClick={this.toggleNavigation}></div>
-                        ) : ''}
+                        {isOpen && <div id="sidenav-overlay" onClick={this.toggleNavigation}></div>}
                     </div>
                 </nav>
             </div>

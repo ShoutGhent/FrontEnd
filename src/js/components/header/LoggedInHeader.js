@@ -23,7 +23,7 @@ let LoggedInHeader = React.createClass({
     },
     toggleSearch(event) {
         event.preventDefault()
-        SearchActions.toggleSearch()
+        SearchActions.openSearch()
     },
     openAddGroupForm(event) {
         event.preventDefault()

@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react/addons'
 import Validation from '../forms/Validation/Validation'
 import { Grid, Cell } from '../grid/Grid'
 
-let MaterialTextarea = React.createClass({
+let MaterialInput = React.createClass({
     propTypes: {
         validate: PropTypes.bool,
         rules: PropTypes.array,
@@ -22,11 +22,13 @@ let MaterialTextarea = React.createClass({
             value: ''
         }
     },
-    componentWillMount() {
-        this.setState({
-            open: (this.props.value || this.props.defaultValue) ? true : false,
-            value: this.props.value || this.props.defaultValue || ''
-        })
+    componentDidMount() {
+        if(this.isMounted()) {
+            this.setState({
+                open: (this.props.value || this.props.defaultValue) ? true : false,
+                value: this.props.value || this.props.defaultValue || ''
+            })
+        }
     },
     openLabel() {
         this.setState({
@@ -79,4 +81,4 @@ let MaterialTextarea = React.createClass({
     }
 })
 
-export default MaterialTextarea
+export default MaterialInput
