@@ -26,6 +26,11 @@ var Button = React.createClass({
     render() {
         let { children, large, right, flat, disabled, onClick, className } = this.props
 
+        let btnStyle = {
+            position: 'relative'
+        }
+
+        // Attach classes
         let classes = cx({
             'btn': true,
             'btn-large': large,
@@ -40,7 +45,7 @@ var Button = React.createClass({
         return (
             <button
                 className={classes}
-                style={{ position: 'relative' }}
+                style={btnStyle}
                 disabled={disabled}
                 onClick={onClick}
             >
