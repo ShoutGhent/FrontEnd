@@ -50,7 +50,6 @@ let SearchBar = React.createClass({
             tabId: 'shouts'
         })
 
-        GroupActions.fetchGroupInformation(group.id)
         SearchActions.resetResults()
     },
     render() {

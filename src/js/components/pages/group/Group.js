@@ -20,6 +20,11 @@ import { Grid, Cell } from '../../grid/Grid'
 import { Tab, TabPanel } from '../../tab/Tab'
 
 let Group = React.createClass({
+    statics: {
+        willTransitionTo(transition, params, query) {
+            GroupActions.fetchGroupInformation(params.groupId)
+        }
+    },
     getInitialState() {
         return this.merge(GroupStore.getState(), {
             editLogoFormOpen: false,
@@ -36,8 +41,6 @@ let Group = React.createClass({
     },
     componentDidMount() {
         GroupStore.listen(this._onChange)
-
-        GroupActions.fetchGroupInformation(this.props.params.groupId)
 
         window.addEventListener('resize', (event) => {
             this.calcHeaderWidth()

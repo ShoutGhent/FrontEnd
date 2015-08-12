@@ -34,8 +34,6 @@ var AddGroup = React.createClass({
         }
 
         API.post('groups/add', payload, (res, err) => {
-            GroupActions.fetchGroupInformation(res.id)
-
             Redirect.to('group', {
                 groupId: res.id,
                 tabId: 'shouts'
