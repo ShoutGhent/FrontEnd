@@ -169,7 +169,7 @@ let Group = React.createClass({
                                     </Button>
                                 }
                                 <Button
-                                    disabled={inGroup && memberCount == 1}
+                                    disabled={(inGroup && memberCount == 1) || isAdmin}
                                     onClick={() => {inGroup ? this.leaveGroup() : this.joinGroup()}}
                                 >
                                         {leavingOrJoiningGroupLoading && <Icon className="right" icon="loop" spinning/>}
