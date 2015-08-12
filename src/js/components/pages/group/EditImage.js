@@ -89,9 +89,9 @@ var EditImage = React.createClass({
                         crop={this._crop}
                     />
                     <div className="file-field input-field">
-                        <div className="btn" style={{position: 'relative'}}>
+                        <div className="btn" style={{position: 'relative'}} onClick={(e) => React.findDOMNode(this.refs.image).click()}>
                             <span>Selecteer Afbeelding</span>
-                            <input type="file" onChange={this.setImage}/>
+                            <input ref="image" type="file" onChange={this.setImage}/>
                             <Ink/>
                         </div>
                         <br/><br/>
