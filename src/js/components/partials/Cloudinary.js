@@ -42,6 +42,9 @@ var Cloudinary = React.createClass({
             image = {}
         }
 
+        // Force Ssl
+        options['secure'] = true
+
         return (
             <div>
             { ! this.isEmpty(image) ? (
