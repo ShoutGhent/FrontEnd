@@ -8,6 +8,7 @@ import SearchActions from './SearchActions'
 import SearchStore from './SearchStore'
 import { Collection, CollectionItem } from '../collection/Collection'
 import { Grid, Cell } from '../grid/Grid'
+import GroupDistance from '../pages/group/GroupDistance'
 
 let SearchBar = React.createClass({
     getInitialState() {
@@ -128,7 +129,11 @@ let SearchBar = React.createClass({
                                             <Cell width={11/12}>
                                             {group.name} <br/>
                                                 <span style={{color: '#aaa'}}>{group.meta.member_count} {group.meta.member_count == 1 ? 'lid' : 'leden'}</span>
-                                                <span style={{color: '#aaa', float: 'right'}}>Ik ben {group.meta.in_group ? '' : 'geen'} lid</span>
+
+                                                <span className="right" style={{color: '#aaa'}}>
+                                                    <GroupDistance group={group}/> &nbsp;&nbsp;
+                                                    <span>Ik ben {group.meta.in_group ? '' : 'geen'} lid</span>
+                                                </span>
                                             </Cell>
                                         </Grid>
                                     </div>

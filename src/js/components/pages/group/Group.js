@@ -8,6 +8,7 @@ import EditGroupName from './EditGroupName'
 import EditHeader from './EditHeader'
 import EditLogo from './EditLogo'
 import GroupActions from './GroupActions'
+import GroupDistance from './GroupDistance'
 import GroupStore from './GroupStore'
 import Icon from '../../partials/Icon'
 import Loading from '../../loading/Loading'
@@ -16,7 +17,6 @@ import Redirect from '../../../services/Redirect'
 import RemoveGroup from './RemoveGroup'
 import ShoutFeed from '../../shout/ShoutFeed'
 import ShoutForm from '../../shout/ShoutForm'
-import TransitiveNumber from 'react-transitive-number'
 import { Button } from '../../button/MaterialButton'
 import { Card, CardContent, CardTitle } from '../../card/Card'
 import { Grid, Cell } from '../../grid/Grid'
@@ -203,13 +203,7 @@ let Group = React.createClass({
                                     </Cell>
                                     <Cell width={6/12}>
                                         <div className="right">
-                                            <span className="group-badge">
-                                                {group.meta.from_me != null && (group.meta.from_me > 1000 ? (
-                                                    <span><TransitiveNumber>{Math.round(group.meta.from_me/1000)}</TransitiveNumber> kilometer</span>
-                                                ) : (
-                                                    <span><TransitiveNumber>{Math.round(group.meta.from_me)}</TransitiveNumber> meter</span>
-                                                ))}
-                                            </span>
+                                            <GroupDistance group={group} badge/>
                                             <span className="group-badge">
                                                 {memberCount} {memberCount == 1 ? 'lid' : 'leden'}
                                             </span>
