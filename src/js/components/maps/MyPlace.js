@@ -2,37 +2,22 @@ import React, { PropTypes } from 'react'
 
 import { Gmaps, Marker, Circle, InfoWindow } from 'react-gmaps'
 
-var MyPlace = React.createClass({
+const MyPlace = React.createClass({
     propTypes: {
         coords: PropTypes.object.isRequired,
         radius: PropTypes.number.isRequired,
         height: PropTypes.number.isRequired,
         zoom: PropTypes.number,
     },
-    getInitialState() {
-        return {
-            mount: false
-        }
-    },
     getDefaultProps() {
         return {
             zoom: 17
         }
     },
-    componentDidMount() {
-        setTimeout(() => {
-            this.setState({ mount: true })
-        }, 50)
-    },
-    componentWillUnmount() {
-        this.setState({ mount: false })
-    },
     render() {
         let { coords, radius, height, zoom } = this.props
-        let {mount} = this.state
 
-
-        return mount ? (
+        return (
             <Gmaps
                 width={'100%'}
                 height={height}
@@ -55,7 +40,7 @@ var MyPlace = React.createClass({
                     lng={coords.longitude}
                 />
             </Gmaps>
-        ) : null
+        )
     }
 })
 

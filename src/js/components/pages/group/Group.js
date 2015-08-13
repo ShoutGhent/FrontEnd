@@ -1,7 +1,9 @@
 import React from 'react/addons'
 
+import assign from 'react/lib/Object.assign'
 import Cloudinary from '../../partials/Cloudinary'
 import cx from "classnames"
+import EditGroupLocation from './EditGroupLocation'
 import EditGroupName from './EditGroupName'
 import EditHeader from './EditHeader'
 import EditLogo from './EditLogo'
@@ -26,18 +28,12 @@ let Group = React.createClass({
         }
     },
     getInitialState() {
-        return this.merge(GroupStore.getState(), {
+        return assign(GroupStore.getState(), {
             editLogoFormOpen: false,
             editHeaderFormOpen: false,
             logoHover: false,
             headerWidth: 800
         })
-    },
-    merge(obj1, obj2) {
-        var obj3 = {}
-        for (var attrname in obj1) { obj3[attrname] = obj1[attrname] }
-        for (var attrname in obj2) { obj3[attrname] = obj2[attrname] }
-        return obj3
     },
     componentDidMount() {
         GroupStore.listen(this._onChange)
@@ -175,8 +171,8 @@ let Group = React.createClass({
                                     disabled={(inGroup && memberCount == 1) || isAdmin}
                                     onClick={() => {inGroup ? this.leaveGroup() : this.joinGroup()}}
                                 >
-                                        {leavingOrJoiningGroupLoading && <Icon className="right" icon="loop" spinning/>}
-                                        {group.meta.in_group ? 'Groep Verlaten' : 'Lid Worden'}
+                                    {leavingOrJoiningGroupLoading && <Icon className="right" icon="loop" spinning/>}
+                                    {group.meta.in_group ? 'Groep Verlaten' : 'Lid Worden'}
                                 </Button>
                             </div>
                         </div>
@@ -227,9 +223,10 @@ let Group = React.createClass({
                                 <Grid>
                                     <Cell width={6/12}>
                                         <EditGroupName group={group} onChange={this.updateGroup}/>
+                                        <RemoveGroup group={group} onDelete={this.removeGroup}/>
                                     </Cell>
                                     <Cell width={6/12}>
-                                        <RemoveGroup group={group} onDelete={this.removeGroup}/>
+                                        <EditGroupLocation group={group} onChange={this.updateGroup}/>
                                     </Cell>
                                 </Grid>
                             </TabPanel>

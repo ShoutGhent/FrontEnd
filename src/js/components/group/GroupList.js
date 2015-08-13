@@ -53,13 +53,12 @@ var GroupList = React.createClass({
                 <Card>
                     <CardContent>
                         <CardTitle>Mijn Groepen</CardTitle>
-                        {loading && <Loading/>}
-
                         {myGroups.length != 0 &&
                             <Collection>
                                 {myGroups.map(this.renderGroups)}
                             </Collection>
                         }
+                        {loading && <Loading/>}
                     </CardContent>
                 </Card>
             </div>
