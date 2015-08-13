@@ -16,6 +16,7 @@ import Redirect from '../../../services/Redirect'
 import RemoveGroup from './RemoveGroup'
 import ShoutFeed from '../../shout/ShoutFeed'
 import ShoutForm from '../../shout/ShoutForm'
+import TransitiveNumber from 'react-transitive-number'
 import { Button } from '../../button/MaterialButton'
 import { Card, CardContent, CardTitle } from '../../card/Card'
 import { Grid, Cell } from '../../grid/Grid'
@@ -201,9 +202,18 @@ let Group = React.createClass({
                                         <h4 className="left" style={{marginLeft: 20}}>{group.name}</h4>
                                     </Cell>
                                     <Cell width={6/12}>
-                                        <span className="right">
-                                            {memberCount} {memberCount == 1 ? 'lid' : 'leden'}
-                                        </span>
+                                        <div className="right">
+                                            <span className="group-badge">
+                                                {group.meta.from_me != null && (group.meta.from_me > 1000 ? (
+                                                    <span><TransitiveNumber>{Math.round(group.meta.from_me/1000)}</TransitiveNumber> kilometer</span>
+                                                ) : (
+                                                    <span><TransitiveNumber>{Math.round(group.meta.from_me)}</TransitiveNumber> meter</span>
+                                                ))}
+                                            </span>
+                                            <span className="group-badge">
+                                                {memberCount} {memberCount == 1 ? 'lid' : 'leden'}
+                                            </span>
+                                        </div>
                                     </Cell>
                                 </Grid>
                             </CardContent>

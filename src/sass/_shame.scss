@@ -11,3 +11,22 @@ input:-webkit-autofill {
 .hidden {
     display: none;
 }
+
+.group-badge {
+    text-align: center;
+    line-height: inherit;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 3px 6px;
+//    color: #FFF;
+//    background-color: $secondary-color;
+    border-radius: 2px;
+
+    &:first-of-type {
+        margin-left: 0;
+    }
+
+    &:last-of-type {
+        margin-right: 0;
+    }
+}

@@ -1,14 +1,15 @@
 import React, { PropTypes } from 'react'
 
 import API from '../../../services/API'
+import assign from 'react/lib/Object.assign'
 import LoginActions from '../../../auth/LoginActions'
 import LoginStore from '../../../auth/LoginStore'
 import MaterialInput from '../../partials/MaterialInput'
-import { Gmaps, Marker } from 'react-gmaps'
 import Notification from '../../notification/NotificationActions'
+import WebStorage from '../../../services/WebStorage'
 import { Button } from '../../button/MaterialButton'
 import { Card, CardContent, CardTitle, CardFooter } from '../../card/Card'
-import assign from 'react/lib/Object.assign'
+import { Gmaps, Marker } from 'react-gmaps'
 
 var EditGroupLocation = React.createClass({
     propTypes: {
@@ -18,9 +19,16 @@ var EditGroupLocation = React.createClass({
     getInitialState() {
         let loginState = LoginStore.getState()
 
-        return assign(loginState, {
-            markerCoords: this.props.group.location || loginState.user.location
-        })
+        let group_location = {
+            latitude: this.props.group.lat,
+            longitude: this.props.group.lng
+        }
+
+        return {
+            myLocation: loginState.user.location,
+            markerCoords: group_location || loginState.user.location,
+            zoom: 17
+        }
     },
     componentDidMount() {
         LoginStore.listen(this._onChange)
@@ -56,10 +64,22 @@ var EditGroupLocation = React.createClass({
 
         this.setState({ markerCoords })
     },
+    myLocation(event) {
+        event.preventDefault()
+
+        this.setState({
+            markerCoords: WebStorage.fromStore('coords')
+        })
+    },
     render() {
         let { group } = this.props
 
         let markerCoords = this.state.markerCoords
+
+        let group_location = {
+            latitude: group.lat,
+            longitude: group.lng
+        }
 
         return (
             <div>
@@ -76,15 +96,16 @@ var EditGroupLocation = React.createClass({
                                 lat={markerCoords.latitude}
                                 lng={markerCoords.longitude}
                                 onClick={this.moveMarker}
-                                zoom={17}>
+                            >
                                 <Marker
                                     lat={markerCoords.latitude}
                                     lng={markerCoords.longitude}
                                 />
                             </Gmaps>
-                            { ! group.location && <p>Vermits deze groep nog geen locatie heeft, hebben we een schatting van je huidige locatie gemaakt.</p>}
+                            { ! group_location && <p>Vermits deze groep nog geen locatie heeft, hebben we een schatting van je huidige locatie gemaakt.</p>}
                         </CardContent>
                         <CardFooter>
+                            <Button onClick={this.myLocation}>Mijn Locatie</Button>
                             <Button right>Wijzigen</Button>
                         </CardFooter>
                     </Card>
