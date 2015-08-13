@@ -79,7 +79,7 @@ let Group = React.createClass({
         }
     },
     changeTab(tabId) {
-        Redirect.to('group', {
+        Redirect.replaceWith('group', {
             tabId,
             groupId: this.props.params.groupId
         })
@@ -122,7 +122,7 @@ let Group = React.createClass({
         Redirect.to('home')
     },
     render() {
-        let { loading } = this.state
+        let { loading, group } = this.state
 
         return (
             <div className="container">

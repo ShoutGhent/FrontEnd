@@ -14,6 +14,7 @@ import { Grid, Cell } from '../../grid/Grid'
 import { Link } from 'react-router'
 import { Tab, TabPanel } from '../../tab/Tab'
 import Loading from '../../loading/Loading'
+import MyPlace from '../../maps/MyPlace'
 
 let Settings = React.createClass({
     statics: {
@@ -118,6 +119,18 @@ let Settings = React.createClass({
                                             }
                                         })}
                                         </Collection>
+                                    </CardContent>
+                                </Card>
+                            </Cell>
+                        </Grid>
+                    </TabPanel>
+                    <TabPanel title="Locatie" tabId="location">
+                        <Grid>
+                            <Cell>
+                                <Card>
+                                    <CardContent>
+                                        <CardTitle>Mijn Huidige Locatie</CardTitle>
+                                        <MyPlace radius={0} height={400} coords={user.location}/>
                                     </CardContent>
                                 </Card>
                             </Cell>

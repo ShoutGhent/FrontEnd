@@ -4,7 +4,6 @@ import Avatar from '../../users/Avatar'
 import Footer from '../../partials/Footer'
 import Headline from '../../partials/Headline'
 import Icon from '../../partials/Icon'
-import Maps from '../../maps/Maps'
 import Parallax from '../../partials/Parallax'
 import { Card, CardContent, CardTitle, CardFooter } from '../../card/Card'
 import { Gmaps, Marker } from 'react-gmaps'
@@ -153,13 +152,11 @@ var _IndexLoggedOut = React.createClass({
                         </div>
                     </div>
 
-                    <Maps width={'100%'} height={map.height}>
-                        <Gmaps ref='Gmaps' width={'100%'} height={map.height} lat={coords.lat} lng={coords.lng} zoom={17}>
-                            <Marker lat={coords.lat} lng={coords.lng} />
-                        </Gmaps>
-                    </Maps>
+                    <Gmaps ref='Gmaps' width={'100%'} height={map.height} lat={coords.lat} lng={coords.lng} zoom={17}>
+                        <Marker lat={coords.lat} lng={coords.lng} />
+                    </Gmaps>
                 </div>
-                <Footer />
+                <Footer/>
             </div>
         )
     }

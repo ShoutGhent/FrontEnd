@@ -5,6 +5,7 @@ import WebStore from '../services/WebStorage'
 class LoginStore {
     constructor() {
         this.user = WebStore.fromStore('user', null)
+        this.coords = WebStore.fromStore('coords', null)
         this.jwt = WebStore.fromStore('user', null)
 
         this.bindActions(LoginActions)
@@ -29,6 +30,14 @@ class LoginStore {
     onChangeUserInformation(payload) {
         let { user } = payload
         this.user = user
+    }
+
+    onGetGeolocation(coords) {
+        this.coords = coords
+    }
+
+    onResetLocation() {
+        this.coords = null
     }
 }
 

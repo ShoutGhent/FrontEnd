@@ -7,6 +7,12 @@ class Redirect {
         })
     }
 
+    replaceWith(path, data) {
+        setTimeout(() => {
+            RouterContainer.get().replaceWith(path, data || {})
+        })
+    }
+
     toNext() {
         setTimeout(() => {
             RouterContainer.get().transitionTo(

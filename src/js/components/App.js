@@ -5,6 +5,7 @@ import HeaderActions from './header/HeaderActions'
 import Notification from './notification/Notification'
 import WebStorage from '../services/WebStorage'
 import { RouteHandler} from 'react-router'
+import LoginActions from '../auth/LoginActions'
 
 var App = React.createClass({
     statics: {
@@ -14,6 +15,9 @@ var App = React.createClass({
     },
     componentWillMount() {
         this.cleanCache()
+        window.addEventListener('focus', () => {
+            LoginActions.getGeolocation()
+        })
     },
     cleanCache() {
         let cachedShoutUrls = WebStorage.fromStore('cachedShoutUrls', [])

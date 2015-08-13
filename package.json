@@ -15,7 +15,7 @@
     "node-uuid": "^1.4.3",
     "react": "^0.13.0",
     "react-cloudinary-img": "0.0.4",
-    "react-gmaps": "^0.1.10",
+    "react-gmaps": "^0.3.0",
     "react-highlightable": "0.0.2",
     "react-ink": "^4.1.0",
     "react-notification-system": "^0.1.13",
