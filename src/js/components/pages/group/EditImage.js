@@ -19,7 +19,6 @@ var EditImage = React.createClass({
     getInitialState() {
         return {
             url: this.props.image,
-            cropped: null,
             uploading: false
         }
     },
@@ -64,17 +63,14 @@ var EditImage = React.createClass({
     submit(event) {
         event.preventDefault()
 
-        this.upload(this.state.cropped, () => {
+        let cropped = this.refs.cropper.getCroppedCanvas().toDataURL()
+        
+        this.upload(cropped, () => {
             this.props.onDone()
         })
     },
-    _crop() {
-        this.setState({
-            cropped: this.refs.cropper.getCroppedCanvas().toDataURL()
-        })
-    },
     render() {
-        let { uploading, cropped } = this.state
+        let { uploading } = this.state
         let { isOpen, onDone, ratio } = this.props
 
         return (
@@ -86,7 +82,6 @@ var EditImage = React.createClass({
                         style={{height: 400, width: '100%'}}
                         aspectRatio={ratio}
                         guides={false}
-                        crop={this._crop}
                     />
                     <div className="file-field input-field">
                         <div className="btn">
@@ -97,7 +92,7 @@ var EditImage = React.createClass({
                     </div>
                 </ModalContent>
                 <ModalFooter>
-                    <Button onClick={this.submit} disabled={ ! cropped} right>
+                    <Button onClick={this.submit} right>
                         {uploading ? (
                             <span>
                                 <Icon className="right" icon="loop" spinning/>
