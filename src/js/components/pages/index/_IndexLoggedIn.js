@@ -14,16 +14,11 @@ import ShoutFeed from '../../shout/ShoutFeed'
 import { Card, CardContent, CardTitle, CardFooter } from '../../card/Card'
 import { Grid, Cell } from '../../grid/Grid'
 import { Tab, TabPanel } from '../../tab/Tab'
+import assign from 'react/lib/Object.assign'
 
 var _IndexLoggedIn = React.createClass({
-    merge(obj1, obj2) {
-        var obj3 = {}
-        for (var attrname in obj1) { obj3[attrname] = obj1[attrname] }
-        for (var attrname in obj2) { obj3[attrname] = obj2[attrname] }
-        return obj3
-    },
     getInitialState() {
-        return this.merge(MyGroupsStore.getState(), {
+        return assign(MyGroupsStore.getState(), {
             coords: LoginStore.getState().coords,
             radius: 20
         })

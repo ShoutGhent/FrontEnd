@@ -30,7 +30,8 @@ let Settings = React.createClass({
             user: loginState.user,
             jwt: loginState.jwt,
             groups: myGroupsState.myGroups,
-            loading: myGroupsState.loading
+            loading: myGroupsState.loading,
+            address: null
         }
     },
     componentDidMount() {
@@ -43,6 +44,10 @@ let Settings = React.createClass({
     },
     _onChange(state) {
         this.setState(state)
+
+        if(state.user) {
+            this.findAdress(state.user.location)
+        }
     },
     changeTab(tabId) {
         Redirect.to('settings', { tabId })
@@ -72,9 +77,49 @@ let Settings = React.createClass({
             </CollectionItem>
         )
     },
+    findAdress(location) {
+        let geocoder = new google.maps.Geocoder
+
+        let coords = {
+            lat: parseFloat(location.latitude),
+            lng: parseFloat(location.longitude)
+        }
+
+        geocoder.geocode({ location: coords }, (results, status) => {
+            let address = null
+
+            if (status === google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
+                    address = results[0].formatted_address
+                } else {
+                   address = 'Geen resultaten gevonden'
+                }
+            } else {
+                address = 'Geocoder failed due to: ' + status
+            }
+
+            this.setState({ address })
+        })
+    },
     render() {
         let { user, groups, loading } = this.state
         let { params } = this.props
+
+        let countStyles = {
+            color: '#bbb',
+            fontSize: 16
+        }
+
+        let adminGroups = []
+        let memberGroups = []
+
+        groups.map((group) => {
+            if (group.meta.my_type == "admin") {
+                adminGroups.push(group)
+            } else {
+                memberGroups.push(group)
+            }
+        })
 
         return (
             <div className="container">
@@ -95,14 +140,10 @@ let Settings = React.createClass({
                             <Cell width={6/12}>
                                 <Card>
                                     <CardContent>
-                                        <CardTitle>Die ik beheer</CardTitle>
+                                        <CardTitle>Die ik beheer <span style={countStyles}>({adminGroups.length})</span></CardTitle>
                                         {loading && groups.length == 0 && <Loading/>}
                                         <Collection>
-                                        {groups.map(group => {
-                                            if (group.meta.my_type == "admin") {
-                                                return (this.renderGroupItem(group))
-                                            }
-                                        })}
+                                        {adminGroups.map(group => this.renderGroupItem(group))}
                                         </Collection>
                                     </CardContent>
                                 </Card>
@@ -110,14 +151,10 @@ let Settings = React.createClass({
                             <Cell width={6/12}>
                                 <Card>
                                     <CardContent>
-                                        <CardTitle>Waar ik lid van ben</CardTitle>
+                                        <CardTitle>Waar ik lid van ben <span style={countStyles}>({memberGroups.length})</span></CardTitle>
                                         {loading && groups.length == 0 && <Loading/>}
                                         <Collection>
-                                        {groups.map(group => {
-                                            if (group.meta.my_type != "admin") {
-                                                return (this.renderGroupItem(group))
-                                            }
-                                        })}
+                                        {memberGroups.map(group => this.renderGroupItem(group))}
                                         </Collection>
                                     </CardContent>
                                 </Card>
@@ -130,6 +167,7 @@ let Settings = React.createClass({
                                 <Card>
                                     <CardContent>
                                         <CardTitle>Mijn Huidige Locatie</CardTitle>
+                                        <span>Wilde gok: {this.state.address}</span>
                                         <MyPlace radius={0} height={400} coords={user.location}/>
                                     </CardContent>
                                 </Card>

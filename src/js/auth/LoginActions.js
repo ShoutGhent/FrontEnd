@@ -12,6 +12,7 @@ class LoginActions {
 
         WebStorage.toStore('jwt', jwt)
         WebStorage.toStore('user', user)
+        WebStorage.toStore('coords', user.location)
 
         this.dispatch({ user, jwt })
     }
@@ -19,6 +20,7 @@ class LoginActions {
     logoutUser() {
         WebStorage.remove('jwt')
         WebStorage.remove('user')
+        WebStorage.remove('coords')
 
         Redirect.to('/auth/login')
 
