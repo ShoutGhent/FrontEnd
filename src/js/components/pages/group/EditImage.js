@@ -32,7 +32,7 @@ var EditImage = React.createClass({
             uploading: true
         })
 
-        API.post(this.props.link, { image: file }, (res, err) => {
+        API.postFile(this.props.link, { key: 'image', value: file }, (res, err) => {
             GroupActions.setGroup(res)
             this.setState({
                 uploading: false
@@ -64,10 +64,18 @@ var EditImage = React.createClass({
         event.preventDefault()
 
         let cropped = this.refs.cropper.getCroppedCanvas().toDataURL()
-        
-        this.upload(cropped, () => {
+
+        this.upload(this.toBlob(cropped), () => {
             this.props.onDone()
         })
+    },
+    toBlob(dataurl) {
+        var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n)
+        while(n--){
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new Blob([u8arr], {type:mime})
     },
     render() {
         let { uploading } = this.state
