@@ -143,8 +143,8 @@ let Group = React.createClass({
 
         return (
             <div className="group">
-                {isAdmin && editLogoFormOpen && <EditLogo isOpen={editLogoFormOpen} onDone={this.onLogoEdited} image={group.header_data.url} groupId={group.id}/>}
-                {isAdmin && editHeaderFormOpen && <EditHeader isOpen={editHeaderFormOpen} onDone={this.onHeaderEdited} image={group.header_data.url} groupId={group.id}/>}
+                {isAdmin && editLogoFormOpen && <EditLogo isOpen={editLogoFormOpen} onDone={this.onLogoEdited} image={group.header_data.secure_url} groupId={group.id}/>}
+                {isAdmin && editHeaderFormOpen && <EditHeader isOpen={editHeaderFormOpen} onDone={this.onHeaderEdited} image={group.header_data.secure_url} groupId={group.id}/>}
                 <Grid>
                     <Cell center>
                         <div className="group__header" ref="header">
