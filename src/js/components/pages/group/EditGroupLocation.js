@@ -26,8 +26,7 @@ var EditGroupLocation = React.createClass({
 
         return {
             myLocation: loginState.user.location,
-            markerCoords: group_location || loginState.user.location,
-            zoom: 17
+            markerCoords: group_location || loginState.user.location
         }
     },
     componentDidMount() {
@@ -95,8 +94,8 @@ var EditGroupLocation = React.createClass({
                                 height={300}
                                 lat={markerCoords.latitude}
                                 lng={markerCoords.longitude}
-                                onClick={this.moveMarker}
-                            >
+                                zoom={17}
+                                onClick={this.moveMarker}>
                                 <Marker
                                     lat={markerCoords.latitude}
                                     lng={markerCoords.longitude}
