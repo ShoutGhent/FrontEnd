@@ -14,11 +14,18 @@ const MyPlace = React.createClass({
             zoom: 17
         }
     },
+    handleRadiusChanged(e) {
+        let { gmaps } = this.refs
+        let { circle } = gmaps.refs
+        let bounds = circle.getEntity().getBounds()
+        gmaps.getMap().fitBounds(bounds)
+    },
     render() {
         let { coords, radius, height, zoom } = this.props
 
         return (
             <Gmaps
+                ref="gmaps"
                 width={'100%'}
                 height={height}
                 lat={coords.latitude}
@@ -30,6 +37,7 @@ const MyPlace = React.createClass({
                 />
 
                 <Circle
+                    ref="circle"
                     strokeColor={'#F44336'}
                     strokeOpacity={0.8}
                     strokeWeight={1}
@@ -38,6 +46,7 @@ const MyPlace = React.createClass({
                     radius={radius}
                     lat={coords.latitude}
                     lng={coords.longitude}
+                    onRadiusChanged={this.handleRadiusChanged}
                 />
             </Gmaps>
         )
