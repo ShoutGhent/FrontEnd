@@ -10,7 +10,18 @@ class MyGroupsActions {
         API.get('groups/mine', {}, (response, err) => {
             this.dispatch(response.data)
 
-            this.actions.cacheMyGroups(response.data)
+            this.actions.cacheMyGroups(response.data, 'groups.myGroups')
+
+            this.actions.isLoading(false)
+        })
+    }
+    fetchGroupsNearMe() {
+        this.actions.isLoading(true)
+
+        API.get('groups/near/me', {}, (response, err) => {
+            this.dispatch(response.data)
+
+            this.actions.cacheMyGroups(response.data, 'groups.near.me')
 
             this.actions.isLoading(false)
         })
@@ -18,8 +29,7 @@ class MyGroupsActions {
     isLoading(bool) {
         this.dispatch(bool)
     }
-    cacheMyGroups(groups) {
-        let key = 'groups.myGroups'
+    cacheMyGroups(groups, key) {
         WebStorage.toStore(key, groups)
 
         let cachedUrls = WebStorage.fromStore('cachedShoutUrls', [])

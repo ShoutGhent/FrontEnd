@@ -1,27 +1,32 @@
 import React from 'react'
 
-import GroupList from '../../group/GroupList'
+import assign from 'react/lib/Object.assign'
+import MyGroupList from '../../group/MyGroupList'
+import GroupListNearMe from '../../group/GroupListNearMe'
 import InfoPanel from '../../partials/InfoPanel'
 import JoinInitialGroupModal from '../../partials/JoinInitialGroupModal'
-import LoginActions from '../../../auth/LoginActions'
 import LoginStore from '../../../auth/LoginStore'
-import MaterialSlider from '../../partials/MaterialSlider'
 import MyGroupsActions from '../../group/MyGroupsActions'
 import MyGroupsStore from '../../group/MyGroupsStore'
-import MyPlace from '../../maps/MyPlace'
-import Notification from '../../notification/NotificationActions'
+import MyLocation from '../../users/MyLocation'
 import ShoutFeed from '../../shout/ShoutFeed'
-import { Card, CardContent, CardTitle, CardFooter } from '../../card/Card'
 import { Grid, Cell } from '../../grid/Grid'
 import { Tab, TabPanel } from '../../tab/Tab'
-import assign from 'react/lib/Object.assign'
+import { Button } from '../../button/MaterialButton'
+import { Card, CardContent } from '../../card/Card'
 
 var _IndexLoggedIn = React.createClass({
     getInitialState() {
-        return assign(MyGroupsStore.getState(), {
-            coords: LoginStore.getState().coords,
-            radius: 20
-        })
+        let myGroupsStoreState = MyGroupsStore.getState()
+        let loginStoreState = LoginStore.getState()
+
+        return {
+            loading: myGroupsStoreState.loading,
+            myGroups: myGroupsStoreState.myGroups,
+            user: loginStoreState.user,
+            myLocationIsOpen: false
+
+        }
     },
     componentDidMount() {
         MyGroupsStore.listen(this._onChange)
@@ -29,6 +34,7 @@ var _IndexLoggedIn = React.createClass({
 
         if (this.isMounted()) {
             MyGroupsActions.fetchMyGroups()
+            MyGroupsActions.fetchGroupsNearMe()
         }
     },
     componentWillUnmount() {
@@ -40,23 +46,21 @@ var _IndexLoggedIn = React.createClass({
     },
     refetchGroups() {
         MyGroupsActions.fetchMyGroups()
+        MyGroupsActions.fetchGroupsNearMe()
     },
-    enableGeolocation(e) {
-        if (e.target.checked) {
-            Notification.info('Locatie wordt opgehaald')
-            LoginActions.getGeolocation()
-        } else {
-            LoginActions.resetLocation()
-        }
+    closeMyLocation() {
+        this.setState({ myLocationIsOpen: false })
     },
-    setRadius(radius) {
-        this.setState({ radius: parseFloat(radius) })
+    openMyLocation() {
+        this.setState({ myLocationIsOpen: true })
     },
     render() {
-        let { loading, myGroups } = this.state
+        let { loading, myGroups, myLocationIsOpen } = this.state
 
         return (
             <div className="container">
+                <MyLocation isOpen={myLocationIsOpen} height={300} onClose={this.closeMyLocation}/>
+
                 {!loading && myGroups.length <= 0 ? (
                     <JoinInitialGroupModal onDone={this.refetchGroups}></JoinInitialGroupModal>
                 ) : ''}
@@ -64,7 +68,7 @@ var _IndexLoggedIn = React.createClass({
                     <TabPanel title="Vrienden">
                         <Grid>
                             <Cell width={4/12}>
-                                <GroupList/>
+                                <MyGroupList/>
                             </Cell>
                             <Cell width={8/12}>
                                 <ShoutFeed url="shouts/from/groups"/>
@@ -76,61 +80,16 @@ var _IndexLoggedIn = React.createClass({
                             <Cell width={4/12}>
                                 <Card>
                                     <CardContent>
-                                        <CardTitle>
-                                            <span>Mijn Omgeving</span>
-                                            <div className="switch right">
-                                                <label>
-                                                    <input checked={!! this.state.coords} type="checkbox" onChange={this.enableGeolocation}/>
-                                                    <span className="lever"></span>
-                                                </label>
-                                            </div>
-                                        </CardTitle>
-
-                                        <div style={{position: 'relative'}}>
-                                        {this.state.coords ? (
-                                            <MyPlace radius={this.state.radius} height={300} coords={this.state.coords}/>
-                                        ) : (
-                                            <div style={{
-                                                position: 'relative',
-                                                width: '100%',
-                                                height: 300,
-                                                background: 'rgba(0,0,0,0.04)'
-                                            }}>
-                                                <span style={{
-                                                    position: 'absolute',
-                                                    left: '50%',
-                                                    top: '50%',
-                                                    transform: 'translate(-50%, -50%)'
-                                                }}>
-                                                Wachten op locatie...
-                                                </span>
-                                            </div>
-                                        )}
-                                        </div>
-
-                                        <br/>
-                                        <div className="right">
-                                        Shouts in een straal van {this.state.radius > 1000 ? (
-                                            <span>{this.state.radius/1000} km</span>
-                                        ) : (
-                                            <span>{this.state.radius} m</span>
-                                        )}
-                                        </div>
-                                        <br/>
+                                        <Button onClick={this.openMyLocation} disabled={myLocationIsOpen} full>
+                                            Wijzig Omgeving
+                                        </Button>
                                     </CardContent>
-                                    <CardFooter>
-                                        <MaterialSlider
-                                            min={20}
-                                            max={2000}
-                                            step={10}
-                                            onChange={this.setRadius}
-                                            onDone={this.setRadius}
-                                        />
-                                    </CardFooter>
                                 </Card>
+
+                                <GroupListNearMe/>
                             </Cell>
                             <Cell width={8/12}>
-                            {this.state.coords ? (
+                            {this.state.user.location ? (
                                 <ShoutFeed url="shouts/from/groups"/>
                             ) : (
                                 <InfoPanel>

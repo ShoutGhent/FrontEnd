@@ -15,9 +15,6 @@ var App = React.createClass({
     },
     componentWillMount() {
         this.cleanCache()
-        window.addEventListener('focus', () => {
-            LoginActions.getGeolocation()
-        })
     },
     cleanCache() {
         let cachedShoutUrls = WebStorage.fromStore('cachedShoutUrls', [])

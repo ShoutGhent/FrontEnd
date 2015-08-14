@@ -9,6 +9,7 @@ var Button = React.createClass({
         disabled: PropTypes.bool,
         flat: PropTypes.bool,
         large: PropTypes.bool,
+        full: PropTypes.bool,
         onClick: PropTypes.func,
         right: PropTypes.bool,
     },
@@ -18,13 +19,14 @@ var Button = React.createClass({
             disabled: false,
             flat: false,
             large: false,
+            full: false,
             onClick: () => {},
             right: false,
         }
     },
 
     render() {
-        let { children, large, right, flat, disabled, onClick, className } = this.props
+        let { children, large, right, flat, full, disabled, onClick, className } = this.props
 
         let btnStyle = {
             position: 'relative'
@@ -35,6 +37,7 @@ var Button = React.createClass({
             'btn': true,
             'btn-large': large,
             'btn-flat': flat,
+            'btn-block': full,
             'right': right
         })
 

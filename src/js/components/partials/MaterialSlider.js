@@ -4,6 +4,7 @@ var MaterialSlider = React.createClass({
     propTypes: {
         min: PropTypes.number,
         max: PropTypes.number,
+        current: PropTypes.number,
         step: PropTypes.number,
         onChange: PropTypes.func,
     },
@@ -16,6 +17,7 @@ var MaterialSlider = React.createClass({
         return {
             min: 0,
             max: 100,
+            current: 0,
             step: 1,
             onChange: () => {},
             onDone: () => {}
@@ -36,7 +38,7 @@ var MaterialSlider = React.createClass({
             <div>
                 <p className="range-field" style={{position: 'relative'}}>
                     <input
-                        defaultValue={this.props.min}
+                        defaultValue={this.props.current}
                         max={this.props.max}
                         min={this.props.min}
                         onChange={this.setValue}

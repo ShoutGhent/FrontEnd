@@ -23,7 +23,7 @@ const MyPlace = React.createClass({
     render() {
         const { coords, radius, height, zoom } = this.props
 
-        return (
+        return coords ? (
             <Gmaps
                 ref="gmaps"
                 width={'100%'}
@@ -31,11 +31,13 @@ const MyPlace = React.createClass({
                 lat={coords.latitude}
                 lng={coords.longitude}
                 zoom={zoom}>
+
                 <Marker
                     lat={coords.latitude}
                     lng={coords.longitude}
                 />
 
+                {radius &&
                 <Circle
                     ref="circle"
                     strokeColor={'#F44336'}
@@ -47,9 +49,9 @@ const MyPlace = React.createClass({
                     lat={coords.latitude}
                     lng={coords.longitude}
                     onRadiusChanged={this.handleRadiusChanged}
-                />
+                />}
             </Gmaps>
-        )
+        ) : null
     }
 })
 

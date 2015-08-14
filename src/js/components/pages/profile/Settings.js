@@ -4,17 +4,17 @@ import Cloudinary from '../../partials/Cloudinary'
 import EditName from './EditName'
 import EditPassword from './EditPassword'
 import EditProfilePicture from './EditProfilePicture'
+import Loading from '../../loading/Loading'
 import LoginStore from '../../../auth/LoginStore'
 import MyGroupsActions from '../../group/MyGroupsActions'
 import MyGroupsStore from '../../group/MyGroupsStore'
+import MyLocation from '../../users/MyLocation'
 import Redirect from '../../../services/Redirect'
 import { Card, CardContent, CardTitle } from '../../card/Card'
 import { Collection, CollectionItem } from '../../collection/Collection'
 import { Grid, Cell } from '../../grid/Grid'
 import { Link } from 'react-router'
 import { Tab, TabPanel } from '../../tab/Tab'
-import Loading from '../../loading/Loading'
-import MyPlace from '../../maps/MyPlace'
 
 let Settings = React.createClass({
     statics: {
@@ -30,8 +30,7 @@ let Settings = React.createClass({
             user: loginState.user,
             jwt: loginState.jwt,
             groups: myGroupsState.myGroups,
-            loading: myGroupsState.loading,
-            address: null
+            loading: myGroupsState.loading
         }
     },
     componentDidMount() {
@@ -44,10 +43,6 @@ let Settings = React.createClass({
     },
     _onChange(state) {
         this.setState(state)
-
-        if(state.user) {
-            this.findAdress(state.user.location)
-        }
     },
     changeTab(tabId) {
         Redirect.to('settings', { tabId })
@@ -76,30 +71,6 @@ let Settings = React.createClass({
                 </Link>
             </CollectionItem>
         )
-    },
-    findAdress(location) {
-        let geocoder = new google.maps.Geocoder
-
-        let coords = {
-            lat: parseFloat(location.latitude),
-            lng: parseFloat(location.longitude)
-        }
-
-        geocoder.geocode({ location: coords }, (results, status) => {
-            let address = null
-
-            if (status === google.maps.GeocoderStatus.OK) {
-                if (results[0]) {
-                    address = results[0].formatted_address
-                } else {
-                   address = 'Geen resultaten gevonden'
-                }
-            } else {
-                address = 'Geocoder failed due to: ' + status
-            }
-
-            this.setState({ address })
-        })
     },
     render() {
         let { user, groups, loading } = this.state
@@ -156,19 +127,6 @@ let Settings = React.createClass({
                                         <Collection>
                                         {memberGroups.map(group => this.renderGroupItem(group))}
                                         </Collection>
-                                    </CardContent>
-                                </Card>
-                            </Cell>
-                        </Grid>
-                    </TabPanel>
-                    <TabPanel title="Locatie" tabId="location">
-                        <Grid>
-                            <Cell>
-                                <Card>
-                                    <CardContent>
-                                        <CardTitle>Mijn Huidige Locatie</CardTitle>
-                                        <span>Wilde gok: {this.state.address}</span>
-                                        <MyPlace radius={0} height={400} coords={user.location}/>
                                     </CardContent>
                                 </Card>
                             </Cell>

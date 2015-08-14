@@ -6,13 +6,11 @@ import Icon from '../partials/Icon'
 import moment from 'moment'
 import ReportShout from '../pages/shout/ReportShout'
 import TransitiveNumber from 'react-transitive-number'
-import WebStorage from '../../services/WebStorage'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
 import { Link } from 'react-router'
 
 let Shout = React.createClass({
     propTypes: {
-        user: PropTypes.object.isRequired,
         shout: PropTypes.object.isRequired,
         onHide: PropTypes.func.isRequired,
         onEdit: PropTypes.func.isRequired,
@@ -24,7 +22,6 @@ let Shout = React.createClass({
         return {
             width: '100%',
             intervalId: null,
-            currentUser: WebStorage.fromStore('user'),
             editModalOpen: false,
             reportModalOpen: false,
             secondsLeft: 0
@@ -110,14 +107,14 @@ let Shout = React.createClass({
         this.props.onToggleFavorite(this.props.shout)
     },
     render() {
-        let { user, shout } = this.props
+        let { shout } = this.props
         let { width, editModalOpen, reportModalOpen } = this.state
         let { anonymous } = shout
 
         let anonymousName = 'Anonymous'
 
-        let name = anonymous ? anonymousName : user.full_name
-        let email = anonymous ? anonymousName : user.email
+        let name = anonymous ? anonymousName : shout.user.full_name
+        let email = anonymous ? anonymousName : shout.user.email
 
         let myShout = shout.meta.my_shout
 

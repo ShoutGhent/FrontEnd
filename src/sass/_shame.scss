@@ -18,8 +18,6 @@ input:-webkit-autofill {
     margin-left: 5px;
     margin-right: 5px;
     padding: 3px 6px;
-//    color: #FFF;
-//    background-color: $secondary-color;
     border-radius: 2px;
 
     &:first-of-type {
@@ -29,4 +27,8 @@ input:-webkit-autofill {
     &:last-of-type {
         margin-right: 0;
     }
+}
+
+.btn-block {
+    width: 100%;
 }

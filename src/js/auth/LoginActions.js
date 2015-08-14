@@ -12,7 +12,6 @@ class LoginActions {
 
         WebStorage.toStore('jwt', jwt)
         WebStorage.toStore('user', user)
-        WebStorage.toStore('coords', user.location)
 
         this.dispatch({ user, jwt })
     }
@@ -20,7 +19,6 @@ class LoginActions {
     logoutUser() {
         WebStorage.remove('jwt')
         WebStorage.remove('user')
-        WebStorage.remove('coords')
 
         Redirect.to('/auth/login')
 
@@ -36,23 +34,31 @@ class LoginActions {
         this.dispatch({ user })
     }
 
+    changeRadius(radius, cb) {
+        API.post('users/me/changeRadius', { radius }, (data, err) => {
+            if (cb) {
+                cb(data.radius)
+            }
+            this.dispatch(data.radius)
+        })
+    }
+
     getGeolocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
+
                 let coords = {
                     latitude: position.coords.latitude,
                     longitude: position.coords.longitude
                 }
 
-                WebStorage.toStore('coords', coords)
-
-                API.post('users/me/location', { latitude: coords.latitude, longitude: position.coords.longitude }, (data, err) => {
+                API.post('users/me/location', coords, (data, err) => {
                     let user = WebStorage.fromStore('user')
                     user.location = data.location
                     WebStorage.toStore('user', user)
+                    this.dispatch(user)
                 })
 
-                this.dispatch(coords)
             }, (err) => {
                 console.log(err)
             }, {
@@ -64,7 +70,6 @@ class LoginActions {
     }
 
     resetLocation() {
-        WebStorage.remove('coords')
         this.dispatch()
     }
 }

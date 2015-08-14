@@ -3,24 +3,20 @@ import React, { PropTypes } from 'react'
 import Cloudinary from '../partials/Cloudinary'
 import Icon from '../partials/Icon'
 import Loading from '../loading/Loading'
-import MyGroupsStore from './MyGroupsStore'
-import WebStorage from '../../services/WebStorage'
 import { Card, CardContent, CardTitle } from '../card/Card'
 import { Collection, CollectionItem } from '../collection/Collection'
 import { Link } from 'react-router'
 
 var GroupList = React.createClass({
-    getInitialState() {
-        return MyGroupsStore.getState()
+    propTypes: {
+        groups: PropTypes.array.isRequired,
+        title: PropTypes.string.isRequired,
+        loading: PropTypes.bool
     },
-    componentDidMount() {
-        MyGroupsStore.listen(this._onChange)
-    },
-    componentWillUnmount() {
-        MyGroupsStore.unlisten(this._onChange)
-    },
-    _onChange(state) {
-        this.setState(state)
+    getDefaultProps() {
+        return {
+            loading: false
+        }
     },
     renderGroups(group) {
         return (
@@ -46,22 +42,20 @@ var GroupList = React.createClass({
         )
     },
     render() {
-        let { myGroups, loading } = this.state
+        let { groups, loading, title } = this.props
 
         return (
-            <div>
-                <Card>
-                    <CardContent>
-                        <CardTitle>Mijn Groepen</CardTitle>
-                        {myGroups.length != 0 &&
-                            <Collection>
-                                {myGroups.map(this.renderGroups)}
-                            </Collection>
-                        }
-                        {loading && <Loading/>}
-                    </CardContent>
-                </Card>
-            </div>
+            <Card>
+                <CardContent>
+                    <CardTitle>{title}</CardTitle>
+                    {groups.length != 0 &&
+                        <Collection>
+                            {groups.map(this.renderGroups)}
+                        </Collection>
+                    }
+                    {loading && <Loading/>}
+                </CardContent>
+            </Card>
         )
     }
 })
