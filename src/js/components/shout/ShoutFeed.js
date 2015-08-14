@@ -157,7 +157,7 @@ let ShoutFeed = React.createClass({
                 {canShout && <AddShout groupId={groupId} onDone={this.prependShout}/>}
                 {shouts.map((shout) =>
                     <Shout
-                        user={shout.user || WebStorage.fromStore('user') }
+                        user={shout.user}
                         key={shout.id}
                         shout={shout}
                         onHide={this.hideShout}

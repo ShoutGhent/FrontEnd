@@ -111,7 +111,7 @@ let Shout = React.createClass({
     },
     render() {
         let { user, shout } = this.props
-        let { currentUser, width, editModalOpen, reportModalOpen } = this.state
+        let { width, editModalOpen, reportModalOpen } = this.state
         let { anonymous } = shout
 
         let anonymousName = 'Anonymous'
@@ -119,7 +119,7 @@ let Shout = React.createClass({
         let name = anonymous ? anonymousName : user.full_name
         let email = anonymous ? anonymousName : user.email
 
-        let myShout = currentUser.id == user.id
+        let myShout = shout.meta.my_shout
 
         let whenMyShout = [
             <li key="edit"><a href onClick={this.openEditModal}>Bewerken</a></li>,

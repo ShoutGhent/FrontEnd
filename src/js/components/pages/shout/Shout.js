@@ -77,7 +77,7 @@ let ShoutPage = React.createClass({
             ) : (
                 shout ? (
                     <Shout
-                        user={shout.user || WebStorage.fromStore('user')}
+                        user={shout.user}
                         key={shout.id}
                         shout={shout}
                         onHide={this.hideShout}
