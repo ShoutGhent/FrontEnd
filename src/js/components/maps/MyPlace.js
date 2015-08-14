@@ -15,13 +15,13 @@ const MyPlace = React.createClass({
         }
     },
     handleRadiusChanged(e) {
-        let { gmaps } = this.refs
-        let { circle } = gmaps.refs
-        let bounds = circle.getEntity().getBounds()
+        const { gmaps } = this.refs
+        const { circle } = gmaps.refs
+        const bounds = circle.getEntity().getBounds()
         gmaps.getMap().fitBounds(bounds)
     },
     render() {
-        let { coords, radius, height, zoom } = this.props
+        const { coords, radius, height, zoom } = this.props
 
         return (
             <Gmaps
