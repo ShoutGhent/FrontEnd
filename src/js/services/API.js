@@ -71,12 +71,16 @@ class API {
                         }
                     }
                 }
-                if (res.body && res.body.token) {
+                if (res && res.body && res.body.token) {
                     WebStorage.toStore('jwt', res.body.token)
                 }
 
                 if (typeof cb == "function") {
-                    cb(res.body, err)
+                    if (res && res.body) {
+                        cb(res.body, err)
+                    } else {
+                        cb(null, err)
+                    }
                 }
             })
     }

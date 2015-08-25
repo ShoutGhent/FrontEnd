@@ -23,8 +23,7 @@ var _IndexLoggedIn = React.createClass({
         return {
             loading: myGroupsStoreState.loading,
             myGroups: myGroupsStoreState.myGroups,
-            user: loginStoreState.user,
-            myLocationIsOpen: false
+            user: loginStoreState.user
 
         }
     },
@@ -48,19 +47,11 @@ var _IndexLoggedIn = React.createClass({
         MyGroupsActions.fetchMyGroups()
         MyGroupsActions.fetchGroupsNearMe()
     },
-    closeMyLocation() {
-        this.setState({ myLocationIsOpen: false })
-    },
-    openMyLocation() {
-        this.setState({ myLocationIsOpen: true })
-    },
     render() {
-        let { loading, myGroups, myLocationIsOpen } = this.state
+        let { loading, myGroups } = this.state
 
         return (
             <div className="container">
-                <MyLocation isOpen={myLocationIsOpen} height={300} onClose={this.closeMyLocation}/>
-
                 {!loading && myGroups.length <= 0 ? (
                     <JoinInitialGroupModal onDone={this.refetchGroups}></JoinInitialGroupModal>
                 ) : ''}
@@ -78,13 +69,7 @@ var _IndexLoggedIn = React.createClass({
                     <TabPanel title="Omgeving">
                         <Grid>
                             <Cell width={4/12}>
-                                <Card>
-                                    <CardContent>
-                                        <Button onClick={this.openMyLocation} disabled={myLocationIsOpen} full>
-                                            Wijzig Omgeving
-                                        </Button>
-                                    </CardContent>
-                                </Card>
+                                <MyLocation height={300}/>
 
                                 <GroupListNearMe/>
                             </Cell>

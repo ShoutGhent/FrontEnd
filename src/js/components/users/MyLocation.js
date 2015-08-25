@@ -5,21 +5,16 @@ import LoginStore from '../../auth/LoginStore'
 import MaterialSlider from '../partials/MaterialSlider'
 import MyGroupsActions from '../group/MyGroupsActions'
 import MyPlace from '../maps/MyPlace'
-import { Grid, Cell } from '../grid/Grid'
-import { Modal, ModalContent, ModalFooter } from '../modal/Modal'
+import { Card, CardContent, CardTitle } from '../card/Card'
 
 var MyLocation = React.createClass({
     propTypes: {
         radius: PropTypes.number,
-        height: PropTypes.number,
-        isOpen: PropTypes.bool,
-        onClose: PropTypes.func,
+        height: PropTypes.number
     },
     getDefaultProps() {
         return {
-            height: 400,
-            isOpen: false,
-            onClose: () => {}
+            height: 400
         }
     },
     getInitialState() {
@@ -100,9 +95,9 @@ var MyLocation = React.createClass({
         let { height, isOpen } = this.props
 
         return (
-            <Modal isOpen={isOpen} onClose={this.props.onClose}>
-                <ModalContent>
-                    <h5>
+            <Card>
+                <CardContent>
+                    <CardTitle>
                         Locatiebepaling ({checked ? 'aan' : 'uit'}):
                         <div className="switch right">
                             <label>
@@ -110,60 +105,54 @@ var MyLocation = React.createClass({
                                 <span className="lever"></span>
                             </label>
                         </div>
-                    </h5>
+                    </CardTitle>
+
                     {address && user.location &&
-                    <MyPlace
-                        radius={radius}
-                        height={height}
-                        coords={user.location}
-                    />
-                        }
-                    { ! checked &&
-                    <div style={{
-                        position: 'relative',
-                        width: '100%',
-                        height: 300,
-                        background: 'rgba(0,0,0,0.04)'
-                    }}>
-                        <span style={{
-                            position: 'absolute',
-                            left: '50%',
-                            top: '50%',
-                            transform: 'translate(-50%, -50%)'
+                        <MyPlace
+                            radius={radius}
+                            height={height}
+                            coords={user.location}
+                        />
+                            }
+                        { ! checked &&
+                        <div style={{
+                            position: 'relative',
+                            width: '100%',
+                            height: 300,
+                            background: 'rgba(0,0,0,0.04)'
                         }}>
-                            Wachten op locatie...
-                        </span>
-                    </div>
-                        }
-                </ModalContent>
-                <ModalFooter>
-                    <Grid>
-                        <Cell width={6/12}>
-                            <MaterialSlider
-                                min={20}
-                                max={2000}
-                                step={10}
-                                current={user.radius}
-                                onChange={this.setRadius}
-                                onDone={this.changeUserRadius}
-                            />
-                        </Cell>
-                        <Cell width={6/12}>
-                            <div className="center" style={{
-                                height: 63,
-                                lineHeight: '63px',
-                                verticalAlign: 'middle'
+                            <span style={{
+                                position: 'absolute',
+                                left: '50%',
+                                top: '50%',
+                                transform: 'translate(-50%, -50%)'
                             }}>
-                                Shouts in een straal van {radius > 1000 ? (
-                                <span>{radius/1000} km</span>
-                            ) : (
-                                <span>{radius} m</span>
-                            )}
-                            </div>
-                        </Cell>
-                    </Grid>
-                </ModalFooter>
-            </Modal>
+                                Wachten op locatie...
+                            </span>
+                        </div>
+                    }
+                    <MaterialSlider
+                        min={20}
+                        max={2000}
+                        step={10}
+                        current={user.radius}
+                        onChange={this.setRadius}
+                        onDone={this.changeUserRadius}
+                    />
+
+                    <div className="center" style={{
+                        height: 63,
+                        lineHeight: '63px',
+                        verticalAlign: 'middle'
+                    }}>
+                        Shouts in een straal van {radius > 1000 ? (
+                        <span>{radius/1000} km</span>
+                    ) : (
+                        <span>{radius} m</span>
+                    )}
+                    </div>
+                </CardContent>
+            </Card>
         )
     }
 })
