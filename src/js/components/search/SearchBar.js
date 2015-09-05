@@ -9,6 +9,7 @@ import SearchStore from './SearchStore'
 import { Collection, CollectionItem } from '../collection/Collection'
 import { Grid, Cell } from '../grid/Grid'
 import GroupDistance from '../pages/group/GroupDistance'
+import Debounce from '../../services/Debounce'
 
 let SearchBar = React.createClass({
     getInitialState() {
@@ -16,6 +17,7 @@ let SearchBar = React.createClass({
     },
     componentDidMount() {
         SearchStore.listen(this._onChange)
+        this.search = Debounce(this.search)
     },
     componentWillUnmount() {
         SearchStore.unlisten(this._onChange)
@@ -27,7 +29,11 @@ let SearchBar = React.createClass({
         }
     },
     updateSearchText(event) {
-        SearchActions.updateSearchText(event.target.value)
+        this.setState({ searchText: event.target.value })
+        this.search()
+    },
+    search() {
+        SearchActions.updateSearchText(this.state.searchText)
     },
     handleKeyboard(event) {
         if (event.keyCode == 27) { // Escape key
