@@ -5,6 +5,14 @@ import WebStorage from '../../services/WebStorage'
 import GroupList from './GroupList'
 
 var GroupListNearMe = React.createClass({
+    propTypes: {
+        onFetched: PropTypes.func
+    },
+    getDefaultProps() {
+        return {
+            onFetched: () => {}
+        }
+    },
     getInitialState() {
         return MyGroupsStore.getState()
     },
@@ -15,6 +23,9 @@ var GroupListNearMe = React.createClass({
         MyGroupsStore.unlisten(this._onChange)
     },
     _onChange(state) {
+        if ( ! state.loading) {
+            this.props.onFetched(state.myGroups)
+        }
         this.setState(state)
     },
 

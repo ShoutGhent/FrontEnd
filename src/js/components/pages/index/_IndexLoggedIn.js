@@ -24,7 +24,6 @@ var _IndexLoggedIn = React.createClass({
             loading: myGroupsStoreState.loading,
             myGroups: myGroupsStoreState.myGroups,
             user: loginStoreState.user
-
         }
     },
     componentDidMount() {

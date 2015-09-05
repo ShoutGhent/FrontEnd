@@ -67,7 +67,12 @@ var EditGroupLocation = React.createClass({
         event.preventDefault()
 
         this.setState({
-            markerCoords: WebStorage.fromStore('coords')
+            markerCoords: WebStorage.fromStore('user', {
+                location: {
+                    latitude: null,
+                    longitude: null
+                }
+            }).location
         })
     },
     render() {

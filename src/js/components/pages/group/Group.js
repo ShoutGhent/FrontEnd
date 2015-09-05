@@ -119,7 +119,7 @@ let Group = React.createClass({
         Redirect.to('home')
     },
     render() {
-        let { loading, group } = this.state
+        let { loading } = this.state
 
         return (
             <div className="container">

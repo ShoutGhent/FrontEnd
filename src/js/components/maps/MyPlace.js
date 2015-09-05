@@ -7,7 +7,7 @@ const MyPlace = React.createClass({
         coords: PropTypes.object.isRequired,
         radius: PropTypes.number.isRequired,
         height: PropTypes.number.isRequired,
-        zoom: PropTypes.number,
+        zoom: PropTypes.number
     },
     getDefaultProps() {
         return {

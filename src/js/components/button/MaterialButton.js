@@ -12,6 +12,7 @@ var Button = React.createClass({
         full: PropTypes.bool,
         onClick: PropTypes.func,
         right: PropTypes.bool,
+        padding: PropTypes.string
     },
     getDefaultProps() {
         return {
@@ -22,14 +23,16 @@ var Button = React.createClass({
             full: false,
             onClick: () => {},
             right: false,
+            padding: '0 2rem'
         }
     },
 
     render() {
-        let { children, large, right, flat, full, disabled, onClick, className } = this.props
+        let { children, large, right, flat, full, disabled, onClick, className, padding } = this.props
 
         let btnStyle = {
-            position: 'relative'
+            position: 'relative',
+            padding: padding
         }
 
         // Attach classes

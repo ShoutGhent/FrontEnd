@@ -3,6 +3,7 @@ import React from "react"
 import App from './components/App'
 import Group from './components/pages/group/Group'
 import Index from './components/pages/index/Index'
+import Map from './components/pages/index/Map'
 import LoggedIn from './components/pages/LoggedIn'
 import Login from './components/pages/auth/Login'
 import Profile from './components/pages/profile/Profile'
@@ -21,6 +22,7 @@ var routes = (
         </Route>
         <Route handler={LoggedIn}>
             <Route name="profile" path="/profile" handler={Profile}/>
+            <Route name="map" path="/map" handler={Map}/>
             <Route name="settings" path="profile/settings/:tabId" handler={Settings}/>
             <Route name="shout" path="shouts/:shoutId" handler={Shout} />
             <Route name="group" path="groups/:groupId/:tabId" handler={Group} />
