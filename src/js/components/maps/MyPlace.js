@@ -20,6 +20,36 @@ const MyPlace = React.createClass({
         const bounds = circle.getEntity().getBounds()
         gmaps.getMap().fitBounds(bounds)
     },
+    shouldComponentUpdate(next) {
+        if (
+            (next.coords.latitude == this.props.coords.latitude) &&
+            (next.coords.longitude == this.props.coords.longitude) &&
+            (next.radius == this.props.radius) &&
+            (next.height == this.props.height) &&
+            (next.zoom == this.props.zoom)
+        ) {
+            return false
+        }
+
+        return true
+    },
+    componentDidMount() {
+        if (this.isMounted()) {
+            setTimeout(() => {
+                google.maps.event.trigger(this.refs.gmaps, 'resize')
+            })
+        }
+    },
+    onMapCreated() {
+        google.maps.event.addDomListener(window, 'resize', this.fixingMaps)
+    },
+    fixingMaps() {
+        const gmaps = this.refs.gmaps
+        const coords = this.props.coords
+
+        gmaps.getMap().setCenter(new google.maps.LatLng(coords.latitude, coords.longitude))
+        this.handleRadiusChanged()
+    },
     render() {
         const { coords, radius, height, zoom } = this.props
 
@@ -30,7 +60,8 @@ const MyPlace = React.createClass({
                 height={height}
                 lat={coords.latitude}
                 lng={coords.longitude}
-                zoom={zoom}>
+                zoom={zoom}
+                onMapCreated={this.onMapCreated}>
 
                 <Marker
                     lat={coords.latitude}

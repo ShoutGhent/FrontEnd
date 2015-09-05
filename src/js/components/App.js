@@ -6,6 +6,7 @@ import Notification from './notification/Notification'
 import WebStorage from '../services/WebStorage'
 import { RouteHandler} from 'react-router'
 import LoginActions from '../auth/LoginActions'
+import LoginStore from '../auth/LoginStore'
 
 var App = React.createClass({
     statics: {
@@ -15,6 +16,9 @@ var App = React.createClass({
     },
     componentWillMount() {
         this.cleanCache()
+        if (LoginStore.isLoggedIn()) {
+            LoginActions.getGeolocation()
+        }
     },
     cleanCache() {
         let cachedShoutUrls = WebStorage.fromStore('cachedShoutUrls', [])

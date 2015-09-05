@@ -56,7 +56,7 @@ var Validation = React.createClass({
             let v = Validator.validate(method, data, items)
             if ( ! v.valid) {
                 return {
-                    valid: v.valid,
+                    valid: v.valid ? true : false,
                     message: v.message
                 }
             }

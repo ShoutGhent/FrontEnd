@@ -13,7 +13,7 @@
     "md5": "^2.0.0",
     "moment": "^2.10.3",
     "node-uuid": "^1.4.3",
-    "react": "^0.13.0",
+    "react": "^0.13.3",
     "react-cloudinary-img": "0.0.4",
     "react-gmaps": "^0.3.0",
     "react-highlightable": "0.0.2",

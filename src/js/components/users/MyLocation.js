@@ -47,6 +47,7 @@ var MyLocation = React.createClass({
         if (e.target.checked) {
             LoginActions.getGeolocation()
         } else {
+            this.setState({ address: null })
             LoginActions.resetLocation()
         }
 
@@ -92,7 +93,7 @@ var MyLocation = React.createClass({
     },
     render() {
         let { address, user, checked, radius } = this.state
-        let { height, isOpen } = this.props
+        let { height } = this.props
 
         return (
             <Card>
@@ -113,8 +114,8 @@ var MyLocation = React.createClass({
                             height={height}
                             coords={user.location}
                         />
-                            }
-                        { ! checked &&
+                    }
+                    { ! checked &&
                         <div style={{
                             position: 'relative',
                             width: '100%',
