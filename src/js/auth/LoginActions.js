@@ -43,7 +43,7 @@ class LoginActions {
         })
     }
 
-    getGeolocation() {
+    getGeolocation(cb = () => {}) {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
 
@@ -57,6 +57,7 @@ class LoginActions {
                     user.location = data.location
                     WebStorage.toStore('user', user)
                     this.dispatch(user)
+                    cb(user.location)
                 })
 
             }, (err) => {

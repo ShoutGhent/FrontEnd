@@ -2,9 +2,11 @@ import React, { PropTypes } from 'react'
 
 import Icon from '../../partials/Icon'
 import LoginStore from '../../../auth/LoginStore'
+import LoginActions from '../../../auth/LoginActions'
 import WebStorage from '../../../services/WebStorage'
 import { Button } from '../../button/MaterialButton'
 import { Gmaps, Marker, Circle, InfoWindow } from 'react-gmaps'
+import Notification from '../../notification/NotificationActions'
 
 var Map = React.createClass({
     getInitialState() {
@@ -37,8 +39,13 @@ var Map = React.createClass({
             }
         }).location
 
-
         gmaps.getMap().setCenter(new google.maps.LatLng(coords.latitude, coords.longitude))
+    },
+    getLocation() {
+        LoginActions.getGeolocation((location) => {
+            Notification.success('Nieuwe locatie is ingesteld!')
+        })
+        Notification.success("Locatie wordt opgehaald!")
     },
     render() {
         let { coords, height } = this.state
@@ -58,8 +65,11 @@ var Map = React.createClass({
                     <Button className="btn" padding="0 1rem" onClick={this.centerCurrentLocation}>
                         <Icon icon="home"/>
                     </Button>
+                    &nbsp;&nbsp;
+                    <Button className="btn" padding="0 1rem" onClick={this.getLocation}>
+                        <Icon icon="my_location"/>
+                    </Button>
                 </div>
-
                 <Gmaps
                     ref="gmaps"
                     width={'100%'}
