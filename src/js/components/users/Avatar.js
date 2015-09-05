@@ -10,7 +10,8 @@ var Avatar = React.createClass({
         default: PropTypes.string,
         pixelate: PropTypes.number,
         greyscale: PropTypes.bool,
-        blur: PropTypes.number
+        blur: PropTypes.number,
+        round: PropTypes.bool
     },
     getInitialState() {
         return {
@@ -23,7 +24,8 @@ var Avatar = React.createClass({
             default: '',
             pixelate: 0,
             greyscale: false,
-            blur: 0
+            blur: 0,
+            round: false
         }
     },
     componentDidMount() {

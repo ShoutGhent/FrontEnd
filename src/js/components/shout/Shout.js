@@ -3,10 +3,14 @@ import React, { PropTypes } from 'react'
 import Avatar from '../users/Avatar'
 import EditShout from '../pages/shout/EditShout'
 import Icon from '../partials/Icon'
+import MaterialTextarea from '../partials/MaterialTextarea'
 import moment from 'moment'
 import ReportShout from '../pages/shout/ReportShout'
 import TransitiveNumber from 'react-transitive-number'
+import { Button } from '../button/MaterialButton'
+import { Collection, CollectionItem } from '../collection/Collection'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
+import { Grid, Cell } from '../grid/Grid'
 import { Link } from 'react-router'
 
 let Shout = React.createClass({
@@ -24,7 +28,8 @@ let Shout = React.createClass({
             intervalId: null,
             editModalOpen: false,
             reportModalOpen: false,
-            secondsLeft: 0
+            secondsLeft: 0,
+            openComments: false,
         }
     },
     calcPercentage(shout, onHide) {
@@ -106,9 +111,14 @@ let Shout = React.createClass({
     toggleFavorite() {
         this.props.onToggleFavorite(this.props.shout)
     },
+    toggleComments() {
+        this.setState({
+            openComments: ! this.state.openComments
+        })
+    },
     render() {
         let { shout } = this.props
-        let { width, editModalOpen, reportModalOpen } = this.state
+        let { width, editModalOpen, reportModalOpen, openComments } = this.state
         let { anonymous } = shout
 
         let anonymousName = 'Anonymous'
@@ -119,90 +129,129 @@ let Shout = React.createClass({
         let myShout = shout.meta.my_shout
 
         let whenMyShout = [
-            <li key="edit"><a href onClick={this.openEditModal}>Bewerken</a></li>,
-            <li key="delete"><a href onClick={this.onDelete}>Verwijderen</a></li>
+            <li key="edit"><a href onClick={this.openEditModal}><Icon icon="mode_edit"/> Bewerken</a></li>,
+            <li key="delete"><a href onClick={this.onDelete}><Icon icon="delete"/> Verwijderen</a></li>
             //null ? <li><a href onClick={(event) => {event.preventDefault}}>Republish</a></li> : ''
         ]
 
         let whenNotMyShout = [
             <li key="report">
-                <a href onClick={this.openReportModal}>Rapporteren</a>
+                <a href onClick={this.openReportModal}><Icon icon="report"/> Rapporteren</a>
                 <ReportShout isOpen={reportModalOpen} onReport={this.report} onClose={this.closeReportModal} />
             </li>
         ]
 
         return (
-            <div className="card shout">
-                <div className="card-content black-text">
-                    <div className="card-title black-text">
-                        <a href="#">
-                            <Avatar email={email} size={35}/>
-                        </a>
+            <div className="shout">
+                <div className="card">
+                    <div className="card-content black-text">
+                        <div className="card-title black-text">
+                            <a href="#">
+                                <Avatar email={email} size={35}/>
+                            </a>
                         {name}
-                        <Dropdown className="right">
-                            <DropdownTitle>
-                                <div className="more">
-                                    <Icon icon="more_vert"/>
-                                </div>
-                            </DropdownTitle>
-                            <DropdownContent top={0}>
-                                <li><Link to="shout" params={{shoutId: shout.id}}>Permalink</Link></li>
+                            <Dropdown className="right">
+                                <DropdownTitle>
+                                    <div className="more">
+                                        <Icon icon="more_vert"/>
+                                    </div>
+                                </DropdownTitle>
+                                <DropdownContent top={0}>
+                                    <li>
+                                        <Link to="shout" params={{shoutId: shout.id}}>
+                                            <Icon icon="link"/> Link
+                                        </Link>
+                                    </li>
                                 {myShout ? whenMyShout.map(item => item) : ''}
                                 {!myShout ? whenNotMyShout.map(item => item) : ''}
-                            </DropdownContent>
-                        </Dropdown>
+                                </DropdownContent>
+                            </Dropdown>
                         {editModalOpen && <EditShout
                             isOpen={editModalOpen}
                             onSave={this.save}
                             onClose={this.closeEditModal}
                             shout={shout}
                         />}
+                        </div>
+                        <p style={{whiteSpace: 'pre-line'}}>{shout.description}</p>
                     </div>
-                    <p style={{whiteSpace: 'pre-line'}}>{shout.description}</p>
-                </div>
-                <div className="card-action">
+                    <div className="card-action">
                     {(this.state.secondsLeft < 10 && this.state.secondsLeft != 0) ? (
                         <TransitiveNumber>{this.state.secondsLeft}</TransitiveNumber>
                     ) : ''}
 
-                    <span className="right">
-                        <ul className="shout__action-items">
+                        <span className="right">
+                            <ul className="shout__action-items">
                         {shout.location && <li>
-                            <Icon style={{
-                                fontSize: 16,
-                                verticalAlign: 'middle',
-                                marginTop: -2,
-                                marginLeft: 5
-                            }} icon='location_on'/>
+                            <Icon icon='location_on'/>
                         </li>}
-                            <li>
-                                <TransitiveNumber>{shout.meta.favorite_count}</TransitiveNumber>
-                                <button onClick={this.toggleFavorite} style={{
-                                    background: 'transparent',
-                                    margin: 0,
-                                    padding: 0,
-                                    border: 0
-                                }}>
-                                    <Icon
-                                        style={{
-                                            fontSize: 16,
-                                            verticalAlign: 'middle',
-                                            color: shout.meta.favorited_by_me ? '#ffab40' : 'rgba(0, 0, 0, .6)',
-                                            marginTop: -2,
-                                            marginLeft: 5
-                                        }}
-                                        icon="star"
-                                    />
-                                </button>
-                            </li>
-                        </ul>
-                    </span>
-                </div>
-                <div className="shout-progress">
-                    <div className="progress">
-                        <div className="determinate" style={{width}}></div>
+                                <li>
+                                    <button onClick={this.toggleComments} style={{
+                                        background: 'transparent',
+                                        margin: 0,
+                                        padding: 0,
+                                        border: 0
+                                    }}>
+                                        <TransitiveNumber>3</TransitiveNumber>
+                                        <Icon icon="comment"/>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button onClick={this.toggleFavorite} style={{
+                                        background: 'transparent',
+                                        margin: 0,
+                                        padding: 0,
+                                        border: 0
+                                    }}>
+                                        <TransitiveNumber>{shout.meta.favorite_count}</TransitiveNumber>
+                                        <Icon
+                                            style={{ color: shout.meta.favorited_by_me ? '#ffab40' : 'rgba(0, 0, 0, .6)'}}
+                                            icon="star"
+                                        />
+                                    </button>
+                                </li>
+                            </ul>
+                        </span>
+                    </div>
+                    <div className="shout-progress">
+                        <div className="progress">
+                            <div className="determinate" style={{width}}></div>
+                        </div>
                     </div>
                 </div>
+                {openComments && <div className="comments">
+                    <Collection>
+                        <CollectionItem>
+                            <Avatar email={email} size={20}/>
+                            <span style={{whiteSpace: 'pre-line'}}>Ik zeg altijd, beter een scheetje voor iederen dan buikpijn voor mij alleen!</span>
+                        </CollectionItem>
+                        <CollectionItem>
+                            <Avatar email={'mike.brants@ugent.be'} size={20}/>
+                            <span style={{whiteSpace: 'pre-line'}}>Serieus...</span>
+                        </CollectionItem>
+                        <CollectionItem>
+                            <Avatar email={'yigit.abbas@ugent.be'} size={20}/>
+                            <span style={{whiteSpace: 'pre-line'}}>
+                                Ja ja mannen, niet normaal ze...
+                            </span>
+                        </CollectionItem>
+
+                        <CollectionItem>
+                            <Grid>
+                                <Cell>
+                                    <MaterialTextarea
+                                        rules={['required', 'min:3']}
+                                        onValidate={() => {}}
+                                        placeholder="Wat wil je reageren?"
+                                        className="materialize-textarea"
+                                        onChange={() => {}}
+                                    />
+                                    <Button right>Reageren</Button>
+                                </Cell>
+                            </Grid>
+                        </CollectionItem>
+                    </Collection>
+                </div>}
             </div>
         )
     }
