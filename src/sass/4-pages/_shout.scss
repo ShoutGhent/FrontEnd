@@ -49,4 +49,15 @@
         vertical-align: middle !important;
         margin-right: 10px;
     }
+
+    &__action-items {
+        display: inline-block;
+        float: left;
+        margin: 0;
+
+        li {
+            margin-left: 20px;
+            display: inline-block;
+        }
+    }
 }

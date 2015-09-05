@@ -166,24 +166,36 @@ let Shout = React.createClass({
                     ) : ''}
 
                     <span className="right">
-                        <TransitiveNumber>{shout.meta.favorite_count}</TransitiveNumber>
-                        <button onClick={this.toggleFavorite} style={{
-                            background: 'transparent',
-                            margin: 0,
-                            padding: 0,
-                            border: 0
-                        }}>
-                            <span
-                                style={{
-                                    fontSize: 16,
-                                    verticalAlign: 'middle',
-                                    color: shout.meta.favorited_by_me ? '#ffab40' : 'rgba(0, 0, 0, .6)',
-                                    marginTop: -2,
-                                    marginLeft: 5
-                                }}
-                                className="material-icons"
-                            >star</span>
-                        </button>
+                        <ul className="shout__action-items">
+                        {shout.location && <li>
+                            <Icon style={{
+                                fontSize: 16,
+                                verticalAlign: 'middle',
+                                marginTop: -2,
+                                marginLeft: 5
+                            }} icon='location_on'/>
+                        </li>}
+                            <li>
+                                <TransitiveNumber>{shout.meta.favorite_count}</TransitiveNumber>
+                                <button onClick={this.toggleFavorite} style={{
+                                    background: 'transparent',
+                                    margin: 0,
+                                    padding: 0,
+                                    border: 0
+                                }}>
+                                    <Icon
+                                        style={{
+                                            fontSize: 16,
+                                            verticalAlign: 'middle',
+                                            color: shout.meta.favorited_by_me ? '#ffab40' : 'rgba(0, 0, 0, .6)',
+                                            marginTop: -2,
+                                            marginLeft: 5
+                                        }}
+                                        icon="star"
+                                    />
+                                </button>
+                            </li>
+                        </ul>
                     </span>
                 </div>
                 <div className="shout-progress">
