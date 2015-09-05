@@ -4,25 +4,17 @@ import LoginActions from '../../auth/LoginActions'
 import LoginStore from '../../auth/LoginStore'
 import MaterialSlider from '../partials/MaterialSlider'
 import MyGroupsActions from '../group/MyGroupsActions'
-import MyPlace from '../maps/MyPlace'
 import { Card, CardContent, CardTitle } from '../card/Card'
 
 var MyLocation = React.createClass({
     propTypes: {
         radius: PropTypes.number,
-        height: PropTypes.number
-    },
-    getDefaultProps() {
-        return {
-            height: 400
-        }
     },
     getInitialState() {
         let loginState = LoginStore.getState()
 
         return {
             user: loginState.user,
-            address: null,
             checked: loginState.user.location,
             radius: loginState.user.radius || 20
         }
@@ -35,19 +27,11 @@ var MyLocation = React.createClass({
     },
     _onChange(state) {
         this.setState(state)
-
-        if(state.user) {
-            this.findAdress(state.user.location)
-        }
-    },
-    componentWillReceiveProps() {
-        this.findAdress(this.state.user.location)
     },
     enableGeolocation(e) {
         if (e.target.checked) {
             LoginActions.getGeolocation()
         } else {
-            this.setState({ address: null })
             LoginActions.resetLocation()
         }
 
@@ -63,37 +47,8 @@ var MyLocation = React.createClass({
             MyGroupsActions.fetchGroupsNearMe()
         })
     },
-    findAdress(location) {
-        if ( ! location) {
-            return
-        }
-
-        let geocoder = new google.maps.Geocoder
-
-        let coords = {
-            lat: parseFloat(location.latitude),
-            lng: parseFloat(location.longitude)
-        }
-
-        geocoder.geocode({ location: coords }, (results, status) => {
-            let address = null
-
-            if (status === google.maps.GeocoderStatus.OK) {
-                if (results[0]) {
-                    address = results[0].formatted_address
-                } else {
-                    address = 'Geen resultaten gevonden'
-                }
-            } else {
-                address = 'Geocoder failed due to: ' + status
-            }
-
-            this.setState({ address })
-        })
-    },
     render() {
-        let { address, user, checked, radius } = this.state
-        let { height } = this.props
+        let { user, checked, radius } = this.state
 
         return (
             <Card>
@@ -108,30 +63,6 @@ var MyLocation = React.createClass({
                         </div>
                     </CardTitle>
 
-                    {address && user.location &&
-                        <MyPlace
-                            radius={radius}
-                            height={height}
-                            coords={user.location}
-                        />
-                    }
-                    { ! checked &&
-                        <div style={{
-                            position: 'relative',
-                            width: '100%',
-                            height: 300,
-                            background: 'rgba(0,0,0,0.04)'
-                        }}>
-                            <span style={{
-                                position: 'absolute',
-                                left: '50%',
-                                top: '50%',
-                                transform: 'translate(-50%, -50%)'
-                            }}>
-                                Wachten op locatie...
-                            </span>
-                        </div>
-                    }
                     <MaterialSlider
                         min={20}
                         max={2000}
