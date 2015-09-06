@@ -9,6 +9,7 @@ import ReportShout from '../pages/shout/ReportShout'
 import TransitiveNumber from 'react-transitive-number'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
 import { Link } from 'react-router'
+import Emojify from '../partials/Emojify'
 
 let Shout = React.createClass({
     propTypes: {
@@ -184,7 +185,9 @@ let Shout = React.createClass({
                             shout={shout}
                         />}
                         </div>
-                        <p style={{whiteSpace: 'pre-wrap'}}>{shout.description}</p>
+                        <p style={{whiteSpace: 'pre-wrap'}}>
+                            <Emojify>{shout.description}</Emojify>
+                        </p>
                     </div>
                     <div className="card-action">
                     {(this.state.secondsLeft < 10 && this.state.secondsLeft != 0) ? (
