@@ -7,9 +7,6 @@ import MyGroupsActions from '../group/MyGroupsActions'
 import { Card, CardContent, CardTitle } from '../card/Card'
 
 var MyLocation = React.createClass({
-    propTypes: {
-        radius: PropTypes.number,
-    },
     getInitialState() {
         let loginState = LoginStore.getState()
 
@@ -28,17 +25,6 @@ var MyLocation = React.createClass({
     _onChange(state) {
         this.setState(state)
     },
-    enableGeolocation(e) {
-        if (e.target.checked) {
-            LoginActions.getGeolocation()
-        } else {
-            LoginActions.resetLocation()
-        }
-
-        this.setState({
-            checked: ! this.state.checked
-        })
-    },
     setRadius(radius) {
         this.setState({ radius: parseFloat(radius) })
     },
@@ -48,21 +34,11 @@ var MyLocation = React.createClass({
         })
     },
     render() {
-        let { user, checked, radius } = this.state
+        let { user, radius } = this.state
 
         return (
             <Card>
                 <CardContent>
-                    <CardTitle>
-                        Locatiebepaling ({checked ? 'aan' : 'uit'}):
-                        <div className="switch right">
-                            <label>
-                                <input checked={checked} type="checkbox" onChange={this.enableGeolocation}/>
-                                <span className="lever"></span>
-                            </label>
-                        </div>
-                    </CardTitle>
-
                     <MaterialSlider
                         min={20}
                         max={2000}
@@ -73,14 +49,13 @@ var MyLocation = React.createClass({
                     />
 
                     <div className="center" style={{
-                        height: 63,
-                        lineHeight: '63px',
+                        minWidth: 240,
                         verticalAlign: 'middle'
                     }}>
                         Shouts in een straal van {radius > 1000 ? (
-                        <span>{radius/1000} km</span>
+                        <span>{(radius/1000).toFixed(2)} km</span>
                     ) : (
-                        <span>{radius} m</span>
+                        <span>{radius.toFixed(2)} m</span>
                     )}
                     </div>
                 </CardContent>

@@ -68,7 +68,7 @@ var _IndexLoggedIn = React.createClass({
                     <TabPanel title="Omgeving">
                         <Grid>
                             <Cell width={4/12}>
-                                <MyLocation height={300}/>
+                                <MyLocation/>
 
                                 <GroupListNearMe/>
                             </Cell>
