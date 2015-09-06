@@ -46,7 +46,14 @@ var CommentsForShout = React.createClass({
         evt.preventDefault()
         this.setState({ loading: true })
         let url = this.state.next_page_url.replace('/?', '?')
-        var box = React.findDOMNode(this.refs[`item-${this.state.comments[0].id}`])
+
+        if (this.state.comments.length > 0) {
+            var box = React.findDOMNode(this.refs[`item-${this.state.comments[0].id}`])
+        } else {
+            var box = {
+                offsetTop: 0
+            }
+        }
 
         API.get(url, {}, (res, err) => {
             if ( ! err) {
