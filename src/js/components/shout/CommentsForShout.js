@@ -3,6 +3,7 @@ import React, { PropTypes } from 'react'
 import API from '../../services/API'
 import Avatar from '../users/Avatar'
 import Emojify from '../partials/Emojify'
+import Icon from '../partials/Icon'
 import Loading from '../loading/Loading'
 import MaterialInput from '../partials/MaterialInput'
 import TransitiveNumber from 'react-transitive-number'
@@ -161,7 +162,11 @@ var CommentsForShout = React.createClass({
                             </Collection>
                         </CollectionItem>
                     ) : (
-                        ! loading && <CollectionItem>Wees de eerste om een reactie te plaatsen!</CollectionItem>
+                        ! loading && <CollectionItem>
+                            <span className="blue-text">
+                                Wees de eerste om een reactie te plaatsen!
+                            </span>
+                        </CollectionItem>
                     )}
 
                     <CollectionItem>
