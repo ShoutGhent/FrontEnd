@@ -184,7 +184,7 @@ let Shout = React.createClass({
                             shout={shout}
                         />}
                         </div>
-                        <p style={{whiteSpace: 'pre-line'}}>{shout.description}</p>
+                        <p style={{whiteSpace: 'pre-wrap'}}>{shout.description}</p>
                     </div>
                     <div className="card-action">
                     {(this.state.secondsLeft < 10 && this.state.secondsLeft != 0) ? (
