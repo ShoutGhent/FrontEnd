@@ -10,9 +10,13 @@ var Emojify = React.createClass({
     },
     makeRealImages(html) {
         var matches = html.match(/\<img class\=\"([^"]*)\" alt\=\"([^"]*)\" src\=\"([^"]*)\"\/\>/gi)
-        matches.map((item, key) => {
-            html = html.replace(matches[key], this.convert(item))
-        })
+
+        if (matches) {
+            matches.map((item, key) => {
+                html = html.replace(matches[key], this.convert(item))
+            })
+        }
+
         return html
     },
     render() {
