@@ -72,7 +72,8 @@ var Login = React.createClass({
                     <MaterialInput
                         onValidate={this.validateEmail}
                         rules={['required', 'email']}
-                        label="E-mail" type="email"
+                        label="E-mail"
+                        type="email"
                         id="email"
                         name="email"
                         value={this.state.email}

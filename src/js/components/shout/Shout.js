@@ -1,16 +1,13 @@
 import React, { PropTypes } from 'react'
 
 import Avatar from '../users/Avatar'
+import CommentsForShout from './CommentsForShout'
 import EditShout from '../pages/shout/EditShout'
 import Icon from '../partials/Icon'
-import MaterialTextarea from '../partials/MaterialTextarea'
 import moment from 'moment'
 import ReportShout from '../pages/shout/ReportShout'
 import TransitiveNumber from 'react-transitive-number'
-import { Button } from '../button/MaterialButton'
-import { Collection, CollectionItem } from '../collection/Collection'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
-import { Grid, Cell } from '../grid/Grid'
 import { Link } from 'react-router'
 
 let Shout = React.createClass({
@@ -149,7 +146,7 @@ let Shout = React.createClass({
                             <a href="#">
                                 <Avatar email={email} size={35}/>
                             </a>
-                        {name}
+                            {name}
                             <Dropdown className="right">
                                 <DropdownTitle>
                                     <div className="more">
@@ -219,39 +216,7 @@ let Shout = React.createClass({
                         </div>
                     </div>
                 </div>
-                {openComments && <div className="comments">
-                    <Collection>
-                        <CollectionItem>
-                            <Avatar email={email} size={20}/>
-                            <span style={{whiteSpace: 'pre-line'}}>Ik zeg altijd, beter een scheetje voor iederen dan buikpijn voor mij alleen!</span>
-                        </CollectionItem>
-                        <CollectionItem>
-                            <Avatar email={'mike.brants@ugent.be'} size={20}/>
-                            <span style={{whiteSpace: 'pre-line'}}>Serieus...</span>
-                        </CollectionItem>
-                        <CollectionItem>
-                            <Avatar email={'yigit.abbas@ugent.be'} size={20}/>
-                            <span style={{whiteSpace: 'pre-line'}}>
-                                Ja ja mannen, niet normaal ze...
-                            </span>
-                        </CollectionItem>
-
-                        <CollectionItem>
-                            <Grid>
-                                <Cell>
-                                    <MaterialTextarea
-                                        rules={['required', 'min:3']}
-                                        onValidate={() => {}}
-                                        placeholder="Wat wil je reageren?"
-                                        className="materialize-textarea"
-                                        onChange={() => {}}
-                                    />
-                                    <Button right>Reageren</Button>
-                                </Cell>
-                            </Grid>
-                        </CollectionItem>
-                    </Collection>
-                </div>}
+                {openComments && <CommentsForShout shout={shout}/>}
             </div>
         )
     }

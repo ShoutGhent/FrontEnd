@@ -1,63 +1,9 @@
-@each $color in map_keys($colors) {
-    .btn--#{$color} {
-        @if (lightness(color($color, 600)) > 60) {
-            color: black;
-        } @else {
-            color: white;
-        }
-
-        background-color: color($color, 600);
-
-        &:hover, &:active, &:focus {
-            @if (lightness(color($color)) > 60) {
-                color: black;
-            } @else {
-                color: white;
-            }
-
-            background-color: color($color);
-            outline: none !important;
-        }
+.btn-flat {
+    &:hover, &:focus {
+        color: white;
     }
 }
 
-.btn--card {
-
-    @for $i from 1 through 5 {
-        &--depth-#{$i} {
-            @include card($i);
-
-            &:hover, &:active, &:focus {
-                @include card($i + 1);
-            }
-        }
-    }
-
+.btn-rectangular {
+    border-radius: 0;
 }
-
-// BEM Fixes
-.btn--primary {
-    @extend .btn-primary;
-}
-
-.btn--warning {
-    @extend .btn-warning;
-}
-
-.btn--info {
-    @extend .btn-info;
-}
-
-.btn--danger {
-    @extend .btn-danger;
-}
-
-.btn--default {
-    @extend .btn-default;
-}
-
-.btn--success {
-    @extend .btn-success;
-}
-
-

@@ -1,4 +1,5 @@
 import React, { PropTypes, addons } from 'react/addons'
+import cx from 'classnames'
 var { PureRenderMixin } = addons
 
 var Collection = React.createClass({
@@ -28,16 +29,24 @@ var CollectionItem = React.createClass({
     propTypes: {
         active: PropTypes.bool,
         avatar: PropTypes.bool,
+        noPadding: PropTypes.bool
     },
     getDefaultProps() {
         return {
             active: false,
-            avatar: false
+            avatar: false,
+            noPadding: false
         }
     },
     render() {
-        let { children, active, avatar } = this.props
-        let className = `collection-item ${active ? 'active' : ''} ${avatar ? 'avatar' : ''}`
+        let { children, active, avatar, noPadding } = this.props
+        let className = cx({
+            'collection-item': true,
+            'active': active,
+            'avatar': avatar,
+            'no-padding': noPadding,
+            'clearfix': true
+        })
 
         return (
             <li className={className}>{children}</li>

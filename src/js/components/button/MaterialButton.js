@@ -8,27 +8,29 @@ var Button = React.createClass({
         className: PropTypes.string,
         disabled: PropTypes.bool,
         flat: PropTypes.bool,
-        large: PropTypes.bool,
         full: PropTypes.bool,
+        large: PropTypes.bool,
         onClick: PropTypes.func,
-        right: PropTypes.bool,
-        padding: PropTypes.string
+        padding: PropTypes.string,
+        rectangular: PropTypes.bool,
+        right: PropTypes.bool
     },
     getDefaultProps() {
         return {
             className: '',
             disabled: false,
             flat: false,
-            large: false,
             full: false,
+            large: false,
             onClick: () => {},
-            right: false,
-            padding: '0 2rem'
+            padding: '0 2rem',
+            rectangular: false,
+            right: false
         }
     },
 
     render() {
-        let { children, large, right, flat, full, disabled, onClick, className, padding } = this.props
+        let { children, large, right, flat, full, rectangular, disabled, onClick, className, padding } = this.props
 
         let btnStyle = {
             position: 'relative',
@@ -41,6 +43,7 @@ var Button = React.createClass({
             'btn-large': large,
             'btn-flat': flat,
             'btn-block': full,
+            'btn-rectangular': rectangular,
             'right': right
         })
 
