@@ -142,8 +142,6 @@ let Group = React.createClass({
             "group__logo--change": isAdmin && logoHover
         })
 
-        console.log(group.name)
-
         return (
             <div className="group">
                 {isAdmin && editLogoFormOpen && <EditLogo isOpen={editLogoFormOpen} onDone={this.onLogoEdited} image={group.header_data.secure_url} groupId={group.id}/>}

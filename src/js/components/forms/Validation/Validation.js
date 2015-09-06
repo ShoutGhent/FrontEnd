@@ -1,6 +1,7 @@
 import React, { PropTypes, addons } from 'react'
 
 import Validator from './Validator'
+import EmojiToNative from '../../../services/EmojiToNative'
 
 var Validation = React.createClass({
     propTypes: {
@@ -73,12 +74,14 @@ var Validation = React.createClass({
             input = addons.cloneWithProps(input, {
                 className: valid ? validClass : inValidClass,
                 onBlur: this.onBlur,
-                onChange: this.onChange
+                onChange: this.onChange,
+                value: EmojiToNative(input.props.value || '')
             })
         } else {
             input = addons.cloneWithProps(input, {
                 onBlur: this.props.onBlur,
-                onChange: this.props.onChange
+                onChange: this.props.onChange,
+                value: EmojiToNative(input.props.value || '')
             })
         }
 
