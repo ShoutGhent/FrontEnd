@@ -105,10 +105,10 @@ var CommentsForShout = React.createClass({
     },
     renderComment(comment) {
         return (<CollectionItem key={`item-${comment.id}`} ref={`item-${comment.id}`}>
-            <div className="left" style={{marginTop: 5, width: '10%'}}>
+            <div className="left" style={{marginTop: 5, width: 30, marginRight: 10}}>
                 <Avatar email={comment.user.email} size={25}/>
             </div>
-            <div className="left" style={{width: '90%'}}>
+            <div className="left" style={{width: 'calc(100% - 40px)'}}>
                 <small>{comment.user.first_name}</small><br/>
                 <span style={{whiteSpace: 'pre-line'}}>{comment.comment}</span>
             </div>
