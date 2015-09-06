@@ -9,6 +9,8 @@ class EmojiToNative {
     }
 
     decode(html) {
+        if ( ! html) return html
+        
         var e = document.createElement('div')
         e.innerHTML = html
         return e.childNodes[0].nodeValue
