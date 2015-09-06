@@ -119,7 +119,7 @@ var CommentsForShout = React.createClass({
                 <Avatar email={comment.user.email} size={25}/>
             </div>
             <div className="left" style={{width: 'calc(100% - 40px)'}}>
-                <small>{comment.user.first_name}</small><br/>
+                <small><Emojify>{comment.user.first_name}</Emojify></small><br/>
                 <span style={{whiteSpace: 'pre-line'}}><Emojify>{comment.comment}</Emojify></span>
             </div>
         </CollectionItem>)

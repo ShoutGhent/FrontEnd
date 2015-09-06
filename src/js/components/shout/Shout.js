@@ -161,7 +161,7 @@ let Shout = React.createClass({
                             <a href="#">
                                 <Avatar email={email} size={35}/>
                             </a>
-                            {name}
+                            <Emojify>{name}</Emojify>
                             <Dropdown className="right">
                                 <DropdownTitle>
                                     <div className="more">

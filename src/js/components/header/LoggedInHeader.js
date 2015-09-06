@@ -3,6 +3,7 @@ import React from 'react'
 import AddGroup from '../pages/group/AddGroup'
 import Auth from '../../auth/AuthService'
 import Avatar from '../users/Avatar'
+import Emojify from '../partials/Emojify'
 import Icon from '../partials/Icon'
 import SearchActions from '../search/SearchActions'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
@@ -90,7 +91,7 @@ let LoggedInHeader = React.createClass({
                 <li>
                     <Dropdown>
                         <DropdownTitle>
-                            {user.full_name} <Avatar email={user.email} size={30} round/>
+                            <Emojify>{user.full_name}</Emojify> <Avatar email={user.email} size={30} round/>
                         </DropdownTitle>
                         <DropdownContent>
                             <li><Link to="profile">Profiel</Link></li>
