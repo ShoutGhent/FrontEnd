@@ -144,6 +144,13 @@ let ShoutFeed = React.createClass({
             this.setState({ shouts })
         })
     },
+    updateCommentCount(shout, count) {
+        let { shouts } = this.state
+
+        shouts[shouts.indexOf(shout)].meta.comment_count = count
+
+        this.setState({ shouts })
+    },
     render() {
         let { loading, shouts, paginationData } = this.state
         let { canShout, groupId } = this.props
@@ -164,6 +171,7 @@ let ShoutFeed = React.createClass({
                         onReport={this.reportShout}
                         onDelete={this.deleteShout}
                         onToggleFavorite={this.toggleFavorite}
+                        updateCommentCount={this.updateCommentCount}
                     />
                 )}
                 {loading ? <LoadingShouts /> : ''}

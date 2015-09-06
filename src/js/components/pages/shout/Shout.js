@@ -67,6 +67,13 @@ let ShoutPage = React.createClass({
 
         API.post(url, {}, (shout, err) => this.setState({ shout }))
     },
+    updateCommentCount(shout, count) {
+        shout = this.state.shout
+
+        shout.meta.comment_count = count
+
+        this.setState({ shout })
+    },
     render() {
         let { shout, loading } = this.state
 
@@ -84,6 +91,7 @@ let ShoutPage = React.createClass({
                         onReport={this.reportShout}
                         onDelete={this.deleteShout}
                         onToggleFavorite={this.toggleFavorite}
+                        updateCommentCount={this.updateCommentCount}
                     />
                 ) : (
                     <div>

@@ -17,7 +17,13 @@ let Shout = React.createClass({
         onEdit: PropTypes.func.isRequired,
         onReport: PropTypes.func.isRequired,
         onDelete: PropTypes.func.isRequired,
-        onToggleFavorite: PropTypes.func.isRequired
+        onToggleFavorite: PropTypes.func.isRequired,
+        updateCommentCount: PropTypes.func
+    },
+    getDefaultProps() {
+        return {
+            updateCommentCount: () => {}
+        }
     },
     getInitialState() {
         return {
@@ -113,6 +119,14 @@ let Shout = React.createClass({
             openComments: ! this.state.openComments
         })
     },
+    closeComments() {
+        this.setState({
+            openComments: false
+        })
+    },
+    updateCommentCount(count) {
+        this.props.updateCommentCount(this.props.shout, count)
+    },
     render() {
         let { shout } = this.props
         let { width, editModalOpen, reportModalOpen, openComments } = this.state
@@ -179,9 +193,7 @@ let Shout = React.createClass({
 
                         <span className="right">
                             <ul className="shout__action-items">
-                        {shout.location && <li>
-                            <Icon icon='location_on'/>
-                        </li>}
+                            {shout.location && <li><Icon icon='location_on'/></li>}
                                 <li>
                                     <button onClick={this.toggleComments} style={{
                                         background: 'transparent',
@@ -189,7 +201,7 @@ let Shout = React.createClass({
                                         padding: 0,
                                         border: 0
                                     }}>
-                                        <TransitiveNumber>3</TransitiveNumber>
+                                        <TransitiveNumber>{shout.meta.comment_count}</TransitiveNumber>
                                         <Icon icon="comment"/>
                                     </button>
                                 </li>
@@ -216,11 +228,14 @@ let Shout = React.createClass({
                         </div>
                     </div>
                 </div>
-                {openComments && <CommentsForShout shout={shout}/>}
+                {openComments && <CommentsForShout
+                    shout={shout}
+                    updateCommentCount={this.updateCommentCount}
+                    onCloseRequest={this.closeComments}
+                />}
             </div>
         )
     }
 })
 
 export default Shout
-

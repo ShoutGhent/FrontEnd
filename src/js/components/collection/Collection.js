@@ -4,11 +4,30 @@ var { PureRenderMixin } = addons
 
 var Collection = React.createClass({
     mixins: [PureRenderMixin],
+    propTypes: {
+        noBorder: PropTypes.bool,
+        noMargin: PropTypes.bool,
+        noPadding: PropTypes.bool,
+    },
+    getDefaultProps() {
+        return {
+            noBorder: false,
+            noMargin: false,
+            noPadding: false,
+        }
+    },
     render() {
-        let { children } = this.props
+        let { children, noPadding, noBorder, noMargin } = this.props
+
+        let className = cx({
+            'collection': true,
+            'no-padding': noPadding,
+            'no-margin': noMargin,
+            'no-border': noBorder
+        })
 
         return (
-            <ul className="collection">{children}</ul>
+            <ul {...this.props} className={className}>{children}</ul>
         )
     }
 })
