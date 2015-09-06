@@ -23,7 +23,7 @@ var MyLocation = React.createClass({
         LoginStore.unlisten(this._onChange)
     },
     _onChange(state) {
-        this.setState(state)
+        this.getInitialState()
     },
     setRadius(radius) {
         this.setState({ radius: parseFloat(radius) })

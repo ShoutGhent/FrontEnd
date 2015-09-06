@@ -12,3 +12,15 @@
         transform: translate(0, -50);
     }
 }
+
+.center {
+    @include centerer();
+}
+
+.center-horizontal {
+    @include centerer(true, false)
+}
+
+.center-vertical {
+    @include centerer(false, true)
+}

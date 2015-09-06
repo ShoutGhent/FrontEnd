@@ -153,11 +153,7 @@ let Group = React.createClass({
                                 style={{position:'relative'}}
                                 image={group.header_data}
                                 options={{width: headerWidth}}
-                                defaultElement={<h1 style={{
-                                    position: 'absolute',
-                                    left: '50%',
-                                    top: '50%',
-                                    transform: 'translate(-50%, -50%)',
+                                defaultElement={<h1 className="center" style={{
                                     color: 'rgba(0, 0, 0, 0.4)',
                                     margin: 0
                                 }}>{group.name}</h1>}
@@ -187,11 +183,7 @@ let Group = React.createClass({
                                             <Cloudinary
                                                 image={group.logo_data}
                                                 options={{ width: 100, height: 100, crop: 'fill' }}
-                                                defaultElement={<h1 style={{
-                                                    position: 'absolute',
-                                                    left: '50%',
-                                                    top: '50%',
-                                                    transform: 'translate(-50%, -50%)',
+                                                defaultElement={<h1 className="center" style={{
                                                     color: 'rgba(0, 0, 0, 0.4)',
                                                     fontWeight: 'bold',
                                                     margin: 0
