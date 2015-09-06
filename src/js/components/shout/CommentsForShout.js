@@ -101,8 +101,10 @@ var CommentsForShout = React.createClass({
         }
     },
     scrollToBottom() {
-        let box = React.findDOMNode(this.refs.comments)
-        box.scrollTop = box.scrollHeight
+        if (this.refs.comments) {
+            let box = React.findDOMNode(this.refs.comments)
+            box.scrollTop = box.scrollHeight
+        }
     },
     appendNewComment(comment) {
         let { comments } = this.state
