@@ -57,7 +57,7 @@ let Settings = React.createClass({
                     <Cloudinary
                         image={group.logo_data}
                         options={{ width: 24, height: 24 }}
-                        defaultElement={<span className="center" style={{
+                        defaultElement={<span className="center-both" style={{
                             color: 'rgba(0, 0, 0, 0.4)',
                             fontWeight: 'bold',
                             margin: 0,

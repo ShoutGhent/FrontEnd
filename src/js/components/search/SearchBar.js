@@ -120,7 +120,7 @@ let SearchBar = React.createClass({
                                                 <Cloudinary
                                                     image={group.logo_data}
                                                     options={{ width: 40, height: 40 }}
-                                                    defaultElement={<span className="center" style={{
+                                                    defaultElement={<span className="center-both" style={{
                                                         color: 'rgba(0, 0, 0, 0.4)',
                                                         fontWeight: 'bold',
                                                         margin: 0,
