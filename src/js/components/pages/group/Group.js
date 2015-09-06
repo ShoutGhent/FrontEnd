@@ -21,6 +21,7 @@ import { Button } from '../../button/MaterialButton'
 import { Card, CardContent, CardTitle } from '../../card/Card'
 import { Grid, Cell } from '../../grid/Grid'
 import { Tab, TabPanel } from '../../tab/Tab'
+import Emojify from '../../partials/Emojify'
 
 let Group = React.createClass({
     statics: {
@@ -141,6 +142,8 @@ let Group = React.createClass({
             "group__logo--change": isAdmin && logoHover
         })
 
+        console.log(group.name)
+
         return (
             <div className="group">
                 {isAdmin && editLogoFormOpen && <EditLogo isOpen={editLogoFormOpen} onDone={this.onLogoEdited} image={group.header_data.secure_url} groupId={group.id}/>}
@@ -156,7 +159,7 @@ let Group = React.createClass({
                                 defaultElement={<h1 className="center-both" style={{
                                     color: 'rgba(0, 0, 0, 0.4)',
                                     margin: 0
-                                }}>{group.name}</h1>}
+                                }}><Emojify>{group.name}</Emojify></h1>}
                             />
                             <div className="group__header__buttons">
                                 {isAdmin &&
@@ -191,7 +194,7 @@ let Group = React.createClass({
                                             />
                                         </div>
 
-                                        <h4 className="left" style={{marginLeft: 20}}>{group.name}</h4>
+                                        <h4 className="left" style={{marginLeft: 20}}><Emojify>{group.name}</Emojify></h4>
                                     </Cell>
                                     <Cell width={6/12}>
                                         <div className="right">

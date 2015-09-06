@@ -2,12 +2,13 @@ import React, { PropTypes } from 'react'
 
 import API from '../../services/API'
 import Avatar from '../users/Avatar'
+import Emojify from '../partials/Emojify'
+import Loading from '../loading/Loading'
 import MaterialInput from '../partials/MaterialInput'
 import TransitiveNumber from 'react-transitive-number'
 import { Button } from '../button/MaterialButton'
 import { Collection, CollectionItem } from '../collection/Collection'
 import { Grid, Cell } from '../grid/Grid'
-import Loading from '../loading/Loading'
 
 var CommentsForShout = React.createClass({
     propTypes: {
@@ -119,7 +120,7 @@ var CommentsForShout = React.createClass({
             </div>
             <div className="left" style={{width: 'calc(100% - 40px)'}}>
                 <small>{comment.user.first_name}</small><br/>
-                <span style={{whiteSpace: 'pre-line'}}>{comment.comment}</span>
+                <span style={{whiteSpace: 'pre-line'}}><Emojify>{comment.comment}</Emojify></span>
             </div>
         </CollectionItem>)
     },

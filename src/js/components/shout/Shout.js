@@ -3,13 +3,13 @@ import React, { PropTypes } from 'react'
 import Avatar from '../users/Avatar'
 import CommentsForShout from './CommentsForShout'
 import EditShout from '../pages/shout/EditShout'
+import Emojify from '../partials/Emojify'
 import Icon from '../partials/Icon'
 import moment from 'moment'
 import ReportShout from '../pages/shout/ReportShout'
 import TransitiveNumber from 'react-transitive-number'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
 import { Link } from 'react-router'
-import Emojify from '../partials/Emojify'
 
 let Shout = React.createClass({
     propTypes: {

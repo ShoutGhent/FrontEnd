@@ -1,15 +1,16 @@
 import React from 'react'
 
 import Cloudinary from '../partials/Cloudinary'
+import Debounce from '../../services/Debounce'
+import Emojify from '../partials/Emojify'
 import GroupActions from '../pages/group/GroupActions'
+import GroupDistance from '../pages/group/GroupDistance'
 import Icon from '../partials/Icon'
 import Redirect from '../../services/Redirect'
 import SearchActions from './SearchActions'
 import SearchStore from './SearchStore'
 import { Collection, CollectionItem } from '../collection/Collection'
 import { Grid, Cell } from '../grid/Grid'
-import GroupDistance from '../pages/group/GroupDistance'
-import Debounce from '../../services/Debounce'
 
 let SearchBar = React.createClass({
     getInitialState() {
@@ -129,7 +130,7 @@ let SearchBar = React.createClass({
                                                 />
                                             </Cell>
                                             <Cell width={11/12}>
-                                            {group.name} <br/>
+                                                <Emojify>{group.name}</Emojify><br/>
                                                 <span style={{color: '#aaa'}}>{group.meta.member_count} {group.meta.member_count == 1 ? 'lid' : 'leden'}</span>
 
                                                 <span className="right" style={{color: '#aaa'}}>

@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react'
 
 import Cloudinary from '../partials/Cloudinary'
+import Emojify from '../partials/Emojify'
+import GroupDistance from '../pages/group/GroupDistance'
 import Icon from '../partials/Icon'
 import Loading from '../loading/Loading'
-import GroupDistance from '../pages/group/GroupDistance'
 import { Card, CardContent, CardTitle } from '../card/Card'
 import { Collection, CollectionItem } from '../collection/Collection'
 import { Link } from 'react-router'
@@ -23,7 +24,7 @@ var GroupList = React.createClass({
         return (
             <CollectionItem key={group.id}>
                 <Link to="group" params={{groupId: group.id, tabId: 'shouts'}}>
-                    {group.name}
+                    <Emojify>{group.name}</Emojify>
 
                     <div className="secondary-content">
                         <Cloudinary
