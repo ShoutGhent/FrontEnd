@@ -37,10 +37,11 @@ var CommentsForShout = React.createClass({
     },
     getInitialState() {
         return {
-            newComment: '',
+            boxHeight: 50,
+            comments: [],
             loading: true,
+            newComment: '',
             next_page_url: null,
-            comments: []
         }
     },
     loadMoreComments(evt) {
@@ -105,6 +106,9 @@ var CommentsForShout = React.createClass({
         if (this.refs.comments) {
             let box = React.findDOMNode(this.refs.comments)
             box.scrollTop = box.scrollHeight
+            this.setState({
+                boxHeight: box.scrollHeight
+            })
         }
     },
     appendNewComment(comment) {
@@ -125,7 +129,7 @@ var CommentsForShout = React.createClass({
         </CollectionItem>)
     },
     render() {
-        let { newComment, loading, comments, next_page_url } = this.state
+        let { newComment, loading, comments, next_page_url, boxHeight } = this.state
 
         comments = comments.sort((a, b) => {
             var first = a.created_at
@@ -146,7 +150,8 @@ var CommentsForShout = React.createClass({
                         <CollectionItem noPadding>
                             <Collection noMargin noBorder ref="comments" style={{
                                 overflowY: 'auto',
-                                maxHeight: 450
+                                maxHeight: 450,
+                                height: boxHeight
                             }}>
                                 {next_page_url && <CollectionItem noPadding>
                                     <Button onClick={this.loadMoreComments} full rectangular flat>Meer Laden</Button>
