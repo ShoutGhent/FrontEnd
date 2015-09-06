@@ -92,6 +92,7 @@ let ShoutPage = React.createClass({
                         onDelete={this.deleteShout}
                         onToggleFavorite={this.toggleFavorite}
                         updateCommentCount={this.updateCommentCount}
+                        openComments={true}
                     />
                 ) : (
                     <div>

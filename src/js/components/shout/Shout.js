@@ -19,11 +19,13 @@ let Shout = React.createClass({
         onReport: PropTypes.func.isRequired,
         onDelete: PropTypes.func.isRequired,
         onToggleFavorite: PropTypes.func.isRequired,
-        updateCommentCount: PropTypes.func
+        updateCommentCount: PropTypes.func,
+        openComments: PropTypes.bool,
     },
     getDefaultProps() {
         return {
-            updateCommentCount: () => {}
+            updateCommentCount: () => {},
+            openComments: false
         }
     },
     getInitialState() {
@@ -33,7 +35,7 @@ let Shout = React.createClass({
             editModalOpen: false,
             reportModalOpen: false,
             secondsLeft: 0,
-            openComments: false,
+            openComments: this.props.openComments
         }
     },
     calcPercentage(shout, onHide) {
