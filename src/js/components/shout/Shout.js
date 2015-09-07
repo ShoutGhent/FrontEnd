@@ -180,16 +180,24 @@ let Shout = React.createClass({
                                 {!myShout ? whenNotMyShout.map(item => item) : ''}
                                 </DropdownContent>
                             </Dropdown>
-                        {editModalOpen && <EditShout
-                            isOpen={editModalOpen}
-                            onSave={this.save}
-                            onClose={this.closeEditModal}
-                            shout={shout}
-                        />}
                         </div>
-                        <p style={{whiteSpace: 'pre-wrap'}}>
-                            <Emojify>{shout.description}</Emojify>
-                        </p>
+
+                        {editModalOpen ? (
+                            <div>
+                                <EditShout
+                                    isOpen={editModalOpen}
+                                    onSave={this.save}
+                                    onClose={this.closeEditModal}
+                                    shout={shout}
+                                />
+                                <br/><br/>
+                            </div>
+                        ) : (
+                            <p style={{whiteSpace: 'pre-wrap'}}>
+                                <Emojify>{shout.description}</Emojify>
+                            </p>
+                        )}
+
                     </div>
                     <div className="card-action">
                     {(this.state.secondsLeft < 10 && this.state.secondsLeft != 0) ? (

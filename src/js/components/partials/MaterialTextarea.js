@@ -45,7 +45,7 @@ let MaterialTextarea = React.createClass({
 
         this.setState({ value: event.target.value })
 
-        this.openLabel()
+        this.check()
     },
     check() {
         if (this.state.value != '') {

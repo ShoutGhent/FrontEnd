@@ -17,20 +17,14 @@ var EditShout = React.createClass({
         this.props.onClose()
     },
     render() {
-        let { isOpen } = this.props
-
         return (
-            <div>
-                <Modal isOpen={isOpen} onClose={this.done}>
-                    <ShoutForm
-                        valid={true}
-                        shout={this.props.shout}
-                        onSave={this.save}
-                        onDone={this.done}
-                        buttonName="Wijzigen"
-                    />
-                </Modal>
-            </div>
+            <ShoutForm
+                valid={true}
+                shout={this.props.shout}
+                onSave={this.save}
+                onDone={this.done}
+                buttonName="Wijzigen"
+            />
         )
     }
 })
