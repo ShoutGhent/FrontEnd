@@ -59,6 +59,15 @@ let MaterialTextarea = React.createClass({
             this.props.onValidate(result)
         }
     },
+    renderTextarea() {
+        return (
+            <textarea
+                {...this.props}
+                autoComplete='off'
+                ref="textarea"
+            />
+        )
+    },
     render() {
         let { label, rules } = this.props
 
@@ -71,7 +80,7 @@ let MaterialTextarea = React.createClass({
         return (
             <div className="input-field">
                 <Validation onValidate={this.onValidate} rules={rules} validate={valid} inValidClass="invalid" validClass="" onChange={this.changeValue} onBlur={this.check}>
-                    <textarea {...this.props} autoComplete='off'/>
+                {this.renderTextarea()}
                 </Validation>
                 <label style={labelStyles} className={this.state.open ? 'active' : ''}>{label}</label>
             </div>
