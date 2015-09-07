@@ -45,9 +45,9 @@ let MaterialInput = React.createClass({
             this.props.onChange(event)
         }
 
-        this.setState({ value: event.target.value })
-
-        this.openLabel()
+        this.setState({ value: event.target.value }, () => {
+            this.check()
+        })
     },
     check() {
         if (this.state.value != '') {
@@ -73,7 +73,7 @@ let MaterialInput = React.createClass({
         return (
             <div className="input-field">
                 <Validation onValidate={this.onValidate} rules={rules} validate={valid} inValidClass="invalid" validClass="" onChange={this.changeValue} onBlur={this.check}>
-                    <input {...this.props} autoComplete='off'/>
+                    <input {...this.props} value={this.state.value} autoComplete='off'/>
                 </Validation>
                 <label style={labelStyles} className={this.state.open ? 'active' : ''}>{label}</label>
             </div>

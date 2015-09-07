@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react/addons'
 
 import { Grid, Cell } from '../grid/Grid'
 import Validation from '../forms/Validation/Validation'
+import TextareaAutosize from '../forms/TextareaAutosize'
 
 let MaterialTextarea = React.createClass({
     propTypes: {
@@ -43,9 +44,9 @@ let MaterialTextarea = React.createClass({
             this.props.onChange(event)
         }
 
-        this.setState({ value: event.target.value })
-
-        this.check()
+        this.setState({ value: event.target.value }, () => {
+            this.check()
+        })
     },
     check() {
         if (this.state.value != '') {
@@ -59,15 +60,6 @@ let MaterialTextarea = React.createClass({
             this.props.onValidate(result)
         }
     },
-    renderTextarea() {
-        return (
-            <textarea
-                {...this.props}
-                autoComplete='off'
-                ref="textarea"
-            />
-        )
-    },
     render() {
         let { label, rules } = this.props
 
@@ -80,7 +72,7 @@ let MaterialTextarea = React.createClass({
         return (
             <div className="input-field">
                 <Validation onValidate={this.onValidate} rules={rules} validate={valid} inValidClass="invalid" validClass="" onChange={this.changeValue} onBlur={this.check}>
-                {this.renderTextarea()}
+                    <TextareaAutosize {...this.props} value={this.state.value} autoComplete='off'/>
                 </Validation>
                 <label style={labelStyles} className={this.state.open ? 'active' : ''}>{label}</label>
             </div>

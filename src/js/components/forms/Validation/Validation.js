@@ -1,7 +1,7 @@
 import React, { PropTypes, addons } from 'react'
 
-import Validator from './Validator'
 import EmojiToNative from '../../../services/EmojiToNative'
+import Validator from './Validator'
 
 var Validation = React.createClass({
     propTypes: {
@@ -24,11 +24,11 @@ var Validation = React.createClass({
     getInitialState() {
         return {
             valid: true,
-            message: ""
+            message: "",
         }
     },
     validateInput(event) {
-        let { valid, message } = this.validate(event.target.value)
+        let { valid, message } = this.validate(EmojiToNative(event.target.value))
 
         this.props.onValidate(valid)
 
