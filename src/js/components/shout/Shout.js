@@ -73,7 +73,9 @@ let Shout = React.createClass({
     componentDidMount() {
         let { shout, onHide } = this.props
         this.calcPercentage(shout, onHide)
-        io.join(`shout.${shout.id}`)
+        let channelKey = `shout.${shout.id}`
+        io.join(channelKey)
+        //io.listen(`${channelKey}:`)
     },
     componentWillUnmount() {
         clearInterval(this.state.intervalId)
