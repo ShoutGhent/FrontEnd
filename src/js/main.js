@@ -27,7 +27,9 @@ io.listen('connect', () => {
     io.join('global')
 
     io.listen('global:UpdateAvailable', (data) => {
-        console.log(data)
+        if (confirm("Er is een nieuwe shout versie, wil je de pagina herladen?")) {
+            window.location.reload()
+        }
     })
 })
 
