@@ -23,9 +23,6 @@ var ShoutForm = React.createClass({
             descriptionIsValid: this.props.valid
         }
     },
-    componentWillReceiveProps() {
-        this.setState(this.getInitialState())
-    },
     getDefaultProps() {
         return {
             valid: false,
