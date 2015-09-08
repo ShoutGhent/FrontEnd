@@ -6,6 +6,7 @@ import RouterContainer from './services/RouterContainer'
 import routes from "./Routes"
 import WebStorage from './services/WebStorage'
 import analytics from 'ga-react-router'
+import Notification from './components/notification/NotificationActions.js'
 
 import { io } from './services/Socket'
 
@@ -25,10 +26,19 @@ if (jwt) {
 // Subscribe to global messages
 io.join('global')
 
+// Listen for some global events, like UpdateAvailable
 io.listen('global:UpdateAvailable', (data) => {
     if (confirm("Er is een nieuwe shout versie, wil je de pagina herladen?")) {
         window.location.reload()
     }
+})
+
+io.listen('global:GoingDown', () => {
+    Notification.info('De server gaat heel even offline...')
+})
+
+io.listen('global:GoingUp', () => {
+    Notification.info('Sorry voor het ongemak, we zijn er weer :)')
 })
 
 let mountNode = document.getElementById('mount-node')

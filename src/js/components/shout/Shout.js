@@ -10,6 +10,7 @@ import ReportShout from '../pages/shout/ReportShout'
 import TransitiveNumber from 'react-transitive-number'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
 import { Link } from 'react-router'
+import { io } from '../../services/Socket'
 
 let Shout = React.createClass({
     propTypes: {
@@ -72,6 +73,7 @@ let Shout = React.createClass({
     componentDidMount() {
         let { shout, onHide } = this.props
         this.calcPercentage(shout, onHide)
+        io.join(`shout.${shout.id}`)
     },
     componentWillUnmount() {
         clearInterval(this.state.intervalId)
