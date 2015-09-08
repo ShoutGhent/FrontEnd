@@ -16,13 +16,11 @@ import LoginStore from '../../auth/LoginStore'
 var CommentsForShout = React.createClass({
     propTypes: {
         shout: PropTypes.object.isRequired,
-        updateCommentCount: PropTypes.func,
         onCloseRequest: PropTypes.func,
         channelKey: PropTypes.string.isRequired,
     },
     getDefaultProps() {
         return {
-            updateCommentCount: () => {},
             onCloseRequest: () => {},
         }
     },
@@ -87,7 +85,6 @@ var CommentsForShout = React.createClass({
         event.preventDefault()
         API.post(`shouts/${this.props.shout.id}/comment`, { comment: this.state.newComment }, (res, err) => {
             if ( ! err) {
-                this.props.updateCommentCount(res.shout.meta.comment_count)
                 this.appendNewComment(res.comment)
             }
         })

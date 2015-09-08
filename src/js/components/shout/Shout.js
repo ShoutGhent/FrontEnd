@@ -21,13 +21,11 @@ let Shout = React.createClass({
         onToggleFavorite: PropTypes.func.isRequired,
         openComments: PropTypes.bool,
         shout: PropTypes.object.isRequired,
-        updateCommentCount: PropTypes.func,
-        updateFavoriteCount: PropTypes.func,
+        updateShout: PropTypes.func,
     },
     getDefaultProps() {
         return {
-            updateCommentCount: () => {},
-            updateFavoriteCount: () => {},
+            updateShout: () => {},
             openComments: false
         }
     },
@@ -78,15 +76,10 @@ let Shout = React.createClass({
 
         let channelKey = `shout.${shout.id}`
         io.join(channelKey)
-        io.listen(`${channelKey}:shout.events.shouts.ShoutHasBeenFavorited`, (data) => {
-            this.props.updateFavoriteCount(shout, +1)
-        })
-        io.listen(`${channelKey}:shout.events.shouts.ShoutHasBeenUnFavorited`, (data) => {
-            this.props.updateFavoriteCount(shout, -1)
-        })
-        io.listen(`${channelKey}:shout.events.comments.BroadcastCommentedOnShout`, (data) => {
-            this.updateCommentCount(data.shout.meta.comment_count)
-        })
+
+        io.listen(`${channelKey}:shout.events.shouts.ShoutHasBeenFavorited`, data => this.props.updateShout(shout, data.shout))
+        io.listen(`${channelKey}:shout.events.shouts.ShoutHasBeenUnFavorited`, data => this.props.updateShout(shout, data.shout))
+        io.listen(`${channelKey}:shout.events.comments.BroadcastCommentedOnShout`, data => this.props.updateShout(shout, data.shout))
     },
     componentWillUnmount() {
         clearInterval(this.state.intervalId)
@@ -141,9 +134,6 @@ let Shout = React.createClass({
         this.setState({
             openComments: false
         })
-    },
-    updateCommentCount(count) {
-        this.props.updateCommentCount(this.props.shout, count)
     },
     render() {
         let { shout } = this.props
@@ -257,7 +247,6 @@ let Shout = React.createClass({
                     channelKey={`shout.${shout.id}`}
                     onCloseRequest={this.closeComments}
                     shout={shout}
-                    updateCommentCount={this.updateCommentCount}
                 />}
             </div>
         )

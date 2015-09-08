@@ -141,17 +141,10 @@ let ShoutFeed = React.createClass({
             this.setState({ shouts })
         })
     },
-    updateCommentCount(shout, count) {
+    updateShout(oldShout, newShout) {
         let { shouts } = this.state
 
-        shouts[shouts.indexOf(shout)].meta.comment_count = count
-
-        this.setState({ shouts })
-    },
-    updateFavoriteCount(shout, change) {
-        let { shouts } = this.state
-
-        shouts[shouts.indexOf(shout)].meta.favorite_count += change
+        shouts[shouts.indexOf(oldShout)] = newShout
 
         this.setState({ shouts })
     },
@@ -186,8 +179,7 @@ let ShoutFeed = React.createClass({
                             onReport={this.reportShout}
                             onDelete={this.deleteShout}
                             onToggleFavorite={this.toggleFavorite}
-                            updateCommentCount={this.updateCommentCount}
-                            updateFavoriteCount={this.updateFavoriteCount}
+                            updateShout={this.updateShout}
                         />
                     )
                 })}
