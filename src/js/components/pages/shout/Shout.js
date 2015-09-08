@@ -35,11 +35,11 @@ let ShoutPage = React.createClass({
     },
     editShout(shout) {
         API.put(`shouts/${shout.id}`, {
+            anonymous: shout.anonymous,
+            description: shout.description,
+            publish_until: shout.publish_until,
             shout_id: shout.id,
             user_id: shout.user_id,
-            description: shout.description,
-            anonymous: shout.anonymous,
-            publish_until: shout.publish_until
         }, (updatedShout) => {
             this.setState({ shout: updatedShout })
             Notification.success("Shout is bewerkt!")
@@ -50,7 +50,7 @@ let ShoutPage = React.createClass({
             this.setState({
                 shout: null
             })
-            Notification.success("Shout is verwijdert!")
+            Notification.success("Shout is verwijderd!")
         })
     },
     reportShout(data) {
@@ -85,14 +85,14 @@ let ShoutPage = React.createClass({
                 shout ? (
                     <Shout
                         key={shout.id}
-                        shout={shout}
-                        onHide={this.hideShout}
-                        onEdit={this.editShout}
-                        onReport={this.reportShout}
                         onDelete={this.deleteShout}
+                        onEdit={this.editShout}
+                        onHide={this.hideShout}
+                        onReport={this.reportShout}
                         onToggleFavorite={this.toggleFavorite}
-                        updateCommentCount={this.updateCommentCount}
                         openComments={true}
+                        shout={shout}
+                        updateCommentCount={this.updateCommentCount}
                     />
                 ) : (
                     <div>

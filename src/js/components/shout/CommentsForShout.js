@@ -162,11 +162,13 @@ var CommentsForShout = React.createClass({
                             </Collection>
                         </CollectionItem>
                     ) : (
-                        ! loading && <CollectionItem>
+                    ! loading && (
+                        <CollectionItem>
                             <span className="blue-text">
                                 Wees de eerste om een reactie te plaatsen!
                             </span>
                         </CollectionItem>
+                    )
                     )}
 
                     <CollectionItem>

@@ -13,14 +13,14 @@ import { Link } from 'react-router'
 
 let Shout = React.createClass({
     propTypes: {
-        shout: PropTypes.object.isRequired,
-        onHide: PropTypes.func.isRequired,
-        onEdit: PropTypes.func.isRequired,
-        onReport: PropTypes.func.isRequired,
         onDelete: PropTypes.func.isRequired,
+        onEdit: PropTypes.func.isRequired,
+        onHide: PropTypes.func.isRequired,
+        onReport: PropTypes.func.isRequired,
         onToggleFavorite: PropTypes.func.isRequired,
-        updateCommentCount: PropTypes.func,
         openComments: PropTypes.bool,
+        shout: PropTypes.object.isRequired,
+        updateCommentCount: PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -30,18 +30,18 @@ let Shout = React.createClass({
     },
     getInitialState() {
         return {
-            width: '100%',
-            intervalId: null,
             editModalOpen: false,
+            intervalId: null,
+            openComments: this.props.openComments,
             reportModalOpen: false,
             secondsLeft: 0,
-            openComments: this.props.openComments
+            width: '100%'
         }
     },
     calcPercentage(shout, onHide) {
-        let { created_at, publish_until} = shout
+        let { updated_at, publish_until} = shout
 
-        let begin = moment(created_at).format('X')
+        let begin = moment(updated_at).format('X')
         let end = publish_until
 
         if (end != null) {
