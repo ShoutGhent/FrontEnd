@@ -4,6 +4,7 @@ import Cloudinary from '../../partials/Cloudinary'
 import EditName from './EditName'
 import EditPassword from './EditPassword'
 import EditProfilePicture from './EditProfilePicture'
+import Emojify from '../../partials/Emojify'
 import Loading from '../../loading/Loading'
 import LoginStore from '../../../auth/LoginStore'
 import MyGroupsActions from '../../group/MyGroupsActions'
@@ -29,7 +30,7 @@ let Settings = React.createClass({
         return {
             user: loginState.user,
             jwt: loginState.jwt,
-            groups: myGroupsState.myGroups,
+            myGroups: myGroupsState.myGroups,
             loading: myGroupsState.loading
         }
     },
@@ -51,7 +52,7 @@ let Settings = React.createClass({
         return (
             <CollectionItem key={group.id}>
                 <Link to="group" params={{groupId: group.id, tabId: 'shouts'}}>
-                    {group.name}
+                    <Emojify>{group.name}</Emojify>
                 </Link>
                 <Link to="group" params={{groupId: group.id, tabId: 'shouts'}} className="secondary-content">
                     <Cloudinary
@@ -68,19 +69,37 @@ let Settings = React.createClass({
             </CollectionItem>
         )
     },
-    render() {
-        let { user, groups, loading } = this.state
-        let { params } = this.props
-
+    renderList(title, groups) {
+        let { loading, myGroups } = this.state
         let countStyles = {
             color: '#bbb',
             fontSize: 16
         }
 
+        return (
+            <Card>
+                <CardContent>
+                    <CardTitle>
+                        <span>{title}</span> <span style={countStyles}>({groups.length})</span>
+                    </CardTitle>
+                    <div>
+                    {loading && myGroups.length == 0 && (
+                        <Loading/>
+                    )}
+                    </div>
+                    <Collection>{groups.map(group => this.renderGroupItem(group))}</Collection>
+                </CardContent>
+            </Card>
+        )
+    },
+    render() {
+        let { user, myGroups } = this.state
+        let { params } = this.props
+
         let adminGroups = []
         let memberGroups = []
 
-        groups.map((group) => {
+        myGroups.map((group) => {
             if (group.meta.my_type == "admin") {
                 adminGroups.push(group)
             } else {
@@ -105,26 +124,10 @@ let Settings = React.createClass({
                     <TabPanel title="Groepen" tabId="groups">
                         <Grid>
                             <Cell width={6/12}>
-                                <Card>
-                                    <CardContent>
-                                        <CardTitle>Die ik beheer <span style={countStyles}>({adminGroups.length})</span></CardTitle>
-                                        {loading && groups.length == 0 && <Loading/>}
-                                        <Collection>
-                                        {adminGroups.map(group => this.renderGroupItem(group))}
-                                        </Collection>
-                                    </CardContent>
-                                </Card>
+                                {this.renderList("Die ik beheer", adminGroups)}
                             </Cell>
                             <Cell width={6/12}>
-                                <Card>
-                                    <CardContent>
-                                        <CardTitle>Waar ik lid van ben <span style={countStyles}>({memberGroups.length})</span></CardTitle>
-                                        {loading && groups.length == 0 && <Loading/>}
-                                        <Collection>
-                                        {memberGroups.map(group => this.renderGroupItem(group))}
-                                        </Collection>
-                                    </CardContent>
-                                </Card>
+                                {this.renderList("Waar ik lid van ben", memberGroups)}
                             </Cell>
                         </Grid>
                     </TabPanel>
