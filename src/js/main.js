@@ -27,17 +27,17 @@ if (jwt) {
 io.join('global')
 
 // Listen for some global events, like UpdateAvailable
-io.listen('global:shouts.events.UpdateAvailable', (data) => {
+io.listen('global:shout.events.UpdateAvailable', (data) => {
     if (confirm("Er is een nieuwe shout versie, wil je de pagina herladen?")) {
         window.location.reload()
     }
 })
 
-io.listen('global:shouts.events.GoingDown', () => {
+io.listen('global:shout.events.GoingDown', () => {
     Notification.info('De server gaat heel even offline...')
 })
 
-io.listen('global:shouts.events.GoingUp', () => {
+io.listen('global:shout.events.GoingUp', () => {
     Notification.info('Sorry voor het ongemak, we zijn er weer :)')
 })
 
