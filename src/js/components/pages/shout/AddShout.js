@@ -28,7 +28,9 @@ var AddShout = React.createClass({
         })
     },
     done(shout) {
-        this.props.onDone(shout)
+        if (shout) {
+            this.props.onDone(shout)
+        }
         this.setState({
             cleanShout: {
                 description: '',
@@ -40,16 +42,15 @@ var AddShout = React.createClass({
         })
     },
     render() {
+        let { cleanShout } = this.state
+
         return (
-            <Card>
-                <ShoutForm
-                    type="card"
-                    shout={this.state.cleanShout}
-                    onSave={this.addShout}
-                    onDone={this.done}
-                    buttonName="Shout!"
-                />
-            </Card>
+            <ShoutForm
+                shout={cleanShout}
+                onSave={this.addShout}
+                onDone={this.done}
+                buttonName="Shout!"
+            />
         )
     }
 })

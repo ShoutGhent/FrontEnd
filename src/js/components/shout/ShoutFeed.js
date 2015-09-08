@@ -51,9 +51,7 @@ let ShoutFeed = React.createClass({
     fetch(data, cb) {
         let { url } = this.props
 
-        this.setState({
-            loading: true
-        })
+        this.setState({ loading: true })
 
         API.get(url, data, (response) => {
             this.setPaginationData(response)
@@ -62,9 +60,7 @@ let ShoutFeed = React.createClass({
                 cb(response.data)
             }
 
-            this.setState({
-                loading: false
-            })
+            this.setState({ loading: false })
         })
     },
     loadMore() {
@@ -162,27 +158,27 @@ let ShoutFeed = React.createClass({
         return (
             <div>
                 {canShout && <AddShout groupId={groupId} onDone={this.prependShout}/>}
-                {shouts.map((shout) =>
-                    <Shout
-                        key={shout.id}
-                        shout={shout}
-                        onHide={this.hideShout}
-                        onEdit={this.editShout}
-                        onReport={this.reportShout}
-                        onDelete={this.deleteShout}
-                        onToggleFavorite={this.toggleFavorite}
-                        updateCommentCount={this.updateCommentCount}
-                    />
+                {shouts.map(shout =>
+                        <Shout
+                            key={shout.id}
+                            shout={shout}
+                            onHide={this.hideShout}
+                            onEdit={this.editShout}
+                            onReport={this.reportShout}
+                            onDelete={this.deleteShout}
+                            onToggleFavorite={this.toggleFavorite}
+                            updateCommentCount={this.updateCommentCount}
+                        />
                 )}
-                {loading ? <LoadingShouts /> : ''}
-                {noShouts ? (
+                {loading && <LoadingShouts />}
+                {noShouts && (
                     <InfoPanel>
                         <h4>Wees de eerste om hier een shout te plaatsen!</h4>
                     </InfoPanel>
-                ): ''}
-                {next_page_url ? (
+                )}
+                {next_page_url && (
                     <Button className="btn-large" onClick={this.loadMore}>Meer Tonen</Button>
-                ) : ''}
+                )}
             </div>
         )
     }

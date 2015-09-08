@@ -72,7 +72,7 @@ let MaterialTextarea = React.createClass({
         return (
             <div className="input-field">
                 <Validation onValidate={this.onValidate} rules={rules} validate={valid} inValidClass="invalid" validClass="" onChange={this.changeValue} onBlur={this.check}>
-                    <TextareaAutosize {...this.props} value={this.state.value} autoComplete='off'/>
+                    <TextareaAutosize {...this.props} value={this.props.value} autoComplete='off'/>
                 </Validation>
                 <label style={labelStyles} className={this.state.open ? 'active' : ''}>{label}</label>
             </div>

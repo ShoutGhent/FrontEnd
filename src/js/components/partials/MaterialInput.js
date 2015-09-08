@@ -18,16 +18,8 @@ let MaterialInput = React.createClass({
     },
     getInitialState() {
         return {
-            open: false,
-            value: ''
-        }
-    },
-    componentDidMount() {
-        if(this.isMounted()) {
-            this.setState({
-                open: (this.props.value || this.props.defaultValue) ? true : false,
-                value: this.props.value || this.props.defaultValue || ''
-            })
+            open: (this.props.value || this.props.defaultValue) ? true : false,
+            value: this.props.value || this.props.defaultValue || ''
         }
     },
     openLabel() {
@@ -73,7 +65,7 @@ let MaterialInput = React.createClass({
         return (
             <div className="input-field">
                 <Validation onValidate={this.onValidate} rules={rules} validate={valid} inValidClass="invalid" validClass="" onChange={this.changeValue} onBlur={this.check}>
-                    <input {...this.props} value={this.state.value} autoComplete='off'/>
+                    <input {...this.props} value={this.props.value} autoComplete='off'/>
                 </Validation>
                 <label style={labelStyles} className={this.state.open ? 'active' : ''}>{label}</label>
             </div>

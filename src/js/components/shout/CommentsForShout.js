@@ -41,7 +41,7 @@ var CommentsForShout = React.createClass({
             boxHeight: 50,
             comments: [],
             loading: true,
-            newComment: '',
+            newComment: "",
             next_page_url: null,
         }
     },
@@ -174,10 +174,13 @@ var CommentsForShout = React.createClass({
                             <Cell>
                                 <form onSubmit={this.addComment}>
                                     <MaterialInput
+                                        onValidate={() => {}}
+                                        rules={['required']}
                                         autoFocus={true}
                                         label="Wat wil je reageren?"
                                         name="comment"
                                         type="text"
+                                        multiline={true}
                                         value={newComment}
                                         onChange={this.setNewComment}
                                         onKeyDown={this.handleKeyboard}

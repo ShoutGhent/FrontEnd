@@ -4,9 +4,7 @@ import DateTimePicker from '../partials/DateTimePicker'
 import MaterialTextarea from '../partials/MaterialTextarea'
 import moment from 'moment'
 import { Button } from '../button/MaterialButton'
-import { CardContent, CardFooter } from '../card/Card'
 import { Grid, Cell } from '../grid/Grid'
-import { ModalContent, ModalFooter } from '../modal/Modal'
 
 var ShoutForm = React.createClass({
     propTypes: {
@@ -14,8 +12,7 @@ var ShoutForm = React.createClass({
         buttonName: PropTypes.string.isRequired,
         onSave: PropTypes.func.isRequired,
         onDone: PropTypes.func.isRequired,
-        valid: PropTypes.bool,
-        type: PropTypes.string
+        valid: PropTypes.bool
     },
     getInitialState() {
         var { shout } = this.props
@@ -25,10 +22,12 @@ var ShoutForm = React.createClass({
             descriptionIsValid: this.props.valid
         }
     },
+    componentWillReceiveProps() {
+        this.setState(this.getInitialState())
+    },
     getDefaultProps() {
         return {
-            valid: false,
-            type: 'modal'
+            valid: false
         }
     },
     setDescription(event) {
@@ -65,14 +64,18 @@ var ShoutForm = React.createClass({
 
         this.setState({ shout })
     },
+    validateDescription(result) {
+        this.setState({ descriptionIsValid: result })
+    },
     save(event) {
         event.preventDefault()
 
         this.props.onSave(this.state.shout)
         this.setState(this.getInitialState())
     },
-    validateDescription(result) {
-        this.setState({ descriptionIsValid: result })
+    cancel(event) {
+        event.preventDefault()
+        this.props.onDone()
     },
     render() {
         var { shout, descriptionIsValid } = this.state
@@ -85,13 +88,10 @@ var ShoutForm = React.createClass({
 
         var isValid = descriptionIsValid
 
-        var Content = type == 'modal' ? ModalContent : CardContent
-        var Footer = type == 'modal' ? ModalFooter : CardFooter
-
         return (
             <div>
                 <form onSubmit={this.save}>
-                    <Content>
+                    <div>
                         <Grid>
                             <Cell>
                                 <MaterialTextarea
@@ -116,17 +116,18 @@ var ShoutForm = React.createClass({
                                     <label htmlFor={`anonymous.shout.${shout.id || 'add'}`}>Anoniem</label>
                                 </span>
                             </Cell>
-                            <Cell width={9/12}>
+                            <Cell width={3/12}>
                                 <span>
                                     <input type="checkbox" id={`forever.shout.${shout.id || 'add'}`} checked={forever} onChange={this.setForever} />
                                     <label htmlFor={`forever.shout.${shout.id || 'add'}`}>Voor altijd tonen</label>
                                 </span>
                             </Cell>
+                            <Cell width={6/12}>
+                                <Button disabled={ ! isValid} right>{buttonName}</Button>
+                                <Button flat right onClick={this.cancel}>Annuleren</Button>
+                            </Cell>
                         </Grid>
-                    </Content>
-                    <Footer>
-                        <Button disabled={ ! isValid} right>{buttonName}</Button>
-                    </Footer>
+                    </div>
                 </form>
             </div>
         )
