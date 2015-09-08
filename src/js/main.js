@@ -23,14 +23,12 @@ if (jwt) {
 }
 
 // Subscribe to global messages
-io.listen('connect', () => {
-    io.join('global')
+io.join('global')
 
-    io.listen('global:UpdateAvailable', (data) => {
-        if (confirm("Er is een nieuwe shout versie, wil je de pagina herladen?")) {
-            window.location.reload()
-        }
-    })
+io.listen('global:UpdateAvailable', (data) => {
+    if (confirm("Er is een nieuwe shout versie, wil je de pagina herladen?")) {
+        window.location.reload()
+    }
 })
 
 let mountNode = document.getElementById('mount-node')

@@ -25,7 +25,7 @@ class Socket {
     }
 
     join(channel) {
-        this.fire('join', channel)
+        this.listen('connect', () => this.fire('join', channel))
     }
 
     static get io() {
