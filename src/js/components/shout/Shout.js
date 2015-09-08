@@ -21,11 +21,13 @@ let Shout = React.createClass({
         onToggleFavorite: PropTypes.func.isRequired,
         openComments: PropTypes.bool,
         shout: PropTypes.object.isRequired,
-        updateCommentCount: PropTypes.func
+        updateCommentCount: PropTypes.func,
+        updateFavoriteCount: PropTypes.func,
     },
     getDefaultProps() {
         return {
             updateCommentCount: () => {},
+            updateFavoriteCount: () => {},
             openComments: false
         }
     },
@@ -73,9 +75,15 @@ let Shout = React.createClass({
     componentDidMount() {
         let { shout, onHide } = this.props
         this.calcPercentage(shout, onHide)
+
         let channelKey = `shout.${shout.id}`
         io.join(channelKey)
-        //io.listen(`${channelKey}:`)
+        io.listen(`${channelKey}:shout.events.shouts.ShoutHasBeenFavorited`, (data) => {
+            this.props.updateFavoriteCount(shout, +1)
+        })
+        io.listen(`${channelKey}:shout.events.shouts.ShoutHasBeenUnFavorited`, (data) => {
+            this.props.updateFavoriteCount(shout, -1)
+        })
     },
     componentWillUnmount() {
         clearInterval(this.state.intervalId)

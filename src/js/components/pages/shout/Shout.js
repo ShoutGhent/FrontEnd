@@ -75,6 +75,13 @@ let ShoutPage = React.createClass({
 
         this.setState({ shout })
     },
+    updateFavoriteCount(shout, change) {
+        shout = this.state.shout
+
+        shout.meta.favorite_count += change
+
+        this.setState({ shout })
+    },
     render() {
         let { shout, loading } = this.state
 
@@ -94,6 +101,7 @@ let ShoutPage = React.createClass({
                         openComments={true}
                         shout={shout}
                         updateCommentCount={this.updateCommentCount}
+                        updateFavoriteCount={this.updateFavoriteCount}
                     />
                 ) : (
                     <div>
