@@ -19,11 +19,12 @@ var EditShout = React.createClass({
     render() {
         return (
             <ShoutForm
-                valid={true}
-                shout={this.props.shout}
-                onSave={this.save}
-                onDone={this.done}
                 buttonName="Wijzigen"
+                hasCancelButton={true}
+                onDone={this.done}
+                onSave={this.save}
+                shout={this.props.shout}
+                valid={true}
             />
         )
     }

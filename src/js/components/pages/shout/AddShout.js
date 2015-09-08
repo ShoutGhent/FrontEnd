@@ -46,10 +46,11 @@ var AddShout = React.createClass({
 
         return (
             <ShoutForm
-                shout={cleanShout}
-                onSave={this.addShout}
-                onDone={this.done}
                 buttonName="Shout!"
+                hasCancelButton={false}
+                onDone={this.done}
+                onSave={this.addShout}
+                shout={cleanShout}
             />
         )
     }

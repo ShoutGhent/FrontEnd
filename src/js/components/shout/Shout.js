@@ -183,15 +183,12 @@ let Shout = React.createClass({
                         </div>
 
                         {editModalOpen ? (
-                            <div>
-                                <EditShout
-                                    isOpen={editModalOpen}
-                                    onSave={this.save}
-                                    onClose={this.closeEditModal}
-                                    shout={shout}
-                                />
-                                <br/><br/>
-                            </div>
+                            <EditShout
+                                isOpen={editModalOpen}
+                                onSave={this.save}
+                                onClose={this.closeEditModal}
+                                shout={shout}
+                            />
                         ) : (
                             <p style={{whiteSpace: 'pre-wrap'}}>
                                 <Emojify>{shout.description}</Emojify>

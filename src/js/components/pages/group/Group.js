@@ -211,7 +211,11 @@ let Group = React.createClass({
                             <TabPanel title="Shouts" tabId="shouts">
                                 <Grid>
                                     <Cell width={9/12}>
-                                        <ShoutFeed canShout={inGroup} groupId={group.id} url={`shouts/group/${group.id}`}/>
+                                        <ShoutFeed
+                                            canShout={inGroup}
+                                            groupId={group.id}
+                                            url={`shouts/group/${group.id}`}
+                                        />
                                     </Cell>
                                 </Grid>
                             </TabPanel>

@@ -8,6 +8,7 @@ import Notification from '../notification/NotificationActions'
 import Shout from './Shout'
 import WebStorage from '../../services/WebStorage'
 import { Button } from '../button/MaterialButton'
+import { Card, CardContent } from '../card/Card'
 
 let ShoutFeed = React.createClass({
     propTypes: {
@@ -157,8 +158,19 @@ let ShoutFeed = React.createClass({
 
         return (
             <div>
-                {canShout && <AddShout groupId={groupId} onDone={this.prependShout}/>}
-                {shouts.map(shout =>
+                {canShout && (
+                    <Card>
+                        <CardContent>
+                            <AddShout
+                                groupId={groupId}
+                                onDone={this.prependShout}
+                            />
+                        </CardContent>
+                    </Card>
+                )}
+
+                {shouts.map(shout => {
+                    return (
                         <Shout
                             key={shout.id}
                             shout={shout}
@@ -169,15 +181,21 @@ let ShoutFeed = React.createClass({
                             onToggleFavorite={this.toggleFavorite}
                             updateCommentCount={this.updateCommentCount}
                         />
+                    )
+                })}
+
+                {loading && (
+                    <LoadingShouts />
                 )}
-                {loading && <LoadingShouts />}
+
                 {noShouts && (
                     <InfoPanel>
                         <h4>Wees de eerste om hier een shout te plaatsen!</h4>
                     </InfoPanel>
                 )}
+
                 {next_page_url && (
-                    <Button className="btn-large" onClick={this.loadMore}>Meer Tonen</Button>
+                    <Button onClick={this.loadMore} large full>Meer Tonen</Button>
                 )}
             </div>
         )

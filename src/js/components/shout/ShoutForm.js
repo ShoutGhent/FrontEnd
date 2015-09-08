@@ -8,11 +8,12 @@ import { Grid, Cell } from '../grid/Grid'
 
 var ShoutForm = React.createClass({
     propTypes: {
-        shout: PropTypes.object.isRequired,
         buttonName: PropTypes.string.isRequired,
-        onSave: PropTypes.func.isRequired,
+        hasCancelButton: PropTypes.bool,
         onDone: PropTypes.func.isRequired,
-        valid: PropTypes.bool
+        onSave: PropTypes.func.isRequired,
+        shout: PropTypes.object.isRequired,
+        valid: PropTypes.bool,
     },
     getInitialState() {
         var { shout } = this.props
@@ -27,7 +28,8 @@ var ShoutForm = React.createClass({
     },
     getDefaultProps() {
         return {
-            valid: false
+            valid: false,
+            hasCancelButton: true
         }
     },
     setDescription(event) {
@@ -79,7 +81,7 @@ var ShoutForm = React.createClass({
     },
     render() {
         var { shout, descriptionIsValid } = this.state
-        var { buttonName, type } = this.props
+        var { buttonName, hasCancelButton } = this.props
 
         var { anonymous, forever, description } = shout
 
@@ -87,6 +89,12 @@ var ShoutForm = React.createClass({
         var time = moment(shout.publish_until || moment()).format('HH:mm')
 
         var isValid = descriptionIsValid
+
+        let checkboxStyle = {
+            height: 36,
+            lineHeight: '36px',
+            verticalAlign: 'middle'
+        }
 
         return (
             <div>
@@ -111,20 +119,24 @@ var ShoutForm = React.createClass({
 
                         <Grid>
                             <Cell width={3/12}>
-                                <span>
+                                <div style={checkboxStyle}>
                                     <input type="checkbox" id={`anonymous.shout.${shout.id || 'add'}`} checked={anonymous} onChange={this.setAnonymous} />
                                     <label htmlFor={`anonymous.shout.${shout.id || 'add'}`}>Anoniem</label>
-                                </span>
+                                </div>
                             </Cell>
                             <Cell width={3/12}>
-                                <span>
+                                <div style={checkboxStyle}>
                                     <input type="checkbox" id={`forever.shout.${shout.id || 'add'}`} checked={forever} onChange={this.setForever} />
                                     <label htmlFor={`forever.shout.${shout.id || 'add'}`}>Voor altijd tonen</label>
-                                </span>
+                                </div>
                             </Cell>
                             <Cell width={6/12}>
-                                <Button disabled={ ! isValid} right>{buttonName}</Button>
-                                <Button flat right onClick={this.cancel}>Annuleren</Button>
+                                <div className="right">
+                                    {hasCancelButton && (
+                                        <Button flat onClick={this.cancel}>Annuleren</Button>
+                                    )}
+                                    <Button disabled={ ! isValid}>{buttonName}</Button>
+                                </div>
                             </Cell>
                         </Grid>
                     </div>
