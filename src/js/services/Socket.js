@@ -17,7 +17,10 @@ class Socket {
     }
 
     listen(event, cb) {
-        this.socket.on(event, cb)
+        this.socket.on(event, (data) => {
+            //console.log(data)
+            cb(data)
+        })
     }
 
     fire(event, data) {

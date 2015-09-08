@@ -144,7 +144,13 @@ let ShoutFeed = React.createClass({
     updateShout(oldShout, newShout) {
         let { shouts } = this.state
 
-        shouts[shouts.indexOf(oldShout)] = newShout
+        shouts = shouts.map((item, key) => {
+            if (item.id == newShout.id) {
+                return newShout
+            } else {
+                return item
+            }
+        })
 
         this.setState({ shouts })
     },
@@ -173,12 +179,12 @@ let ShoutFeed = React.createClass({
                     return (
                         <Shout
                             key={shout.id}
-                            shout={shout}
-                            onHide={this.hideShout}
-                            onEdit={this.editShout}
-                            onReport={this.reportShout}
                             onDelete={this.deleteShout}
+                            onEdit={this.editShout}
+                            onHide={this.hideShout}
+                            onReport={this.reportShout}
                             onToggleFavorite={this.toggleFavorite}
+                            shout={shout}
                             updateShout={this.updateShout}
                         />
                     )
