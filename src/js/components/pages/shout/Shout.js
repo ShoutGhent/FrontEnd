@@ -41,9 +41,10 @@ let ShoutPage = React.createClass({
             shout_id: shout.id,
             user_id: shout.user_id,
         }, (updatedShout) => {
-            this.setState({ shout: updatedShout })
             Notification.success("Shout is bewerkt!")
         })
+
+        this.setState({ shout })
     },
     deleteShout(shout) {
         API.del(`shouts/${shout.id}`, {}, (data) => {
