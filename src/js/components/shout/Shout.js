@@ -84,6 +84,9 @@ let Shout = React.createClass({
         io.listen(`${channelKey}:shout.events.shouts.ShoutHasBeenUnFavorited`, (data) => {
             this.props.updateFavoriteCount(shout, -1)
         })
+        io.listen(`${channelKey}:shout.events.comments.BroadcastCommentedOnShout`, (data) => {
+            this.updateCommentCount(data.shout.meta.comment_count)
+        })
     },
     componentWillUnmount() {
         clearInterval(this.state.intervalId)
@@ -251,9 +254,10 @@ let Shout = React.createClass({
                     </div>
                 </div>
                 {openComments && <CommentsForShout
+                    channelKey={`shout.${shout.id}`}
+                    onCloseRequest={this.closeComments}
                     shout={shout}
                     updateCommentCount={this.updateCommentCount}
-                    onCloseRequest={this.closeComments}
                 />}
             </div>
         )

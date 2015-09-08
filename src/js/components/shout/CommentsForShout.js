@@ -10,17 +10,29 @@ import TransitiveNumber from 'react-transitive-number'
 import { Button } from '../button/MaterialButton'
 import { Collection, CollectionItem } from '../collection/Collection'
 import { Grid, Cell } from '../grid/Grid'
+import { io } from '../../services/Socket'
+import LoginStore from '../../auth/LoginStore'
 
 var CommentsForShout = React.createClass({
     propTypes: {
         shout: PropTypes.object.isRequired,
         updateCommentCount: PropTypes.func,
         onCloseRequest: PropTypes.func,
+        channelKey: PropTypes.string.isRequired,
     },
     getDefaultProps() {
         return {
             updateCommentCount: () => {},
             onCloseRequest: () => {},
+        }
+    },
+    getInitialState() {
+        return {
+            boxHeight: 50,
+            comments: [],
+            loading: true,
+            newComment: "",
+            next_page_url: null,
         }
     },
     componentWillMount() {
@@ -32,18 +44,13 @@ var CommentsForShout = React.createClass({
                     comments: res.data
                 })
 
+                io.listen(`${this.props.channelKey}:shout.events.comments.BroadcastCommentedOnShout`, (data) => {
+                    this.appendNewComment(data.comment)
+                })
+
                 this.scrollToBottom()
             }
         })
-    },
-    getInitialState() {
-        return {
-            boxHeight: 50,
-            comments: [],
-            loading: true,
-            newComment: "",
-            next_page_url: null,
-        }
     },
     loadMoreComments(evt) {
         evt.preventDefault()
@@ -114,9 +121,18 @@ var CommentsForShout = React.createClass({
     },
     appendNewComment(comment) {
         let { comments } = this.state
-        comments.push(comment)
-        this.setState({ comments })
-        this.scrollToBottom()
+        let pushIt = true
+        comments.forEach(c => {
+            if (c.id == comment.id) {
+                pushIt = false
+            }
+        })
+
+        if (pushIt) {
+            comments.push(comment)
+            this.setState({ comments })
+            this.scrollToBottom()
+        }
     },
     renderComment(comment) {
         return (<CollectionItem key={`item-${comment.id}`} ref={`item-${comment.id}`}>
