@@ -67,7 +67,7 @@ var EditPassword = React.createClass({
                                         onValidate={this.validPassword}
                                         rules={['required']}
                                         type="password"
-                                        value=""
+                                        value={password}
                                     />
                                 </Cell>
                                 <Cell width={6/12}>
@@ -79,7 +79,7 @@ var EditPassword = React.createClass({
                                         onValidate={this.validPasswordConfirmation}
                                         rules={['required']}
                                         type="password"
-                                        value=""
+                                        value={password_confirmation}
                                     />
                                 </Cell>
                                 <cell>

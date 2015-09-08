@@ -80,7 +80,7 @@ var AddGroup = React.createClass({
                                     onValidate={this.validateName}
                                     placeholder="Groep Naam"
                                     rules={['required']}
-                                    value=''
+                                    value={this.state.name}
                                 />
                             </Cell>
                             <Cell>
