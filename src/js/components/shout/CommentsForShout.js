@@ -176,16 +176,16 @@ var CommentsForShout = React.createClass({
                             <Cell>
                                 <form onSubmit={this.addComment}>
                                     <MaterialInput
-                                        onValidate={() => {}}
-                                        rules={['required']}
                                         autoFocus={true}
                                         label="Wat wil je reageren?"
-                                        name="comment"
-                                        type="text"
                                         multiline={true}
-                                        value={newComment}
+                                        name="comment"
                                         onChange={this.setNewComment}
                                         onKeyDown={this.handleKeyboard}
+                                        onValidate={() => {}}
+                                        rules={['required']}
+                                        type="text"
+                                        value={newComment}
                                     />
                                 </form>
                                 <span className="right">Druk op enter om te reageren</span>

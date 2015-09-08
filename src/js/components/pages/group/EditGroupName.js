@@ -56,14 +56,14 @@ var EditGroupName = React.createClass({
                         <CardContent>
                             <CardTitle>Naam Wijzigen</CardTitle>
                                 <MaterialInput
-                                    onValidate={this.validName}
-                                    rules={['required']}
+                                    id="name"
                                     label="Groep Naam"
                                     name="name"
-                                    id="name"
-                                    value={name}
                                     onChange={this.changeName}
+                                    onValidate={this.validName}
+                                    rules={['required']}
                                     type="text"
+                                    value={name}
                                 />
                         </CardContent>
                         <CardFooter>

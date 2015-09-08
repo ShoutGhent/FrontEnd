@@ -60,24 +60,26 @@ var EditPassword = React.createClass({
                             <Grid>
                                 <Cell width={6/12}>
                                     <MaterialInput
-                                        onValidate={this.validPassword}
-                                        rules={['required']}
+                                        id="password"
                                         label="Wachtwoord"
                                         name="password"
-                                        id="password"
                                         onChange={this.changePassword}
+                                        onValidate={this.validPassword}
+                                        rules={['required']}
                                         type="password"
+                                        value=""
                                     />
                                 </Cell>
                                 <Cell width={6/12}>
                                     <MaterialInput
-                                        onValidate={this.validPasswordConfirmation}
-                                        rules={['required']}
+                                        id="password_confirmation"
                                         label="Wachtwoord Herhalen"
                                         name="password_confirmation"
-                                        id="password_confirmation"
                                         onChange={this.changePasswordConfirmation}
+                                        onValidate={this.validPasswordConfirmation}
+                                        rules={['required']}
                                         type="password"
+                                        value=""
                                     />
                                 </Cell>
                                 <cell>

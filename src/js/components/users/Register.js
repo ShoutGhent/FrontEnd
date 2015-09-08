@@ -122,26 +122,26 @@ var Register = React.createClass({
                     <Grid>
                         <Cell>
                             <MaterialInput
+                                id="email"
+                                label="E-mail"
+                                name="email"
+                                onChange={this.setEmail}
                                 onValidate={this.validateEmail}
                                 rules={['required', 'email', 'endsWith:@ugent.be:@student.hogent.be']}
-                                label="E-mail"
                                 type="email"
-                                id="email"
-                                name="email"
                                 value={this.state.email}
-                                onChange={this.setEmail}
                             />
                         </Cell>
                         <Cell width={6/12}>
                             <MaterialInput
+                                id="first_name"
+                                label="Voornaam"
+                                name="first_name"
+                                onChange={this.setFirstName}
                                 onValidate={this.validateFirstName}
                                 rules={['required']}
-                                label="Voornaam"
                                 type="text"
-                                id="first_name"
-                                name="first_name"
                                 value={this.state.first_name}
-                                onChange={this.setFirstName}
                             />
                         </Cell>
                         <Cell width={6/12}>

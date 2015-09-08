@@ -66,26 +66,26 @@ var EditName = React.createClass({
                             <Grid>
                                 <Cell width={6/12}>
                                     <MaterialInput
-                                        onValidate={this.validFirstName}
-                                        rules={['required']}
+                                        id="first_name"
                                         label="Voornaam"
                                         name="first_name"
-                                        id="first_name"
-                                        value={first_name}
                                         onChange={this.changeFirstName}
+                                        onValidate={this.validFirstName}
+                                        rules={['required']}
                                         type="text"
+                                        value={first_name}
                                     />
                                 </Cell>
                                 <Cell width={6/12}>
                                     <MaterialInput
-                                        onValidate={this.validLastName}
-                                        rules={['required']}
+                                        id="last_name"
                                         label="Achternaam"
                                         name="last_name"
-                                        id="last_name"
-                                        value={last_name}
                                         onChange={this.changeLastName}
+                                        onValidate={this.validLastName}
+                                        rules={['required']}
                                         type="text"
+                                        value={last_name}
                                     />
                                 </Cell>
                             </Grid>

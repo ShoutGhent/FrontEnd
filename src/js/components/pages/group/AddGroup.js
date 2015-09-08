@@ -75,11 +75,12 @@ var AddGroup = React.createClass({
                         <Grid>
                             <Cell>
                                 <MaterialTextarea
-                                    onValidate={this.validateName}
-                                    rules={['required']}
-                                    placeholder="Groep Naam"
                                     className="materialize-textarea"
                                     onChange={this.setName}
+                                    onValidate={this.validateName}
+                                    placeholder="Groep Naam"
+                                    rules={['required']}
+                                    value=''
                                 />
                             </Cell>
                             <Cell>
