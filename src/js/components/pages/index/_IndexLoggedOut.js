@@ -2,8 +2,6 @@ import React from 'react'
 
 import Avatar from '../../users/Avatar'
 import Footer from '../../partials/Footer'
-import Headline from '../../partials/Headline'
-import Icon from '../../partials/Icon'
 import Parallax from '../../partials/Parallax'
 import { Card, CardContent, CardTitle, CardFooter } from '../../card/Card'
 import { Gmaps, Marker } from 'react-gmaps'

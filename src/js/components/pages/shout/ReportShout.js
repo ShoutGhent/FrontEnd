@@ -42,7 +42,7 @@ var ReportShout = React.createClass({
     },
     render() {
         let { isOpen } = this.props
-        let { reasonIsValid } = this.state
+        let { reasonIsValid, reason } = this.state
 
         let isValid = reasonIsValid
 
@@ -55,11 +55,12 @@ var ReportShout = React.createClass({
                                 <Cell>
                                     <div className="input-field">
                                         <MaterialTextarea
-                                            rules={['required', 'min:20']}
-                                            onValidate={this.validateReason}
-                                            placeholder="Waarom?"
                                             className="materialize-textarea"
                                             onChange={this.setReason}
+                                            onValidate={this.validateReason}
+                                            placeholder="Waarom?"
+                                            rules={['required', 'min:20']}
+                                            value={reason}
                                         />
                                     </div>
                                 </Cell>

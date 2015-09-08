@@ -1,10 +1,7 @@
 import React, { PropTypes } from 'react'
 
 import API from '../../../services/API'
-import assign from 'react/lib/Object.assign'
-import LoginActions from '../../../auth/LoginActions'
 import LoginStore from '../../../auth/LoginStore'
-import MaterialInput from '../../partials/MaterialInput'
 import Notification from '../../notification/NotificationActions'
 import WebStorage from '../../../services/WebStorage'
 import { Button } from '../../button/MaterialButton'
@@ -95,18 +92,22 @@ var EditGroupLocation = React.createClass({
                                 Klik op de kaart om een juiste locatie te kiezen voor deze groep.
                             </p>
                             <Gmaps
-                                width={'100%'}
                                 height={300}
                                 lat={markerCoords.latitude}
                                 lng={markerCoords.longitude}
+                                onClick={this.moveMarker}
+                                width={'100%'}
                                 zoom={17}
-                                onClick={this.moveMarker}>
+                            >
                                 <Marker
                                     lat={markerCoords.latitude}
                                     lng={markerCoords.longitude}
                                 />
                             </Gmaps>
-                            { ! group_location && <p>Vermits deze groep nog geen locatie heeft, hebben we een schatting van je huidige locatie gemaakt.</p>}
+
+                            { ! group_location && (
+                                <p>Vermits deze groep nog geen locatie heeft, hebben we een schatting van je huidige locatie gemaakt.</p>
+                            )}
                         </CardContent>
                         <CardFooter>
                             <Button onClick={this.myLocation}>Mijn Locatie</Button>

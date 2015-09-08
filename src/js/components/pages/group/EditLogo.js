@@ -5,8 +5,8 @@ import EditImage from './EditImage'
 var EditLogo = React.createClass({
     propTypes: {
         groupId: PropTypes.string.isRequired,
-        isOpen: PropTypes.bool.isRequired,
         image: PropTypes.string.isRequired,
+        isOpen: PropTypes.bool.isRequired,
         onDone: PropTypes.func,
     },
     render() {
@@ -14,11 +14,11 @@ var EditLogo = React.createClass({
 
         return (
             <EditImage
-                ratio={1/1}
-                link={link}
-                isOpen={this.props.isOpen}
-                onDone={this.props.onDone}
                 image={this.props.image}
+                isOpen={this.props.isOpen}
+                link={link}
+                onDone={this.props.onDone}
+                ratio={1/1}
             />
         )
     }

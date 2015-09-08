@@ -7,12 +7,12 @@ import EditGroupLocation from './EditGroupLocation'
 import EditGroupName from './EditGroupName'
 import EditHeader from './EditHeader'
 import EditLogo from './EditLogo'
+import Emojify from '../../partials/Emojify'
 import GroupActions from './GroupActions'
 import GroupDistance from './GroupDistance'
 import GroupStore from './GroupStore'
 import Icon from '../../partials/Icon'
 import Loading from '../../loading/Loading'
-import Parallax from '../../partials/Parallax'
 import Redirect from '../../../services/Redirect'
 import RemoveGroup from './RemoveGroup'
 import ShoutFeed from '../../shout/ShoutFeed'
@@ -21,7 +21,6 @@ import { Button } from '../../button/MaterialButton'
 import { Card, CardContent, CardTitle } from '../../card/Card'
 import { Grid, Cell } from '../../grid/Grid'
 import { Tab, TabPanel } from '../../tab/Tab'
-import Emojify from '../../partials/Emojify'
 
 let Group = React.createClass({
     statics: {
@@ -31,10 +30,10 @@ let Group = React.createClass({
     },
     getInitialState() {
         return assign(GroupStore.getState(), {
-            editLogoFormOpen: false,
             editHeaderFormOpen: false,
+            editLogoFormOpen: false,
+            headerWidth: 800,
             logoHover: false,
-            headerWidth: 800
         })
     },
     componentDidMount() {
@@ -63,17 +62,12 @@ let Group = React.createClass({
 
         let width = React.findDOMNode(this.refs.header).offsetWidth
 
-        if (Math.abs(width - this.state.headerWidth) > 30)
-        {
-            this.setState({
-                headerWidth: width
-            })
+        if (Math.abs(width - this.state.headerWidth) > 30) {
+            this.setState({ headerWidth: width })
         }
 
         if(force) {
-            this.setState({
-                headerWidth: width
-            })
+            this.setState({ headerWidth: width })
         }
     },
     changeTab(tabId) {
@@ -89,32 +83,22 @@ let Group = React.createClass({
         GroupActions.joinGroup(this.state.group.id)
     },
     editLogo() {
-        this.setState({
-            editLogoFormOpen: true
-        })
+        this.setState({ editLogoFormOpen: true })
     },
     editHeader() {
-        this.setState({
-            editHeaderFormOpen: true
-        })
+        this.setState({ editHeaderFormOpen: true })
     },
     updateGroup(group) {
         this.setState({ group })
     },
     hoverLogo() {
-        this.setState({
-            logoHover: ! this.state.logoHover
-        })
+        this.setState({ logoHover: ! this.state.logoHover })
     },
     onLogoEdited() {
-        this.setState({
-            editLogoFormOpen: false
-        })
+        this.setState({ editLogoFormOpen: false })
     },
     onHeaderEdited() {
-        this.setState({
-            editHeaderFormOpen: false
-        })
+        this.setState({ editHeaderFormOpen: false })
     },
     removeGroup() {
         Redirect.to('home')
@@ -144,33 +128,54 @@ let Group = React.createClass({
 
         return (
             <div className="group">
-                {isAdmin && editLogoFormOpen && <EditLogo isOpen={editLogoFormOpen} onDone={this.onLogoEdited} image={group.header_data.secure_url} groupId={group.id}/>}
-                {isAdmin && editHeaderFormOpen && <EditHeader isOpen={editHeaderFormOpen} onDone={this.onHeaderEdited} image={group.header_data.secure_url} groupId={group.id}/>}
+                {isAdmin && editLogoFormOpen && (
+                    <EditLogo
+                        groupId={group.id}
+                        image={group.header_data.secure_url}
+                        isOpen={editLogoFormOpen}
+                        onDone={this.onLogoEdited}
+                    />
+                )}
+                {isAdmin && editHeaderFormOpen && (
+                    <EditHeader
+                        groupId={group.id}
+                        image={group.header_data.secure_url}
+                        isOpen={editHeaderFormOpen}
+                        onDone={this.onHeaderEdited}
+                    />
+                )}
                 <Grid>
                     <Cell center>
                         <div className="group__header" ref="header">
                             <Cloudinary
                                 fallbackHeight={Math.round(headerWidth / (21/9))}
-                                style={{position:'relative'}}
                                 image={group.header_data}
                                 options={{width: headerWidth}}
+                                style={{position:'relative'}}
                                 defaultElement={<h1 className="center-both" style={{
                                     color: 'rgba(0, 0, 0, 0.4)',
                                     margin: 0
                                 }}><Emojify>{group.name}</Emojify></h1>}
                             />
                             <div className="group__header__buttons">
-                                {isAdmin &&
+                                {isAdmin && (
                                     <Button onClick={this.editHeader}>
                                         Wijzig Afbeelding
                                     </Button>
-                                }
+                                )}
                                 <Button
                                     disabled={(inGroup && memberCount == 1) || isAdmin}
                                     onClick={() => {inGroup ? this.leaveGroup() : this.joinGroup()}}
                                 >
-                                    {leavingOrJoiningGroupLoading && <Icon className="right" icon="loop" spinning/>}
-                                    {group.meta.in_group ? 'Groep Verlaten' : 'Lid Worden'}
+                                    {leavingOrJoiningGroupLoading && (
+                                        <Icon className="right" icon="loop" spinning/>
+                                    )}
+
+                                    {group.meta.in_group ? (
+                                        <span>Groep Verlaten</span>
+                                    ) : (
+                                        <span>Lid Worden</span>
+                                    )}
                                 </Button>
                             </div>
                         </div>
@@ -192,7 +197,9 @@ let Group = React.createClass({
                                             />
                                         </div>
 
-                                        <h4 className="left" style={{marginLeft: 20}}><Emojify>{group.name}</Emojify></h4>
+                                        <h4 className="left" style={{marginLeft: 20}}>
+                                            <Emojify>{group.name}</Emojify>
+                                        </h4>
                                     </Cell>
                                     <Cell width={6/12}>
                                         <div className="right">
@@ -219,19 +226,28 @@ let Group = React.createClass({
                                     </Cell>
                                 </Grid>
                             </TabPanel>
-                            {isAdmin &&
-                            <TabPanel title="Beheer" tabId="manage">
-                                <Grid>
-                                    <Cell width={6/12}>
-                                        <EditGroupName group={group} onChange={this.updateGroup}/>
-                                        <RemoveGroup group={group} onDelete={this.removeGroup}/>
-                                    </Cell>
-                                    <Cell width={6/12}>
-                                        <EditGroupLocation group={group} onChange={this.updateGroup}/>
-                                    </Cell>
-                                </Grid>
-                            </TabPanel>
-                            }
+                            {isAdmin && (
+                                <TabPanel title="Beheer" tabId="manage">
+                                    <Grid>
+                                        <Cell width={6/12}>
+                                            <EditGroupName
+                                                group={group}
+                                                onChange={this.updateGroup}
+                                            />
+                                            <RemoveGroup
+                                                group={group}
+                                                onDelete={this.removeGroup}
+                                            />
+                                        </Cell>
+                                        <Cell width={6/12}>
+                                            <EditGroupLocation
+                                                group={group}
+                                                onChange={this.updateGroup}
+                                            />
+                                        </Cell>
+                                    </Grid>
+                                </TabPanel>
+                            )}
                         </Tab>
                     </Cell>
                 </Grid>

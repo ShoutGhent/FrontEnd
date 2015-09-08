@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
 
 import MyGroupsStore from './MyGroupsStore'
-import WebStorage from '../../services/WebStorage'
 import GroupList from './GroupList'
 
 var MyGroupList = React.createClass({
@@ -23,9 +22,9 @@ var MyGroupList = React.createClass({
 
         return (
             <GroupList
-                title="Mijn Groepen"
                 groups={myGroups}
                 loading={loading}
+                title="Mijn Groepen"
             />
         )
     }

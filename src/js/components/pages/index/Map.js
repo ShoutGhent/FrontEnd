@@ -72,7 +72,7 @@ var Map = React.createClass({
                     <Button className="btn" padding="0 1rem" onClick={this.centerCurrentLocation}>
                         <Icon icon="home"/>
                     </Button>
-                &nbsp;&nbsp;
+                    <span>&nbsp;&nbsp;</span>
                     <Button className="btn" padding="0 1rem" onClick={this.getLocation}>
                         <Icon icon="my_location"/>
                     </Button>
@@ -97,19 +97,20 @@ var Map = React.createClass({
                     lng={group.lng}
                     title={group.name}
                 />)}
-                    {radius &&
-                    <Circle
-                        ref="circle"
-                        strokeColor={'#F44336'}
-                        strokeOpacity={0.8}
-                        strokeWeight={1}
-                        fillColor={'#F44336'}
-                        fillOpacity={0.35}
-                        radius={radius}
-                        lat={coords.latitude}
-                        lng={coords.longitude}
-                        onRadiusChanged={this.handleRadiusChanged}
-                    />}
+                    {radius && (
+                        <Circle
+                            ref="circle"
+                            strokeColor={'#F44336'}
+                            strokeOpacity={0.8}
+                            strokeWeight={1}
+                            fillColor={'#F44336'}
+                            fillOpacity={0.35}
+                            radius={radius}
+                            lat={coords.latitude}
+                            lng={coords.longitude}
+                            onRadiusChanged={this.handleRadiusChanged}
+                        />
+                    )}
                 </Gmaps>
             </div>
         )

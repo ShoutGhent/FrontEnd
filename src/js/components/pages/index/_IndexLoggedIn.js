@@ -1,6 +1,5 @@
 import React from 'react'
 
-import assign from 'react/lib/Object.assign'
 import MyGroupList from '../../group/MyGroupList'
 import GroupListNearMe from '../../group/GroupListNearMe'
 import InfoPanel from '../../partials/InfoPanel'
@@ -51,9 +50,11 @@ var _IndexLoggedIn = React.createClass({
 
         return (
             <div className="container">
-                {!loading && myGroups.length <= 0 ? (
-                    <JoinInitialGroupModal onDone={this.refetchGroups}></JoinInitialGroupModal>
-                ) : ''}
+                { ! loading && myGroups.length <= 0 && (
+                    <JoinInitialGroupModal
+                        onDone={this.refetchGroups}
+                    />
+                )}
                 <Tab>
                     <TabPanel title="Vrienden">
                         <Grid>

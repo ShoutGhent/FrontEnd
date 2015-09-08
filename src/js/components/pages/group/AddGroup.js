@@ -1,10 +1,8 @@
 import React, { PropTypes } from 'react'
 
 import API from '../../../services/API'
-import GroupActions from '../../pages/group/GroupActions'
 import MaterialTextarea from '../../partials/MaterialTextarea'
 import Redirect from "../../../services/Redirect"
-import ShoutForm from '../../shout/ShoutForm'
 import { Button } from '../../button/MaterialButton'
 import { Grid, Cell } from '../../grid/Grid'
 import { Modal, ModalContent, ModalFooter } from '../../modal/Modal'
@@ -86,15 +84,39 @@ var AddGroup = React.createClass({
                             <Cell>
                                 <ul className="list-unstyled">
                                     <li>
-                                        <input checked={type == 'open'} className="with-gap" name="open_type" id="open_type" type="radio" value="open" onChange={this.setType}/>
+                                        <input
+                                            checked={type == 'open'}
+                                            className="with-gap"
+                                            id="open_type"
+                                            name="open_type"
+                                            onChange={this.setType}
+                                            type="radio"
+                                            value="open"
+                                        />
                                         <label htmlFor="open_type">Open Groep</label>
                                     </li>
                                     <li>
-                                        <input checked={type == 'closed'} className="with-gap" name="closed_type" id="closed_type" type="radio" value="closed" onChange={this.setType}/>
+                                        <input
+                                            checked={type == 'closed'}
+                                            className="with-gap"
+                                            id="closed_type"
+                                            name="closed_type"
+                                            onChange={this.setType}
+                                            type="radio"
+                                            value="closed"
+                                        />
                                         <label htmlFor="closed_type">Gesloten Groep</label>
                                     </li>
                                     <li className="hidden">
-                                        <input checked={type == 'secret'} className="with-gap" name="secret_type" id="secret_type" type="radio" value="secret" onChange={this.setType}/>
+                                        <input
+                                            checked={type == 'secret'}
+                                            className="with-gap"
+                                            id="secret_type"
+                                            name="secret_type"
+                                            onChange={this.setType}
+                                            type="radio"
+                                            value="secret"
+                                        />
                                         <label htmlFor="secret_type">Secret Groep</label>
                                     </li>
                                 </ul>

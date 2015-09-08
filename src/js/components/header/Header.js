@@ -1,7 +1,7 @@
 import React from 'react'
 
-import HeaderStore from './HeaderStore'
 import HeaderActions from './HeaderActions'
+import HeaderStore from './HeaderStore'
 import Icon from '../partials/Icon'
 import LoggedInHeader from './LoggedInHeader'
 import LoggedOutHeader from './LoggedOutHeader'
@@ -52,8 +52,16 @@ let Header = React.createClass({
                         <a href={true} className="button-collapse" onClick={this.toggleNavigation}>
                             <Icon icon="menu"/>
                         </a>
-                        {LoginStore.isLoggedIn() ? <LoggedInHeader className={className} user={user}/> : <LoggedOutHeader className={className}/>}
-                        {isOpen && <div id="sidenav-overlay" onClick={this.toggleNavigation}></div>}
+
+                        {LoginStore.isLoggedIn() ? (
+                            <LoggedInHeader className={className} user={user}/>
+                        ) : (
+                            <LoggedOutHeader className={className}/>
+                        )}
+
+                        {isOpen && (
+                            <div id="sidenav-overlay" onClick={this.toggleNavigation}/>
+                        )}
                     </div>
                 </nav>
             </div>

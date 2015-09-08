@@ -103,7 +103,11 @@ let LoggedInHeader = React.createClass({
                             <li><a href onClick={this.logout}>Uitloggen</a></li>
                         </DropdownContent>
                     </Dropdown>
-                    <AddGroup isOpen={isAddGroupFormOpen} onDone={this.groupWasAdded} onClose={this.closeAddGroupModal}></AddGroup>
+                    <AddGroup
+                        isOpen={isAddGroupFormOpen}
+                        onClose={this.closeAddGroupModal}
+                        onDone={this.groupWasAdded}
+                    />
                 </li>
             </ul>
         )

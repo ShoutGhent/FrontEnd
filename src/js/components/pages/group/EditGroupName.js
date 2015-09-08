@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
 
 import API from '../../../services/API'
-import LoginActions from '../../../auth/LoginActions'
 import MaterialInput from '../../partials/MaterialInput'
 import Notification from '../../notification/NotificationActions'
 import { Button } from '../../button/MaterialButton'

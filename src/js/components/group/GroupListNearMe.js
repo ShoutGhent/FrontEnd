@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react'
 
-import MyGroupsStore from './MyGroupsStore'
-import WebStorage from '../../services/WebStorage'
 import GroupList from './GroupList'
+import MyGroupsStore from './MyGroupsStore'
 
 var GroupListNearMe = React.createClass({
     propTypes: {
@@ -34,9 +33,9 @@ var GroupListNearMe = React.createClass({
 
         return (
             <GroupList
-                title="Groepen in de buurt"
                 groups={groupsNearMe}
                 loading={loading}
+                title="Groepen in de buurt"
             />
         )
     }

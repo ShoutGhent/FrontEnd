@@ -3,7 +3,6 @@ import React, { PropTypes } from 'react'
 import Cloudinary from '../partials/Cloudinary'
 import Emojify from '../partials/Emojify'
 import GroupDistance from '../pages/group/GroupDistance'
-import Icon from '../partials/Icon'
 import Loading from '../loading/Loading'
 import { Card, CardContent, CardTitle } from '../card/Card'
 import { Collection, CollectionItem } from '../collection/Collection'
@@ -53,12 +52,16 @@ var GroupList = React.createClass({
             <Card>
                 <CardContent>
                     <CardTitle>{title}</CardTitle>
-                    {groups.length != 0 &&
+
+                    {groups.length != 0 && (
                         <Collection>
                             {groups.map(this.renderGroups)}
                         </Collection>
-                    }
-                    {loading && <Loading/>}
+                    )}
+
+                    {loading && (
+                        <Loading/>
+                    )}
                 </CardContent>
             </Card>
         )

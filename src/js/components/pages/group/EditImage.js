@@ -4,17 +4,16 @@ import API from '../../../services/API'
 import Cropper from '../../cropper/Cropper'
 import GroupActions from './GroupActions'
 import Icon from '../../partials/Icon'
-import Ink from 'react-ink'
 import { Button } from '../../button/MaterialButton'
 import { Modal, ModalContent, ModalFooter } from '../../modal/Modal'
 
 var EditImage = React.createClass({
     propTypes: {
-        link: PropTypes.string.isRequired,
-        ratio: PropTypes.number.isRequired,
-        isOpen: PropTypes.bool.isRequired,
         image: PropTypes.string.isRequired,
+        isOpen: PropTypes.bool.isRequired,
+        link: PropTypes.string.isRequired,
         onDone: PropTypes.func,
+        ratio: PropTypes.number.isRequired
     },
     getInitialState() {
         return {
@@ -85,11 +84,11 @@ var EditImage = React.createClass({
             <Modal isOpen={isOpen} onClose={onDone}>
                 <ModalContent>
                     <Cropper
+                        aspectRatio={ratio}
+                        guides={false}
                         ref="cropper"
                         src={this.getFileUrl()}
                         style={{height: 400, width: '100%'}}
-                        aspectRatio={ratio}
-                        guides={false}
                     />
                     <div className="file-field input-field">
                         <div className="btn">

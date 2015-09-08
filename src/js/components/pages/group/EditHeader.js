@@ -14,11 +14,11 @@ var EditHeader = React.createClass({
 
         return (
             <EditImage
-                ratio={21/9}
-                link={link}
-                isOpen={this.props.isOpen}
-                onDone={this.props.onDone}
                 image={this.props.image}
+                isOpen={this.props.isOpen}
+                link={link}
+                onDone={this.props.onDone}
+                ratio={21/9}
             />
         )
     }
