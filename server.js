@@ -17,5 +17,5 @@ new WebpackDevServer(compiler, {
         console.log(err);
     }
 
-    console.log('Listening at ' + ip + ':' + port);
+    console.log('Listening at http://' + ip + ':' + port);
 });

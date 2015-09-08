@@ -3,6 +3,7 @@ import alt from "../alt"
 import API from '../services/API'
 import Redirect from "../services/Redirect"
 import WebStorage from "../services/WebStorage"
+import { io } from '../services/Socket'
 
 class LoginActions {
     loginUser(jwt, user, redirect) {
@@ -12,6 +13,10 @@ class LoginActions {
 
         WebStorage.toStore('jwt', jwt)
         WebStorage.toStore('user', user)
+
+        io.listen('connect', () => {
+            io.join(`user.${user.id}`)
+        })
 
         this.dispatch({ user, jwt })
     }
