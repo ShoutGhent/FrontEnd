@@ -77,9 +77,11 @@ let Shout = React.createClass({
         let channelKey = `shout.${shout.id}`
         io.join(channelKey)
 
-        io.listen(`${channelKey}:shout.events.shouts.ShoutHasBeenFavorited`, data => this.props.updateShout(shout, data.shout))
-        io.listen(`${channelKey}:shout.events.shouts.ShoutHasBeenUnFavorited`, data => this.props.updateShout(shout, data.shout))
+        io.listen(`${channelKey}:shout.events.shouts.BroadcastShoutHasBeenFavorited`, data => this.props.updateShout(shout, data.shout))
+        io.listen(`${channelKey}:shout.events.shouts.BroadcastShoutHasBeenUnFavorited`, data => this.props.updateShout(shout, data.shout))
         io.listen(`${channelKey}:shout.events.comments.BroadcastCommentedOnShout`, data => this.props.updateShout(shout, data.shout))
+        io.listen(`${channelKey}:shout.events.shouts.BroadcastShoutWasEdited`, data => this.props.updateShout(shout, data.shout))
+        io.listen(`${channelKey}:shout.events.shouts.BroadcastShoutWasRemoved`, data => this.props.onHide(shout, true))
     },
     componentWillUnmount() {
         clearInterval(this.state.intervalId)

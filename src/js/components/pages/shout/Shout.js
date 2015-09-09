@@ -26,8 +26,9 @@ let ShoutPage = React.createClass({
             }
         })
     },
-    hideShout() {
-        if (this.state.shout.user.id != WebStorage.fromStore('user', { user: { id: null }}).id) {
+    hideShout(shout, force) {
+
+        if (force || this.state.shout.user.id != WebStorage.fromStore('user', { id: null }).id) {
             let shout = null
 
             this.setState({ shout })

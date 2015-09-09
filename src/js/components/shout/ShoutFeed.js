@@ -90,17 +90,17 @@ let ShoutFeed = React.createClass({
             anonymous: shout.anonymous,
             publish_until: shout.publish_until
         }, (updatedShout) => {
-            var shouts = this.state.shouts
-            shouts.map((item, key) => {
-                if (item.id == shout.id) {
-                    shouts[key] = updatedShout
-                }
-            })
-
-            this.setState({ shouts })
-
             Notification.success("Shout is bewerkt!")
         })
+
+        var shouts = this.state.shouts
+        shouts.map((item, key) => {
+            if (item.id == shout.id) {
+                shouts[key] = shout
+            }
+        })
+
+        this.setState({ shouts })
     },
     deleteShout(shout) {
         API.del(`shouts/${shout.id}`, {}, (data) => {
