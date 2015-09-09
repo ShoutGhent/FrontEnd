@@ -23,6 +23,8 @@ let ShoutPage = React.createClass({
                     let loading = false
                     this.setState({ shout, loading })
                 }
+            } else {
+                this.setState({ shout: null, loading: false })
             }
         })
     },
