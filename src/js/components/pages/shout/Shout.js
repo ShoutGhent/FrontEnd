@@ -72,6 +72,9 @@ let ShoutPage = React.createClass({
         API.post(url, {}, (shout, err) => this.setState({ shout }))
     },
     updateShout(oldShout, newShout) {
+        newShout.meta.favorited_by_me = oldShout.meta.favorited_by_me
+        newShout.meta.my_shout = oldShout.meta.my_shout
+
         this.setState({ shout: newShout })
     },
     render() {

@@ -146,6 +146,9 @@ let ShoutFeed = React.createClass({
 
         shouts = shouts.map((item, key) => {
             if (item.id == newShout.id) {
+                newShout.meta.favorited_by_me = item.meta.favorited_by_me
+                newShout.meta.my_shout = item.meta.my_shout
+
                 return newShout
             } else {
                 return item
