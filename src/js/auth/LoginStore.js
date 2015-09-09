@@ -14,6 +14,10 @@ class LoginStore {
         return !! this.getState().user
     }
 
+    static isMine(id) {
+        return id == this.getState().user.id
+    }
+
     onLoginUser(payload) {
         let { token, user } = payload
 

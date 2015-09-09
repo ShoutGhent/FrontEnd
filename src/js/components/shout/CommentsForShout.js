@@ -5,13 +5,13 @@ import Avatar from '../users/Avatar'
 import Emojify from '../partials/Emojify'
 import Icon from '../partials/Icon'
 import Loading from '../loading/Loading'
+import LoginStore from '../../auth/LoginStore'
 import MaterialInput from '../partials/MaterialInput'
 import TransitiveNumber from 'react-transitive-number'
 import { Button } from '../button/MaterialButton'
 import { Collection, CollectionItem } from '../collection/Collection'
 import { Grid, Cell } from '../grid/Grid'
 import { io } from '../../services/Socket'
-import LoginStore from '../../auth/LoginStore'
 
 var CommentsForShout = React.createClass({
     propTypes: {
@@ -49,6 +49,12 @@ var CommentsForShout = React.createClass({
                 this.scrollToBottom()
             }
         })
+    },
+    componentDidMount() {
+        let channelKey = `shout.${this.props.shout.id}`
+        io.join(channelKey)
+
+        io.listen(`${channelKey}:shout.events.comments.BroadcastCommentHasBeenDeleted`, data => this.removeCommentFromList(data.comment_id))
     },
     loadMoreComments(evt) {
         evt.preventDefault()
@@ -121,6 +127,30 @@ var CommentsForShout = React.createClass({
             })
         }
     },
+    fixBoxHeight() {
+        this.setState({
+            boxHeight: 50
+        })
+        if (this.refs.comments) {
+            let box = React.findDOMNode(this.refs.comments)
+            this.setState({
+                boxHeight: box.scrollHeight
+            })
+        }
+    },
+    deleteComment(comment) {
+        API.del(`shouts/${this.props.shout.id}/comment`, { comment_id: comment.id }, (res, err) => {
+            if ( ! err) {
+                this.removeCommentFromList(res.comment_id)
+            }
+        })
+    },
+    removeCommentFromList(id) {
+        let { comments } = this.state
+        comments = comments.filter(comment => id != comment.id)
+        this.setState({ comments })
+        this.fixBoxHeight()
+    },
     appendNewComment(comment) {
         let { comments } = this.state
         let pushIt = true
@@ -142,7 +172,23 @@ var CommentsForShout = React.createClass({
                 <Avatar email={comment.user.email} size={25}/>
             </div>
             <div className="left" style={{width: 'calc(100% - 40px)'}}>
-                <small><Emojify>{comment.user.first_name}</Emojify></small><br/>
+                <small>
+                    <Emojify>{comment.user.first_name}</Emojify>
+                </small>
+
+            {LoginStore.isMine(comment.user.id) && (
+                <span className="right">
+                    <Button className="hidden" padding="0 11px" flat>
+                        <Icon style={{fontSize: 14}} icon="edit"/>
+                    </Button>
+
+                    <Button padding="0 11px" flat onClick={() => { this.deleteComment(comment)}}>
+                        <Icon style={{fontSize: 14}} icon="delete"/>
+                    </Button>
+                </span>
+            )}
+
+                <br/>
                 <span style={{whiteSpace: 'pre-line'}}><Emojify>{comment.comment}</Emojify></span>
             </div>
         </CollectionItem>)
