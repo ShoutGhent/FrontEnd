@@ -17,16 +17,18 @@ let ShoutPage = React.createClass({
     componentDidMount() {
         let { shoutId } = this.props.params
 
-        API.get(`shouts/${shoutId}`, {}, (shout, err) => {
-            if ( ! err) {
-                if (this.isMounted()) {
+        if (this.isMounted()) {
+            API.get(`shouts/${shoutId}`, {}, (shout, err) => {
+                if ( ! err) {
+
                     let loading = false
                     this.setState({ shout, loading })
+
+                } else {
+                    this.setState({ shout: null, loading: false })
                 }
-            } else {
-                this.setState({ shout: null, loading: false })
-            }
-        })
+            })
+        }
     },
     hideShout(shout, force) {
 
@@ -72,10 +74,9 @@ let ShoutPage = React.createClass({
         API.post(url, {}, (shout, err) => this.setState({ shout }))
     },
     updateShout(oldShout, newShout) {
-        newShout.meta.favorited_by_me = oldShout.meta.favorited_by_me
-        newShout.meta.my_shout = oldShout.meta.my_shout
-
-        this.setState({ shout: newShout })
+        API.get(`shouts/${oldShout.id}`, {}, (data, err) => {
+            this.setState({ shout: data })
+        })
     },
     render() {
         let { shout, loading } = this.state

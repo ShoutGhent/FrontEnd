@@ -141,21 +141,21 @@ let ShoutFeed = React.createClass({
             this.setState({ shouts })
         })
     },
-    updateShout(oldShout, newShout) {
+    updateShout(oldShout) {
         let { shouts } = this.state
 
-        shouts = shouts.map((item, key) => {
-            if (item.id == newShout.id) {
-                newShout.meta.favorited_by_me = item.meta.favorited_by_me
-                newShout.meta.my_shout = item.meta.my_shout
+        API.get(`shouts/${oldShout.id}`, {}, (data, err) => {
+            shouts = shouts.map((item, key) => {
+                if (item.id == oldShout.id) {
+                    console.log(data)
+                   return data
+                } else {
+                    return item
+                }
+            })
 
-                return newShout
-            } else {
-                return item
-            }
+            this.setState({ shouts })
         })
-
-        this.setState({ shouts })
     },
     render() {
         let { loading, shouts, paginationData } = this.state
