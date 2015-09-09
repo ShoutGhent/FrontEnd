@@ -38,6 +38,11 @@ let Header = React.createClass({
 
         HeaderActions.toggleNavigation()
     },
+    closeNavigation(evt) {
+        evt.preventDefault()
+
+        HeaderActions.closeNavigation()
+    },
     render() {
         let { user, isOpen } = this.state
 
@@ -56,13 +61,13 @@ let Header = React.createClass({
                         {LoginStore.isLoggedIn() ? (
                             <LoggedInHeader
                                 className={className}
-                                toggleNavigation={this.toggleNavigation}
+                                closeNavigation={this.closeNavigation}
                                 user={user}
                             />
                         ) : (
                             <LoggedOutHeader
                                 className={className}
-                                toggleNavigation={this.toggleNavigation}
+                                closeNavigation={this.closeNavigation}
                             />
                         )}
 
