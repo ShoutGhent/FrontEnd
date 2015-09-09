@@ -83,11 +83,16 @@ var CommentsForShout = React.createClass({
     },
     addComment(event) {
         event.preventDefault()
-        API.post(`shouts/${this.props.shout.id}/comment`, { comment: this.state.newComment }, (res, err) => {
-            if ( ! err) {
-                this.appendNewComment(res.comment)
-            }
-        })
+        let comment = this.state.newComment
+
+        if (comment != "") {
+            API.post(`shouts/${this.props.shout.id}/comment`, { comment }, (res, err) => {
+                if ( ! err) {
+                    this.appendNewComment(res.comment)
+                }
+            })
+        }
+
         this.setState({ newComment: '' })
     },
     setNewComment(event) {
