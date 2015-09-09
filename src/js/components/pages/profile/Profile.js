@@ -21,6 +21,7 @@ let Profile = React.createClass({
                             <div className="center">
                                 <CardContent>
                                     <Avatar email={currentUser.email} round/>
+                                    <h5>{currentUser.full_name}</h5>
                                 </CardContent>
                                 <CardFooter>
                                     <Link to="settings" params={{tabId: 'general'}}>Instellingen</Link>
