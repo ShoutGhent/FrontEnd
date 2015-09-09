@@ -1,12 +1,10 @@
 import React, { PropTypes } from 'react'
 
 import API from '../../services/API'
-import Avatar from '../users/Avatar'
-import Emojify from '../partials/Emojify'
-import Icon from '../partials/Icon'
+import Comment from './Comment'
 import Loading from '../loading/Loading'
-import LoginStore from '../../auth/LoginStore'
 import MaterialInput from '../partials/MaterialInput'
+import Notification from '../notification/NotificationActions'
 import TransitiveNumber from 'react-transitive-number'
 import { Button } from '../button/MaterialButton'
 import { Collection, CollectionItem } from '../collection/Collection'
@@ -101,6 +99,27 @@ var CommentsForShout = React.createClass({
 
         this.setState({ newComment: '' })
     },
+    updateComment(comment) {
+        API.put(`shouts/${this.props.shout.id}/comment`, { comment: comment.comment, comment_id: comment.id }, (res, err) => {
+            if ( ! err) {
+                Notification.success('Je reactie is gewijzigd!')
+            }
+        })
+        this.replaceComment(comment)
+    },
+    replaceComment(comment) {
+        let { comments } = this.state
+        comments = comments.map(oldComment => {
+            if (oldComment.id == comment.id) {
+                return comment
+            }
+
+            return oldComment
+        })
+
+        this.setState({ comments })
+        this.fixBoxHeight()
+    },
     setNewComment(event) {
         this.setState({
             newComment: event.target.value
@@ -128,15 +147,14 @@ var CommentsForShout = React.createClass({
         }
     },
     fixBoxHeight() {
-        this.setState({
-            boxHeight: 50
+        this.setState({ boxHeight: 50 }, () => {
+            if (this.refs.comments) {
+                let box = React.findDOMNode(this.refs.comments)
+                this.setState({
+                    boxHeight: box.scrollHeight
+                })
+            }
         })
-        if (this.refs.comments) {
-            let box = React.findDOMNode(this.refs.comments)
-            this.setState({
-                boxHeight: box.scrollHeight
-            })
-        }
     },
     deleteComment(comment) {
         API.del(`shouts/${this.props.shout.id}/comment`, { comment_id: comment.id }, (res, err) => {
@@ -166,35 +184,60 @@ var CommentsForShout = React.createClass({
             this.scrollToBottom()
         }
     },
-    renderComment(comment) {
-        return (<CollectionItem key={`item-${comment.id}`} ref={`item-${comment.id}`}>
-            <div className="left" style={{marginTop: 5, width: 30, marginRight: 10}}>
-                <Avatar email={comment.user.email} size={25}/>
-            </div>
-            <div className="left" style={{width: 'calc(100% - 40px)'}}>
-                <small>
-                    <Emojify>{comment.user.first_name}</Emojify>
-                </small>
+    setCommentDescription(comment, event) {
+        let { comments } = this.state
 
-            {LoginStore.isMine(comment.user.id) && (
-                <span className="right">
-                    <Button className="hidden" padding="0 11px" flat>
-                        <Icon style={{fontSize: 14}} icon="edit"/>
-                    </Button>
+        comments[comments.indexOf(comment)].comment = event.target.value
 
-                    <Button padding="0 11px" flat onClick={() => { this.deleteComment(comment)}}>
-                        <Icon style={{fontSize: 14}} icon="delete"/>
-                    </Button>
+        this.setState({ comments })
+    },
+    renderAllComments(comments) {
+        let { next_page_url, boxHeight } = this.state
+
+        return (
+            <CollectionItem noPadding>
+                <Collection noMargin noBorder ref="comments" style={{
+                    overflowY: 'auto',
+                    maxHeight: 450,
+                    height: boxHeight
+                }}>
+                    <span>
+                        {next_page_url && (
+                            <CollectionItem noPadding>
+                                <Button onClick={this.loadMoreComments} full rectangular flat>Meer Laden</Button>
+                            </CollectionItem>
+                        )}
+                    </span>
+
+                    <span>
+                        {comments.map(comment => (
+                            <Comment
+                                comment={comment}
+                                key={`item-${comment.id}`}
+                                onDeleteComment={this.deleteComment}
+                                ref={`item-${comment.id}`}
+                                resizeBox={this.fixBoxHeight}
+                                onUpdateComment={this.updateComment}
+                                onReplaceComment={this.replaceComment}
+                                setCommentDescription={(event) => this.setCommentDescription(comment, event)}
+                            />
+                        ))}
+                    </span>
+                </Collection>
+            </CollectionItem>
+        )
+    },
+    renderWhenNoComments(loading) {
+        return ! loading ? (
+            <CollectionItem>
+                <span className="blue-text">
+                    Wees de eerste om een reactie te plaatsen!
                 </span>
-            )}
-
-                <br/>
-                <span style={{whiteSpace: 'pre-line'}}><Emojify>{comment.comment}</Emojify></span>
-            </div>
-        </CollectionItem>)
+            </CollectionItem>
+        ) : null
     },
     render() {
-        let { newComment, loading, comments, next_page_url, boxHeight } = this.state
+        let { newComment, loading, comments } = this.state
 
         comments = comments.sort((a, b) => {
             var first = a.created_at
@@ -211,29 +254,7 @@ var CommentsForShout = React.createClass({
                         <Loading/>
                     </CollectionItem>}
 
-                    { comments.length > 0 ? (
-                        <CollectionItem noPadding>
-                            <Collection noMargin noBorder ref="comments" style={{
-                                overflowY: 'auto',
-                                maxHeight: 450,
-                                height: boxHeight
-                            }}>
-                                {next_page_url && <CollectionItem noPadding>
-                                    <Button onClick={this.loadMoreComments} full rectangular flat>Meer Laden</Button>
-                                </CollectionItem>}
-
-                                {comments.map(this.renderComment)}
-                            </Collection>
-                        </CollectionItem>
-                    ) : (
-                    ! loading && (
-                        <CollectionItem>
-                            <span className="blue-text">
-                                Wees de eerste om een reactie te plaatsen!
-                            </span>
-                        </CollectionItem>
-                    )
-                    )}
+                    { comments.length > 0 ? this.renderAllComments(comments) : this.renderWhenNoComments(loading)}
 
                     <CollectionItem>
                         <Grid>
