@@ -54,9 +54,16 @@ let Header = React.createClass({
                         </a>
 
                         {LoginStore.isLoggedIn() ? (
-                            <LoggedInHeader className={className} user={user}/>
+                            <LoggedInHeader
+                                className={className}
+                                toggleNavigation={this.toggleNavigation}
+                                user={user}
+                            />
                         ) : (
-                            <LoggedOutHeader className={className}/>
+                            <LoggedOutHeader
+                                className={className}
+                                toggleNavigation={this.toggleNavigation}
+                            />
                         )}
 
                         {isOpen && (

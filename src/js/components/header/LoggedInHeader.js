@@ -11,7 +11,8 @@ import { Link } from 'react-router'
 
 let LoggedInHeader = React.createClass({
     propTypes: {
-        className: React.PropTypes.string.isRequired
+        className: React.PropTypes.string.isRequired,
+        toggleNavigation: React.PropTypes.func.isRequired,
     },
     getInitialState() {
         return {
@@ -94,13 +95,13 @@ let LoggedInHeader = React.createClass({
                             <Emojify>{user.full_name}</Emojify> <Avatar email={user.email} size={30} round/>
                         </DropdownTitle>
                         <DropdownContent>
-                            <li><Link to="profile">Profiel</Link></li>
-                            <li><Link to="settings" params={{tabId: 'general'}}>Instellingen</Link></li>
+                            <li onClick={this.props.toggleNavigation}><Link to="profile">Profiel</Link></li>
+                            <li onClick={this.props.toggleNavigation}><Link to="settings" params={{tabId: 'general'}}>Instellingen</Link></li>
                             <li className="divider"></li>
-                            <li><a href onClick={this.openAddGroupForm}>Nieuwe groep</a></li>
+                            <li onClick={this.props.toggleNavigation}><a href onClick={this.openAddGroupForm}>Nieuwe groep</a></li>
 
                             <li className="divider"></li>
-                            <li><a href onClick={this.logout}>Uitloggen</a></li>
+                            <li onClick={this.props.toggleNavigation}><a href onClick={this.logout}>Uitloggen</a></li>
                         </DropdownContent>
                     </Dropdown>
                     <AddGroup
