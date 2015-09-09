@@ -4,8 +4,8 @@ let url = SERVER_URL.split('')
 url.pop()
 url = url.join('')
 
-let singleton = Symbol()
-let singletonEnforcer = Symbol()
+let singleton = null
+let singletonEnforcer = null
 
 class Socket {
     constructor(enforce) {
