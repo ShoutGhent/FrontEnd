@@ -186,10 +186,10 @@ var CommentsForShout = React.createClass({
             this.scrollToBottom()
         }
     },
-    setCommentDescription(comment, event) {
+    setCommentDescription(comment, text) {
         let { comments } = this.state
 
-        comments[comments.indexOf(comment)].comment = event.target.value
+        comments[comments.indexOf(comment)].comment = text
 
         this.setState({ comments })
     },
@@ -221,7 +221,7 @@ var CommentsForShout = React.createClass({
                                 resizeBox={this.fixBoxHeight}
                                 onUpdateComment={this.updateComment}
                                 onReplaceComment={this.replaceComment}
-                                setCommentDescription={(event) => this.setCommentDescription(comment, event)}
+                                setCommentDescription={text => this.setCommentDescription(comment, text)}
                             />
                         ))}
                     </span>

@@ -26,7 +26,8 @@ var Comment = React.createClass({
     },
     getInitialState() {
         return {
-            updateMode: false
+            updateMode: false,
+            commentDescription: this.props.comment.comment
         }
     },
     toggleUpdateMode() {
@@ -34,10 +35,26 @@ var Comment = React.createClass({
     },
     updateComment(event) {
         event.preventDefault()
+        if (this.props.comment.comment.trim() == "") {
+            this.props.setCommentDescription(this.state.commentDescription)
+        }
+
         this.props.onUpdateComment(this.props.comment)
         this.setState({
             updateMode: false
         }, this.props.resizeBox)
+    },
+    setCommentDescription(event) {
+        var text = event.target.value
+        this.props.setCommentDescription(text)
+    },
+    handleKeyboard(event) {
+        if (event.keyCode == 27) {
+            this.props.setCommentDescription(this.state.commentDescription)
+            this.setState({
+                updateMode: false
+            }, this.props.resizeBox)
+        }
     },
     render() {
         let { updateMode } = this.state
@@ -72,7 +89,8 @@ var Comment = React.createClass({
                         <form onSubmit={this.updateComment}>
                             <MaterialInput
                                 autoFocus={true}
-                                onChange={this.props.setCommentDescription}
+                                onChange={this.setCommentDescription}
+                                onKeyUp={this.handleKeyboard}
                                 type="text"
                                 value={comment.comment}
                             />
