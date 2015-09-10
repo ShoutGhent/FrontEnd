@@ -70,7 +70,13 @@ var EditGroupLocation = React.createClass({
                     longitude: null
                 }
             }).location
-        })
+        }, this.centerCurrentLocation)
+    },
+    centerCurrentLocation() {
+        const gmaps = this.refs.gmaps
+        let coords = this.state.markerCoords
+
+        gmaps.getMap().setCenter(new google.maps.LatLng(coords.latitude, coords.longitude))
     },
     render() {
         let { group } = this.props
@@ -92,6 +98,7 @@ var EditGroupLocation = React.createClass({
                                 Klik op de kaart om een juiste locatie te kiezen voor deze groep.
                             </p>
                             <Gmaps
+                                ref="gmaps"
                                 height={300}
                                 lat={markerCoords.latitude}
                                 lng={markerCoords.longitude}
