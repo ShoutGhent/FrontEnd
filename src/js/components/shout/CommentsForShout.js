@@ -100,12 +100,14 @@ var CommentsForShout = React.createClass({
         this.setState({ newComment: '' })
     },
     updateComment(comment) {
-        API.put(`shouts/${this.props.shout.id}/comment`, { comment: comment.comment, comment_id: comment.id }, (res, err) => {
-            if ( ! err) {
-                Notification.success('Je reactie is gewijzigd!')
-            }
-        })
-        this.replaceComment(comment)
+        if (comment.comment != '') {
+            API.put(`shouts/${this.props.shout.id}/comment`, { comment: comment.comment, comment_id: comment.id }, (res, err) => {
+                if ( ! err) {
+                    Notification.success('Je reactie is gewijzigd!')
+                }
+            })
+            this.replaceComment(comment)
+        }
     },
     replaceComment(comment) {
         let { comments } = this.state
@@ -263,12 +265,9 @@ var CommentsForShout = React.createClass({
                                     <MaterialInput
                                         autoFocus={true}
                                         label="Wat wil je reageren?"
-                                        multiline={true}
                                         name="comment"
                                         onChange={this.setNewComment}
                                         onKeyDown={this.handleKeyboard}
-                                        onValidate={() => {}}
-                                        rules={['required']}
                                         type="text"
                                         value={newComment}
                                     />

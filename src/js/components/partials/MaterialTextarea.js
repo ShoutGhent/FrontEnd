@@ -6,13 +6,11 @@ import TextareaAutosize from '../forms/TextareaAutosize'
 
 let MaterialTextarea = React.createClass({
     propTypes: {
-        validate: PropTypes.bool,
         rules: PropTypes.array,
         onValidate: PropTypes.func
     },
     getDefaultProps() {
         return {
-            validate: false,
             rules: [],
             onValidate: null
         }
@@ -29,24 +27,23 @@ let MaterialTextarea = React.createClass({
             value: this.props.value || this.props.defaultValue || ''
         })
     },
+    componentWillReceiveProps(newProps) {
+        if (newProps.value == "") {
+            this.setState(this.getInitialState())
+        }
+    },
     openLabel() {
-        this.setState({
-            open: true
-        })
+        this.setState({ open: true })
     },
     closeLabel() {
-        this.setState({
-            open: false
-        })
+        this.setState({ open: false })
     },
     changeValue(event) {
         if (typeof this.props.onChange == "function") {
             this.props.onChange(event)
         }
 
-        this.setState({ value: event.target.value }, () => {
-            this.check()
-        })
+        this.setState({ value: event.target.value }, this.check)
     },
     check() {
         if (this.state.value != '') {
