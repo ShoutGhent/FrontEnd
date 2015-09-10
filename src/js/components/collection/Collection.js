@@ -68,7 +68,7 @@ var CollectionItem = React.createClass({
         })
 
         return (
-            <li className={className}>{children}</li>
+            <li {...this.props} className={className}>{children}</li>
         )
     }
 })

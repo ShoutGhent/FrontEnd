@@ -27,7 +27,8 @@ var Comment = React.createClass({
     getInitialState() {
         return {
             updateMode: false,
-            commentDescription: this.props.comment.comment
+            commentDescription: this.props.comment.comment,
+            isHovering: false
         }
     },
     toggleUpdateMode() {
@@ -56,12 +57,18 @@ var Comment = React.createClass({
             }, this.props.resizeBox)
         }
     },
+    setIsHovering() {
+        this.setState({ isHovering: true })
+    },
+    setIsNotHovering() {
+        this.setState({ isHovering: false })
+    },
     render() {
-        let { updateMode } = this.state
+        let { updateMode, isHovering } = this.state
         let { comment, onDeleteComment } = this.props
 
         return (
-            <CollectionItem>
+            <CollectionItem onMouseEnter={this.setIsHovering} onMouseLeave={this.setIsNotHovering}>
                 <div className="left" style={{marginTop: 5, width: 30, marginRight: 10}}>
                     <Avatar email={comment.user.email} size={25}/>
                 </div>
@@ -71,7 +78,7 @@ var Comment = React.createClass({
                     </small>
 
                     <span>
-                    {LoginStore.isMine(comment.user.id) && (
+                    {LoginStore.isMine(comment.user.id) && isHovering && (
                         <span className="right">
                             <Button padding="0 11px" flat onClick={this.toggleUpdateMode}>
                                 <Icon style={{fontSize: 14}} icon="edit"/>
