@@ -1,14 +1,15 @@
 import React, { PropTypes } from 'react'
 
 import Icon from '../../partials/Icon'
-import LoginStore from '../../../auth/LoginStore'
 import LoginActions from '../../../auth/LoginActions'
+import LoginStore from '../../../auth/LoginStore'
+import MyGroupsStore from '../../group/MyGroupsStore'
+import MyLocation from '../../users/MyLocation'
+import Notification from '../../notification/NotificationActions'
+import ShoutFeed from '../../shout/ShoutFeed'
 import WebStorage from '../../../services/WebStorage'
 import { Button } from '../../button/MaterialButton'
 import { Gmaps, Marker, Circle, InfoWindow } from 'react-gmaps'
-import Notification from '../../notification/NotificationActions'
-import MyLocation from '../../users/MyLocation'
-import MyGroupsStore from '../../group/MyGroupsStore'
 
 var Map = React.createClass({
     getInitialState() {
@@ -65,6 +66,19 @@ var Map = React.createClass({
 
         return (
             <div style={{position: 'relative'}}>
+                <div style={{
+                    position: 'absolute',
+                    zIndex: 2,
+                    padding: 5,
+                    left: 5,
+                    top: 0,
+                    width: 600,
+                    height: this.calcHeight(),
+                    overflowY: 'scroll'
+                }}>
+                    <ShoutFeed url="shouts/from/groups"/>
+                </div>
+
                 <div style={{
                     position: 'absolute',
                     zIndex: 2,
