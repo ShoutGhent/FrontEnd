@@ -26,7 +26,11 @@ var LoggedIn = React.createClass({
         this.setState(state)
     },
     render() {
-        return (<RouteHandler currentUser={this.state.user} />)
+        return (
+            <div style={{marginBottom:60}}>
+                <RouteHandler currentUser={this.state.user} />
+            </div>
+        )
     }
 })
 
