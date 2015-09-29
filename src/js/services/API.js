@@ -32,7 +32,7 @@ class API {
                         }
                     }
                 }
-                if (res.body && res.body.token) {
+                if (res && res.body && res.body.token) {
                     WebStorage.toStore('jwt', res.body.token)
                 }
 

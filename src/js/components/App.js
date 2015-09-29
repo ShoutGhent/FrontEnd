@@ -32,9 +32,9 @@ var App = React.createClass({
     render() {
         return (
             <div>
-                <Header />
+                <Header/>
                 <RouteHandler/>
-                <Notification />
+                <Notification/>
             </div>
         )
     }
