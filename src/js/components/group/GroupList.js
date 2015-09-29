@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react'
 
 import Cloudinary from '../partials/Cloudinary'
 import Emojify from '../partials/Emojify'
-import GroupDistance from '../pages/group/GroupDistance'
 import Loading from '../loading/Loading'
 import { Card, CardContent, CardTitle } from '../card/Card'
 import { Collection, CollectionItem } from '../collection/Collection'
@@ -39,9 +38,6 @@ var GroupList = React.createClass({
                             }}>{group.name.substr(0, 1).toUpperCase()}</span>}
                         />
                     </div>
-                    <span className="right">
-                        <GroupDistance group={group} badge/>
-                    </span>
                 </Link>
             </CollectionItem>
         )

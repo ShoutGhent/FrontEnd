@@ -27,7 +27,7 @@ var LoggedIn = React.createClass({
     },
     render() {
         return (
-            <div style={{marginBottom:60}}>
+            <div style={{marginBottom: 64}}>
                 <RouteHandler currentUser={this.state.user} />
             </div>
         )

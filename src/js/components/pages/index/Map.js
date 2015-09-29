@@ -17,15 +17,18 @@ var Map = React.createClass({
 
         return {
             user: loginStoreData.user,
-            height: window.innerHeight,
+            height: this.calcHeight(),
             groupsNearMe: myGroupStoreData.groupsNearMe
         }
+    },
+    calcHeight() {
+        return window.innerHeight - 64
     },
     componentDidMount() {
         LoginStore.listen(this._onChange)
         MyGroupsStore.listen(this._onChange)
         window.addEventListener('resize', (e) => {
-            this.setState({ height: window.innerHeight })
+            this.setState({ height: this.calcHeight() })
         })
     },
     componentWillUnmount() {
