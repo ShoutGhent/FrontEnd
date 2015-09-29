@@ -1,4 +1,8 @@
 .shout{
+    &:last-child {
+        margin-bottom: 64px !important;
+    }
+
     .comments {
         margin-top: -27px;
     }
