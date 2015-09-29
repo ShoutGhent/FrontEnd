@@ -1,3 +1,6 @@
+.shoutMap {
+    @include scrollbars(0, transparant, transparant)
+}
 .shout{
     &:last-child {
         margin-bottom: 64px !important;
