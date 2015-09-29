@@ -28,6 +28,7 @@ var GroupList = React.createClass({
                     <div className="secondary-content">
                         <Cloudinary
                             className="right"
+                            style={{borderRadius: '50%'}}
                             image={group.logo_data}
                             options={{ width: 24, height: 24 }}
                             defaultElement={<span className="center-both" style={{
