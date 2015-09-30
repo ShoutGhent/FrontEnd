@@ -28,17 +28,18 @@ var Map = React.createClass({
     componentDidMount() {
         LoginStore.listen(this._onChange)
         MyGroupsStore.listen(this._onChange)
-        window.addEventListener('resize', (e) => {
-            this.setState({ height: this.calcHeight() })
-        })
+        window.addEventListener('resize', this._setHeight)
     },
     componentWillUnmount() {
         LoginStore.unlisten(this._onChange)
         MyGroupsStore.unlisten(this._onChange)
-        window.removeEventListener('resize')
+        window.removeEventListener('resize', this._setHeight)
     },
     _onChange(state) {
         this.setState(state)
+    },
+    _setHeight(e) {
+        this.setState({ height: this.calcHeight() })
     },
     centerCurrentLocation() {
         const gmaps = this.refs.gmaps

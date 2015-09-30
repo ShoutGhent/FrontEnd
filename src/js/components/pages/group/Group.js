@@ -39,15 +39,13 @@ let Group = React.createClass({
     componentDidMount() {
         GroupStore.listen(this._onChange)
 
-        window.addEventListener('resize', (event) => {
-            this.calcHeaderWidth()
-        })
+        window.addEventListener('resize', this.calcHeaderWidth)
 
         this.calcHeaderWidth()
     },
     componentWillUnmount() {
         GroupStore.unlisten(this._onChange)
-        window.removeEventListener('resize')
+        window.removeEventListener('resize', this.calcHeaderWidth)
     },
     _onChange(state) {
         this.setState(state)

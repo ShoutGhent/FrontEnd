@@ -20,18 +20,19 @@ let Header = React.createClass({
         LoginStore.listen(this._onChange)
         HeaderStore.listen(this._onChange)
 
-        window.addEventListener('resize', () => {
-            HeaderActions.closeNavigation()
-        }, true)
+        window.addEventListener('resize', this._closeNavigation, true)
     },
     componentWillUnmount() {
         LoginStore.unlisten(this._onChange)
         HeaderStore.unlisten(this._onChange)
 
-        window.removeEventListener('resize')
+        window.removeEventListener('resize', this._closeNavigation)
     },
     _onChange(state) {
         this.setState(state)
+    },
+    _closeNavigation(e) {
+        HeaderActions.closeNavigation()
     },
     toggleNavigation(evt) {
         evt.preventDefault()

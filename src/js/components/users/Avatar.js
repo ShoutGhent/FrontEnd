@@ -29,16 +29,17 @@ var Avatar = React.createClass({
         }
     },
     componentDidMount() {
-        window.addEventListener('focus', () => {
-            if (this.isMounted()) {
-                this.setState({
-                    time: moment().format('x')
-                })
-            }
-        }, false)
+        window.addEventListener('focus', this._setTime, false)
     },
     componentWillUnmount() {
-        window.removeEventListener('focus')
+        window.removeEventListener('focus', this._setTime)
+    },
+    _setTime() {
+        if (this.isMounted()) {
+            this.setState({
+                time: moment().format('x')
+            })
+        }
     },
     render() {
         let { email, size, round } = this.props
