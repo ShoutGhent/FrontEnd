@@ -10,9 +10,10 @@ class MyGroupsActions {
         API.get('groups/mine', {}, (response, err) => {
             this.dispatch(response.data)
 
-            this.actions.cacheMyGroups(response.data, 'groups.myGroups')
-
-            this.actions.isLoading(false)
+            setTimeout(() => {
+                this.actions.cacheMyGroups(response.data, 'groups.myGroups')
+                this.actions.isLoading(false)
+            })
         })
     }
     fetchGroupsNearMe() {
@@ -21,9 +22,10 @@ class MyGroupsActions {
         API.get('groups/near/me', {}, (response, err) => {
             this.dispatch(response.data)
 
-            this.actions.cacheMyGroups(response.data, 'groups.near.me')
-
-            this.actions.isLoading(false)
+            setTimeout(() => {
+                this.actions.cacheMyGroups(response.data, 'groups.near.me')
+                this.actions.isLoading(false)
+            })
         })
     }
     isLoading(bool) {

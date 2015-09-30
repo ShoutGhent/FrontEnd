@@ -1,6 +1,7 @@
 import request from 'superagent'
 import WebStorage from '../services/WebStorage'
 import { SERVER_URL } from '../consts'
+import Router from '../services/RouterContainer'
 
 class API {
     static options() {
@@ -23,24 +24,32 @@ class API {
 
         req.set('Authorization', `Bearer ${WebStorage.fromStore('jwt')}`)
             .set('Accept', 'application/json')
-            .end((err, res) => {
-                if (err) {
-                    if (res && res.body && res.body.error && res.body.error == "token_expired") {
-                        if (err.message == "Unauthorized") {
-                            WebStorage.remove('jwt')
-                            WebStorage.remove('user')
-                        }
-                    }
-                }
-                if (res && res.body && res.body.token) {
-                    WebStorage.toStore('jwt', res.body.token)
-                }
-
-                if (typeof cb == "function") {
-                    cb(res.body, err)
-                }
-            })
+            .end((err, res) => API._handler(err, res, cb))
     }
+
+    static _handler(err, res, cb) {
+        if (err) {
+            if (res && res.body && res.body.error && res.body.error == "token_expired") {
+                WebStorage.remove('jwt')
+                WebStorage.remove('user')
+
+                window.location.reload()
+            }
+        }
+
+        if (res && res.body && res.body.token) {
+            WebStorage.toStore('jwt', res.body.token)
+        }
+
+        if (typeof cb == "function") {
+            if (res && res.body) {
+                cb(res.body, err)
+            } else {
+                cb(null, err)
+            }
+        }
+    }
+
     static get(url, data, cb) {
         API._send("get", url, data, cb)
     }
@@ -62,27 +71,7 @@ class API {
             .post(url)
             .attach(data.key, data.value)
             .set('Authorization', `Bearer ${WebStorage.fromStore('jwt')}`)
-            .end((err, res) => {
-                if (err) {
-                    if (res && res.body && res.body.error && res.body.error == "token_expired") {
-                        if (err.message == "Unauthorized") {
-                            WebStorage.remove('jwt')
-                            WebStorage.remove('user')
-                        }
-                    }
-                }
-                if (res && res.body && res.body.token) {
-                    WebStorage.toStore('jwt', res.body.token)
-                }
-
-                if (typeof cb == "function") {
-                    if (res && res.body) {
-                        cb(res.body, err)
-                    } else {
-                        cb(null, err)
-                    }
-                }
-            })
+            .end((err, res) => API._handler(err, res, cb))
     }
 
 }

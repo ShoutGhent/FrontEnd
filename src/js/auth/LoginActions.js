@@ -25,7 +25,7 @@ class LoginActions {
         WebStorage.remove('jwt')
         WebStorage.remove('user')
 
-        Redirect.to('/auth/login')
+        Redirect.to('login')
 
         this.dispatch()
     }
