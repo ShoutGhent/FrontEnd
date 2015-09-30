@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 
 import Avatar from '../users/Avatar'
+import Cloudinary from '../partials/Cloudinary'
 import CommentsForShout from './CommentsForShout'
 import EditShout from '../pages/shout/EditShout'
 import Emojify from '../partials/Emojify'
@@ -9,8 +10,8 @@ import moment from 'moment'
 import ReportShout from '../pages/shout/ReportShout'
 import TransitiveNumber from 'react-transitive-number'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
-import { Link } from 'react-router'
 import { io } from '../../services/Socket'
+import { Link } from 'react-router'
 
 let Shout = React.createClass({
     propTypes: {
@@ -208,8 +209,20 @@ let Shout = React.createClass({
                                 <Emojify>{shout.description}</Emojify>
                             </p>
                         )}
-
                     </div>
+
+                    <ul style={{display: 'inline-block'}}>
+                    {shout.images.map(image => (
+                        <li style={{display: 'inline-block', margin: 10}}>
+                            <Cloudinary
+                                style={{borderRadius:'50%'}}
+                                image={image.data}
+                                options={{width: 50, height: 50}}
+                            />
+                        </li>
+                    ))}
+                    </ul>
+
                     <div className="card-action">
                     {(this.state.secondsLeft < 10 && this.state.secondsLeft != 0) ? (
                         <TransitiveNumber>{this.state.secondsLeft}</TransitiveNumber>

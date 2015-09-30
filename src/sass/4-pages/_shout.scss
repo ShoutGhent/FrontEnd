@@ -3,8 +3,7 @@
 .shoutMap {
     .shout {
         .card {
-            margin: 0;
-            margin-bottom: 3px;
+            margin: 0 0 3px;
 
             &-title {
                 font-size: 16px;
@@ -13,6 +12,12 @@
 
             &-content {
                 padding: 10px;
+            }
+
+            &__name {
+                &--from {
+                    font-weight: normal;
+                }
             }
 
 //            &-action {
@@ -27,6 +32,24 @@
     }
 }
 
+.example-enter {
+    opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+    opacity: 1;
+    transition: opacity .5s ease-in;
+}
+
+.example-leave {
+    opacity: 1;
+}
+
+.example-leave.example-leave-active {
+    opacity: 0.01;
+    transition: opacity .5s ease-in;
+}
+
 .shout{
     &:last-child {
         margin-bottom: 64px !important;
@@ -39,7 +62,6 @@
 
     &__name {
         &--from {
-            font-weight: normal;
             font-size: 0.8em;
             vertical-align: middle;
             line-height: 0.8em;

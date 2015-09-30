@@ -97,6 +97,7 @@ var Map = React.createClass({
                     <br/>
                     <MyLocation/>
                 </div>
+
                 <Gmaps
                     ref="gmaps"
                     width={'100%'}
@@ -110,25 +111,25 @@ var Map = React.createClass({
                         lng={coords.longitude}
                         title={"Jouw huidige locatie!"}
                     />
-                {groupsNearMe.map(group => <Marker
-                    lat={group.lat}
-                    lng={group.lng}
-                    title={group.name}
-                />)}
-                    {radius && (
-                        <Circle
-                            ref="circle"
-                            strokeColor={'#F44336'}
-                            strokeOpacity={0.8}
-                            strokeWeight={1}
-                            fillColor={'#F44336'}
-                            fillOpacity={0.35}
-                            radius={radius}
-                            lat={coords.latitude}
-                            lng={coords.longitude}
-                            onRadiusChanged={this.handleRadiusChanged}
-                        />
-                    )}
+            {groupsNearMe.map(group => <Marker
+                lat={group.lat}
+                lng={group.lng}
+                title={group.name}
+            />)}
+                {radius && (
+                    <Circle
+                        ref="circle"
+                        strokeColor={'#F44336'}
+                        strokeOpacity={0.8}
+                        strokeWeight={1}
+                        fillColor={'#F44336'}
+                        fillOpacity={0.35}
+                        radius={radius}
+                        lat={coords.latitude}
+                        lng={coords.longitude}
+                        onRadiusChanged={this.handleRadiusChanged}
+                    />
+                )}
                 </Gmaps>
             </div>
         )
