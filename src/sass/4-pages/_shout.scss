@@ -1,5 +1,32 @@
 @include scrollbars(0, white);
 
+.shoutMap {
+    .shout {
+        .card {
+            margin: 0;
+            margin-bottom: 3px;
+
+            &-title {
+                font-size: 16px;
+                line-height: 0;
+            }
+
+            &-content {
+                padding: 10px;
+            }
+
+//            &-action {
+//                display: none;
+//            }
+        }
+
+        .comments {
+            margin-top: 0;
+        }
+
+    }
+}
+
 .shout{
     &:last-child {
         margin-bottom: 64px !important;
@@ -7,7 +34,23 @@
 
     .comments {
         margin-top: -27px;
+        padding: 0 7px 7px;
     }
+
+    &__name {
+        &--from {
+            font-weight: normal;
+            font-size: 0.8em;
+            vertical-align: middle;
+            line-height: 0.8em;
+            height: 0.8em;
+
+            a {
+                color: $primary-color;
+            }
+        }
+    }
+
     .more {
         position: relative;
         border-radius: 50%;

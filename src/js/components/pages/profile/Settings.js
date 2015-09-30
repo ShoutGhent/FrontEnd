@@ -55,13 +55,15 @@ let Settings = React.createClass({
                 </Link>
                 <Link to="group" params={{groupId: group.id, tabId: 'shouts'}} className="secondary-content">
                     <Cloudinary
+                        style={{borderRadius: '50%'}}
                         image={group.logo_data}
                         options={{ width: 24, height: 24 }}
                         defaultElement={<span className="center-both" style={{
                             color: 'rgba(0, 0, 0, 0.4)',
                             fontWeight: 'bold',
                             margin: 0,
-                            fontSize: 18
+                            fontSize: 18,
+                            borderRadius: '50%'
                         }}>{group.name.substr(0, 1).toUpperCase()}</span>}
                     />
                 </Link>

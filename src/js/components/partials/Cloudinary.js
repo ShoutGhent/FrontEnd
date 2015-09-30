@@ -54,8 +54,7 @@ var Cloudinary = React.createClass({
                     width: options.width || '100%',
                     height: options.height || fallbackHeight || '100%',
                     backgroundColor: 'rgba(0, 0, 0, 0.05)',
-                    position: 'relative',
-                    borderRadius: '50%'
+                    position: 'relative'
                 }}>
                     {defaultElement}
                 </div>

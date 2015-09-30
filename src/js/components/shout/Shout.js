@@ -171,7 +171,13 @@ let Shout = React.createClass({
                             <a href="#">
                                 <Avatar email={email} size={35}/>
                             </a>
-                            <Emojify>{name}</Emojify>
+                            <span className="shout__name">
+                                <Emojify>{name}</Emojify> {shout.meta.via && (
+                                <span className="shout__name--from">
+                                    via <Link to="group" params={{ groupId: shout.meta.via.id, tabId: 'shouts' }}><Emojify>{shout.meta.via.name}</Emojify></Link>
+                                </span>
+                            )}
+                            </span>
                             <Dropdown className="right">
                                 <DropdownTitle>
                                     <div className="more">

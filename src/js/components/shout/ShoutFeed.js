@@ -147,7 +147,6 @@ let ShoutFeed = React.createClass({
         API.get(`shouts/${oldShout.id}`, {}, (data, err) => {
             shouts = shouts.map((item, key) => {
                 if (item.id == oldShout.id) {
-                    console.log(data)
                    return data
                 } else {
                     return item

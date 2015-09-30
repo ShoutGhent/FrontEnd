@@ -5,6 +5,8 @@ import Auth from '../../auth/AuthService'
 import Avatar from '../users/Avatar'
 import Emojify from '../partials/Emojify'
 import Icon from '../partials/Icon'
+import Redirect from '../../services/Redirect'
+import Router from '../../services/RouterContainer'
 import SearchActions from '../search/SearchActions'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
 import { Link } from 'react-router'
@@ -44,6 +46,9 @@ let LoggedInHeader = React.createClass({
             isAddGroupFormOpen: false
         })
     },
+    goToMap(e) {
+        Redirect.to(e.target.checked ? 'map' : 'home')
+    },
     render() {
         let { user, className } = this.props
         let { isAddGroupFormOpen } = this.state
@@ -68,6 +73,14 @@ let LoggedInHeader = React.createClass({
                             <li><a href="#!">Alle groepen</a></li>
                         </DropdownContent>
                     </Dropdown>
+                </li>
+                <li>
+                    <div className="switch">
+                        <label>
+                            <input type="checkbox" checked={Router.pathNameIs("map")} onChange={this.goToMap}/>
+                            <span className="lever"></span>
+                        </label>
+                    </div>
                 </li>
                 <li className="hidden">
                     <Link to="home">
