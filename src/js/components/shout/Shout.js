@@ -211,17 +211,21 @@ let Shout = React.createClass({
                         )}
                     </div>
 
-                    <ul style={{display: 'inline-block'}}>
-                    {shout.images.map(image => (
-                        <li style={{display: 'inline-block', margin: 10}}>
-                            <Cloudinary
-                                style={{borderRadius:'50%'}}
-                                image={image.data}
-                                options={{width: 50, height: 50}}
-                            />
-                        </li>
-                    ))}
-                    </ul>
+                    {shout.images.length > 0 && (
+                        <ul style={{display: 'inline-block', margin: 10}}>
+                        {shout.images.map(image => (
+                            <a target="_blank" href={image.data.secure_url}>
+                                <li style={{display: 'inline-block', margin: '0 3px'}}>
+                                    <Cloudinary
+                                        style={{cursor: 'pointer'}}
+                                        image={image.data}
+                                        options={{width: 65, height: 65}}
+                                    />
+                                </li>
+                            </a>
+                        ))}
+                        </ul>
+                    )}
 
                     <div className="card-action">
                     {(this.state.secondsLeft < 10 && this.state.secondsLeft != 0) ? (
