@@ -23,7 +23,8 @@ var ShoutForm = React.createClass({
         return {
             shout: JSON.parse(JSON.stringify(shout)),
             descriptionIsValid: this.props.valid,
-            uploadedImages: []
+            uploadedImages: [],
+            showUploadImages: false
         }
     },
     getDefaultProps() {
@@ -104,6 +105,11 @@ var ShoutForm = React.createClass({
             }
         }
     },
+    showUploadImages(event) {
+        event.preventDefault()
+
+        this.setState({ showUploadImages: ! this.state.showUploadImages })
+    },
     render() {
         var { shout, descriptionIsValid } = this.state
         var { buttonName, hasCancelButton } = this.props
@@ -123,7 +129,7 @@ var ShoutForm = React.createClass({
 
         return (
             <div style={{position: 'relative'}}>
-                <FileDrop onDrop={this.uploadImages}><span>Sleep hier afbeelding(en) naartoe</span></FileDrop>
+                <FileDrop targetAlwaysVisible={this.state.showUploadImages} onDrop={this.uploadImages}><span>Sleep hier afbeelding(en) naartoe</span></FileDrop>
 
                 <form onSubmit={this.save}>
                     <div>
@@ -168,7 +174,10 @@ var ShoutForm = React.createClass({
                                 </div>
                             </Cell>
                             <Cell width={6/12}>
-                                <div className="right">
+                                <div className="right" style={{zIndex:4}}>
+                                    <Button flat onClick={this.showUploadImages} padding="0 1rem">
+                                        <Icon className="left" icon="panorama"/> Afbeeldingen
+                                    </Button>
                                     {hasCancelButton && (
                                         <Button flat onClick={this.cancel}>Annuleren</Button>
                                     )}
