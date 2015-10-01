@@ -81,7 +81,15 @@ var ShoutForm = React.createClass({
         this.props.onDone()
     },
     isAllowedImage(file) {
-        return ['image/jpeg', 'image/png'].includes(file.type)
+        let valids = ['image/jpeg', 'image/png']
+
+        for(var i = 0; i < valids.length; i++) {
+            if (valids[i] == file.type) {
+                return true
+            }
+        }
+
+        return false
     },
     uploadImages(files, event) {
         for(var i = 0; i < files.length; i++) {
