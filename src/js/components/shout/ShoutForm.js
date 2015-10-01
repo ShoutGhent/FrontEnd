@@ -174,8 +174,8 @@ var ShoutForm = React.createClass({
                                 </div>
                             </Cell>
                             <Cell width={6/12}>
-                                <div className="right" style={{zIndex:4}}>
-                                    <Button flat onClick={this.showUploadImages} padding="0 1rem">
+                                <div className="right">
+                                    <Button zIndex="4" flat onClick={this.showUploadImages} padding="0 1rem">
                                         <Icon className="left" icon="panorama"/> Afbeeldingen
                                     </Button>
                                     {hasCancelButton && (
