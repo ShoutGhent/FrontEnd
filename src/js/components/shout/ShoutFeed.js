@@ -172,6 +172,7 @@ let ShoutFeed = React.createClass({
                             <AddShout
                                 groupId={groupId}
                                 onDone={this.prependShout}
+                                updateShout={this.updateShout}
                             />
                         </CardContent>
                     </Card>

@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react/addons'
 
 import DateTimePicker from '../partials/DateTimePicker'
+import FileDrop from "react-file-drop"
+import Icon from '../partials/Icon'
 import MaterialTextarea from '../partials/MaterialTextarea'
 import moment from 'moment'
 import { Button } from '../button/MaterialButton'
@@ -20,7 +22,8 @@ var ShoutForm = React.createClass({
 
         return {
             shout: JSON.parse(JSON.stringify(shout)),
-            descriptionIsValid: this.props.valid
+            descriptionIsValid: this.props.valid,
+            uploadedImages: []
         }
     },
     getDefaultProps() {
@@ -69,12 +72,37 @@ var ShoutForm = React.createClass({
     save(event) {
         event.preventDefault()
 
-        this.props.onSave(this.state.shout)
+        this.props.onSave(this.state.shout, this.state.uploadedImages)
         this.setState(this.getInitialState())
     },
     cancel(event) {
         event.preventDefault()
         this.props.onDone()
+    },
+    isAllowedImage(file) {
+        return ['image/jpeg', 'image/png'].includes(file.type)
+    },
+    uploadImages(files, event) {
+        for(var i = 0; i < files.length; i++) {
+            let file = files.item(i)
+
+            if (this.isAllowedImage(file)) {
+                let reader = new FileReader()
+
+                reader.onload = (e) => {
+                    let { uploadedImages } = this.state
+
+                    uploadedImages.push({
+                        file: file,
+                        preview: reader.result
+                    })
+
+                    this.setState({ uploadedImages })
+                }
+
+                reader.readAsDataURL(file)
+            }
+        }
     },
     render() {
         var { shout, descriptionIsValid } = this.state
@@ -94,7 +122,9 @@ var ShoutForm = React.createClass({
         }
 
         return (
-            <div>
+            <div style={{position: 'relative'}}>
+                <FileDrop onDrop={this.uploadImages}><span>Sleep hier afbeelding(en) naartoe</span></FileDrop>
+
                 <form onSubmit={this.save}>
                     <div>
                         <Grid>
@@ -113,6 +143,16 @@ var ShoutForm = React.createClass({
                         { ! forever ? (
                             <DateTimePicker onChange={this.setPublishUntil} date={date} time={time}/>
                         ) : ''}
+
+                        <ul style={{display: 'inline-block', margin: 10}}>
+                        {this.state.uploadedImages.map((image, key) => (
+                            <a target="_blank" href={image.preview}>
+                                <li style={{display: 'inline-block', margin: '0 3px'}}>
+                                    <img src={image.preview} style={{width: 65, height: 65, cursor: 'pointer' }}/>
+                                </li>
+                            </a>
+                        ))}
+                        </ul>
 
                         <Grid>
                             <Cell width={3/12}>

@@ -1,10 +1,12 @@
 import React, { PropTypes } from 'react'
 
+import API from '../../services/API'
 import Avatar from '../users/Avatar'
 import Cloudinary from '../partials/Cloudinary'
 import CommentsForShout from './CommentsForShout'
 import EditShout from '../pages/shout/EditShout'
 import Emojify from '../partials/Emojify'
+import FileDrop from 'react-file-drop'
 import Icon from '../partials/Icon'
 import moment from 'moment'
 import ReportShout from '../pages/shout/ReportShout'
@@ -37,7 +39,8 @@ let Shout = React.createClass({
             openComments: this.props.openComments,
             reportModalOpen: false,
             secondsLeft: 0,
-            width: '100%'
+            width: '100%',
+            toBeUploaded: []
         }
     },
     calcPercentage(shout, onHide) {
@@ -139,6 +142,43 @@ let Shout = React.createClass({
             openComments: false
         })
     },
+    isAllowedImage(file) {
+        return ['image/jpeg', 'image/png'].includes(file.type)
+    },
+    uploadImages(files, event) {
+        for(var i = 0; i < files.length; i++) {
+            let file = files.item(i)
+
+            if (this.isAllowedImage(file)) {
+                let reader = new FileReader()
+
+                reader.onload = e => {
+                    let { toBeUploaded } = this.state
+                    let imageObject = {
+                        file: file,
+                        url: reader.result
+                    }
+
+                    toBeUploaded.push(imageObject)
+                    this.setState({ toBeUploaded }, () => {
+                        this.uploadImageTo(this.props.shout.id, imageObject)
+                    })
+                }
+
+                reader.readAsDataURL(file)
+            }
+        }
+    },
+    uploadImageTo(shoutId, imageObject) {
+        API.postFile(`shouts/${shoutId}/image`, { key: 'image', value: imageObject.file }, (res, err) => {
+            if ( ! err) {
+                let { toBeUploaded } = this.state
+                toBeUploaded = toBeUploaded.filter(obj => obj.url != imageObject.url)
+                this.props.updateShout(res)
+                this.setState({ toBeUploaded })
+            }
+        })
+    },
     render() {
         let { shout } = this.props
         let { width, editModalOpen, reportModalOpen, openComments } = this.state
@@ -166,7 +206,9 @@ let Shout = React.createClass({
 
         return (
             <div className="shout">
-                <div className="card">
+                <div className="card" style={{position:'relative'}}>
+                    {myShout && (<FileDrop onDrop={this.uploadImages}><span>Sleep hier afbeelding(en) naartoe</span></FileDrop>)}
+
                     <div className="card-content black-text">
                         <div className="card-title black-text">
                             <a href="#">
@@ -211,7 +253,7 @@ let Shout = React.createClass({
                         )}
                     </div>
 
-                    {shout.images.length > 0 && (
+                    {shout.images && shout.images.length > 0 && (
                         <ul style={{display: 'inline-block', margin: 10}}>
                         {shout.images.map(image => (
                             <a target="_blank" href={image.data.secure_url}>
@@ -223,6 +265,29 @@ let Shout = React.createClass({
                                     />
                                 </li>
                             </a>
+                        ))}
+                        {this.state.toBeUploaded.map(image => (
+                            <li style={{display: 'inline-block', margin: '0 3px', width: 65, height: 65}}>
+                                <div style={{
+                                    position: 'relative',
+                                    top: 0,
+                                    left: 0,
+                                    right: 0,
+                                    bottom: 0
+                                }}>
+                                    <div style={{
+                                        position: 'absolute',
+                                        backgroundColor: 'rgba(255, 255, 255, 0.6)',
+                                        width: 65,
+                                        height: 65,
+                                        color: '#333',
+                                        padding: 20
+                                    }}>
+                                        <Icon icon="loop" spinning/>
+                                    </div>
+                                    <img src={image.url} style={{width: 65, height: 65}}/>
+                                </div>
+                            </li>
                         ))}
                         </ul>
                     )}
