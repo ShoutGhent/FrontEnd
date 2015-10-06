@@ -10,6 +10,7 @@ import Router from '../../services/RouterContainer'
 import SearchActions from '../search/SearchActions'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
 import { Link } from 'react-router'
+import Log from '../../components/log/Log'
 
 let LoggedInHeader = React.createClass({
     propTypes: {
@@ -87,18 +88,13 @@ let LoggedInHeader = React.createClass({
                         <Icon icon="chat_bubble_outline" />
                     </Link>
                 </li>
-                <li className="hidden">
+                <li>
                     <Dropdown>
                         <DropdownTitle>
                             <Icon icon="schedule" />
                         </DropdownTitle>
                         <DropdownContent>
-                            <li><a href="#!">Log 1</a></li>
-                            <li><a href="#!">Log 2</a></li>
-                            <li><a href="#!">Log 3</a></li>
-                            <li><a href="#!">Log 4</a></li>
-                            <li className="divider"></li>
-                            <li><a href="#!">Alle logs weergeven</a></li>
+                            <Log />
                         </DropdownContent>
                     </Dropdown>
                 </li>
