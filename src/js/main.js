@@ -33,13 +33,8 @@ io.listen('global:shout.events.UpdateAvailable', (data) => {
     }
 })
 
-io.listen('global:shout.events.GoingDown', () => {
-    Notification.info('De server gaat heel even offline...')
-})
-
-io.listen('global:shout.events.GoingUp', () => {
-    Notification.info('Sorry voor het ongemak, we zijn er weer :)')
-})
+io.listen('global:shout.events.GoingDown', () => Notification.info('De server gaat heel even offline...'))
+io.listen('global:shout.events.GoingUp', () => Notification.info('Sorry voor het ongemak, we zijn er weer :)'))
 
 let mountNode = document.getElementById('mount-node')
 router.run((Handler, state) => {
