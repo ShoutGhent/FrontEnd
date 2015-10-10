@@ -98,7 +98,7 @@ let LoggedInHeader = React.createClass({
                                 <Log />
                             </li>
                             <li className="divider"></li>
-                            <li style={{textAlign:'center'}}><a href="#!">Alle logs weergeven</a></li>
+                            <li style={{textAlign:'center'}}><Link to="notifications">Alle logs weergeven</Link></li>
                         </DropdownContent>
                     </Dropdown>
                 </li>

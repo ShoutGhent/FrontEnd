@@ -31,9 +31,6 @@ var Log = React.createClass({
     scrollToTop() {
         React.findDOMNode(this.refs.notifications).scrollTop = 0
     },
-    markAsSeen(event, notification) {
-        LogActions.markAsSeen(notification)
-    },
     _checkScrolling(e) {
         if (e.target.scrollHeight == e.target.scrollTop + e.target.offsetHeight + 10) {
             this.loadMore()
@@ -44,10 +41,9 @@ var Log = React.createClass({
     },
     render() {
         return (
-            <ul style={{width: 400}} className="notifications" ref="notifications">
+            <ul className="notifications" ref="notifications">
                 {this.state.notifications.map(notification => (
                     <li
-                        onMouseOver={(e) => this.markAsSeen(e, notification)}
                         key={notification.id}
                         className={`${notification.seen ? 'seen' : 'unseen'}`}
                     >

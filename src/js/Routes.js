@@ -3,9 +3,10 @@ import React from "react"
 import App from './components/App'
 import Group from './components/pages/group/Group'
 import Index from './components/pages/index/Index'
-import Map from './components/pages/index/Map'
 import LoggedIn from './components/pages/LoggedIn'
 import Login from './components/pages/auth/Login'
+import Map from './components/pages/index/Map'
+import Notifications from './components/pages/notifications/Notifications'
 import Profile from './components/pages/profile/Profile'
 import Register from './components/pages/auth/Register'
 import Settings from './components/pages/profile/Settings'
@@ -22,6 +23,7 @@ var routes = (
         </Route>
         <Route handler={LoggedIn}>
             <Route name="profile" path="/profile" handler={Profile}/>
+            <Route name="notifications" path="/notifications" handler={Notifications}/>
             <Route name="map" path="/map" handler={Map}/>
             <Route name="settings" path="profile/settings/:tabId" handler={Settings}/>
             <Route name="shout" path="shouts/:shoutId" handler={Shout} />

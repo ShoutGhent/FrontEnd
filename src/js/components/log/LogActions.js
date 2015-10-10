@@ -28,14 +28,6 @@ class LogActions {
         this.dispatch(res)
     }
 
-    markAsSeen(notification) {
-        if ( ! notification.seen) {
-            API.put(`users/me/notifications`, {
-                id: notification.id,
-                seen: true
-            }, (res, err) => this.dispatch(notification))
-        }
-    }
 }
 
 export default alt.createActions(LogActions)

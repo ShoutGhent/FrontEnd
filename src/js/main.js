@@ -1,12 +1,12 @@
 import React from "react"
 
+import analytics from 'ga-react-router'
 import Auth from './auth/AuthService'
+import Notification from './components/notification/NotificationActions.js'
 import Router from "react-router"
 import RouterContainer from './services/RouterContainer'
 import routes from "./Routes"
 import WebStorage from './services/WebStorage'
-import analytics from 'ga-react-router'
-import Notification from './components/notification/NotificationActions.js'
 
 import { io } from './services/Socket'
 
