@@ -1,35 +1,59 @@
 @include scrollbars(0, white);
 
 .shoutMap {
-    .shout {
-        .card {
-            margin: 0 0 3px;
+    $sidebarWidth: 600px;
+    position: relative;
 
-            &-title {
-                font-size: 16px;
-                line-height: 0;
-            }
+    &__feed {
+        position: absolute;
+        z-index: 2;
+        left: 10px;
+        top: 10px;
+        bottom: 0;
+        min-height: 100%;
+        width: $sidebarWidth;
+        overflow-y: scroll;
 
-            &-content {
-                padding: 10px;
-            }
+        .shout {
+            .card {
+                margin: 0 0 3px;
 
-            &__name {
-                &--from {
-                    font-weight: normal;
+                &-title {
+                    font-size: 16px;
+                    line-height: 0;
+                }
+
+                &-content {
+                    padding: 10px;
+                }
+
+                &__name {
+                    &--from {
+                        font-weight: normal;
+                    }
+                }
+
+                &-action {
+                    display: none;
                 }
             }
 
-//            &-action {
-//                display: none;
-//            }
-        }
+            .comments {
+                margin-top: 0;
+            }
 
-        .comments {
-            margin-top: 0;
         }
-
     }
+
+    &__map {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
 }
 
 .shout{

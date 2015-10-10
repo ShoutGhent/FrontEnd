@@ -66,17 +66,8 @@ var Map = React.createClass({
         let radius = user.radius
 
         return (
-            <div style={{position: 'relative'}}>
-                <div className="shoutMap" style={{
-                    position: 'absolute',
-                    zIndex: 2,
-                    padding: 5,
-                    left: 5,
-                    top: 0,
-                    width: 600,
-                    height: this.calcHeight(),
-                    overflowY: 'scroll'
-                }}>
+            <div className="shoutMap">
+                <div className="shoutMap__feed" style={{ height: this.calcHeight() }}>
                     <ShoutFeed url="shouts/from/groups"/>
                 </div>
 
@@ -98,19 +89,20 @@ var Map = React.createClass({
                     <MyLocation/>
                 </div>
 
-                <Gmaps
-                    ref="gmaps"
-                    width={'100%'}
-                    height={height}
-                    lat={coords.latitude}
-                    lng={coords.longitude}
-                    zoom={17}
-                >
-                    <Marker
+                <div className="shoutMap__map">
+                    <Gmaps
+                        ref="gmaps"
+                        width={'100%'}
+                        height={height}
                         lat={coords.latitude}
                         lng={coords.longitude}
-                        title={"Jouw huidige locatie!"}
-                    />
+                        zoom={17}
+                    >
+                        <Marker
+                            lat={coords.latitude}
+                            lng={coords.longitude}
+                            title={"Jouw huidige locatie!"}
+                        />
                     {groupsNearMe.map(group => <Marker
                         lat={group.lat}
                         lng={group.lng}
@@ -130,7 +122,8 @@ var Map = React.createClass({
                         onRadiusChanged={this.handleRadiusChanged}
                     />
                 )}
-                </Gmaps>
+                    </Gmaps>
+                </div>
             </div>
         )
     }
