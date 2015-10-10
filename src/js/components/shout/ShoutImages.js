@@ -101,6 +101,8 @@ var ShoutImages = React.createClass({
                     images={images.map(img => img.data.secure_url)}
                     initialImage={lightboxInitialImage}
                     isOpen={lightboxIsOpen}
+                    height={`80%`}
+                    width={`100%`}
                     onClose={this.closeLightbox}
                 />
             </div>
