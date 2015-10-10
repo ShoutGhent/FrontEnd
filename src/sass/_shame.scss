@@ -69,3 +69,23 @@ input:-webkit-autofill {
 .relative {
     position: relative;
 }
+
+.image-gallery {
+    &-1 {
+        img {
+            margin: 0 auto;
+        }
+    }
+
+    &-2 {
+        img {
+            width: 50%;
+        }
+    }
+
+    &-4 {
+        img {
+            width: 50%;
+        }
+    }
+}
