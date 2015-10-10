@@ -111,11 +111,11 @@ var Map = React.createClass({
                         lng={coords.longitude}
                         title={"Jouw huidige locatie!"}
                     />
-            {groupsNearMe.map(group => <Marker
-                lat={group.lat}
-                lng={group.lng}
-                title={group.name}
-            />)}
+                    {groupsNearMe.map(group => <Marker
+                        lat={group.lat}
+                        lng={group.lng}
+                        title={group.name}
+                    />)}
                 {radius && (
                     <Circle
                         ref="circle"

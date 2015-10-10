@@ -94,7 +94,11 @@ let LoggedInHeader = React.createClass({
                             <Icon icon="schedule" />
                         </DropdownTitle>
                         <DropdownContent>
-                            <Log />
+                            <li>
+                                <Log />
+                            </li>
+                            <li className="divider"></li>
+                            <li style={{textAlign:'center'}}><a href="#!">Alle logs weergeven</a></li>
                         </DropdownContent>
                     </Dropdown>
                 </li>

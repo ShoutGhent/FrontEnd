@@ -1,0 +1,22 @@
+.notifications {
+    $height: 55px;
+    $items: 5;
+
+    max-height: ($height * $items) + 10;
+    overflow-y: scroll;
+
+    li {
+        background-color: white;
+        border-left: 3px solid transparent;
+
+        &.seen {
+
+        }
+
+        &.unseen {
+            background-color: $active-color-light;
+            border-left-color: $primary-color;
+        }
+    }
+
+}

@@ -70,9 +70,7 @@ var CommentsForShout = React.createClass({
         API.get(url, {}, (res, err) => {
             if ( ! err) {
                 let { comments } = this.state
-                res.data.map(comment => {
-                    comments.push(comment)
-                })
+                comments.push(...res.data)
 
                 this.setState({
                     loading: false,

@@ -1,7 +1,10 @@
 /*** Colors ***/
-$primary-color: colour("red", 400) !default;
+$main: "red";
+
+$primary-color: colour($main, 400) !default;
 $primary-color-light: lighten($primary-color, 15%) !default;
 $primary-color-dark: darken($primary-color, 15%) !default;
+$active-color-light: colour($main, 50);
 
 $secondary-color: colour("grey", 600) !default;
 $success-color: colour("green") !default;
