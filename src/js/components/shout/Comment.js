@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react'
 
-import LoginStore from '../../auth/LoginStore'
+import Avatar from '../users/Avatar'
 import Emojify from '../partials/Emojify'
+import Icon from '../partials/Icon'
+import LoginStore from '../../auth/LoginStore'
+import MaterialInput from '../partials/MaterialInput'
 import { Button } from '../button/MaterialButton'
 import { CollectionItem } from '../collection/Collection'
-import Avatar from '../users/Avatar'
-import Icon from '../partials/Icon'
-import MaterialInput from '../partials/MaterialInput'
 import { io } from '../../services/Socket'
 
 var Comment = React.createClass({

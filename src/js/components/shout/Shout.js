@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react'
 
 import API from '../../services/API'
 import Avatar from '../users/Avatar'
-import Cloudinary from '../partials/Cloudinary'
 import CommentsForShout from './CommentsForShout'
 import EditShout from '../pages/shout/EditShout'
 import Emojify from '../partials/Emojify'
@@ -10,6 +9,8 @@ import FileDrop from 'react-file-drop'
 import Icon from '../partials/Icon'
 import moment from 'moment'
 import ReportShout from '../pages/shout/ReportShout'
+import ShoutName from './ShoutName'
+import ShoutImages from './ShoutImages'
 import TransitiveNumber from 'react-transitive-number'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
 import { io } from '../../services/Socket'
@@ -192,9 +193,6 @@ let Shout = React.createClass({
         let { width, editModalOpen, reportModalOpen, openComments } = this.state
         let { anonymous } = shout
 
-        let anonymousName = 'Anonymous'
-
-        let name = anonymous ? anonymousName : shout.user.full_name
         let email = anonymous ? anonymousName : shout.user.email
 
         let myShout = shout.meta.my_shout
@@ -223,11 +221,7 @@ let Shout = React.createClass({
                                 <Avatar email={email} size={35}/>
                             </a>
                             <span className="shout__name">
-                                <Emojify>{name}</Emojify> {shout.meta.via && (
-                                <span className="shout__name--from">
-                                    via <Link to="group" params={{ groupId: shout.meta.via.id, tabId: 'shouts' }}><Emojify>{shout.meta.via.name}</Emojify></Link>
-                                </span>
-                            )}
+                                <ShoutName shout={shout} />
                             </span>
                             <Dropdown className="right">
                                 <DropdownTitle>
@@ -261,44 +255,10 @@ let Shout = React.createClass({
                         )}
                     </div>
 
-                    {shout.images && shout.images.length > 0 && (
-                        <ul style={{display: 'inline-block', margin: 10}}>
-                        {shout.images.map(image => (
-                            <a target="_blank" href={image.data.secure_url}>
-                                <li style={{display: 'inline-block', margin: '0 3px'}}>
-                                    <Cloudinary
-                                        style={{cursor: 'pointer'}}
-                                        image={image.data}
-                                        options={{width: 65, height: 65}}
-                                    />
-                                </li>
-                            </a>
-                        ))}
-                        {this.state.toBeUploaded.map(image => (
-                            <li style={{display: 'inline-block', margin: '0 3px', width: 65, height: 65}}>
-                                <div style={{
-                                    position: 'relative',
-                                    top: 0,
-                                    left: 0,
-                                    right: 0,
-                                    bottom: 0
-                                }}>
-                                    <div style={{
-                                        position: 'absolute',
-                                        backgroundColor: 'rgba(255, 255, 255, 0.6)',
-                                        width: 65,
-                                        height: 65,
-                                        color: '#333',
-                                        padding: 20
-                                    }}>
-                                        <Icon icon="loop" spinning/>
-                                    </div>
-                                    <img src={image.url} style={{width: 65, height: 65}}/>
-                                </div>
-                            </li>
-                        ))}
-                        </ul>
-                    )}
+                    <ShoutImages
+                        images={shout.images}
+                        toBeUploaded={this.state.toBeUploaded}
+                    />
 
                     <div className="card-action">
                     {(this.state.secondsLeft < 10 && this.state.secondsLeft != 0) ? (
