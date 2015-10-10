@@ -193,7 +193,7 @@ let Shout = React.createClass({
         let { width, editModalOpen, reportModalOpen, openComments } = this.state
         let { anonymous } = shout
 
-        let email = anonymous ? anonymousName : shout.user.email
+        let email = anonymous ? "anonymous@shout.nu" : shout.user.email
 
         let myShout = shout.meta.my_shout
 
