@@ -9,7 +9,7 @@ var ShoutName = React.createClass({
     },
     render() {
         let { shout } = this.props
-        let { anonymous } = this.props
+        let { anonymous } = shout
         let name = anonymous ? 'Anonymous' : shout.user.full_name
 
         return (
