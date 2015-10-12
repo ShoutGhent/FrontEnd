@@ -68,7 +68,7 @@ var Map = React.createClass({
         return (
             <div className="shoutMap">
                 <div className="shoutMap__feed" style={{ height: this.calcHeight() }}>
-                    <ShoutFeed url="shouts/from/groups"/>
+                    <ShoutFeed url="shouts/near/me"/>
                 </div>
 
                 <div style={{
