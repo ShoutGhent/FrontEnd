@@ -26,6 +26,11 @@
     li {
         background-color: white;
         border-left: 3px solid transparent;
+
+        &.unseen {
+//            background-color: $active-color-light;
+//            border-left-color: $primary-color;
+        }
     }
 
 }
