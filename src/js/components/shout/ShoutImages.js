@@ -103,6 +103,7 @@ var ShoutImages = React.createClass({
                     isOpen={lightboxIsOpen}
                     height={`80%`}
                     width={`100%`}
+                    showCloseButton={true}
                     onClose={this.closeLightbox}
                 />
             </div>
