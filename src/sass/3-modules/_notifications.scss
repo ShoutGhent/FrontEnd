@@ -28,8 +28,15 @@
         border-left: 3px solid transparent;
 
         &.unseen {
-//            background-color: $active-color-light;
-//            border-left-color: $primary-color;
+            border-left-color: $primary-color;
+        }
+
+        button {
+            height: 25px;
+
+            .material-icons {
+                font-size: 16px;
+            }
         }
     }
 

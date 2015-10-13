@@ -4,6 +4,9 @@ import Avatar from '../users/Avatar'
 import Loading from '../loading/Loading'
 import LogActions from './LogActions'
 import LogStore from './LogStore'
+import Icon from '../partials/Icon'
+import { Button } from '../button/MaterialButton'
+import Redirect from '../../services/Redirect'
 
 var Log = React.createClass({
     getInitialState() {
@@ -39,6 +42,13 @@ var Log = React.createClass({
     loadMore() {
         LogActions.loadMore(this.state.next_page_url)
     },
+    goto(notification, evt) {
+        evt.preventDefault()
+
+        Redirect.to('shout', {
+            shoutId: notification.notification_id
+        })
+    },
     render() {
         return (
             <ul className="notifications" ref="notifications">
@@ -47,7 +57,7 @@ var Log = React.createClass({
                         key={notification.id}
                         className={`${notification.seen ? 'seen' : 'unseen'}`}
                     >
-                        <a href={notification.link}>
+                        <a href="#" onClick={(e) => this.goto(notification, e)}>
                             <Avatar
                                 email={notification.from.email}
                                 size={25}
@@ -63,5 +73,9 @@ var Log = React.createClass({
         )
     }
 })
+
+//<Button padding="0" right flat>
+//  <Icon icon="remove_red_eye"/>
+//</Button>
 
 export default Log

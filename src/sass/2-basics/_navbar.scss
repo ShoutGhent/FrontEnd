@@ -21,15 +21,32 @@ nav {
     left: auto;
 }
 
-.badge.overlay{
-    display:block !important;
-    position: relative;
-    background: none !important;
-    left: 0;
-    top: 0;
-    padding: 0px !important;
-    margin-top: -50px !important;   
-    height: 20px !important;
-    width: 20px !important;
-    background: red;
+.badge {
+    &.overlay {
+        display:block !important;
+        position: relative;
+        background: none !important;
+        left: 0;
+        top: 0;
+        padding: 0px !important;
+        margin-top: -50px !important;
+        height: 20px !important;
+        width: 20px !important;
+        background: red;
+    }
+
+    &__count {
+        @extend .clearfix;
+        color: white;
+        height: 64px;
+
+        span {
+            float: right;
+            margin-left: 5px;
+        }
+
+        .material-icons {
+            float: left;
+        }
+    }
 }

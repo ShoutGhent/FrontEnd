@@ -5,12 +5,13 @@ import Auth from '../../auth/AuthService'
 import Avatar from '../users/Avatar'
 import Emojify from '../partials/Emojify'
 import Icon from '../partials/Icon'
+import Log from '../../components/log/Log'
+import LogStore from '../../components/log/LogStore'
 import Redirect from '../../services/Redirect'
 import Router from '../../services/RouterContainer'
 import SearchActions from '../search/SearchActions'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
 import { Link } from 'react-router'
-import Log from '../../components/log/Log'
 
 let LoggedInHeader = React.createClass({
     propTypes: {
@@ -18,9 +19,20 @@ let LoggedInHeader = React.createClass({
         closeNavigation: React.PropTypes.func.isRequired,
     },
     getInitialState() {
-        return {
-            isAddGroupFormOpen: false
-        }
+        let state = LogStore.getState()
+
+        state.isAddGroupFormOpen = false
+
+        return state
+    },
+    componentDidMount() {
+        LogStore.listen(this._onChange)
+    },
+    componentWillUnmount() {
+        LogStore.unlisten(this._onChange)
+    },
+    _onChange(state) {
+        this.setState(state)
     },
     logout(event) {
         event.preventDefault()
@@ -50,9 +62,22 @@ let LoggedInHeader = React.createClass({
     goToMap(e) {
         Redirect.to(e.target.checked ? 'map' : 'home')
     },
+    calculateUnseenNotificationsCount()
+    {
+        var x = 0
+
+        this.state.notifications.forEach(n => {
+            if ( ! n.seen) {
+                x++
+            }
+        })
+
+        return x
+    },
     render() {
         let { user, className } = this.props
         let { isAddGroupFormOpen } = this.state
+        let notificationCount = this.calculateUnseenNotificationsCount()
 
         return (
             <ul className={className}>
@@ -91,7 +116,14 @@ let LoggedInHeader = React.createClass({
                 <li>
                     <Dropdown>
                         <DropdownTitle>
+                        {notificationCount > 0 ? (
+                            <div className="badge__count">
+                                <Icon icon="schedule" />
+                                <span>{notificationCount}</span>
+                            </div>
+                        ) : (
                             <Icon icon="schedule" />
+                        )}
                         </DropdownTitle>
                         <DropdownContent>
                             <li>
