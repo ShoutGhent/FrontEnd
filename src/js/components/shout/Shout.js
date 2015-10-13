@@ -267,7 +267,9 @@ let Shout = React.createClass({
 
                         <span className="right">
                             <ul className="shout__action-items">
-                            {shout.location && <li><Icon icon='location_on'/></li>}
+                            {shout.location && (
+                                <li><Icon icon='location_on'/></li>
+                            )}
                                 <li>
                                     <button onClick={this.toggleComments} style={{
                                         background: 'transparent',

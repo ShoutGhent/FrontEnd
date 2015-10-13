@@ -75,7 +75,10 @@ var _IndexLoggedIn = React.createClass({
                             </Cell>
                             <Cell width={8/12}>
                             {this.state.user.location ? (
-                                <ShoutFeed url="shouts/near/me"/>
+                                <ShoutFeed
+                                    canShout={true}
+                                    url="shouts/near/me"
+                                />
                             ) : (
                                 <InfoPanel>
                                     <h5>Zet je locatiebepaling aan om deze modus te gebruiken. Klik hier voor meer informatie en voor ons privacybeleid.</h5>
