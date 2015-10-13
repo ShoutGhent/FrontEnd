@@ -14,7 +14,13 @@ let ShoutPage = React.createClass({
             loading: true
         }
     },
+    componentWillReceiveProps() {
+        this.fetch()
+    },
     componentDidMount() {
+        this.fetch()
+    },
+    fetch() {
         let { shoutId } = this.props.params
 
         if (this.isMounted()) {
@@ -31,7 +37,6 @@ let ShoutPage = React.createClass({
         }
     },
     hideShout(shout, force) {
-
         if (force || this.state.shout.user.id != WebStorage.fromStore('user', { id: null }).id) {
             let shout = null
 
