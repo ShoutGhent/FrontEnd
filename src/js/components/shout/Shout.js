@@ -6,12 +6,12 @@ import CommentsForShout from './CommentsForShout'
 import EditShout from '../pages/shout/EditShout'
 import Emojify from '../partials/Emojify'
 import FileDrop from 'react-file-drop'
+import { Gmaps, Marker } from 'react-gmaps'
 import Icon from '../partials/Icon'
 import moment from 'moment'
 import ReportShout from '../pages/shout/ReportShout'
-import ShoutName from './ShoutName'
 import ShoutImages from './ShoutImages'
-import TransitiveNumber from 'react-transitive-number'
+import ShoutName from './ShoutName'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
 import { io } from '../../services/Socket'
 import { Link } from 'react-router'
@@ -261,15 +261,19 @@ let Shout = React.createClass({
                     />
 
                     <div className="card-action">
-                    {(this.state.secondsLeft < 10 && this.state.secondsLeft != 0) ? (
-                        <TransitiveNumber>{this.state.secondsLeft}</TransitiveNumber>
-                    ) : ''}
+                    {(this.state.secondsLeft < 10 && this.state.secondsLeft != 0) && (
+                        <span>{this.state.secondsLeft}</span>
+                    )}
 
                         <span className="right">
                             <ul className="shout__action-items">
-                            {shout.location && (
-                                <li><Icon icon='location_on'/></li>
-                            )}
+
+                                {shout.location && (
+                                    <li style={{position: 'relative'}}>
+                                        <Icon icon='location_on'/>
+                                    </li>
+                                )}
+
                                 <li>
                                     <button onClick={this.toggleComments} style={{
                                         background: 'transparent',
@@ -277,7 +281,7 @@ let Shout = React.createClass({
                                         padding: 0,
                                         border: 0
                                     }}>
-                                        <TransitiveNumber>{shout.meta.comment_count}</TransitiveNumber>
+                                        <span>{shout.meta.comment_count}</span>
                                         <Icon icon="comment"/>
                                     </button>
                                 </li>
@@ -288,7 +292,7 @@ let Shout = React.createClass({
                                         padding: 0,
                                         border: 0
                                     }}>
-                                        <TransitiveNumber>{shout.meta.favorite_count}</TransitiveNumber>
+                                        <span>{shout.meta.favorite_count}</span>
                                         <Icon
                                             style={{ color: shout.meta.favorited_by_me ? '#ffab40' : 'rgba(0, 0, 0, .6)'}}
                                             icon="star"

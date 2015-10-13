@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
 
 import cx from 'classnames'
-import TransitiveNumber from 'react-transitive-number'
 
 var GroupDistance = React.createClass({
     propTypes: {
@@ -26,13 +25,9 @@ var GroupDistance = React.createClass({
         return (
             <span className={classes}>
                 {group.meta.from_me != null && (group.meta.from_me > 1000 ? (
-                    <span>
-                        <TransitiveNumber>{Math.round(group.meta.from_me/1000)}</TransitiveNumber> kilometer
-                    </span>
+                    <span>{Math.round(group.meta.from_me/1000)} kilometer</span>
                 ) : (
-                    <span>
-                        <TransitiveNumber>{Math.round(group.meta.from_me)}</TransitiveNumber> meter
-                    </span>
+                    <span>{Math.round(group.meta.from_me)} meter</span>
                 ))}
             </span>
         )

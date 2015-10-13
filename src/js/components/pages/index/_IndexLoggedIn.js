@@ -55,39 +55,14 @@ var _IndexLoggedIn = React.createClass({
                         onDone={this.refetchGroups}
                     />
                 )}
-                <Tab>
-                    <TabPanel title="Vrienden">
-                        <Grid>
-                            <Cell width={4/12}>
-                                <MyGroupList/>
-                            </Cell>
-                            <Cell width={8/12}>
-                                <ShoutFeed url="shouts/from/groups"/>
-                            </Cell>
-                        </Grid>
-                    </TabPanel>
-                    <TabPanel title="Omgeving">
-                        <Grid>
-                            <Cell width={4/12}>
-                                <MyLocation/>
-
-                                <GroupListNearMe/>
-                            </Cell>
-                            <Cell width={8/12}>
-                            {this.state.user.location ? (
-                                <ShoutFeed
-                                    canShout={true}
-                                    url="shouts/near/me"
-                                />
-                            ) : (
-                                <InfoPanel>
-                                    <h5>Zet je locatiebepaling aan om deze modus te gebruiken. Klik hier voor meer informatie en voor ons privacybeleid.</h5>
-                                </InfoPanel>
-                            )}
-                            </Cell>
-                        </Grid>
-                    </TabPanel>
-                </Tab>
+                <Grid>
+                    <Cell width={4/12}>
+                        <GroupListNearMe/>
+                    </Cell>
+                    <Cell width={8/12}>
+                        <ShoutFeed url="shouts/from/groups"/>
+                    </Cell>
+                </Grid>
             </div>
         )
     }
