@@ -9,9 +9,9 @@ import Notification from '../../notification/NotificationActions'
 import ShoutFeed from '../../shout/ShoutFeed'
 import WebStorage from '../../../services/WebStorage'
 import { Button } from '../../button/MaterialButton'
-import { Gmaps, Marker, Circle, InfoWindow } from 'react-gmaps'
+import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 
-var Map = React.createClass({
+var MapPage = React.createClass({
     getInitialState() {
         let loginStoreData = LoginStore.getState()
         let myGroupStoreData = MyGroupsStore.getState()
@@ -90,43 +90,26 @@ var Map = React.createClass({
                 </div>
 
                 <div className="shoutMap__map">
-                    <Gmaps
-                        ref="gmaps"
-                        width={'100%'}
-                        height={height}
-                        lat={coords.latitude}
-                        lng={coords.longitude}
+                    <Map
+                        center={[coords.latitude, coords.longitude]}
                         zoom={17}
+                        style={{height}}
                     >
-                        <Marker
-                            lat={coords.latitude}
-                            lng={coords.longitude}
-                            title={"Jouw huidige locatie!"}
+                        <TileLayer
+                            url='http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
+                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         />
-                    {groupsNearMe.map(group => <Marker
-                        lat={group.lat}
-                        lng={group.lng}
-                        title={group.name}
-                    />)}
-                {radius && (
-                    <Circle
-                        ref="circle"
-                        strokeColor={'#F44336'}
-                        strokeOpacity={0.8}
-                        strokeWeight={1}
-                        fillColor={'#F44336'}
-                        fillOpacity={0.35}
-                        radius={radius}
-                        lat={coords.latitude}
-                        lng={coords.longitude}
-                        onRadiusChanged={this.handleRadiusChanged}
-                    />
-                )}
-                    </Gmaps>
+
+                        <Marker position={[coords.latitude, coords.longitude]}>
+                            <Popup>
+                                <span>Jouw Locatie</span>
+                            </Popup>
+                        </Marker>
+                    </Map>
                 </div>
             </div>
         )
     }
 })
 
-export default Map
+export default MapPage
