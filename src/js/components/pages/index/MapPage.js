@@ -105,6 +105,12 @@ var MapPage = React.createClass({
                                 <span>Jouw Locatie</span>
                             </Popup>
                         </Marker>
+
+                        {groupsNearMe.map(group => <Marker position={[group.lat, group.lng]}>
+                            <Popup>
+                                <span>{group.name}</span>
+                            </Popup>
+                        </Marker>)}
                     </Map>
                 </div>
             </div>
