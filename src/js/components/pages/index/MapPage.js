@@ -4,16 +4,15 @@ import AddShout from '../../pages/shout/AddShout'
 import Icon from '../../partials/Icon'
 import LoginActions from '../../../auth/LoginActions'
 import LoginStore from '../../../auth/LoginStore'
+import md5 from 'md5'
 import MyGroupsStore from '../../group/MyGroupsStore'
-import MyLocation from '../../users/MyLocation'
 import Notification from '../../notification/NotificationActions'
 import ShoutFeed from '../../shout/ShoutFeed'
 import WebStorage from '../../../services/WebStorage'
 import { Button } from '../../button/MaterialButton'
-import { Map, Marker, LayerGroup, Circle, Popup, TileLayer } from 'react-leaflet'
-import { Modal, ModalContent } from '../../modal/Modal'
 import { Card, CardContent, CardTitle } from '../../card/Card'
-
+import { Map, Marker, LayerGroup, Popup, TileLayer } from 'react-leaflet'
+import { Modal, ModalContent } from '../../modal/Modal'
 
 var MapPage = React.createClass({
     getInitialState() {
@@ -34,18 +33,34 @@ var MapPage = React.createClass({
     componentDidMount() {
         LoginStore.listen(this._onChange)
         MyGroupsStore.listen(this._onChange)
-        window.addEventListener('resize', this._setHeight)
+        window.addEventListener('resize', this._handleResize)
+        this.calculateRadius()
     },
     componentWillUnmount() {
         LoginStore.unlisten(this._onChange)
         MyGroupsStore.unlisten(this._onChange)
-        window.removeEventListener('resize', this._setHeight)
+        window.removeEventListener('resize', this._handleResize)
     },
     _onChange(state) {
         this.setState(state)
     },
-    _setHeight(e) {
+    _handleResize(e) {
+        this.calculateRadius()
+
         this.setState({ height: this.calcHeight() })
+    },
+    calculateRadius() {
+        let { map } = this.refs
+        map = map.getLeafletElement()
+
+        let mapBoundNorthEast = map.getBounds().getNorthEast()
+        let radius = mapBoundNorthEast.distanceTo(map.getCenter())
+
+        if (this.state.user.radius != radius) {
+            LoginActions.changeRadius(radius)
+        }
+
+        return radius
     },
     centerCurrentLocation() {
         const gmaps = this.refs.gmaps
@@ -53,16 +68,11 @@ var MapPage = React.createClass({
 
         gmaps.getMap().setCenter(new google.maps.LatLng(coords.latitude, coords.longitude))
     },
-    handleRadiusChanged(e) {
-        const { gmaps } = this.refs
-        const { circle } = gmaps.refs
-        const bounds = circle.getEntity().getBounds()
-        gmaps.getMap().fitBounds(bounds)
-    },
     getLocation() {
         LoginActions.getGeolocation((location) => {
             Notification.success('Nieuwe locatie is ingesteld!')
         })
+
         Notification.success("Locatie wordt opgehaald!")
     },
     showAddShoutForm() {
@@ -80,14 +90,17 @@ var MapPage = React.createClass({
     },
     myLocation() {
         let coords = this.state.user.location
+
+        const MyLocationIcon = L.icon({
+            iconUrl: `https://avatarize.me/a/${md5(this.state.user.email)}?size=24`,
+            iconSize: [24, 24],
+            className: 'location--myPin'
+        })
+
         return (
             <Marker
                 position={[coords.latitude, coords.longitude]}
-                icon={L.icon({
-                    iconUrl: 'https://avatarize.me/a/malfait.robin@gmail.com?size=24&rounded=true',
-                    iconSize: [24, 24],
-                    className: 'location--myPin'
-                })}
+                icon={MyLocationIcon}
             >
                 <Popup>
                     <span>Jouw Locatie</span>
@@ -104,7 +117,6 @@ var MapPage = React.createClass({
         let { user, height, groupsNearMe } = this.state
 
         let coords = user.location
-        let radius = user.radius
 
         return (
             <div className="shoutMap" style={{ height: this.calcHeight() }}>
@@ -160,8 +172,6 @@ var MapPage = React.createClass({
                             <Button className="btn" padding="0 1rem" onClick={this.getLocation}>
                                 <Icon icon="my_location"/>
                             </Button>
-                            <br/>
-                            <MyLocation/>
 
                             <div style={{
                                 padding: 0,
@@ -201,9 +211,11 @@ var MapPage = React.createClass({
 
                 <div className="shoutMap__map">
                     <Map
+                        ref="map"
                         center={[coords.latitude, coords.longitude]}
                         zoom={17}
                         style={{height}}
+                        onLeafletZoomend={this.calculateRadius}
                     >
                         <TileLayer
                             url='http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
@@ -217,12 +229,6 @@ var MapPage = React.createClass({
                                 <span>{group.name}</span>
                             </Popup>
                         </Marker>)}
-
-                        <Circle
-                            center={[coords.latitude, coords.longitude]}
-                            radius={radius/2}
-                        />
-
                     </Map>
                 </div>
             </div>
