@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 
+import AddShout from '../../pages/shout/AddShout'
 import Icon from '../../partials/Icon'
 import LoginActions from '../../../auth/LoginActions'
 import LoginStore from '../../../auth/LoginStore'
@@ -10,8 +11,9 @@ import ShoutFeed from '../../shout/ShoutFeed'
 import WebStorage from '../../../services/WebStorage'
 import { Button } from '../../button/MaterialButton'
 import { Map, Marker, LayerGroup, Circle, Popup, TileLayer } from 'react-leaflet'
-import AddShout from '../../pages/shout/AddShout'
 import { Modal, ModalContent } from '../../modal/Modal'
+import { Card, CardContent, CardTitle } from '../../card/Card'
+
 
 var MapPage = React.createClass({
     getInitialState() {
@@ -22,7 +24,8 @@ var MapPage = React.createClass({
             user: loginStoreData.user,
             height: this.calcHeight(),
             groupsNearMe: myGroupStoreData.groupsNearMe,
-            openAddShoutForm: false
+            openAddShoutForm: false,
+            legendOpen: false
         }
     },
     calcHeight() {
@@ -72,15 +75,30 @@ var MapPage = React.createClass({
     updateShout(shout) {
         this.refs.shoutFeed.updateShout(shout)
     },
+    closeForm() {
+        this.setState({ openAddShoutForm: false })
+    },
     myLocation() {
         let coords = this.state.user.location
         return (
-            <Marker position={[coords.latitude, coords.longitude]}>
+            <Marker
+                position={[coords.latitude, coords.longitude]}
+                icon={L.icon({
+                    iconUrl: 'https://avatarize.me/a/malfait.robin@gmail.com?size=24&rounded=true',
+                    iconSize: [24, 24],
+                    className: 'location--myPin'
+                })}
+            >
                 <Popup>
                     <span>Jouw Locatie</span>
                 </Popup>
             </Marker>
         )
+    },
+    toggleLegend() {
+        this.setState({
+            legendOpen:  ! this.state.legendOpen
+        })
     },
     render() {
         let { user, height, groupsNearMe } = this.state
@@ -103,7 +121,7 @@ var MapPage = React.createClass({
                         left: 0,
                         top: 0
                     }}>
-                        <Modal isOpen={true}>
+                        <Modal isOpen={true} onClose={this.closeForm}>
                             <ModalContent>
                                 <AddShout
                                     onDone={this.addShout}
@@ -125,22 +143,59 @@ var MapPage = React.createClass({
                     </Button>
                 </div>
 
-                <div style={{
-                    position: 'absolute',
-                    zIndex: 2,
-                    padding: 5,
-                    right: 5,
-                    top: 35
-                }}>
-                    <Button className="btn" padding="0 1rem" onClick={this.centerCurrentLocation}>
-                        <Icon icon="home"/>
-                    </Button>
-                    <span>&nbsp;&nbsp;</span>
-                    <Button className="btn" padding="0 1rem" onClick={this.getLocation}>
-                        <Icon icon="my_location"/>
-                    </Button>
-                    <br/>
-                    <MyLocation/>
+                <div>
+                    <Card
+                        style={{
+                            position: 'absolute',
+                            zIndex: 2,
+                            padding: 5,
+                            right: 5,
+                            top: 35
+                        }}>
+                        <CardContent>
+                            <Button className="btn" padding="0 1rem" onClick={this.centerCurrentLocation}>
+                                <Icon icon="home"/>
+                            </Button>
+                            <span>&nbsp;&nbsp;</span>
+                            <Button className="btn" padding="0 1rem" onClick={this.getLocation}>
+                                <Icon icon="my_location"/>
+                            </Button>
+                            <br/>
+                            <MyLocation/>
+
+                            <div style={{
+                                padding: 0,
+                                marginTop: 20,
+                                marginBottom: -30,
+                                textAlign: 'left',
+                                display: 'none'
+                            }}>
+                                {this.state.legendOpen && (
+                                    <div>
+                                        <div>
+                                            <input type="checkbox"/>
+                                            <label className="label">Shouts van Groepen</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox"/>
+                                            <label className="label">Shouts van vrienden</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox"/>
+                                            <label className="label">Shouts in de buurt</label>
+                                        </div>
+                                    </div>
+                                )}
+                                <div style={{ textAlign: 'center' }} onClick={this.toggleLegend}>
+                                    {this.state.legendOpen ? (
+                                        <Icon icon="expand_less"/>
+                                    ) : (
+                                        <Icon icon="expand_more"/>
+                                    )}
+                                </div>
+                            </div>
+                        </CardContent>
+                    </Card>
                 </div>
 
 

@@ -4,7 +4,6 @@ import LoginActions from '../../auth/LoginActions'
 import LoginStore from '../../auth/LoginStore'
 import MaterialSlider from '../partials/MaterialSlider'
 import MyGroupsActions from '../group/MyGroupsActions'
-import { Card, CardContent, CardTitle } from '../card/Card'
 
 var MyLocation = React.createClass({
     getInitialState() {
@@ -37,29 +36,27 @@ var MyLocation = React.createClass({
         let { user, radius } = this.state
 
         return (
-            <Card>
-                <CardContent>
-                    <MaterialSlider
-                        min={20}
-                        max={2000}
-                        step={10}
-                        current={user.radius}
-                        onChange={this.setRadius}
-                        onDone={this.changeUserRadius}
-                    />
+            <div>
+                <MaterialSlider
+                    min={20}
+                    max={2000}
+                    step={10}
+                    current={user.radius}
+                    onChange={this.setRadius}
+                    onDone={this.changeUserRadius}
+                />
 
-                    <div className="center" style={{
-                        minWidth: 240,
-                        verticalAlign: 'middle'
-                    }}>
-                        Shouts in een straal van {radius > 1000 ? (
-                        <span>{(radius/1000).toFixed(2)} km</span>
-                    ) : (
-                        <span>{radius.toFixed(2)} m</span>
-                    )}
-                    </div>
-                </CardContent>
-            </Card>
+                <div className="center" style={{
+                    minWidth: 240,
+                    verticalAlign: 'middle'
+                }}>
+                    Shouts in een straal van {radius > 1000 ? (
+                    <span>{(radius/1000).toFixed(2)} km</span>
+                ) : (
+                    <span>{radius.toFixed(2)} m</span>
+                )}
+                </div>
+            </div>
         )
     }
 })
