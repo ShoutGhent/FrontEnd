@@ -4,7 +4,7 @@ import Avatar from '../../users/Avatar'
 import Footer from '../../partials/Footer'
 import Parallax from '../../partials/Parallax'
 import { Card, CardContent, CardTitle, CardFooter } from '../../card/Card'
-import { Gmaps, Marker } from 'react-gmaps'
+import { Map, Marker, LayerGroup, Circle, Popup, TileLayer } from 'react-leaflet'
 import { Grid, Cell } from '../../grid/Grid'
 import { Link } from 'react-router'
 
@@ -14,10 +14,10 @@ var _IndexLoggedOut = React.createClass({
             height: 400
         }
 
-        let coords = {
-            lat: 51.0393565,
-            lng: 3.7271276
-        }
+        let coords = [
+            51.0393565,
+            3.7271276
+        ]
 
         let cardCss = {
             height: 300
@@ -150,9 +150,14 @@ var _IndexLoggedOut = React.createClass({
                         </div>
                     </div>
 
-                    <Gmaps ref='Gmaps' width={'100%'} height={map.height} lat={coords.lat} lng={coords.lng} zoom={17}>
-                        <Marker lat={coords.lat} lng={coords.lng} />
-                    </Gmaps>
+                    <Map center={coords} zoom={17} style={{height: map.height}}>
+                        <TileLayer
+                            url='http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
+                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                        />
+
+                        <Marker position={coords}/>
+                    </Map>
                 </div>
                 <Footer/>
             </div>

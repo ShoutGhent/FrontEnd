@@ -137,7 +137,18 @@ var ShoutForm = React.createClass({
 
         return (
             <div style={{position: 'relative'}}>
-                <FileDrop targetAlwaysVisible={this.state.showUploadImages} onDrop={this.uploadImages}><span>Sleep hier afbeelding(en) naartoe</span></FileDrop>
+                <FileDrop
+                    targetAlwaysVisible={this.state.showUploadImages}
+                    onDrop={this.uploadImages}
+                >
+                    <span>Sleep hier afbeelding(en) naartoe</span>
+                </FileDrop>
+
+            {this.state.showUploadImages && (
+                <Button right zIndex="4" flat onClick={this.showUploadImages} padding="0 1rem">
+                    <Icon icon="close"/>
+                </Button>
+            )}
 
                 <form onSubmit={this.save}>
                     <div>
@@ -151,12 +162,15 @@ var ShoutForm = React.createClass({
                                     value={description}
                                     onChange={this.setDescription}
                                 />
+                                <Button right flat onClick={this.showUploadImages} padding="0 1rem">
+                                    <Icon icon="panorama"/>
+                                </Button>
                             </Cell>
                         </Grid>
 
-                        { ! forever ? (
+                        { ! forever && (
                             <DateTimePicker onChange={this.setPublishUntil} date={date} time={time}/>
-                        ) : ''}
+                        )}
 
                         <ul style={{display: 'inline-block', margin: 10}}>
                         {this.state.uploadedImages.map((image, key) => (
@@ -183,9 +197,6 @@ var ShoutForm = React.createClass({
                             </Cell>
                             <Cell width={6/12}>
                                 <div className="right">
-                                    <Button zIndex="4" flat onClick={this.showUploadImages} padding="0 1rem">
-                                        <Icon className="left" icon="panorama"/> Afbeeldingen
-                                    </Button>
                                     {hasCancelButton && (
                                         <Button flat onClick={this.cancel}>Annuleren</Button>
                                     )}

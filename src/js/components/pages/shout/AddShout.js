@@ -7,9 +7,14 @@ import { Card } from '../../card/Card'
 
 var AddShout = React.createClass({
     propTypes: {
+        groupId: PropTypes.string,
         onDone: PropTypes.func.isRequired,
-        groupId: PropTypes.string.isRequired,
         updateShout: PropTypes.func.isRequired
+    },
+    getDefaultProps() {
+        return {
+            groupId: null
+        }
     },
     getInitialState() {
         return {
@@ -27,7 +32,9 @@ var AddShout = React.createClass({
             this.done(res)
             NotificationActions.success("Je shout werd geplaatst!")
 
-            NotificationActions.info("Je afbeeldingen worden geupload, ze komen er automatisch op!")
+            if (images.length > 0) {
+                NotificationActions.info("Je afbeeldingen worden geupload, ze komen er automatisch op!")
+            }
 
             images.map(image => {
                 API.postFile(`shouts/${res.id}/image`, { key: 'image', value: image.file }, (res, err) => {

@@ -9,7 +9,9 @@ import Notification from '../../notification/NotificationActions'
 import ShoutFeed from '../../shout/ShoutFeed'
 import WebStorage from '../../../services/WebStorage'
 import { Button } from '../../button/MaterialButton'
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
+import { Map, Marker, LayerGroup, Circle, Popup, TileLayer } from 'react-leaflet'
+import AddShout from '../../pages/shout/AddShout'
+import { Modal, ModalContent } from '../../modal/Modal'
 
 var MapPage = React.createClass({
     getInitialState() {
@@ -19,7 +21,8 @@ var MapPage = React.createClass({
         return {
             user: loginStoreData.user,
             height: this.calcHeight(),
-            groupsNearMe: myGroupStoreData.groupsNearMe
+            groupsNearMe: myGroupStoreData.groupsNearMe,
+            openAddShoutForm: false
         }
     },
     calcHeight() {
@@ -59,6 +62,26 @@ var MapPage = React.createClass({
         })
         Notification.success("Locatie wordt opgehaald!")
     },
+    showAddShoutForm() {
+        this.setState({ openAddShoutForm: true })
+    },
+    addShout(shout) {
+        this.setState({ openAddShoutForm: false })
+        this.refs.shoutFeed.prependShout(shout)
+    },
+    updateShout(shout) {
+        this.refs.shoutFeed.updateShout(shout)
+    },
+    myLocation() {
+        let coords = this.state.user.location
+        return (
+            <Marker position={[coords.latitude, coords.longitude]}>
+                <Popup>
+                    <span>Jouw Locatie</span>
+                </Popup>
+            </Marker>
+        )
+    },
     render() {
         let { user, height, groupsNearMe } = this.state
 
@@ -66,9 +89,40 @@ var MapPage = React.createClass({
         let radius = user.radius
 
         return (
-            <div className="shoutMap">
+            <div className="shoutMap" style={{ height: this.calcHeight() }}>
                 <div className="shoutMap__feed" style={{ height: this.calcHeight() }}>
-                    <ShoutFeed url="shouts/near/me"/>
+                    <ShoutFeed ref="shoutFeed" url="shouts/near/me"/>
+                </div>
+
+                {this.state.openAddShoutForm && (
+                    <div style={{
+                        position: 'absolute',
+                        zIndex: 2,
+                        right: 0,
+                        bottom: 0,
+                        left: 0,
+                        top: 0
+                    }}>
+                        <Modal isOpen={true}>
+                            <ModalContent>
+                                <AddShout
+                                    onDone={this.addShout}
+                                    updateShout={this.updateShout}
+                                />
+                            </ModalContent>
+                        </Modal>
+                    </div>
+                )}
+
+                <div style={{
+                    position: 'absolute',
+                    zIndex: 2,
+                    right: 24,
+                    bottom: 24
+                }}>
+                    <Button padding="0" circle onClick={this.showAddShoutForm}>
+                        <Icon icon="add"/>
+                    </Button>
                 </div>
 
                 <div style={{
@@ -89,6 +143,7 @@ var MapPage = React.createClass({
                     <MyLocation/>
                 </div>
 
+
                 <div className="shoutMap__map">
                     <Map
                         center={[coords.latitude, coords.longitude]}
@@ -100,17 +155,19 @@ var MapPage = React.createClass({
                             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         />
 
-                        <Marker position={[coords.latitude, coords.longitude]}>
-                            <Popup>
-                                <span>Jouw Locatie</span>
-                            </Popup>
-                        </Marker>
+                        {this.myLocation()}
 
                         {groupsNearMe.map(group => <Marker position={[group.lat, group.lng]}>
                             <Popup>
                                 <span>{group.name}</span>
                             </Popup>
                         </Marker>)}
+
+                        <Circle
+                            center={[coords.latitude, coords.longitude]}
+                            radius={radius/2}
+                        />
+
                     </Map>
                 </div>
             </div>
