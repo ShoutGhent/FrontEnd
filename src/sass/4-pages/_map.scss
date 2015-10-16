@@ -1,0 +1,37 @@
+.leaflet-container {
+    .leaflet-popup-content-wrapper {
+        border-radius: 0;
+    }
+
+    .leaflet-left {
+        right: 10px;
+        left: auto;
+    }
+}
+
+.map {
+    &__action {
+        position: absolute;
+        z-index: 2;
+        right: 24px;
+        bottom: 24px;
+    }
+
+    &__legend {
+        margin-top: 10px !important;
+        position: absolute;
+        z-index: 2;
+        right: 50px;
+        top: 0px;
+        width: 250px;
+
+        &__items {
+            display: none;
+            
+            padding: 0;
+            margin-top: 20px;
+            margin-bottom: -20px;
+            text-align: left;
+        }
+    }
+}

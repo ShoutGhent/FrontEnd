@@ -6,6 +6,7 @@ import LoginActions from '../../../auth/LoginActions'
 import LoginStore from '../../../auth/LoginStore'
 import md5 from 'md5'
 import MyGroupsStore from '../../group/MyGroupsStore'
+import MyGroupsActions from '../../group/MyGroupsActions'
 import Notification from '../../notification/NotificationActions'
 import ShoutFeed from '../../shout/ShoutFeed'
 import WebStorage from '../../../services/WebStorage'
@@ -24,7 +25,8 @@ var MapPage = React.createClass({
             height: this.calcHeight(),
             groupsNearMe: myGroupStoreData.groupsNearMe,
             openAddShoutForm: false,
-            legendOpen: false
+            legendOpen: false,
+            radiusLastChanged: null
         }
     },
     calcHeight() {
@@ -35,6 +37,8 @@ var MapPage = React.createClass({
         MyGroupsStore.listen(this._onChange)
         window.addEventListener('resize', this._handleResize)
         this.calculateRadius()
+
+        MyGroupsActions.fetchGroupsNearMe()
     },
     componentWillUnmount() {
         LoginStore.unlisten(this._onChange)
@@ -56,8 +60,13 @@ var MapPage = React.createClass({
         let mapBoundNorthEast = map.getBounds().getNorthEast()
         let radius = mapBoundNorthEast.distanceTo(map.getCenter())
 
-        if (this.state.user.radius != radius) {
+        let timeDiff = (+new Date() - this.state.radiusLastChanged) / 1000
+
+        if ((this.state.user.radius != radius) && (timeDiff > 5)) {
             LoginActions.changeRadius(radius)
+            this.setState({
+                radiusLastChanged: +new Date()
+            })
         }
 
         return radius
@@ -144,26 +153,15 @@ var MapPage = React.createClass({
                     </div>
                 )}
 
-                <div style={{
-                    position: 'absolute',
-                    zIndex: 2,
-                    right: 24,
-                    bottom: 24
-                }}>
+
+                <div className="map__action">
                     <Button padding="0" circle onClick={this.showAddShoutForm}>
                         <Icon icon="add"/>
                     </Button>
                 </div>
 
                 <div>
-                    <Card
-                        style={{
-                            position: 'absolute',
-                            zIndex: 2,
-                            padding: 5,
-                            right: 5,
-                            top: 35
-                        }}>
+                    <Card className="map__legend">
                         <CardContent>
                             <Button className="btn" padding="0 1rem" onClick={this.centerCurrentLocation}>
                                 <Icon icon="home"/>
@@ -173,13 +171,7 @@ var MapPage = React.createClass({
                                 <Icon icon="my_location"/>
                             </Button>
 
-                            <div style={{
-                                padding: 0,
-                                marginTop: 20,
-                                marginBottom: -30,
-                                textAlign: 'left',
-                                display: 'none'
-                            }}>
+                            <div className="map__legend__items">
                                 {this.state.legendOpen && (
                                     <div>
                                         <div>
