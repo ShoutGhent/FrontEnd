@@ -35,3 +35,80 @@
         }
     }
 }
+
+.group__marker {
+    padding: 0;
+    width: 250px;
+
+    .leaflet-popup-close-button {
+        z-index: 1;
+        color: white;
+    }
+
+    .leaflet-popup-content-wrapper {
+        padding: 0;
+
+        .leaflet-popup-content {
+            background-color: transparent !important;
+            margin: 0 !important;
+        }
+    }
+
+    &__preview {
+        &__header {
+            .__logo {
+                position: absolute;
+                left: 10px;
+                top: 70px;
+                background: #FFF;
+                border-radius: 2px;
+                border: 1px solid #eee;
+            }
+
+            .__name {
+                font-weight: bold;
+                color: white;
+                position: absolute;
+                top: 85px;
+                left: 70px;
+            }
+
+            .__details {
+                padding: 20px 12px;
+                margin: 0;
+
+                ul {
+                    margin: 0;
+
+                    $itemHeight: 28px;
+
+                    li {
+                        margin-bottom: 5px;
+
+                        > span:first-child {
+                            color: $secondary-color;
+                            font-size: 14px;
+                            line-height: 14px;
+                            vertical-align: middle;
+                        }
+
+                        > span:last-child {
+                            font-size: 14px;
+                            line-height: 14px;
+                            padding-left: 5px;
+                            vertical-align: middle;
+                        }
+
+                        span {
+                            i {
+                                vertical-align: middle;
+                                font-size: 14px;
+                                line-height: 14px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

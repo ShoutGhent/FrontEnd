@@ -1,12 +1,14 @@
 import React, { PropTypes } from 'react'
 
 import AddShout from '../../pages/shout/AddShout'
+import GroupPreviewCard from '../../group/GroupPreviewCard'
 import Icon from '../../partials/Icon'
 import LoginActions from '../../../auth/LoginActions'
 import LoginStore from '../../../auth/LoginStore'
 import md5 from 'md5'
 import MyGroupsActions from '../../group/MyGroupsActions'
 import MyGroupsStore from '../../group/MyGroupsStore'
+import MyLocationMarker from '../../map/MyLocationMarker'
 import Notification from '../../notification/NotificationActions'
 import ShoutFeed from '../../shout/ShoutFeed'
 import WebStorage from '../../../services/WebStorage'
@@ -14,7 +16,6 @@ import { Button } from '../../Material/Material'
 import { Card, CardContent, CardTitle } from '../../card/Card'
 import { Map, Marker, LayerGroup, Popup, TileLayer } from 'react-leaflet'
 import { Modal, ModalContent } from '../../modal/Modal'
-import MyLocationMarker from '../../map/MyLocationMarker'
 
 var MapPage = React.createClass({
     getInitialState() {
@@ -198,9 +199,7 @@ var MapPage = React.createClass({
                         <MyLocationMarker map={this.refs.map}/>
 
                         {groupsNearMe.map(group => <Marker position={[group.lat, group.lng]}>
-                            <Popup>
-                                <span>{group.name}</span>
-                            </Popup>
+                            <Popup className="group__marker"><GroupPreviewCard group={group}/></Popup>
                         </Marker>)}
                     </Map>
                 </div>

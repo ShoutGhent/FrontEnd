@@ -66,25 +66,26 @@ var EditGroupLocation = React.createClass({
         event.preventDefault()
 
         this.setState({
-            markerCoords: WebStorage.fromStore('user', {
-                location: {
-                    latitude: null,
-                    longitude: null
-                }
-            }).location
-        }, this.centerCurrentLocation)
+            markerCoords: this.userLocation()
+        })
     },
-    centerCurrentLocation() {
-        let coords = this.state.markerCoords
+    userLocation() {
+        return WebStorage.fromStore('user', {
+            location: {
+                latitude: null,
+                longitude: null
+            }
+        }).location
     },
     render() {
         let { group } = this.props
 
         let markerCoords = this.state.markerCoords
 
-        let group_location = {
-            latitude: group.lat,
-            longitude: group.lng
+        let hasGroupLocation = markerCoords.latitude != null
+
+        if ( ! hasGroupLocation) {
+            markerCoords = this.userLocation()
         }
 
         return (
@@ -118,7 +119,7 @@ var EditGroupLocation = React.createClass({
                                 </Marker>
                             </Map>
 
-                            { ! group_location && (
+                            { ! hasGroupLocation && (
                                 <p>Vermits deze groep nog geen locatie heeft, hebben we een schatting van je huidige locatie gemaakt.</p>
                             )}
                         </CardContent>
