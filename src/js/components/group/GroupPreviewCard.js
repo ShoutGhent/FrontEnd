@@ -4,6 +4,7 @@ import Cloudinary from '../partials/Cloudinary'
 import Emojify from '../partials/Emojify'
 import GroupDistance from '../pages/group/GroupDistance'
 import Icon from '../partials/Icon'
+import { Link } from 'react-router'
 
 var GroupPreviewCard = React.createClass({
     propTypes: {
@@ -20,14 +21,19 @@ var GroupPreviewCard = React.createClass({
                         options={{width: 250, height: 107}}
                     />
 
-                    <div className="__logo">
-                        <Cloudinary
-                            image={group.logo_data}
-                            options={{width: 50, height: 50}}
-                        />
-                    </div>
+                    <Link to="group" params={{
+                        groupId: group.id,
+                        tabId: 'shouts'
+                    }}>
+                        <div className="__logo">
+                            <Cloudinary
+                                image={group.logo_data}
+                                options={{width: 50, height: 50}}
+                            />
+                        </div>
 
-                    <span className="__name">{group.name}</span>
+                        <span className="__name">{group.name}</span>
+                    </Link>
 
                     <div className="__details">
                         <ul>

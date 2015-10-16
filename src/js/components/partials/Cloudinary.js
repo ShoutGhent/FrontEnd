@@ -14,7 +14,7 @@ var Cloudinary = React.createClass({
             image: {},
             options: {},
             fallbackHeight: 0,
-            defaultElement: (<Icon className="center" icon="photo"/>)
+            defaultElement: (<Icon className="center-both" icon="photo"/>)
         }
     },
     isEmpty(obj) {
