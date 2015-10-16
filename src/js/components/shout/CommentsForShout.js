@@ -3,9 +3,8 @@ import React, { PropTypes } from 'react'
 import API from '../../services/API'
 import Comment from './Comment'
 import Loading from '../loading/Loading'
-import MaterialInput from '../partials/MaterialInput'
 import Notification from '../notification/NotificationActions'
-import { Button } from '../button/MaterialButton'
+import { Button, Input } from '../Material/Material'
 import { Collection, CollectionItem } from '../collection/Collection'
 import { Grid, Cell } from '../grid/Grid'
 import { io } from '../../services/Socket'
@@ -259,7 +258,7 @@ var CommentsForShout = React.createClass({
                         <Grid>
                             <Cell>
                                 <form onSubmit={this.addComment}>
-                                    <MaterialInput
+                                    <Input
                                         autoFocus={true}
                                         label="Wat wil je reageren?"
                                         name="comment"

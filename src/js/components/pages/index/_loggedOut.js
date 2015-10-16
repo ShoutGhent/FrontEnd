@@ -4,11 +4,11 @@ import Avatar from '../../users/Avatar'
 import Footer from '../../partials/Footer'
 import Parallax from '../../partials/Parallax'
 import { Card, CardContent, CardTitle, CardFooter } from '../../card/Card'
-import { Map, Marker, LayerGroup, Circle, Popup, TileLayer } from 'react-leaflet'
 import { Grid, Cell } from '../../grid/Grid'
 import { Link } from 'react-router'
+import { Map, Marker, LayerGroup, Circle, Popup, TileLayer } from 'react-leaflet'
 
-var _IndexLoggedOut = React.createClass({
+var LoggedOut = React.createClass({
     render() {
         let map = {
             height: 400
@@ -51,7 +51,7 @@ var _IndexLoggedOut = React.createClass({
                                 <Cell width={4/12}>
                                     <Card>
                                         <CardContent style={cardCss}>
-                                            <CardTitle center>Wat?</CardTitle>
+                                            <CardTitle center>Wat&#xFE56;</CardTitle>
                                             <p className="justify-content">
                                                 Shout is een sociale netwerksite gemaakt door en voor studenten,
                                                 meer bepaald voor de hogeschool en universiteitsstudenten in Gent.
@@ -64,7 +64,7 @@ var _IndexLoggedOut = React.createClass({
                                 <Cell width={4/12}>
                                     <Card>
                                         <CardContent style={cardCss}>
-                                            <CardTitle center>Hoe?</CardTitle>
+                                            <CardTitle center>Hoe&#xFE56;</CardTitle>
                                             <p className="justify-content">
                                                 Omdat het onder de studenten blijft, kan je een stuk losser en zotter zijn.
                                                 Je kan je shouts zowel anoniem als tijdelijk plaatsen.
@@ -76,7 +76,7 @@ var _IndexLoggedOut = React.createClass({
                                 <Cell width={4/12}>
                                     <Card>
                                         <CardContent style={cardCss}>
-                                            <CardTitle center>Waarom?</CardTitle>
+                                            <CardTitle center>Waarom&#xFE56;</CardTitle>
                                             <p className="justify-content">
                                                 Daarnaast is Shout zo ontworpen, dat je nieuwigheden en activiteiten van allerlei studentenkringen gemakkelijker te horen krijgt.
                                                 Door lid te worden van Shout steun je indirect de studentenverenigingen met het verwerven van sponsors, waardoor wij,
@@ -165,4 +165,4 @@ var _IndexLoggedOut = React.createClass({
     }
 })
 
-export default _IndexLoggedOut
+export default LoggedOut

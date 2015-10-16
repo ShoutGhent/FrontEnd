@@ -1,7 +1,7 @@
 import React from 'react'
 
-import LoggedIn from './_IndexLoggedIn'
-import LoggedOut from './_IndexLoggedOut'
+import LoggedIn from './_loggedIn'
+import LoggedOut from './_loggedOut'
 import LoginStore from '../../../auth/LoginStore'
 
 var Index = React.createClass({
@@ -18,11 +18,9 @@ var Index = React.createClass({
         this.setState(state)
     },
     render() {
-        return LoginStore.isLoggedIn() ? (
-            <LoggedIn user={this.state.user} />
-        ) : (
-            <LoggedOut />
-        )
+        let { user } = this.state
+
+        return LoginStore.isLoggedIn() ? (<LoggedIn user={user}/>) : (<LoggedOut/>)
     }
 });
 

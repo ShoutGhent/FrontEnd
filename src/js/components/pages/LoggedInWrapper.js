@@ -3,7 +3,7 @@ import React from 'react'
 import LoginStore from '../../auth/LoginStore'
 import { RouteHandler} from 'react-router'
 
-var LoggedIn = React.createClass({
+var LoggedInWrapper = React.createClass({
     statics: {
         willTransitionTo(transition) {
             if ( ! LoginStore.isLoggedIn()) {
@@ -30,4 +30,4 @@ var LoggedIn = React.createClass({
     }
 })
 
-export default LoggedIn
+export default LoggedInWrapper

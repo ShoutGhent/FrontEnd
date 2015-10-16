@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react'
 import cx from 'classnames'
 import Ink from 'react-ink'
 
-var Button = React.createClass({
+var MaterialButton = React.createClass({
     propTypes: {
         className: PropTypes.string,
         disabled: PropTypes.bool,
@@ -71,4 +71,4 @@ var Button = React.createClass({
     }
 })
 
-export default { Button }
+export default MaterialButton

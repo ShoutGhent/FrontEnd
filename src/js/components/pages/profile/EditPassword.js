@@ -2,9 +2,8 @@ import React from 'react'
 
 import API from '../../../services/API'
 import LoginActions from '../../../auth/LoginActions'
-import MaterialInput from '../../partials/MaterialInput'
 import Notification from '../../notification/NotificationActions'
-import { Button } from '../../button/MaterialButton'
+import { Button, Input } from '../../Material/Material'
 import { Card, CardContent, CardTitle, CardFooter } from '../../card/Card'
 import { Grid, Cell } from '../../grid/Grid'
 
@@ -59,7 +58,7 @@ var EditPassword = React.createClass({
                             <CardTitle>Wachtwoord Wijzigen</CardTitle>
                             <Grid>
                                 <Cell width={6/12}>
-                                    <MaterialInput
+                                    <Input
                                         id="password"
                                         label="Wachtwoord"
                                         name="password"
@@ -71,7 +70,7 @@ var EditPassword = React.createClass({
                                     />
                                 </Cell>
                                 <Cell width={6/12}>
-                                    <MaterialInput
+                                    <Input
                                         id="password_confirmation"
                                         label="Wachtwoord Herhalen"
                                         name="password_confirmation"

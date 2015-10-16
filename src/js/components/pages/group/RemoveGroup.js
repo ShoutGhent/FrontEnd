@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 
 import API from '../../../services/API'
 import Notification from '../../notification/NotificationActions'
-import { Button } from '../../button/MaterialButton'
+import { Button } from '../../Material/Material'
 import { Card, CardContent, CardTitle, CardFooter } from '../../card/Card'
 
 var RemoveGroup = React.createClass({

@@ -1,19 +1,19 @@
 import React from 'react'
 
-import MyGroupList from '../../group/MyGroupList'
 import GroupListNearMe from '../../group/GroupListNearMe'
 import InfoPanel from '../../partials/InfoPanel'
 import JoinInitialGroupModal from '../../partials/JoinInitialGroupModal'
 import LoginStore from '../../../auth/LoginStore'
+import MyGroupList from '../../group/MyGroupList'
 import MyGroupsActions from '../../group/MyGroupsActions'
 import MyGroupsStore from '../../group/MyGroupsStore'
 import ShoutFeed from '../../shout/ShoutFeed'
+import { Button } from '../../Material/Material'
+import { Card, CardContent } from '../../card/Card'
 import { Grid, Cell } from '../../grid/Grid'
 import { Tab, TabPanel } from '../../tab/Tab'
-import { Button } from '../../button/MaterialButton'
-import { Card, CardContent } from '../../card/Card'
 
-var _IndexLoggedIn = React.createClass({
+var LoggedIn = React.createClass({
     getInitialState() {
         let myGroupsStoreState = MyGroupsStore.getState()
         let loginStoreState = LoginStore.getState()
@@ -67,4 +67,4 @@ var _IndexLoggedIn = React.createClass({
     }
 })
 
-export default _IndexLoggedIn
+export default LoggedIn

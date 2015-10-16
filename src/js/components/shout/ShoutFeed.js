@@ -7,7 +7,7 @@ import LoadingShouts from '../loading/LoadingShouts'
 import Notification from '../notification/NotificationActions'
 import Shout from './Shout'
 import WebStorage from '../../services/WebStorage'
-import { Button } from '../button/MaterialButton'
+import { Button } from '../Material/Material'
 import { Card, CardContent } from '../card/Card'
 
 let ShoutFeed = React.createClass({

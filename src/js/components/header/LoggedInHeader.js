@@ -1,5 +1,6 @@
 import React from 'react'
 
+import assign from 'react/lib/Object.assign'
 import AddGroup from '../pages/group/AddGroup'
 import Auth from '../../auth/AuthService'
 import Avatar from '../users/Avatar'
@@ -19,11 +20,9 @@ let LoggedInHeader = React.createClass({
         closeNavigation: React.PropTypes.func.isRequired,
     },
     getInitialState() {
-        let state = LogStore.getState()
-
-        state.isAddGroupFormOpen = false
-
-        return state
+        return assign(LogStore.getState(), {
+            isAddGroupFormOpen: false
+        })
     },
     componentDidMount() {
         LogStore.listen(this._onChange)

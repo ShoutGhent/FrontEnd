@@ -1,8 +1,7 @@
 import React from 'react'
 
 import Auth from '../../auth/AuthService'
-import MaterialInput from '../partials/MaterialInput'
-import { Button } from '../button/MaterialButton'
+import { Button, Input } from '../Material/Material'
 
 var Login = React.createClass({
     getInitialState() {
@@ -69,7 +68,7 @@ var Login = React.createClass({
         return (
             <div>
                 <form onSubmit={this.login}>
-                    <MaterialInput
+                    <Input
                         id="email"
                         label="E-mail"
                         name="email"
@@ -80,7 +79,7 @@ var Login = React.createClass({
                         value={this.state.email}
                     />
 
-                    <MaterialInput
+                    <Input
                         id="password"
                         label="Wachtwoord"
                         name="password"

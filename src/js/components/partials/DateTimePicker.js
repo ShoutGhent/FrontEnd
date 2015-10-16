@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-import MaterialInput from '../partials/MaterialInput'
+import Input from '../Material/MaterialInput'
 import moment from 'moment'
 import { Grid, Cell } from '../grid/Grid'
 
@@ -34,7 +34,7 @@ var DateTimePicker = React.createClass({
         return (
             <Grid>
                 <Cell width={1/2}>
-                    <MaterialInput
+                    <Input
                         label="Datum"
                         type="date"
                         value={date}
@@ -42,7 +42,7 @@ var DateTimePicker = React.createClass({
                     />
                 </Cell>
                 <Cell width={1/2}>
-                    <MaterialInput
+                    <Input
                         label="Tijd"
                         type="time"
                         value={time}

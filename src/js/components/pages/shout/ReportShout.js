@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
 
-import MaterialTextarea from '../../partials/MaterialTextarea'
-import { Button } from '../../button/MaterialButton'
+import { Button, Textarea } from '../../Material/Material'
 import { Grid, Cell } from '../../grid/Grid'
 import { Modal, ModalContent, ModalFooter } from '../../modal/Modal'
 
@@ -54,7 +53,7 @@ var ReportShout = React.createClass({
                             <Grid>
                                 <Cell>
                                     <div className="input-field">
-                                        <MaterialTextarea
+                                        <Textarea
                                             className="materialize-textarea"
                                             onChange={this.setReason}
                                             onValidate={this.validateReason}

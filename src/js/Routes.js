@@ -1,27 +1,27 @@
 import React from "react"
 
-import App from './components/App'
 import Group from './components/pages/group/Group'
-import Index from './components/pages/index/Index'
-import LoggedIn from './components/pages/LoggedIn'
+import IndexPage from './components/pages/index/Index'
+import LoggedInWrapper from './components/pages/LoggedInWrapper'
 import Login from './components/pages/auth/Login'
-import MapPage from './components/pages/index/MapPage'
+import MapPage from './components/pages/map/Map'
 import Notifications from './components/pages/notifications/Notifications'
 import Profile from './components/pages/profile/Profile'
 import Register from './components/pages/auth/Register'
 import Settings from './components/pages/profile/Settings'
 import Shout from './components/pages/shout/Shout'
+import Wrapper from './components/Wrapper'
 import { Route, NotFoundRoute } from "react-router"
 
 var routes = (
-    <Route path="/" handler={App}>
-        <NotFoundRoute handler={Index} />
-        <Route name="home" path="/" handler={Index}></Route>
+    <Route path="/" handler={Wrapper}>
+        <NotFoundRoute handler={IndexPage} />
+        <Route name="home" path="/" handler={IndexPage}></Route>
         <Route name="auth" path="auth">
             <Route name="login" path="login" handler={Login}/>
             <Route name="register" path="register" handler={Register}/>
         </Route>
-        <Route handler={LoggedIn}>
+        <Route handler={LoggedInWrapper}>
             <Route name="profile" path="/profile" handler={Profile}/>
             <Route name="notifications" path="/notifications" handler={Notifications}/>
             <Route name="map" path="/map" handler={MapPage}/>

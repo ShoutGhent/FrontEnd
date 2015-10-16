@@ -1,17 +1,12 @@
 import React from 'react'
 
+import assign from 'react/lib/Object.assign'
 import Avatar from '../users/Avatar'
 import Icon from '../partials/Icon'
 
 var LoadingShouts = React.createClass({
-    merge(obj1, obj2) {
-        var obj3 = {}
-        for (var attrname in obj1) { obj3[attrname] = obj1[attrname] }
-        for (var attrname in obj2) { obj3[attrname] = obj2[attrname] }
-        return obj3
-    },
     getLineCss(optional) {
-        return this.merge({
+        return assign({
             backgroundColor: 'whitesmoke',
             height: 8,
             marginBottom: 10

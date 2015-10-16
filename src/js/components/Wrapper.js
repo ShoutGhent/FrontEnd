@@ -8,7 +8,7 @@ import { RouteHandler} from 'react-router'
 import LoginActions from '../auth/LoginActions'
 import LoginStore from '../auth/LoginStore'
 
-var App = React.createClass({
+let Wrapper = React.createClass({
     statics: {
         willTransitionTo(transition) {
             HeaderActions.closeNavigation()
@@ -40,4 +40,4 @@ var App = React.createClass({
     }
 });
 
-export default App
+export default Wrapper

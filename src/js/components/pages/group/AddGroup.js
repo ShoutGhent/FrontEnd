@@ -1,9 +1,8 @@
 import React, { PropTypes } from 'react'
 
 import API from '../../../services/API'
-import MaterialTextarea from '../../partials/MaterialTextarea'
 import Redirect from "../../../services/Redirect"
-import { Button } from '../../button/MaterialButton'
+import { Button, Textarea } from '../../Material/Material'
 import { Grid, Cell } from '../../grid/Grid'
 import { Modal, ModalContent, ModalFooter } from '../../modal/Modal'
 
@@ -72,7 +71,7 @@ var AddGroup = React.createClass({
                     <ModalContent>
                         <Grid>
                             <Cell>
-                                <MaterialTextarea
+                                <Textarea
                                     className="materialize-textarea"
                                     onChange={this.setName}
                                     onValidate={this.validateName}

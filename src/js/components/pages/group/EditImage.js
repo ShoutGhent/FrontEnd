@@ -4,7 +4,7 @@ import API from '../../../services/API'
 import Cropper from '../../cropper/Cropper'
 import GroupActions from './GroupActions'
 import Icon from '../../partials/Icon'
-import { Button } from '../../button/MaterialButton'
+import { Button } from '../../Material/Material'
 import { Modal, ModalContent, ModalFooter } from '../../modal/Modal'
 
 var EditImage = React.createClass({

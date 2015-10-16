@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react'
 
 import API from '../../../services/API'
+import { Button } from '../../Material/Material'
 import LoginStore from '../../../auth/LoginStore'
-import MaterialInput from '../../partials/MaterialInput'
 import Notification from '../../notification/NotificationActions'
 import WebStorage from '../../../services/WebStorage'
-import { Button } from '../../button/MaterialButton'
 import { Card, CardContent, CardTitle, CardFooter } from '../../card/Card'
-import { Gmaps, Marker } from 'react-gmaps'
+import { Map, Marker, LayerGroup, Popup, TileLayer } from 'react-leaflet'
+import MyLocationMarker from '../../map/MyLocationMarker'
 
 var EditGroupLocation = React.createClass({
     propTypes: {
@@ -30,29 +30,6 @@ var EditGroupLocation = React.createClass({
     },
     componentDidMount() {
         LoginStore.listen(this._onChange)
-
-        if (this.isMounted()) {
-            this.map = this.refs.gmaps.getMap()
-            var autocomplete = new google.maps.places.Autocomplete(React.findDOMNode(this.refs.addressField))
-            console.log(this.map)
-            //autocomplete.bindTo('bounds', this.map)
-            //
-            //google.maps.event.addListener(autocomplete, 'place_changed', (event) => {
-            //
-            //    //Selected place
-            //    var place = autocomplete.getPlace()
-            //
-            //    //Adding marker to the selected location
-            //    var position = new google.maps.LatLng(place.geometry.location.G, place.geometry.location.K)
-            //
-            //    this.setState({
-            //        markerCoords: {
-            //            latitude: position.lat,
-            //            longitude: position.lng
-            //        }
-            //    }, this.centerCurrentLocation)
-            //})
-        }
     },
     componentWillUnmount() {
         LoginStore.unlisten(this._onChange)
@@ -77,11 +54,11 @@ var EditGroupLocation = React.createClass({
             Notification.success('Groep locatie is gewijzigd!')
         })
     },
-    moveMarker(googleMap) {
+    moveMarker(event) {
         let { markerCoords } = this.state
 
-        markerCoords.latitude = googleMap.latLng.G
-        markerCoords.longitude = googleMap.latLng.K
+        markerCoords.latitude = event.latlng.lat
+        markerCoords.longitude = event.latlng.lng
 
         this.setState({ markerCoords })
     },
@@ -99,11 +76,6 @@ var EditGroupLocation = React.createClass({
     },
     centerCurrentLocation() {
         let coords = this.state.markerCoords
-
-        this.map.getMap().setCenter(new google.maps.LatLng(coords.latitude, coords.longitude))
-    },
-    searchAddress(event) {
-        this.setState({ groupAddress: event.target.value})
     },
     render() {
         let { group } = this.props
@@ -124,37 +96,35 @@ var EditGroupLocation = React.createClass({
                             <p>
                                 Klik op de kaart om een juiste locatie te kiezen voor deze groep.
                             </p>
-                            <p>
-                                <input
-                                    type="text"
-                                    ref="addressField"
-                                    placeholder="Of voer hier een adres in"
-                                    value={this.state.groupAddress}
-                                    onChange={this.searchAddress}
-                                />
-                            </p>
-                            <Gmaps
-                                ref="gmaps"
-                                height={300}
-                                lat={markerCoords.latitude}
-                                lng={markerCoords.longitude}
-                                onClick={this.moveMarker}
-                                width={'100%'}
+
+                            <Map
+                                ref="map"
+                                center={[markerCoords.latitude, markerCoords.longitude]}
                                 zoom={17}
+                                style={{height: 300}}
+                                onClick={this.moveMarker}
                             >
-                                <Marker
-                                    lat={markerCoords.latitude}
-                                    lng={markerCoords.longitude}
+                                <TileLayer
+                                    url='http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
+                                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                 />
-                            </Gmaps>
+
+                                <MyLocationMarker map={this.refs.map}/>
+
+                                <Marker position={[markerCoords.latitude, markerCoords.longitude]}>
+                                    <Popup>
+                                        <span>{group.name}</span>
+                                    </Popup>
+                                </Marker>
+                            </Map>
 
                             { ! group_location && (
                                 <p>Vermits deze groep nog geen locatie heeft, hebben we een schatting van je huidige locatie gemaakt.</p>
                             )}
                         </CardContent>
                         <CardFooter>
-                            <Button onClick={this.myLocation}>Mijn Locatie</Button>
-                            <Button right>Wijzigen</Button>
+                            <Button onClick={this.myLocation}>Ga naar mijn Locatie</Button>
+                            <Button right>Wijzig groep locatie</Button>
                         </CardFooter>
                     </Card>
                 </form>

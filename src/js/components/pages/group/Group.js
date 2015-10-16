@@ -17,7 +17,7 @@ import Redirect from '../../../services/Redirect'
 import RemoveGroup from './RemoveGroup'
 import ShoutFeed from '../../shout/ShoutFeed'
 import ShoutForm from '../../shout/ShoutForm'
-import { Button } from '../../button/MaterialButton'
+import { Button } from '../../Material/Material'
 import { Card, CardContent, CardTitle } from '../../card/Card'
 import { Grid, Cell } from '../../grid/Grid'
 import { Tab, TabPanel } from '../../tab/Tab'
@@ -33,7 +33,7 @@ let Group = React.createClass({
             editHeaderFormOpen: false,
             editLogoFormOpen: false,
             headerWidth: 800,
-            logoHover: false,
+            logoHover: false
         })
     },
     componentDidMount() {

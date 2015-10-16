@@ -1,9 +1,8 @@
 import React, { PropTypes } from 'react'
 
 import API from '../../../services/API'
-import MaterialInput from '../../partials/MaterialInput'
 import Notification from '../../notification/NotificationActions'
-import { Button } from '../../button/MaterialButton'
+import { Button, Input } from '../../Material/Material'
 import { Card, CardContent, CardTitle, CardFooter } from '../../card/Card'
 
 var EditGroupName = React.createClass({
@@ -54,7 +53,7 @@ var EditGroupName = React.createClass({
                     <Card>
                         <CardContent>
                             <CardTitle>Naam Wijzigen</CardTitle>
-                                <MaterialInput
+                                <Input
                                     id="name"
                                     label="Groep Naam"
                                     name="name"

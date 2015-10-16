@@ -3,9 +3,8 @@ import React, { PropTypes } from 'react/addons'
 import DateTimePicker from '../partials/DateTimePicker'
 import FileDrop from "react-file-drop"
 import Icon from '../partials/Icon'
-import MaterialTextarea from '../partials/MaterialTextarea'
 import moment from 'moment'
-import { Button } from '../button/MaterialButton'
+import { Button, Textarea } from '../Material/Material'
 import { Grid, Cell } from '../grid/Grid'
 
 var ShoutForm = React.createClass({
@@ -154,7 +153,7 @@ var ShoutForm = React.createClass({
                     <div>
                         <Grid>
                             <Cell>
-                                <MaterialTextarea
+                                <Textarea
                                     rules={['required', 'min:3']}
                                     onValidate={this.validateDescription}
                                     placeholder="Wat wil je shouten?"

@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react'
 
 import Avatar from '../users/Avatar'
+import Icon from '../partials/Icon'
 import Loading from '../loading/Loading'
 import LogActions from './LogActions'
 import LogStore from './LogStore'
-import Icon from '../partials/Icon'
-import { Button } from '../button/MaterialButton'
 import Redirect from '../../services/Redirect'
+import { Button } from '../Material/Material'
 
 var Log = React.createClass({
     getInitialState() {

@@ -4,8 +4,7 @@ import Avatar from '../users/Avatar'
 import Emojify from '../partials/Emojify'
 import Icon from '../partials/Icon'
 import LoginStore from '../../auth/LoginStore'
-import MaterialInput from '../partials/MaterialInput'
-import { Button } from '../button/MaterialButton'
+import { Button, Input } from '../Material/Material'
 import { CollectionItem } from '../collection/Collection'
 import { io } from '../../services/Socket'
 
@@ -94,7 +93,7 @@ var Comment = React.createClass({
                     <br/>
                     {updateMode ? (
                         <form onSubmit={this.updateComment}>
-                            <MaterialInput
+                            <Input
                                 autoFocus={true}
                                 onChange={this.setCommentDescription}
                                 onKeyUp={this.handleKeyboard}

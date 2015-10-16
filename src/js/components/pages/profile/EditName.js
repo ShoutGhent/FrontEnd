@@ -1,10 +1,9 @@
 import React, { PropTypes } from 'react'
 
 import API from '../../../services/API'
+import { Button, Input } from '../../Material/Material'
 import LoginActions from '../../../auth/LoginActions'
-import MaterialInput from '../../partials/MaterialInput'
 import Notification from '../../notification/NotificationActions'
-import { Button } from '../../button/MaterialButton'
 import { Card, CardContent, CardTitle, CardFooter } from '../../card/Card'
 import { Grid, Cell } from '../../grid/Grid'
 
@@ -65,7 +64,7 @@ var EditName = React.createClass({
                             <CardTitle>Naam Wijzigen</CardTitle>
                             <Grid>
                                 <Cell width={6/12}>
-                                    <MaterialInput
+                                    <Input
                                         id="first_name"
                                         label="Voornaam"
                                         name="first_name"
@@ -77,7 +76,7 @@ var EditName = React.createClass({
                                     />
                                 </Cell>
                                 <Cell width={6/12}>
-                                    <MaterialInput
+                                    <Input
                                         id="last_name"
                                         label="Achternaam"
                                         name="last_name"

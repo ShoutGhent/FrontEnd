@@ -5,15 +5,16 @@ import Icon from '../../partials/Icon'
 import LoginActions from '../../../auth/LoginActions'
 import LoginStore from '../../../auth/LoginStore'
 import md5 from 'md5'
-import MyGroupsStore from '../../group/MyGroupsStore'
 import MyGroupsActions from '../../group/MyGroupsActions'
+import MyGroupsStore from '../../group/MyGroupsStore'
 import Notification from '../../notification/NotificationActions'
 import ShoutFeed from '../../shout/ShoutFeed'
 import WebStorage from '../../../services/WebStorage'
-import { Button } from '../../button/MaterialButton'
+import { Button } from '../../Material/Material'
 import { Card, CardContent, CardTitle } from '../../card/Card'
 import { Map, Marker, LayerGroup, Popup, TileLayer } from 'react-leaflet'
 import { Modal, ModalContent } from '../../modal/Modal'
+import MyLocationMarker from '../../map/MyLocationMarker'
 
 var MapPage = React.createClass({
     getInitialState() {
@@ -96,26 +97,6 @@ var MapPage = React.createClass({
     },
     closeForm() {
         this.setState({ openAddShoutForm: false })
-    },
-    myLocation() {
-        let coords = this.state.user.location
-
-        const MyLocationIcon = L.icon({
-            iconUrl: `https://avatarize.me/a/${md5(this.state.user.email)}?size=24`,
-            iconSize: [24, 24],
-            className: 'location--myPin'
-        })
-
-        return (
-            <Marker
-                position={[coords.latitude, coords.longitude]}
-                icon={MyLocationIcon}
-            >
-                <Popup>
-                    <span>Jouw Locatie</span>
-                </Popup>
-            </Marker>
-        )
     },
     toggleLegend() {
         this.setState({
@@ -214,7 +195,7 @@ var MapPage = React.createClass({
                             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         />
 
-                        {this.myLocation()}
+                        <MyLocationMarker map={this.refs.map}/>
 
                         {groupsNearMe.map(group => <Marker position={[group.lat, group.lng]}>
                             <Popup>

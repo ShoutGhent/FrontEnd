@@ -2,8 +2,7 @@ import React from 'react'
 
 import Auth from '../../auth/AuthService'
 import Avatar from './Avatar'
-import MaterialInput from '../partials/MaterialInput'
-import { Button } from '../button/MaterialButton'
+import { Button, Input } from '../Material/Material'
 import { Grid, Cell } from '../grid/Grid'
 
 var Register = React.createClass({
@@ -121,7 +120,7 @@ var Register = React.createClass({
                 <form onSubmit={this.register}>
                     <Grid>
                         <Cell>
-                            <MaterialInput
+                            <Input
                                 id="email"
                                 label="E-mail"
                                 name="email"
@@ -133,7 +132,7 @@ var Register = React.createClass({
                             />
                         </Cell>
                         <Cell width={6/12}>
-                            <MaterialInput
+                            <Input
                                 id="first_name"
                                 label="Voornaam"
                                 name="first_name"
@@ -145,7 +144,7 @@ var Register = React.createClass({
                             />
                         </Cell>
                         <Cell width={6/12}>
-                            <MaterialInput
+                            <Input
                                 onValidate={this.validateLastName}
                                 rules={['required']}
                                 label="Achternaam"
@@ -157,7 +156,7 @@ var Register = React.createClass({
                             />
                         </Cell>
                         <Cell>
-                            <MaterialInput
+                            <Input
                                 onValidate={this.validatePassword}
                                 rules={['required']}
                                 label="Wachtwoord"
@@ -169,7 +168,7 @@ var Register = React.createClass({
                             />
                         </Cell>
                         <Cell>
-                            <MaterialInput
+                            <Input
                                 onValidate={this.validatePasswordRepeat}
                                 rules={['required']}
                                 label="Herhaal Wachtwoord"
