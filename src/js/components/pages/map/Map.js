@@ -18,6 +18,12 @@ import { Map, Marker, LayerGroup, Popup, TileLayer } from 'react-leaflet'
 import { Modal, ModalContent } from '../../modal/Modal'
 
 var MapPage = React.createClass({
+    statics: {
+        willTransitionTo(transition) {
+            MyGroupsActions.fetchGroupsNearMe()
+            LoginActions.getGeolocation()
+        }
+    },
     getInitialState() {
         let loginStoreData = LoginStore.getState()
         let myGroupStoreData = MyGroupsStore.getState()
@@ -34,13 +40,27 @@ var MapPage = React.createClass({
     calcHeight() {
         return window.innerHeight - 64
     },
+    refetchData() {
+        let coords = this.getCenter()
+
+        MyGroupsActions.fetchGroupsNearMe(coords)
+    },
+    getCenter() {
+        if (this.refs.map) {
+            var center = this.refs.map.getLeafletElement().getCenter()
+            return {
+                latitude: center.lat,
+                longitude: center.lng
+            }
+        }
+
+        return this.state.user.location
+    },
     componentDidMount() {
         LoginStore.listen(this._onChange)
         MyGroupsStore.listen(this._onChange)
         window.addEventListener('resize', this._handleResize)
         this.calculateRadius()
-
-        MyGroupsActions.fetchGroupsNearMe()
     },
     componentWillUnmount() {
         LoginStore.unlisten(this._onChange)
@@ -54,6 +74,10 @@ var MapPage = React.createClass({
         this.calculateRadius()
 
         this.setState({ height: this.calcHeight() })
+    },
+    handleZoom() {
+        this.calculateRadius()
+        this.refetchData()
     },
     calculateRadius() {
         let { map } = this.refs
@@ -80,7 +104,7 @@ var MapPage = React.createClass({
         gmaps.getMap().setCenter(new google.maps.LatLng(coords.latitude, coords.longitude))
     },
     getLocation() {
-        LoginActions.getGeolocation((location) => {
+        LoginActions.getGeolocation(null, (location) => {
             Notification.success('Nieuwe locatie is ingesteld!')
         })
 
@@ -112,7 +136,11 @@ var MapPage = React.createClass({
         return (
             <div className="shoutMap" style={{ height: this.calcHeight() }}>
                 <div className="shoutMap__feed" style={{ height: this.calcHeight() }}>
-                    <ShoutFeed ref="shoutFeed" url="shouts/near/me"/>
+                    <ShoutFeed
+                        ref="shoutFeed"
+                        url="shouts/near/me"
+                        location={this.getCenter}
+                    />
                 </div>
 
                 {this.state.openAddShoutForm && (
@@ -189,7 +217,8 @@ var MapPage = React.createClass({
                         center={[coords.latitude, coords.longitude]}
                         zoom={17}
                         style={{height}}
-                        onLeafletZoomend={this.calculateRadius}
+                        onLeafletZoomend={this.handleZoom}
+                        onLeafletMoveend={this.refetchData}
                     >
                         <TileLayer
                             url='http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'

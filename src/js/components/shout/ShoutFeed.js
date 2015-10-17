@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 
+import assign from 'react/lib/Object.assign'
 import AddShout from '../pages/shout/AddShout'
 import API from '../../services/API'
 import InfoPanel from '../partials/InfoPanel'
@@ -15,6 +16,7 @@ let ShoutFeed = React.createClass({
         url: PropTypes.string.isRequired,
         groupId: PropTypes.string,
         canShout: PropTypes.bool,
+        location: PropTypes.object
     },
     getInitialState() {
         return {
@@ -26,11 +28,12 @@ let ShoutFeed = React.createClass({
     getDefaultProps() {
         return {
             canShout: false,
-            groupId: ''
+            groupId: '',
+            location: {}
         }
     },
     componentWillMount() {
-        this.fetch({}, (shouts) => {
+        this.fetch(this.props.location, (shouts) => {
             if (this.isMounted()) {
                 this.setState({ shouts })
             }
@@ -69,7 +72,12 @@ let ShoutFeed = React.createClass({
         let nextPage = currentPage + 1
         let listShouts = this.state.shouts
 
-        this.fetch({ page: nextPage }, shouts => listShouts.concat(shouts))
+        let data = assign({},
+            { page: nextPage },
+            this.props.location
+        )
+
+        this.fetch(data, shouts => listShouts.concat(shouts))
 
         this.setState({ shouts: listShouts })
     },

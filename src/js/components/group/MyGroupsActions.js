@@ -16,10 +16,10 @@ class MyGroupsActions {
             })
         })
     }
-    fetchGroupsNearMe() {
+    fetchGroupsNearMe(coords = {}) {
         this.actions.isLoading(true)
 
-        API.get('groups/near/me', {}, (response, err) => {
+        API.get('groups/near/me', coords, (response, err) => {
             this.dispatch(response.data)
 
             setTimeout(() => {

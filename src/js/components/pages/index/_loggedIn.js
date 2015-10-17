@@ -30,7 +30,6 @@ var LoggedIn = React.createClass({
 
         if (this.isMounted()) {
             MyGroupsActions.fetchMyGroups()
-            MyGroupsActions.fetchGroupsNearMe()
         }
     },
     componentWillUnmount() {
@@ -42,7 +41,6 @@ var LoggedIn = React.createClass({
     },
     refetchGroups() {
         MyGroupsActions.fetchMyGroups()
-        MyGroupsActions.fetchGroupsNearMe()
     },
     render() {
         let { loading, myGroups } = this.state

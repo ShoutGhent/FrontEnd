@@ -82,7 +82,7 @@ var EditGroupLocation = React.createClass({
 
         let markerCoords = this.state.markerCoords
 
-        let hasGroupLocation = markerCoords.latitude != null
+        let hasGroupLocation = markerCoords.latitude != null && markerCoords.latitude != ""
 
         if ( ! hasGroupLocation) {
             markerCoords = this.userLocation()
