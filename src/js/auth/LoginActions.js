@@ -49,6 +49,13 @@ class LoginActions {
     }
 
     getGeolocation(cb = () => {}) {
+        let timeDiff = (+new Date() - WebStorage.fromStore("location_last_changed", 0)) / 1000
+        if (timeDiff < 5) {
+            return
+        } else {
+            WebStorage.toStore("location_last_changed", +new Date())
+        }
+
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
 
