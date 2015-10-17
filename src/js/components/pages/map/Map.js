@@ -133,13 +133,15 @@ var MapPage = React.createClass({
 
         let coords = user.location
 
+        let shoutFeedLocation = this.getCenter()
+
         return (
             <div className="shoutMap" style={{ height: this.calcHeight() }}>
                 <div className="shoutMap__feed" style={{ height: this.calcHeight() }}>
                     <ShoutFeed
                         ref="shoutFeed"
                         url="shouts/near/me"
-                        location={this.getCenter}
+                        location={shoutFeedLocation}
                     />
                 </div>
 
