@@ -32,8 +32,16 @@ let ShoutFeed = React.createClass({
             location: {}
         }
     },
+    componentWillReceiveProps(nextProps) {
+        if ((this.props.location.latitude != nextProps.location.latitude) || ((this.props.location.longitude != nextProps.location.longitude))) {
+            this.fetchBasedOnLocation(nextProps.location)
+        }
+    },
     componentWillMount() {
-        this.fetch(this.props.location, (shouts) => {
+        this.fetchBasedOnLocation(this.props.location)
+    },
+    fetchBasedOnLocation(location) {
+        this.fetch(location, (shouts) => {
             if (this.isMounted()) {
                 this.setState({ shouts })
             }
