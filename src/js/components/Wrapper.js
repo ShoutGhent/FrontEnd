@@ -55,12 +55,18 @@ let Wrapper = React.createClass({
         WebStorage.remove('cachedShoutUrls')
     },
     render() {
-        return (
+        return this.detectIE() ? (
+            <div className="center-both" style={{
+                textAlign: 'center'
+            }}>
+                <h1>Internet Explorer... Really?</h1>
+
+                <img src="https://res.cloudinary.com/shoutghent/image/upload/v1445982672/trollface_desktop_gagd3n.png"/>
+            </div>
+        ) : (
             <div>
                 <Header/>
-                {this.detectIE() ? (
-                    <h1>Internet Explorer... Really?</h1>
-                ) : (<RouteHandler/>)}
+                <RouteHandler/>
                 <Notification/>
             </div>
         )
