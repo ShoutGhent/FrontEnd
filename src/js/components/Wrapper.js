@@ -61,7 +61,7 @@ let Wrapper = React.createClass({
             }}>
                 <h1>Internet Explorer... Really?</h1>
 
-                <img src="https://res.cloudinary.com/shoutghent/image/upload/v1445982672/trollface_desktop_gagd3n.png"/>
+                <img src="https://res.cloudinary.com/shoutghent/image/upload/c_scale,w_500/v1445983397/trollface_transparant_ii5s0f.png"/>
             </div>
         ) : (
             <div>
