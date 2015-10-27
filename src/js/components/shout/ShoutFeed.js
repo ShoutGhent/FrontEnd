@@ -40,6 +40,9 @@ let ShoutFeed = React.createClass({
     componentWillMount() {
         this.fetchBasedOnLocation(this.props.location)
     },
+    giveShouts() {
+        return this.state.shouts
+    },
     fetchBasedOnLocation(location) {
         this.fetch(location, (shouts) => {
             if (this.isMounted()) {
@@ -149,13 +152,10 @@ let ShoutFeed = React.createClass({
         })
     },
     toggleFavorite(shout) {
-        let url = `shouts/${shout.id}/${shout.meta.favorited_by_me ? 'unfavorite' : 'favorite'}`
+        let id = shout.id
+        let type = shout.meta.favorited_by_me ? 'unfavorite' : 'favorite'
 
-        API.post(url, {}, (updatedShout, err) => {
-            var shouts = this.state.shouts
-            shouts[shouts.indexOf(shout)] = updatedShout
-            this.setState({ shouts })
-        })
+        API.post(`shouts/${id}/${type}`)
     },
     updateShout(oldShout) {
         let { shouts } = this.state
@@ -211,12 +211,6 @@ let ShoutFeed = React.createClass({
 
                 {loading && (
                     <LoadingShouts />
-                )}
-
-                {noShouts && (
-                    <InfoPanel>
-                        <h4>Wees de eerste om hier een shout te plaatsen!</h4>
-                    </InfoPanel>
                 )}
 
                 {next_page_url && (

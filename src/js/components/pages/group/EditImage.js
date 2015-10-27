@@ -32,10 +32,7 @@ var EditImage = React.createClass({
         })
 
         API.postFile(this.props.link, { key: 'image', value: file }, (res, err) => {
-            GroupActions.setGroup(res)
-            this.setState({
-                uploading: false
-            })
+            this.setState({  uploading: false })
 
             if (cb) {
                 cb()

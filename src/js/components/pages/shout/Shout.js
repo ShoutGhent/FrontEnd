@@ -78,9 +78,9 @@ let ShoutPage = React.createClass({
 
         API.post(url, {}, (shout, err) => this.setState({ shout }))
     },
-    updateShout(oldShout, newShout) {
-        API.get(`shouts/${oldShout.id}`, {}, (data, err) => {
-            this.setState({ shout: data })
+    updateShout(oldShout) {
+        API.get(`shouts/${oldShout.id}`, {}, (shout, err) => {
+            this.setState({ shout })
         })
     },
     render() {

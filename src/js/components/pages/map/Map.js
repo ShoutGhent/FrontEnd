@@ -34,7 +34,8 @@ var MapPage = React.createClass({
             groupsNearMe: myGroupStoreData.groupsNearMe,
             openAddShoutForm: false,
             legendOpen: false,
-            radiusLastChanged: null
+            radiusLastChanged: null,
+            shouts: []
         }
     },
     calcHeight() {
@@ -44,6 +45,7 @@ var MapPage = React.createClass({
         let coords = this.getCenter()
 
         MyGroupsActions.fetchGroupsNearMe(coords)
+        this.setShouts(this.refs.shoutFeed.giveShouts())
     },
     getCenter() {
         if (this.refs.map) {
@@ -61,6 +63,7 @@ var MapPage = React.createClass({
         MyGroupsStore.listen(this._onChange)
         window.addEventListener('resize', this._handleResize)
         this.calculateRadius()
+        this.setShouts(this.refs.shoutFeed.giveShouts())
     },
     componentWillUnmount() {
         LoginStore.unlisten(this._onChange)
@@ -97,19 +100,6 @@ var MapPage = React.createClass({
 
         return radius
     },
-    centerCurrentLocation() {
-        const gmaps = this.refs.gmaps
-        let coords = this.state.user.location
-
-        gmaps.getMap().setCenter(new google.maps.LatLng(coords.latitude, coords.longitude))
-    },
-    getLocation() {
-        LoginActions.getGeolocation(null, (location) => {
-            Notification.success('Nieuwe locatie is ingesteld!')
-        })
-
-        Notification.success("Locatie wordt opgehaald!")
-    },
     showAddShoutForm() {
         this.setState({ openAddShoutForm: true })
     },
@@ -128,8 +118,11 @@ var MapPage = React.createClass({
             legendOpen:  ! this.state.legendOpen
         })
     },
+    setShouts(shouts) {
+        this.setState({ shouts })
+    },
     render() {
-        let { user, height, groupsNearMe } = this.state
+        let { user, height, groupsNearMe, shouts } = this.state
 
         let coords = user.location
 
@@ -175,14 +168,6 @@ var MapPage = React.createClass({
                 <div>
                     <Card className="map__legend">
                         <CardContent>
-                            <Button className="btn" padding="0 1rem" onClick={this.centerCurrentLocation}>
-                                <Icon icon="home"/>
-                            </Button>
-                            <span>&nbsp;&nbsp;</span>
-                            <Button className="btn" padding="0 1rem" onClick={this.getLocation}>
-                                <Icon icon="my_location"/>
-                            </Button>
-
                             <div className="map__legend__items">
                                 {this.state.legendOpen && (
                                     <div>
@@ -231,6 +216,10 @@ var MapPage = React.createClass({
 
                         {groupsNearMe.map(group => <Marker position={[group.lat, group.lng]}>
                             <Popup className="group__marker"><GroupPreviewCard group={group}/></Popup>
+                        </Marker>)}
+
+                        {shouts.map(shout => <Marker position={[shout.lat, shout.lng]}>
+                            <Popup>SHOUTJE</Popup>
                         </Marker>)}
                     </Map>
                 </div>

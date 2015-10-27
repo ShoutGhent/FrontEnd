@@ -33,8 +33,8 @@ var EditGroupName = React.createClass({
 
         let { name } = this.state
 
-        API.post(`groups/${this.props.group.id}/name`, { name }, (data) => {
-            this.props.onChange(data)
+        API.post(`groups/${this.props.group.id}/name`, { name }, () => {
+            this.props.onChange({ name })
             Notification.success('Groep naam is gewijzigd!')
         })
     },

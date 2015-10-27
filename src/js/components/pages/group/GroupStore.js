@@ -1,5 +1,6 @@
 import alt from '../../../alt'
 
+import assign from 'react/lib/Object.assign'
 import GroupActions from './GroupActions'
 
 class GroupStore {
@@ -11,20 +12,28 @@ class GroupStore {
         this.bindActions(GroupActions)
     }
 
-    onSetGroup(group) {
-        this.group = group
-    }
-
     onFetchGroupInformation(group) {
         this.group = group
     }
 
-    onJoinGroup(group) {
-        this.group = group
+    onJoinGroup(data) {
+        let count = this.group.meta.member_count
+
+        this.group = assign(this.group, data, {
+            meta: {
+                member_count: count + 1
+            }
+        })
     }
 
-    onLeaveGroup(group) {
-        this.group = group
+    onLeaveGroup(data) {
+        let count = this.group.meta.member_count
+
+        this.group = assign(this.group, data, {
+            meta: {
+                member_count: count - 1
+            }
+        })
     }
 
     onSetGroupLoading(value) {

@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 
 import API from '../../services/API'
+import assign from 'react/lib/Object.assign'
 import Avatar from '../users/Avatar'
 import CommentsForShout from './CommentsForShout'
 import EditShout from '../pages/shout/EditShout'
@@ -12,7 +13,6 @@ import ReportShout from '../pages/shout/ReportShout'
 import ShoutImages from './ShoutImages'
 import ShoutName from './ShoutName'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
-import { Gmaps, Marker } from 'react-gmaps'
 import { io } from '../../services/Socket'
 import { Link } from 'react-router'
 
@@ -33,7 +33,11 @@ let Shout = React.createClass({
             openComments: false
         }
     },
+    _onChange(state) {
+        this.setState(state)
+    },
     getInitialState() {
+
         return {
             editModalOpen: false,
             intervalId: null,
@@ -82,12 +86,12 @@ let Shout = React.createClass({
         let channelKey = `shout.${shout.id}`
         io.join(channelKey)
 
-        io.listen(`${channelKey}:shout.events.comments.BroadcastCommentedOnShout`, data => this.props.updateShout(shout, data.shout))
-        io.listen(`${channelKey}:shout.events.comments.BroadcastCommentHasBeenDeleted`, data => this.props.updateShout(shout, data.shout))
-        io.listen(`${channelKey}:shout.events.shouts.BroadcastShoutHasBeenFavorited`, data => this.props.updateShout(shout, data.shout))
-        io.listen(`${channelKey}:shout.events.shouts.BroadcastShoutHasBeenUnFavorited`, data => this.props.updateShout(shout, data.shout))
-        io.listen(`${channelKey}:shout.events.shouts.BroadcastShoutWasEdited`, data => this.props.updateShout(shout, data.shout))
-        io.listen(`${channelKey}:shout.events.shouts.BroadcastShoutWasRemoved`, data => this.props.onHide(shout, true))
+        io.listen(`${channelKey}:shout.events.comments.BroadcastCommentedOnShout`, d => this.props.updateShout(shout))
+        io.listen(`${channelKey}:shout.events.comments.BroadcastCommentHasBeenDeleted`, d => this.props.updateShout(shout))
+        io.listen(`${channelKey}:shout.events.shouts.BroadcastShoutHasBeenFavorited`, d => this.props.updateShout(shout))
+        io.listen(`${channelKey}:shout.events.shouts.BroadcastShoutHasBeenUnFavorited`, d => this.props.updateShout(shout))
+        io.listen(`${channelKey}:shout.events.shouts.BroadcastShoutWasEdited`, d => this.props.updateShout(shout))
+        io.listen(`${channelKey}:shout.events.shouts.BroadcastShoutWasRemoved`, d => this.props.onHide(shout, true))
     },
     componentWillUnmount() {
         clearInterval(this.state.intervalId)
@@ -192,6 +196,10 @@ let Shout = React.createClass({
         let { shout } = this.props
         let { width, editModalOpen, reportModalOpen, openComments } = this.state
         let { anonymous } = shout
+
+        console.group("Hmmm")
+        console.log(shout)
+        console.groupEnd()
 
         let email = anonymous ? "anonymous@shout.nu" : shout.user.email
 

@@ -14,10 +14,6 @@ class GroupActions {
         })
     }
 
-    setGroup(group) {
-        this.dispatch(group)
-    }
-
     setGroupLoading(value) {
         this.dispatch(value)
     }
@@ -27,7 +23,11 @@ class GroupActions {
 
         API.post('groups/join', { group_id }, (response, err) => {
             if ( ! err) {
-                this.dispatch(response)
+                this.dispatch({
+                    meta: {
+                        in_group: true
+                    }
+                })
                 this.actions.setLeavingOrJoiningGroupLoading(false)
             }
         })
@@ -38,7 +38,11 @@ class GroupActions {
 
         API.post('groups/leave', { group_id }, (response, err) => {
             if ( ! err) {
-                this.dispatch(response)
+                this.dispatch({
+                    meta: {
+                        in_group: false
+                    }
+                })
                 this.actions.setLeavingOrJoiningGroupLoading(false)
             }
         })

@@ -86,7 +86,11 @@ let Group = React.createClass({
     editHeader() {
         this.setState({ editHeaderFormOpen: true })
     },
-    updateGroup(group) {
+    updateGroup(data) {
+        let { group } = this.state
+
+        group = assign({}, group, data)
+
         this.setState({ group })
     },
     hoverLogo() {

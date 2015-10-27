@@ -18,6 +18,7 @@
     }
 
     &__legend {
+        display: none;
         margin-top: 10px !important;
         position: absolute;
         z-index: 2;
@@ -26,8 +27,6 @@
         width: 250px;
 
         &__items {
-            display: none;
-
             padding: 0;
             margin-top: 20px;
             margin-bottom: -20px;

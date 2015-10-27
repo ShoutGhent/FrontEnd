@@ -49,8 +49,8 @@ var EditGroupLocation = React.createClass({
 
         let { latitude, longitude } = markerCoords
 
-        API.post(`groups/${this.props.group.id}/location`, { longitude, latitude }, (data) => {
-            this.props.onChange(data)
+        API.post(`groups/${this.props.group.id}/location`, { longitude, latitude }, () => {
+            this.props.onChange({ lat: latitude, lng: longitude })
             Notification.success('Groep locatie is gewijzigd!')
         })
     },

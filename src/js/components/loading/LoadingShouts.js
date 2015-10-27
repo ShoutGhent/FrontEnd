@@ -29,7 +29,6 @@ var LoadingShouts = React.createClass({
                             width: 100,
                             display: 'inline-block',
                             verticalAlign: 'middle',
-                            marginTop: 8,
                             height: 20
                         })}>&nbsp;</span>
                         <div className="right">
