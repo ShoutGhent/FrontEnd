@@ -21,7 +21,7 @@ var Comment = React.createClass({
         let channelKey = `comment.${this.props.comment.id}`
         io.join(channelKey)
 
-        io.listen(`${channelKey}:shout.events.comments.BroadcastCommentHasBeenEdited`, data => this.props.onReplaceComment(data.comment))
+        io.listen(`${channelKey}:BroadcastCommentHasBeenEdited`, data => this.props.onReplaceComment(data.comment))
     },
     getInitialState() {
         return {

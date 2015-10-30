@@ -27,14 +27,14 @@ if (jwt) {
 io.join('global')
 
 // Listen for some global events, like UpdateAvailable
-io.listen('global:shout.events.UpdateAvailable', (data) => {
+io.listen('global:UpdateAvailable', (data) => {
     if (confirm("Er is een nieuwe shout versie, wil je de pagina herladen?")) {
         window.location.reload()
     }
 })
 
-io.listen('global:shout.events.GoingDown', () => Notification.info('De server gaat heel even offline...'))
-io.listen('global:shout.events.GoingUp', () => Notification.info('Sorry voor het ongemak, we zijn er weer :)'))
+io.listen('global:GoingDown', () => Notification.info('De server gaat heel even offline...'))
+io.listen('global:GoingUp', () => Notification.info('Sorry voor het ongemak, we zijn er weer :)'))
 
 let mountNode = document.getElementById('mount-node')
 router.run((Handler, state) => {

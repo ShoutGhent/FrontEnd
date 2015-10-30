@@ -5,12 +5,12 @@ var pkg = require('./package.json');
 module.exports = {
     devtool: 'source-map',
     entry: {
-        app: path.join(__dirname, 'src/js/main'),
+        main: path.join(__dirname, 'src/js/main'),
         vendor: Object.keys(pkg.dependencies)
     },
     output: {
         path: path.join(__dirname, 'dist/js'),
-        filename: 'main.js',
+        filename: '[name].js',
         publicPath: '/dist/js/'
     },
     resolve: {
@@ -27,10 +27,7 @@ module.exports = {
         }]
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            filename: 'vendor.js'
-        }),
+        new webpack.optimize.CommonsChunkPlugin('vendor.js'),
         new webpack.DefinePlugin({
             GA_TRACKING_CODE: JSON.stringify("UA-66177890-1")
         }),

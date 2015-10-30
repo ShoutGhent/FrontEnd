@@ -38,7 +38,7 @@ var CommentsForShout = React.createClass({
                     comments: res.data
                 })
 
-                io.listen(`${this.props.channelKey}:shout.events.comments.BroadcastCommentedOnShout`, (data) => {
+                io.listen(`${this.props.channelKey}:BroadcastCommentedOnShout`, (data) => {
                     this.appendNewComment(data.comment)
                 })
 
@@ -50,7 +50,7 @@ var CommentsForShout = React.createClass({
         let channelKey = `shout.${this.props.shout.id}`
         io.join(channelKey)
 
-        io.listen(`${channelKey}:shout.events.comments.BroadcastCommentHasBeenDeleted`, data => this.removeCommentFromList(data.comment_id))
+        io.listen(`${channelKey}:BroadcastCommentHasBeenDeleted`, data => this.removeCommentFromList(data.comment_id))
     },
     loadMoreComments(evt) {
         evt.preventDefault()
