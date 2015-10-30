@@ -74,9 +74,10 @@ let ShoutPage = React.createClass({
         })
     },
     toggleFavorite(shout) {
-        let url = `shouts/${shout.id}/${shout.meta.favorited_by_me ? 'unfavorite' : 'favorite'}`
+        let id = shout.id
+        let type = shout.meta.favorited_by_me ? 'unfavorite' : 'favorite'
 
-        API.post(url, {}, (shout, err) => this.setState({ shout }))
+        API.post(`shouts/${id}/${type}`)
     },
     updateShout(oldShout) {
         API.get(`shouts/${oldShout.id}`, {}, (shout, err) => {
