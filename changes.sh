@@ -1,23 +1,29 @@
 #!/bin/bash
 
+# Read Last Version
+LAST_ID=$(cat REVISION)
+
 # Check if _index.html has changed
-if [[ $(git --no-pager diff HEAD^ HEAD _index.html) ]]; then
+if [[ $(git --no-pager diff ${LAST_ID} HEAD _index.html) ]]; then
     gulp copy --production
     gulp addDeploymentTimestamps --production
 fi
 
 # Check if src/sass/ has changed
-if [[ $(git --no-pager diff HEAD^ HEAD src/sass/) ]]; then
+if [[ $(git --no-pager diff ${LAST_ID} HEAD src/sass/) ]]; then
     gulp sass --production
     gulp autoprefix --production
 fi
 
 # Check if src/js/ has changed
-if [[ $(git --no-pager diff HEAD^ HEAD src/js/) ]]; then
+if [[ $(git --no-pager diff ${LAST_ID} HEAD src/js/) ]]; then
     ./node_modules/.bin/webpack --config webpack-production.config.js --entry=app
 fi
 
 # Check if package.json has changed
-if [[ $(git --no-pager diff HEAD^ HEAD package.json) ]]; then
+if [[ $(git --no-pager diff ${LAST_ID} HEAD package.json) ]]; then
     ./node_modules/.bin/webpack --config webpack-production.config.js --entry=vendor
 fi
+
+# Write Newest ID
+echo `git log --oneline | awk -F" " '{print $1; exit}'` > 'REVISION'
