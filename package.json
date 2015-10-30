@@ -2,8 +2,7 @@
   "private": true,
   "scripts": {
     "start": "node server.js",
-    "production": "./node_modules/.bin/webpack --config webpack-production.config.js --entry=app --profile --colors && gulp --production",
-    "full-production": "./node_modules/.bin/webpack --config webpack-production.config.js --profile --colors && gulp --production"
+    "production": "./changes.sh",
   },
   "dependencies": {
     "alt": "^0.14.4",
