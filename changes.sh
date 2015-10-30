@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Check if _index.html has changed
 if [[ $(git --no-pager diff HEAD^ HEAD _index.html) ]]; then
