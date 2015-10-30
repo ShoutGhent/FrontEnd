@@ -26,4 +26,4 @@ if [[ $(git --no-pager diff ${LAST_ID} HEAD package.json) ]]; then
 fi
 
 # Write Newest ID
-echo `git log --oneline | awk -F" " '{print $1; exit}'` > 'REVISION'
+git rev-parse HEAD > REVISION
