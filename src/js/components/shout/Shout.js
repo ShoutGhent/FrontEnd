@@ -9,27 +9,23 @@ import Emojify from '../partials/Emojify'
 import FileDrop from 'react-file-drop'
 import Icon from '../partials/Icon'
 import moment from 'moment'
+import Notification from '../notification/NotificationActions'
 import ReportShout from '../pages/shout/ReportShout'
 import ShoutImages from './ShoutImages'
 import ShoutName from './ShoutName'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
 import { io } from '../../services/Socket'
 import { Link } from 'react-router'
+import WebStorage from '../../services/WebStorage'
 
 let Shout = React.createClass({
     propTypes: {
-        onDelete: PropTypes.func.isRequired,
-        onEdit: PropTypes.func.isRequired,
         onHide: PropTypes.func.isRequired,
-        onReport: PropTypes.func.isRequired,
-        onToggleFavorite: PropTypes.func.isRequired,
         openComments: PropTypes.bool,
         shout: PropTypes.object.isRequired,
-        updateShout: PropTypes.func,
     },
     getDefaultProps() {
         return {
-            updateShout: () => {},
             openComments: false
         }
     },
@@ -39,13 +35,14 @@ let Shout = React.createClass({
     getInitialState() {
 
         return {
-            editModalOpen: false,
             intervalId: null,
             openComments: this.props.openComments,
             reportModalOpen: false,
             secondsLeft: 0,
             width: '100%',
-            toBeUploaded: []
+            toBeUploaded: [],
+            favoriteCount: this.props.shout.meta.favorite_count || 0,
+            favoritedByMe: this.props.shout.meta.favoritedByMe || false
         }
     },
     calcPercentage(shout, onHide) {
@@ -86,10 +83,17 @@ let Shout = React.createClass({
         let channelKey = `shout.${shout.id}`
         io.join(channelKey)
 
-        io.listen(`${channelKey}:BroadcastCommentedOnShout`, d => this.props.updateShout(shout))
-        io.listen(`${channelKey}:BroadcastCommentHasBeenDeleted`, d => this.props.updateShout(shout))
-        io.listen(`${channelKey}:BroadcastShoutHasBeenFavorited`, d => this.props.updateShout(shout))
-        io.listen(`${channelKey}:BroadcastShoutHasBeenUnFavorited`, d => this.props.updateShout(shout))
+        io.listen(`${channelKey}:BroadcastCommentHasBeenDeleted`, d => onHide(shout))
+        io.listen(`${channelKey}:BroadcastShoutHasBeenFavorited`, d => {
+            this.setState({
+                favoriteCount: this.state.favoriteCount + 1
+            })
+        })
+        io.listen(`${channelKey}:BroadcastShoutHasBeenUnFavorited`, d => {
+            this.setState({
+                favoriteCount: this.state.favoriteCount - 1
+            })
+        })
         io.listen(`${channelKey}:BroadcastShoutWasEdited`, d => this.props.updateShout(shout))
         io.listen(`${channelKey}:BroadcastShoutWasRemoved`, d => this.props.onHide(shout, true))
     },
@@ -109,7 +113,14 @@ let Shout = React.createClass({
         })
     },
     save(shout) {
-        this.props.onEdit(shout)
+        API.put(`shouts/${shout.id}`, {
+            anonymous: shout.anonymous,
+            description: shout.description,
+            publish_until: shout.publish_until,
+            user_id: shout.user_id
+        }, response => {
+            Notification.success("Shout is bewerkt!")
+        })
 
         this.calcPercentage(shout, this.props.onHide)
     },
@@ -132,10 +143,19 @@ let Shout = React.createClass({
     onDelete(event) {
         event.preventDefault()
 
-        this.props.onDelete(this.props.shout)
+        API.del(`shouts/${this.props.shout.id}`, {}, d => {
+            Notification.success("Shout is verwijderd!")
+        })
     },
     toggleFavorite() {
-        this.props.onToggleFavorite(this.props.shout)
+        let id = this.props.shout.id
+        let type = this.state.favoritedByMe ? 'unfavorite' : 'favorite'
+
+        this.setState({
+            favoritedByMe: ! this.state.favoritedByMe
+        })
+
+        API.post(`shouts/${id}/${type}`)
     },
     toggleComments() {
         this.setState({
@@ -194,21 +214,16 @@ let Shout = React.createClass({
     },
     render() {
         let { shout } = this.props
-        let { width, editModalOpen, reportModalOpen, openComments } = this.state
+        let { favoriteCount, favoritedByMe, width, editModalOpen, reportModalOpen, openComments } = this.state
         let { anonymous } = shout
-
-        console.group("Hmmm")
-        console.log(shout)
-        console.groupEnd()
 
         let email = anonymous ? "anonymous@shout.nu" : shout.user.email
 
-        let myShout = shout.meta.my_shout
+        let myShout = shout.meta.my_shout != null ? shout.meta.my_shout : shout.user_id == WebStorage.fromStore('user', {id:''}).id
 
         let whenMyShout = [
             <li key="edit"><a href onClick={this.openEditModal}><Icon icon="mode_edit"/> Bewerken</a></li>,
-            <li key="delete"><a href onClick={this.onDelete}><Icon icon="delete"/> Verwijderen</a></li>
-            //null ? <li><a href onClick={(event) => {event.preventDefault}}>Republish</a></li> : ''
+            <li key="delete"><a href onClick={this.onDelete}><Icon icon="delete"/> Verwijderen</a></li>,
         ]
 
         let whenNotMyShout = [
@@ -300,9 +315,9 @@ let Shout = React.createClass({
                                         padding: 0,
                                         border: 0
                                     }}>
-                                        <span>{shout.meta.favorite_count}</span>
+                                        <span>{favoriteCount}</span>
                                         <Icon
-                                            style={{ color: shout.meta.favorited_by_me ? '#ffab40' : 'rgba(0, 0, 0, .6)'}}
+                                            style={{ color: favoritedByMe ? '#ffab40' : 'rgba(0, 0, 0, .6)'}}
                                             icon="star"
                                         />
                                     </button>
@@ -316,6 +331,7 @@ let Shout = React.createClass({
                         </div>
                     </div>
                 </div>
+
                 {openComments && <CommentsForShout
                     channelKey={`shout.${shout.id}`}
                     onCloseRequest={this.closeComments}

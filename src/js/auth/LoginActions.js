@@ -72,6 +72,7 @@ class LoginActions {
                 })
 
             }, (err) => {
+
                 console.log(err)
             }, {
                 maximumAge: 600000,

@@ -44,25 +44,10 @@ let ShoutPage = React.createClass({
         }
     },
     editShout(shout) {
-        API.put(`shouts/${shout.id}`, {
-            anonymous: shout.anonymous,
-            description: shout.description,
-            publish_until: shout.publish_until,
-            shout_id: shout.id,
-            user_id: shout.user_id,
-        }, (updatedShout) => {
-            Notification.success("Shout is bewerkt!")
-        })
 
-        this.setState({ shout })
     },
     deleteShout(shout) {
-        API.del(`shouts/${shout.id}`, {}, (data) => {
-            this.setState({
-                shout: null
-            })
-            Notification.success("Shout is verwijderd!")
-        })
+
     },
     reportShout(data) {
         let payload = {

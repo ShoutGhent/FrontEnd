@@ -8,7 +8,6 @@ import Emojify from '../partials/Emojify'
 import Icon from '../partials/Icon'
 import Log from '../../components/log/Log'
 import LogStore from '../../components/log/LogStore'
-import Redirect from '../../services/Redirect'
 import Router from '../../services/RouterContainer'
 import SearchActions from '../search/SearchActions'
 import { Dropdown, DropdownTitle, DropdownContent } from '../dropdown/Dropdown'
@@ -58,9 +57,6 @@ let LoggedInHeader = React.createClass({
             isAddGroupFormOpen: false
         })
     },
-    goToMap(e) {
-        Redirect.to(e.target.checked ? 'map' : 'home')
-    },
     calculateUnseenNotificationsCount()
     {
         var x = 0
@@ -100,12 +96,9 @@ let LoggedInHeader = React.createClass({
                     </Dropdown>
                 </li>
                 <li>
-                    <div className="switch">
-                        <label>
-                            <input type="checkbox" checked={Router.pathNameIs("map")} onChange={this.goToMap}/>
-                            <span className="lever"></span>
-                        </label>
-                    </div>
+                    <Link to="map">
+                        <Icon icon="public" />
+                    </Link>
                 </li>
                 <li className="hidden">
                     <Link to="home">

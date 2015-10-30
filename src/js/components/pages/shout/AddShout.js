@@ -29,11 +29,11 @@ var AddShout = React.createClass({
     },
     addShout(shout, images) {
         API.post('shouts/add', shout, (res, err) => {
-            this.done(res)
+            this.done()
             NotificationActions.success("Je shout werd geplaatst!")
 
             if (images.length > 0) {
-                NotificationActions.info("Je afbeeldingen worden geupload, ze komen er automatisch op!")
+                NotificationActions.info("Je afbeeldingen worden geupload, ze komen automatisch bij de shout!")
             }
 
             images.map(image => {
@@ -43,11 +43,7 @@ var AddShout = React.createClass({
             })
         })
     },
-    done(shout) {
-        if (shout) {
-            this.props.onDone(shout)
-        }
-
+    done() {
         this.setState({
             cleanShout: {
                 description: '',

@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react'
 
-import assign from 'react/lib/Object.assign'
 import AddShout from '../pages/shout/AddShout'
 import API from '../../services/API'
+import assign from 'react/lib/Object.assign'
 import InfoPanel from '../partials/InfoPanel'
 import LoadingShouts from '../loading/LoadingShouts'
 import Notification from '../notification/NotificationActions'
@@ -10,6 +10,7 @@ import Shout from './Shout'
 import WebStorage from '../../services/WebStorage'
 import { Button } from '../Material/Material'
 import { Card, CardContent } from '../card/Card'
+import { io } from '../../services/Socket'
 
 let ShoutFeed = React.createClass({
     propTypes: {
@@ -39,6 +40,16 @@ let ShoutFeed = React.createClass({
     },
     componentWillMount() {
         this.fetchBasedOnLocation(this.props.location)
+    },
+    componentDidMount() {
+        let channelKey = `shoutfeed.${this.props.url}`
+
+        io.join(channelKey)
+
+        io.listen(`${channelKey}:BroadcastShoutWasAdded`, data => this.prependShout(data.shout))
+        io.listen(`${channelKey}:BroadcastShoutLocationHasBeenAdded`, data => {
+            API.get(`shouts/${data.id}`, {}, result => this.prependShout(result))
+        })
     },
     giveShouts() {
         return this.state.shouts
@@ -96,41 +107,10 @@ let ShoutFeed = React.createClass({
         if (force || this.props.url == "shouts") {
             let shouts = this.state.shouts
 
-            shouts.splice(shouts.indexOf(shout), 1)
+            shouts = shouts.filter(s => shout.id != s.id)
 
             this.setState({ shouts })
         }
-    },
-    editShout(shout) {
-        API.put(`shouts/${shout.id}`, {
-            shout_id: shout.id,
-            user_id: shout.user_id,
-            description: shout.description,
-            anonymous: shout.anonymous,
-            publish_until: shout.publish_until
-        }, (updatedShout) => {
-            Notification.success("Shout is bewerkt!")
-        })
-
-        var shouts = this.state.shouts
-        shouts.map((item, key) => {
-            if (item.id == shout.id) {
-                shouts[key] = shout
-            }
-        })
-
-        this.setState({ shouts })
-    },
-    deleteShout(shout) {
-        API.del(`shouts/${shout.id}`, {}, (data) => {
-            this.hideShout(shout, true)
-            Notification.success("Shout is verwijdert!")
-        })
-    },
-    reportShout(data) {
-        API.post('shouts/report', data, (response) => {
-            Notification.success("Shout werd gerapporteerd!")
-        })
     },
     prependShout(shout) {
         let shouts = this.state.shouts
@@ -150,12 +130,6 @@ let ShoutFeed = React.createClass({
                 last_page
             }
         })
-    },
-    toggleFavorite(shout) {
-        let id = shout.id
-        let type = shout.meta.favorited_by_me ? 'unfavorite' : 'favorite'
-
-        API.post(`shouts/${id}/${type}`)
     },
     updateShout(oldShout) {
         let { shouts } = this.state
@@ -198,13 +172,8 @@ let ShoutFeed = React.createClass({
                     return (
                         <Shout
                             key={shout.id}
-                            onDelete={this.deleteShout}
-                            onEdit={this.editShout}
                             onHide={this.hideShout}
-                            onReport={this.reportShout}
-                            onToggleFavorite={this.toggleFavorite}
                             shout={shout}
-                            updateShout={this.updateShout}
                         />
                     )
                 })}
