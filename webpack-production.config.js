@@ -14,7 +14,8 @@ module.exports = {
         publicPath: '/dist/js/'
     },
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['', '.js', '.jsx'],
+        modulesDirectories: ['stores', 'actions', 'shared', 'node_modules']
     },
     module: {
         loaders: [{

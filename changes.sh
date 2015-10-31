@@ -21,9 +21,9 @@ if [[ $(git --no-pager diff ${LAST_ID} HEAD src/js/) ]]; then
 fi
 
 # Check if package.json has changed
-if [[ $(git --no-pager diff ${LAST_ID} HEAD package.json) ]]; then
-    ./node_modules/.bin/webpack --config webpack-production.config.js
-fi
+#if [[ $(git --no-pager diff ${LAST_ID} HEAD package.json) ]]; then
+#    ./node_modules/.bin/webpack --config webpack-production.config.js
+#fi
 
 # Write Newest ID
 git rev-parse HEAD > REVISION

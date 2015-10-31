@@ -1,14 +1,13 @@
 import React from "react"
 
 import analytics from 'ga-react-router'
-import Auth from './auth/AuthService'
-import Notification from './components/notification/NotificationActions.js'
+import Auth from 'AuthService'
+import Notification from 'NotificationActions'
 import Router from "react-router"
-import RouterContainer from './services/RouterContainer'
-import routes from "./Routes"
-import WebStorage from './services/WebStorage'
-
-import { io } from './services/Socket'
+import RouterContainer from 'RouterContainer'
+import routes from "./config/routes"
+import WebStorage from 'WebStorage'
+import { io } from 'Socket'
 
 let router = Router.create({
     routes: routes,
@@ -24,18 +23,17 @@ if (jwt) {
 }
 
 // Subscribe to global messages
-io.join('global')
-
-// Listen for some global events, like UpdateAvailable
-io.listen('global:UpdateAvailable', (data) => {
-    if (confirm("Er is een nieuwe shout versie, wil je de pagina herladen?")) {
-        window.location.reload()
-    }
+io.join('global', {
+    UpdateAvailable: () => {
+        if (confirm("Er is een nieuwe shout versie, wil je de pagina herladen?")) {
+            window.location.reload()
+        }
+    },
+    GoingDown: () => Notification.info('De server gaat heel even offline...'),
+    GoingUp: () => Notification.info('Sorry voor het ongemak, we zijn er weer :)')
 })
 
-io.listen('global:GoingDown', () => Notification.info('De server gaat heel even offline...'))
-io.listen('global:GoingUp', () => Notification.info('Sorry voor het ongemak, we zijn er weer :)'))
-
+// Listen for some global events, like UpdateAvailable
 let mountNode = document.getElementById('mount-node')
 router.run((Handler, state) => {
     React.render(<Handler />, mountNode)
