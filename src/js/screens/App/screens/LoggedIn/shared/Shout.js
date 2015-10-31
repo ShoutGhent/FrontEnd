@@ -80,22 +80,22 @@ let Shout = React.createClass({
         let { shout, onHide } = this.props
         this.calcPercentage(shout, onHide)
 
-        let channelKey = `shout.${shout.id}`
-        io.join(channelKey)
+        io.join(`shout.${shout.id}`, {
+            BroadcastCommentHasBeenDeleted: response => onHide(shout),
+            BroadcastShoutHasBeenFavorited: response => {
+                this.setState({
+                    favoriteCount: this.state.favoriteCount + 1
+                })
+            },
+            BroadcastShoutHasBeenUnFavorited: response => {
+                this.setState({
+                    favoriteCount: this.state.favoriteCount - 1
+                })
+            },
+            BroadcastShoutWasEdited: response => this.props.updateShout(shout),
+            BroadcastShoutWasRemoved: response => this.props.onHide(shout, true)
 
-        io.listen(`${channelKey}:BroadcastCommentHasBeenDeleted`, d => onHide(shout))
-        io.listen(`${channelKey}:BroadcastShoutHasBeenFavorited`, d => {
-            this.setState({
-                favoriteCount: this.state.favoriteCount + 1
-            })
         })
-        io.listen(`${channelKey}:BroadcastShoutHasBeenUnFavorited`, d => {
-            this.setState({
-                favoriteCount: this.state.favoriteCount - 1
-            })
-        })
-        io.listen(`${channelKey}:BroadcastShoutWasEdited`, d => this.props.updateShout(shout))
-        io.listen(`${channelKey}:BroadcastShoutWasRemoved`, d => this.props.onHide(shout, true))
     },
     componentWillUnmount() {
         clearInterval(this.state.intervalId)

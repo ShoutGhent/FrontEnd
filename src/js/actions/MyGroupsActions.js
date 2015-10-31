@@ -15,11 +15,11 @@ class MyGroupsActions {
             })
         })
     }
-    fetchGroupsNearMe(coords = {}, cb = () => {}) {
+    fetchGroupsNearMe(coords = {}) {
         this.actions.isLoading(true)
 
         API.get('groups/near/me', coords, (response, err) => {
-            setTimeout(() => this.dispatch(response.data, cb))
+            setTimeout(() => this.dispatch(response.data))
 
             setTimeout(() => {
                 this.actions.cacheMyGroups(response.data, 'groups.near.me')
