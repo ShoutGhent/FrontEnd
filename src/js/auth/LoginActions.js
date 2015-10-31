@@ -18,6 +18,8 @@ class LoginActions {
             io.join(`user.${user.id}`)
         })
 
+        Redirect.to("map")
+
         this.dispatch({ user, jwt })
     }
 
