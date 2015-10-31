@@ -4,23 +4,24 @@ import API from 'API'
 
 class SearchActions {
     openSearch() {
-        this.dispatch()
+        setTimeout(() => this.dispatch())
     }
     closeSearch() {
-        this.dispatch()
+        setTimeout(() => this.dispatch())
     }
     resetResults() {
-        this.dispatch()
+        setTimeout(() => this.dispatch())
     }
     updateSearchText(value) {
         if (value.trim()) {
             this.actions.fetchResults(value)
         }
-        this.dispatch(value)
+
+        setTimeout(() => this.dispatch(value))
     }
     fetchResults(query) {
         API.get('groups/search', {q: query}, (data, res) => {
-            this.dispatch(data)
+            setTimeout(() => this.dispatch(data))
         })
     }
 }

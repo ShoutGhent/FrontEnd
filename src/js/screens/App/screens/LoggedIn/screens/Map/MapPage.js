@@ -44,8 +44,9 @@ var MapPage = React.createClass({
     refetchData() {
         let coords = this.getCenter()
 
-        MyGroupsActions.fetchGroupsNearMe(coords)
-        this.setShouts(this.refs.shoutFeed.giveShouts())
+        MyGroupsActions.fetchGroupsNearMe(coords, () => {
+            this.setShouts(this.refs.shoutFeed.giveShouts())
+        })
     },
     getCenter() {
         if (this.refs.map) {
@@ -206,6 +207,7 @@ var MapPage = React.createClass({
                         style={{height}}
                         onLeafletZoomend={this.handleZoom}
                         onLeafletMoveend={this.refetchData}
+                        onLeafletLoad={(e) => { console.log("Done Loading")}}
                     >
                         <TileLayer
                             url='http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
@@ -213,19 +215,19 @@ var MapPage = React.createClass({
                         />
 
                         <MyLocationMarker map={this.refs.map}/>
-
-                        {groupsNearMe.map(group => <Marker position={[group.lat, group.lng]}>
-                            <Popup className="group__marker"><GroupPreviewCard group={group}/></Popup>
-                        </Marker>)}
-
-                        {shouts.map(shout => <Marker position={[shout.lat, shout.lng]}>
-                            <Popup>SHOUTJE</Popup>
-                        </Marker>)}
                     </Map>
                 </div>
             </div>
         )
     }
 })
+
+//{groupsNearMe.map(group => <Marker position={[group.lat, group.lng]}>
+//    <Popup className="group__marker"><GroupPreviewCard group={group}/></Popup>
+//</Marker>)}
+//
+//{shouts.map(shout => <Marker position={[shout.lat, shout.lng]}>
+//    <Popup>SHOUTJE</Popup>
+//</Marker>)}
 
 export default MapPage

@@ -8,14 +8,14 @@ class GroupActions {
 
         API.get(`groups/${groupId}`, {}, (group, err) => {
             if ( ! err) {
-                this.dispatch(group)
+                setTimeout(() => this.dispatch(group))
                 this.actions.setGroupLoading(false)
             }
         })
     }
 
     setGroupLoading(value) {
-        this.dispatch(value)
+        setTimeout(() => this.dispatch(value))
     }
 
     joinGroup(group_id) {
@@ -23,11 +23,11 @@ class GroupActions {
 
         API.post('groups/join', { group_id }, (response, err) => {
             if ( ! err) {
-                this.dispatch({
+                setTimeout(() => this.dispatch({
                     meta: {
                         in_group: true
                     }
-                })
+                }))
                 this.actions.setLeavingOrJoiningGroupLoading(false)
             }
         })
@@ -38,18 +38,18 @@ class GroupActions {
 
         API.post('groups/leave', { group_id }, (response, err) => {
             if ( ! err) {
-                this.dispatch({
+                setTimeout(() => this.dispatch({
                     meta: {
                         in_group: false
                     }
-                })
+                }))
                 this.actions.setLeavingOrJoiningGroupLoading(false)
             }
         })
     }
 
     setLeavingOrJoiningGroupLoading(value) {
-        this.dispatch(value)
+        setTimeout(() => this.dispatch(value))
     }
 }
 

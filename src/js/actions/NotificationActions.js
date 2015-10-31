@@ -17,7 +17,7 @@ class NotificationActions {
     notify(message, level) {
         let position = "bl"
 
-        this.dispatch({ message, level, position})
+        setTimeout(() => this.dispatch({ message, level, position}))
     }
 }
 

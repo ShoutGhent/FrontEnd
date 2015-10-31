@@ -6,7 +6,7 @@ class LogActions {
     fetch(cb) {
         this.actions.loading(true)
         API.get('users/me/notifications', {}, (res, err) => {
-            this.dispatch(res)
+            setTimeout(() => this.dispatch(res))
             this.actions.loading(false)
             if (cb) cb(err, res)
         })
@@ -17,7 +17,7 @@ class LogActions {
             this.actions.loading(true)
             url = url.replace('/?', '?')
             API.get(url, {}, (res, err) => {
-                this.dispatch(res)
+                setTimeout(() => this.dispatch(res))
                 this.actions.loading(false)
                 if (cb) cb(err, res)
             })
@@ -25,7 +25,7 @@ class LogActions {
     }
 
     loading(res) {
-        this.dispatch(res)
+        setTimeout(() => this.dispatch(res))
     }
 
 }

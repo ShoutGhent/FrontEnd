@@ -20,7 +20,7 @@ class LoginActions {
 
         //Redirect.to("map")
 
-        this.dispatch({ user, jwt })
+        setTimeout(() => this.dispatch({ user, jwt }))
     }
 
     logoutUser() {
@@ -29,7 +29,7 @@ class LoginActions {
 
         Redirect.to('login')
 
-        this.dispatch()
+        setTimeout(() => this.dispatch())
     }
 
     changeUserInformation(data) {
@@ -38,7 +38,7 @@ class LoginActions {
             user[key] = data[key]
         }
         WebStorage.toStore('user', user)
-        this.dispatch({ user })
+        setTimeout(() => this.dispatch({ user }))
     }
 
     changeRadius(radius, cb) {
@@ -46,7 +46,7 @@ class LoginActions {
             if (cb) {
                 cb(data.radius)
             }
-            this.dispatch(data.radius)
+            setTimeout(() => this.dispatch(data.radius))
         })
     }
 
@@ -69,7 +69,7 @@ class LoginActions {
                     let user = WebStorage.fromStore('user')
                     user.location = data.location
                     WebStorage.toStore('user', user)
-                    this.dispatch(user)
+                    setTimeout(() => this.dispatch(user))
                     cb(user.location)
                 })
 
@@ -80,7 +80,7 @@ class LoginActions {
     }
 
     resetLocation() {
-        this.dispatch()
+        setTimeout(() => this.dispatch())
     }
 }
 

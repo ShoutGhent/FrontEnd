@@ -28,6 +28,7 @@ const TextareaAutosize = React.createClass({
         if (this.props.onResize) {
             this.refs.textarea.getDOMNode().removeEventListener(RESIZED);
         }
+
         this.dispatchEvent(DESTROY);
     },
 
